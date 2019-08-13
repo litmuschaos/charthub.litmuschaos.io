@@ -3,7 +3,7 @@ import * as React from 'react';
 export class ChartCard extends React.Component {
   render() {
     return (
-      <div class="chart-card-container">
+      <div class="chart-card-container" onClick={this.props.navTo}>
         <div class="subchart-count-container">
           <span class="subchart-count">
             {this.props.subChartCount} Subcharts

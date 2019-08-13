@@ -70,7 +70,7 @@ export class HomeHeader extends React.Component {
         </div>
         <div class="top-header-container">
           <div class="top-header-divide-container">
-            <img src={process.env.PUBLIC_URL + '/litmus.png'} class="logo-img"/>
+            <img alt="organization logo" src={process.env.PUBLIC_URL + '/litmus.png'} class="logo-img"/>
             <h3 class="page-title">Litmus</h3>
           </div>
           <div class="top-header-divide-container">
