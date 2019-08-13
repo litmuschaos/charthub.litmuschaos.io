@@ -14,14 +14,42 @@
 
     .chart-container {
       flex-grow: 100;
+
+      .chart-grid {
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding-top: 37.55px;
+      }
       .chart-filter-container {
         width: 100%;
         border-bottom: 1px solid #D1D2D9;
         padding-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
         .chart-count {
-        	color: #383842;
-        	font-size: 14px;
-        	font-weight: 300;
+          .bold-number {
+            font-weight: bold;
+          }
+          color: #383842;
+          font-size: 14px;
+          font-weight: 300;
+        }
+
+        .chart-filter-controls-container {
+          display: flex;
+          flex-direction: row;
+
+          .filter-control-label {
+            color: #383842;
+            font-size: 14px;
+            margin-right: 42px;
+          }
+          .filter-control-label:nth-child(2) {
+            margin-right: 0px;
+          }
         }
       }
     }
@@ -37,16 +65,19 @@
         margin-top: 46px;
         display: inherit;
       }
+
       .filter-title-label:first-child {
-        margin-top: 0px;
+        margin-top: 0;
       }
+
       .checkbox-container {
         margin-top: 6px;
         display: flex;
         align-items: center;
+
         .checkbox-label {
           margin-left: 15px;
-        	color: #383842;
+          color: #383842;
           font-size: 16px;
         }
       }

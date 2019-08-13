@@ -5,6 +5,7 @@ import connect from 'react-redux/es/connect/connect';
 import { withRouter } from 'react-router-dom'
 
 import { HomeHeader } from '../components/HomeHeader';
+import { ChartCard } from '../components/ChartCard';
 
 class Home extends React.Component {
     render() {
@@ -80,7 +81,20 @@ class Home extends React.Component {
 
             <div class="chart-container">
               <div class="chart-filter-container">
-                <span class="chart-count"><bold>2</bold> items</span>
+                <span class="chart-count"><span class="bold-number">2</span> Items</span>
+                <div class="chart-filter-controls-container">
+                  <span class="filter-control-label">
+                    Sort
+                  </span>
+                  <span class="filter-control-label">
+                    View
+                  </span>
+                </div>
+              </div>
+
+              <div class="chart-grid">
+                <ChartCard subChartCount="4" title="OpenEBS" provider="Mayadata" text="Chaos charts for OpenEBS components. Use these to improve the resiliency of stateful applications which are using OpenEBS"/>
+                <ChartCard subChartCount="2" title="Kubernetes" provider="Mayadata" text="Chaos charts for Kubernete. Use these to test the resiliency of Kubernetes applications and also of Kubernetes itself" />
               </div>
             </div>
           </div>
