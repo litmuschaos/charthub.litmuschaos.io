@@ -13,3 +13,6 @@ Build and tag the Docker image:
 Once the build is done run: `docker run -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm sample:dev`.
 
 Go to your browser and open: `http://172.17.0.2:3000/`
+
+Using the production Dockerfile, build and tag the Docker image: `docker build -f Dockerfile-prod -t sample:prod .`.
+Spin up the container: `docker run -it -p 80:80 --rm sample:prod`
