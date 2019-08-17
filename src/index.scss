@@ -9,7 +9,13 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
+// pages
 @import 'styles/home';
+@import 'styles/chart';
+
+// components
 @import 'styles/components/home-header';
+@import 'styles/components/chart-details';
 @import 'styles/components/chart-card';
+@import 'styles/components/react-modal-custom-styles';
+@import 'styles/components/install-modal-content';

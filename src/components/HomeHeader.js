@@ -62,9 +62,40 @@ export class HomeHeader extends React.Component {
     return grid;
   }
 
+  renderHomeText = () => {
+    if(this.props.showHomeText){
+      return [
+        <h1 class="home-header-title-1">Hub for Litmus Charts</h1>,
+        <h2 class="home-header-title-2">Home for Kubernetes chaos community to share the chaos tests</h2>,
+        <h3 class="home-header-title-3">Download a chart. Tune it to your environment. Run chaos. Improve resilience.</h3>
+      ]
+    }
+  }
+
+  renderChartTitle = () => {
+    if(!this.props.showHomeText){
+      return (
+        <div class="chart-header-title-container">
+          <div class="chart-header-logo-container"></div>
+          <div class="chart-header-title">OpenEBS</div>
+        </div>
+      )
+    }
+  }
+
+  getHeaderHeight = () => {
+    let height = '612px';
+    if(!this.props.showHomeText) {
+      height = '272.5px';
+    }
+    return {
+      height
+    }
+  }
+
   render() {
     return (
-      <div class="home-header-container">
+      <div class="home-header-container" style={this.getHeaderHeight()}>
         <div class="home-hexagon-container">
           {this.createHexagonGrid()}
         </div>
@@ -78,9 +109,8 @@ export class HomeHeader extends React.Component {
             <h3 class="top-header-contribute">Contribute</h3>
           </div>
         </div>
-        <h1 class="home-header-title-1">Hub for Litmus Charts</h1>
-        <h2 class="home-header-title-2">Home for Kubernetes chaos community to share the chaos tests</h2>
-        <h3 class="home-header-title-3">Download a chart. Tune it to your environment. Run chaos. Improve resilience.</h3>
+        {this.renderHomeText()}
+        {this.renderChartTitle()}
       </div>
     );
   }

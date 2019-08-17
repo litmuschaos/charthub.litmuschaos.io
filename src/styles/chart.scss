@@ -1,0 +1,14 @@
+.chart-page-container {
+  height: 100vh;
+  background-color: white;
+  width: 1440px;
+  .chart-page-content {
+    box-sizing: border-box;
+    padding: 32.5px 153px 49px 153px;
+    .chart-page-header {
+      height: 63.1px;
+      padding-bottom: 11.1px;
+      border-bottom: 1px solid #D1D2D9;
+    }
+  }
+}

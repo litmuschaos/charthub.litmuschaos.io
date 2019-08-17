@@ -14,7 +14,7 @@ class Home extends React.Component {
   render() {
     return(
       <div class="home-container">
-        <HomeHeader />
+        <HomeHeader showHomeText={true}/>
         <div class="home-content">
           <div class="filter-container">
             <span class="filter-title-label">

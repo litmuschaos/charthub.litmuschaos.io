@@ -1,0 +1,49 @@
+.install-modal-content {
+  width: 894px;
+  padding: 18px 27px 20px 27px;
+  display: flex;
+  flex-direction: column;
+  .modal-header {
+    width: 100%;
+    display: flex;
+    .modal-img-placeholder {
+      width: 38px;
+      height: 38px;
+      border: 6px solid orange;
+      border-radius: 10px;
+    }
+    .modal-header-title-container {
+      margin-left: 10px;
+      .modal-title {
+        margin: 0;
+        font-size: 20px;
+      }
+    }
+  }
+  .install-title {
+    margin-top: 30px;
+    font-size: 18px;
+  }
+  .modal-install-instruction {
+    width: 100%;
+    font-size: 18px;
+    display: flex;
+    .modal-install-instruction-number {
+      color: gray;
+    }
+  }
+  .modal-code {
+    background-color: #E6EDFF;
+    width: 95%;
+    align-self: flex-end;
+    box-sizing: border-box;
+    margin: 15px 20px 20px 0px;
+    padding: 8px 17px 8px 17px;
+    font-size: 18px;
+  }
+  .modal-footer-notes {
+    font-size: 14px;
+    color: #383842;
+    margin-top: 20px;
+  }
+}

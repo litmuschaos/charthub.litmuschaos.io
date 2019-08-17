@@ -2,15 +2,24 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
 import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom'
 
+import { HomeHeader } from '../components/HomeHeader';
+import { ChartDetails } from '../components/ChartDetails';
 
 class Chart extends React.Component {
   render() {
     return (
-      <div>
-      <div> Welcome to chart page </div>
-      <Link to="/">nav to home page</Link>
+      <div class="chart-page-container">
+        <HomeHeader showHomeText={false}/>
+        <div class="chart-page-content">
+          <div class="chart-page-header">
+
+          </div>
+          
+          <ChartDetails />
+          <ChartDetails />
+
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 .home-header-container {
   width: 100%;
-  height: 612px;
+  // height: 612px;
   overflow: auto;
   background: linear-gradient(180deg, #008CD6 0%, #003659 100%);
   padding-left: 159px;
@@ -8,9 +8,32 @@
   box-sizing: border-box;
   position: relative;
   z-index: 5;
+  // 272.5
+  .chart-header-title-container {
+    display: flex;
+    height: 50px;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 113px;
+
+    .chart-header-logo-container {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: white;
+      margin-right: 10px;
+    }
+
+    .chart-header-title {
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
   .home-hexagon-container {
     width: 100%;
-    height: 612px;
+    height: 100%;
     position: absolute;
     left: 0;
     overflow: hidden;
