@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Modal from 'react-modal';
 
+import { GoChevronDown } from 'react-icons/go';
 import { InstallModalContent } from '../components/InstallModalContent';
+import { IconContext } from "react-icons";
 
 const customStyles = {
   content : {
@@ -40,6 +42,9 @@ export class ChartDetails extends React.Component {
         <div class="chart-details-header">
           <div class="chart-details-title-container">
             <span class="chart-details-title">OpenEBS</span>
+            <IconContext.Provider value={{ color: "#004ED6", size: '1.5em' }}>
+              <GoChevronDown />
+            </IconContext.Provider>
           </div>
           <button class="chart-install-button" onClick={this.handleOpenModal}>INSTALL ALL</button>
         </div>
@@ -72,7 +77,7 @@ export class ChartDetails extends React.Component {
            contentLabel="Minimal Modal Example"
            style={customStyles}>
             <InstallModalContent />
-            <button class="modal-close-button" onClick={this.handleCloseModal}>Close Modal</button>
+            <button class="modal-close-button" onClick={this.handleCloseModal}><span class="modal-close rounded"></span></button>
         </Modal>
       </div>
     )

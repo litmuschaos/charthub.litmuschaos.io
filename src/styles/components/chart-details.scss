@@ -12,7 +12,7 @@
     margin-top: 21px;
     display: flex;
     justify-content: space-between;
-
+    transition: 0.4s;
     .chart-details-text {
       width: 733px;
     }
@@ -27,14 +27,17 @@
       padding-top: 8px;
       display: flex;
       flex-direction: column;
+
       .uses-explanation-title {
         color: #999AA7;
         font-size: 16px;
         margin-top: 21px;
       }
+
       .uses-explanation-title:first-child {
-        margin-top: 0px;
+        margin-top: 0;
       }
+
       .uses-explanation {
         color: #383842;
         margin-top: 1px;
@@ -50,10 +53,14 @@
     justify-content: space-between;
 
     .chart-details-title-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
       .chart-details-title {
         font-weight: bold;
         color: #23232A;
         font-size: 18px;
+        margin-right: 5px;
       }
     }
 
@@ -65,6 +72,63 @@
       border-color: transparent;
       color: white;
       font-size: 14px;
+      cursor: pointer;
+    }
+  }
+}
+
+.modal-close-button {
+  border: none;
+  background-color: transparent;
+  margin-right: -8px;
+  cursor: pointer;
+  .modal-close {
+    position: relative;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+    transition: .5s;
+    &:hover {
+      &::after,
+      &::before {
+        background: gray;
+      }
+    }
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      margin-top: -1px;
+      background: #000;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+
+    &.thick {
+      &::after,
+      &::before {
+        height: 4px;
+        margin-top: -2px;
+      }
+    }
+
+    &.rounded {
+      &::after,
+      &::before {
+        border-radius: 5px;
+      }
     }
   }
 }

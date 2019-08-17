@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 export class HomeHeader extends React.Component {
 
@@ -39,7 +39,7 @@ export class HomeHeader extends React.Component {
     }]
 
 
-    let grid = [];
+    let grid = []
 
     for(let i = 0; i < 10; i++) {
       if(positions[i]) {
@@ -59,7 +59,7 @@ export class HomeHeader extends React.Component {
         //   <path fill="transparent" stroke="white" opacity="0.17"  strokeWidth="3px" d="M2.5000000000000004 99.59292143521044Q0 95.26279441628824 2.5000000000000004 90.93266739736605L52.5 4.330127018922193Q55 0 60 0L160 0Q165 0 167.5 4.330127018922193L217.5 90.93266739736605Q220 95.26279441628824 217.5 99.59292143521044L167.5 186.1954618136543Q165 190.5255888325765 160 190.5255888325765L60 190.5255888325765Q55 190.5255888325765 52.5 186.1954618136543Z"></path>
         // </svg>)
     }
-    return grid;
+    return grid
   }
 
   renderHomeText = () => {
@@ -84,9 +84,9 @@ export class HomeHeader extends React.Component {
   }
 
   getHeaderHeight = () => {
-    let height = '612px';
+    let height = '612px'
     if(!this.props.showHomeText) {
-      height = '272.5px';
+      height = '272.5px'
     }
     return {
       height
@@ -112,6 +112,6 @@ export class HomeHeader extends React.Component {
         {this.renderHomeText()}
         {this.renderChartTitle()}
       </div>
-    );
+    )
   }
 }
