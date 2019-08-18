@@ -53,18 +53,18 @@ export class ChartDetails extends React.Component {
       'content-is-open': !this.state.isCollapsed
     });
     return (
-      <div class="chart-details-container">
-        <div class="chart-details-header">
-          <div class="chart-details-title-container" onClick={this.handleCollapseContent}>
-            <span class="chart-details-title">OpenEBS</span>
+      <div className="chart-details-container">
+        <div className="chart-details-header">
+          <div className="chart-details-title-container" onClick={this.handleCollapseContent}>
+            <span className="chart-details-title">OpenEBS</span>
             <IconContext.Provider value={{ color: "#004ED6", size: '1.5em' }}>
               <GoChevronDown />
             </IconContext.Provider>
           </div>
-          <button class="chart-install-button" onClick={this.handleOpenModal}>INSTALL ALL</button>
+          <button className="chart-install-button" onClick={this.handleOpenModal}>INSTALL ALL</button>
         </div>
-        <div class={isCollapsed}>
-          <p class="chart-details-text">
+        <div className={isCollapsed}>
+          <p className="chart-details-text">
             OpenEBS is a leading open source container attached storage solution that enables the use of containers for mission-critical, persistent workloads and for other stateful workloads such as logging or Prometheus for example. OpenEBS itself is deployed as just another container on your host and enables storage services that can be designated on a per pod, application, cluster or container level, including:<br />
             <br />
             Data persistence across nodes
@@ -74,17 +74,17 @@ export class ChartDetails extends React.Component {
             Management of tiering to and from S3 and other targets.
           </p>
 
-          <div class="chart-details-uses-explanation">
-            <span class="uses-explanation-title">Uses of this chart</span>
-            <span class="uses-explanation">Lorem ipsum</span>
+          <div className="chart-details-uses-explanation">
+            <span className="uses-explanation-title">Uses of this chart</span>
+            <span className="uses-explanation">Lorem ipsum</span>
 
-            <span class="uses-explanation-title">List of experiments</span>
-            <span class="uses-explanation">Lorem ipsum</span>
-            <span class="uses-explanation">Lorem ipsum dolor</span>
+            <span className="uses-explanation-title">List of experiments</span>
+            <span className="uses-explanation">Lorem ipsum</span>
+            <span className="uses-explanation">Lorem ipsum dolor</span>
 
-            <span class="uses-explanation-title">Useful links</span>
-            <span class="uses-explanation">Lorem ipsum sit amet</span>
-            <span class="uses-explanation">Lorem ipsum dolor</span>
+            <span className="uses-explanation-title">Useful links</span>
+            <span className="uses-explanation">Lorem ipsum sit amet</span>
+            <span className="uses-explanation">Lorem ipsum dolor</span>
           </div>
         </div>
         <Modal
@@ -92,7 +92,7 @@ export class ChartDetails extends React.Component {
            contentLabel="Minimal Modal Example"
            style={customStyles}>
             <InstallModalContent />
-            <button class="modal-close-button" onClick={this.handleCloseModal}><span class="modal-close rounded"></span></button>
+            <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
         </Modal>
       </div>
     )

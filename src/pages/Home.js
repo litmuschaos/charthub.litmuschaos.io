@@ -19,6 +19,7 @@ class Home extends React.Component {
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
       return <ChartCard
+                key={chart.id}
                 circleColor="orange"
                 navTo={this.handleNavToChart.bind(this, chart.id)}
                 subChartCount="4"
@@ -32,96 +33,96 @@ class Home extends React.Component {
 
   render() {
     return(
-      <div class="home-container">
+      <div className="home-container">
         <HomeHeader showHomeText={true}/>
-        <div class="home-content">
-          <div class="filter-container">
-            <span class="filter-title-label">
+        <div className="home-content">
+          <div className="filter-container">
+            <span className="filter-title-label">
               Chaos Type
             </span>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Application chaos</span>
+              <span className="checkbox-label">Application chaos</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Network chaos</span>
+              <span className="checkbox-label">Network chaos</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Storage chaos</span>
+              <span className="checkbox-label">Storage chaos</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Node chaos</span>
+              <span className="checkbox-label">Node chaos</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Kubernetes specific chaos</span>
+              <span className="checkbox-label">Kubernetes specific chaos</span>
             </div>
 
-            <span class="filter-title-label">
+            <span className="filter-title-label">
               Provider
             </span>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Mayadata</span>
+              <span className="checkbox-label">Mayadata</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Operatorhub</span>
+              <span className="checkbox-label">Operatorhub</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Company-ABC</span>
+              <span className="checkbox-label">Company-ABC</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Company-123</span>
+              <span className="checkbox-label">Company-123</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">Kubernetes specific chaos</span>
+              <span className="checkbox-label">Kubernetes specific chaos</span>
             </div>
 
-            <span class="filter-title-label">
+            <span className="filter-title-label">
               Complexity
             </span>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">User - 1</span>
+              <span className="checkbox-label">User - 1</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">User - 2</span>
+              <span className="checkbox-label">User - 2</span>
             </div>
-            <div class="checkbox-container">
+            <div className="checkbox-container">
               <input type="checkbox" />
-              <span class="checkbox-label">User - 3</span>
+              <span className="checkbox-label">User - 3</span>
             </div>
           </div>
 
-          <div class="chart-container">
-            <div class="chart-filter-container">
-              <span class="chart-count"><span class="bold-number">2</span> Items</span>
-              <div class="chart-filter-controls-container">
+          <div className="chart-container">
+            <div className="chart-filter-container">
+              <span className="chart-count"><span className="bold-number">2</span> Items</span>
+              <div className="chart-filter-controls-container">
                 <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.7em'}}>
                   <FaArrowUp />
                   <FaArrowDown />
                 </IconContext.Provider>
-                <span class="filter-control-label">
+                <span className="filter-control-label">
                   Sort
                 </span>
                 <IconContext.Provider value={{ 'margin-left': '15px', 'margin-right': '5px', size: '0.7em'}}>
                   <FaGripHorizontal />
                 </IconContext.Provider>
-                <span class="filter-control-label">
+                <span className="filter-control-label">
                   View
                 </span>
               </div>
             </div>
 
-            <div class="chart-grid">
+            <div className="chart-grid">
 
               {this.renderChartGrid()}
 

@@ -13,49 +13,49 @@ import { getChartById } from "../redux/selectors";
 
 class Chart extends React.Component {
   renderChartAndSubCharts = () => {
-    
+
   }
   render() {
     return (
-      <div class="chart-page-container">
+      <div className="chart-page-container">
         <HomeHeader
           title={this.props.chart.spec.displayName}
           showHomeText={false}
           icon={`data:${this.props.chart.spec.icon[0].mediatype};base64, ${this.props.chart.spec.icon[0].base64data}`}/>
 
-        <div class="chart-page-content">
-          <div class="chart-page-header">
+        <div className="chart-page-content">
+          <div className="chart-page-header">
 
-            <div class="chart-page-nav-back-container">
-              <div class="nav-back-icon-container">
+            <div className="chart-page-nav-back-container">
+              <div className="nav-back-icon-container">
                 <Link to={'/'}>
                   <IconContext.Provider value={{ color: "#004ED6", size: '0.7em'}}>
                       <FaArrowLeft />
                   </IconContext.Provider>
                 </Link>
               </div>
-              <div class="chart-page-title-container">
-                <h3 class="chart-page-title">{this.props.chart.spec.displayName}</h3>
+              <div className="chart-page-title-container">
+                <h3 className="chart-page-title">{this.props.chart.spec.displayName}</h3>
               </div>
             </div>
 
-            <div class="chart-page-header-breacrumbs-container">
-              <div class="breadcrumbs">
+            <div className="chart-page-header-breacrumbs-container">
+              <div className="breadcrumbs">
                 <Link to={'/'}>Home</Link> / {this.props.chart.spec.displayName}
               </div>
-              <div class="chart-header-filters-container">
-                <div class="header-filter">
+              <div className="chart-header-filters-container">
+                <div className="header-filter">
                   <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.7em'}}>
                     <FaArrowUp />
                     <FaArrowDown />
                   </IconContext.Provider>
-                  <span class="header-filter-label">Sort</span>
+                  <span className="header-filter-label">Sort</span>
                 </div>
-                <div class="header-filter">
+                <div className="header-filter">
                   <IconContext.Provider value={{ 'margin-left': '15px', 'margin-right': '5px', size: '0.7em'}}>
                     <FaGripHorizontal />
                   </IconContext.Provider>
-                  <span class="header-filter-label">View</span>
+                  <span className="header-filter-label">View</span>
                 </div>
               </div>
             </div>

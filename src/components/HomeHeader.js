@@ -47,7 +47,7 @@ export class HomeHeader extends React.Component {
     for(let i = 0; i < 10; i++) {
       if(positions[i]) {
         positions[i].position = 'absolute'
-        grid.push(<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="174" viewBox="0 0 200 173.20508075688772" style={positions[i]}>
+        grid.push(<svg key={i} version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="174" viewBox="0 0 200 173.20508075688772" style={positions[i]}>
           <path fill="transparent" stroke="white" opacity="0.17"  strokeWidth="3px" d="M0 86.60254037844386L50 0L150 0L200 86.60254037844386L150 173.20508075688772L50 173.20508075688772Z"></path>
         </svg>)
         // let svgStyle = {
@@ -68,9 +68,9 @@ export class HomeHeader extends React.Component {
   renderHomeText = () => {
     if(this.props.showHomeText){
       return [
-        <h1 class="home-header-title-1">Hub for Litmus Charts</h1>,
-        <h2 class="home-header-title-2">Home for Kubernetes chaos community to share the chaos tests</h2>,
-        <h3 class="home-header-title-3">Download a chart. Tune it to your environment. Run chaos. Improve resilience.</h3>
+        <h1 key="1" className="home-header-title-1">Hub for Litmus Charts</h1>,
+        <h2 key="2" className="home-header-title-2">Home for Kubernetes chaos community to share the chaos tests</h2>,
+        <h3 key="3" className="home-header-title-3">Download a chart. Tune it to your environment. Run chaos. Improve resilience.</h3>
       ]
     }
   }
@@ -78,11 +78,11 @@ export class HomeHeader extends React.Component {
   renderChartTitle = () => {
     if(!this.props.showHomeText){
       return (
-        <div class="chart-header-title-container">
-          <div class="chart-header-logo-container">
+        <div className="chart-header-title-container">
+          <div className="chart-header-logo-container">
             <img alt="org logo" src={this.props.icon} height="30px"/>
           </div>
-          <div class="chart-header-title">{this.props.title}</div>
+          <div className="chart-header-title">{this.props.title}</div>
         </div>
       )
     }
@@ -100,20 +100,20 @@ export class HomeHeader extends React.Component {
 
   render() {
     return (
-      <div class="home-header-container" style={this.getHeaderHeight()}>
-        <div class="home-hexagon-container">
+      <div className="home-header-container" style={this.getHeaderHeight()}>
+        <div className="home-hexagon-container">
           {this.createHexagonGrid()}
         </div>
-        <div class="top-header-container">
+        <div className="top-header-container">
           <Link to={'/'}>
-            <div class="top-header-divide-container">
-              <img alt="organization logo" src={process.env.PUBLIC_URL + '/icons/litmus.png'} class="logo-img"/>
-              <h3 class="page-title">Litmus</h3>
+            <div className="top-header-divide-container">
+              <img alt="organization logo" src={process.env.PUBLIC_URL + '/icons/litmus.png'} className="logo-img"/>
+              <h3 className="page-title">Litmus</h3>
             </div>
           </Link>
-          <div class="top-header-divide-container">
-            <input class="top-header-input" placeholder="Search for charts..."/>
-            <h3 class="top-header-contribute">Contribute<span class="contribute-icon-container"><FaChevronDown /></span></h3>
+          <div className="top-header-divide-container">
+            <input className="top-header-input" placeholder="Search for charts..."/>
+            <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container"><FaChevronDown /></span></h3>
           </div>
         </div>
         {this.renderHomeText()}

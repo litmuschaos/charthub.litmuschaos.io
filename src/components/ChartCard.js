@@ -1,35 +1,35 @@
 import * as React from 'react';
-import ColorThief from 'colorthief';
+import * as Vibrant from 'node-vibrant';
 
 export class ChartCard extends React.Component {
-  getDominantIconColor = () => {
-    const colorThief = new ColorThief();
+  async getDominantIconColor() {
     const icon = new Image(200, 200);
     icon.src = this.props.icon;
-    return 'radial-gradient(rgb(' + colorThief.getColor(icon).join(', ') + '), white)';
+    const palette = await new Vibrant(icon).getPalette()
+    return `radial-gradient(rgb(${palette.Vibrant._rgb.join(',')}), white)`;
   }
   render() {
     return (
-      <div class="chart-card-container" onClick={this.props.navTo}>
-        <div class="subchart-count-container">
-          <span class="subchart-count">
+      <div className="chart-card-container" onClick={this.props.navTo}>
+        <div className="subchart-count-container">
+          <span className="subchart-count">
             {this.props.subChartCount} Subcharts
           </span>
         </div>
-        <div class="icon-container">
-          <div class="logo-background-circle" style={{ background: this.getDominantIconColor()}}></div>
-          <div class="icon-background">
-            <img class="icon" src={this.props.icon} alt="chart logo"/>
+        <div className="icon-container">
+          <div className="logo-background-circle" style={{ background: this.getDominantIconColor()}}></div>
+          <div className="icon-background">
+            <img className="icon" src={this.props.icon} alt="chart logo"/>
           </div>
         </div>
 
-        <div class="chart-title">
+        <div className="chart-title">
           {this.props.title}
         </div>
-        <div class="chart-provider">
+        <div className="chart-provider">
           Provided by {this.props.provider}
         </div>
-        <p class="chart-description">
+        <p className="chart-description">
           {this.props.text}
         </p>
       </div>
