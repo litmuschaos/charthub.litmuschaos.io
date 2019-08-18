@@ -10,8 +10,12 @@ export class ChartCard extends React.Component {
           </span>
         </div>
         <div class="icon-container">
-          chart logo placeholder
+          <div class="logo-background-circle" style={{ backgroundColor: this.props.circleColor}}></div>
+          <div class="icon-background">
+            <img class="icon" src={this.props.icon} alt="chart logo"/>
+          </div>
         </div>
+
         <div class="chart-title">
           {this.props.title}
         </div>

@@ -6,11 +6,30 @@ import { withRouter } from 'react-router-dom';
 import { HomeHeader } from '../components/HomeHeader';
 import { ChartCard } from '../components/ChartCard';
 
-class Home extends React.Component {
+import { IconContext } from "react-icons";
+import { FaArrowUp, FaArrowDown, FaGripHorizontal } from 'react-icons/fa';
 
-  handleNavToChart = () => {
-    this.props.history.push("/charts/1");
+import { getChartList } from "../redux/selectors";
+
+class Home extends React.Component {
+  handleNavToChart = (id) => {
+    this.props.history.push(`/charts/${id}`);
   }
+
+  renderChartGrid = () => {
+    return this.props.charts.map((chart) => {
+      return <ChartCard
+                circleColor="orange"
+                navTo={this.handleNavToChart.bind(this, chart.id)}
+                subChartCount="4"
+                title={chart.metadata.annotations.vendor}
+                provider={chart.spec.provider.name}
+                text={chart.metadata.annotations.description}
+                icon={`data:${chart.spec.icon[0].mediatype};base64, ${chart.spec.icon[0].base64data}`}
+                id={chart.id}/>
+    });
+  }
+
   render() {
     return(
       <div class="home-container">
@@ -86,9 +105,16 @@ class Home extends React.Component {
             <div class="chart-filter-container">
               <span class="chart-count"><span class="bold-number">2</span> Items</span>
               <div class="chart-filter-controls-container">
+                <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.7em'}}>
+                  <FaArrowUp />
+                  <FaArrowDown />
+                </IconContext.Provider>
                 <span class="filter-control-label">
                   Sort
                 </span>
+                <IconContext.Provider value={{ 'margin-left': '15px', 'margin-right': '5px', size: '0.7em'}}>
+                  <FaGripHorizontal />
+                </IconContext.Provider>
                 <span class="filter-control-label">
                   View
                 </span>
@@ -96,8 +122,9 @@ class Home extends React.Component {
             </div>
 
             <div class="chart-grid">
-              <ChartCard navTo={this.handleNavToChart} subChartCount="4" title="OpenEBS" provider="Mayadata" text="Chaos charts for OpenEBS components. Use these to improve the resiliency of stateful applications which are using OpenEBS"/>
-              <ChartCard navTo={this.handleNavToChart} subChartCount="2" title="Kubernetes" provider="Mayadata" text="Chaos charts for Kubernete. Use these to test the resiliency of Kubernetes applications and also of Kubernetes itself" />
+
+              {this.renderChartGrid()}
+
             </div>
           </div>
         </div>
@@ -112,8 +139,10 @@ Home.propTypes = {
   }).isRequired
 };
 
-const mapStateToProps = state => ({
-  ...state.operatorsState
-});
+const mapStateToProps = state => {
+  return {
+    charts: getChartList(state)
+  }
+};
 
 export default withRouter(connect(mapStateToProps)(Home));

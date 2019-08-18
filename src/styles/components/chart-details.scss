@@ -1,18 +1,27 @@
 .chart-details-container {
   width: 100%;
-  height: 453px;
   padding: 18px 30px 25px 13px;
   box-sizing: border-box;
   box-shadow: 0 0 5px 0 #D0D3E2;
   border-radius: 4px;
   margin-top: 34px;
 
+  .content-is-open {
+    display: flex;
+  }
+
+  .content-is-collapsed {
+    display: none;
+  }
+
   .chart-details-content {
     width: 100%;
     margin-top: 21px;
-    display: flex;
+    // display: flex;
     justify-content: space-between;
     transition: 0.4s;
+    clear: both;
+
     .chart-details-text {
       width: 733px;
     }
@@ -56,6 +65,7 @@
       display: flex;
       align-items: center;
       cursor: pointer;
+
       .chart-details-title {
         font-weight: bold;
         color: #23232A;
@@ -69,10 +79,16 @@
       width: 325px;
       border-radius: 4px;
       background-color: #004ED6;
-      border-color: transparent;
+      border: 3px solid #004ED6;
       color: white;
       font-size: 14px;
       cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        color: #004ED6;
+        background-color: white;
+      }
     }
   }
 }
@@ -82,13 +98,15 @@
   background-color: transparent;
   margin-right: -8px;
   cursor: pointer;
+
   .modal-close {
     position: relative;
     display: inline-block;
     width: 15px;
     height: 15px;
     overflow: hidden;
-    transition: .5s;
+    transition: 0.5s;
+
     &:hover {
       &::after,
       &::before {

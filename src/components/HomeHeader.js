@@ -76,8 +76,10 @@ export class HomeHeader extends React.Component {
     if(!this.props.showHomeText){
       return (
         <div class="chart-header-title-container">
-          <div class="chart-header-logo-container"></div>
-          <div class="chart-header-title">OpenEBS</div>
+          <div class="chart-header-logo-container">
+            <img alt="org logo" src={this.props.icon} height="30px"/>
+          </div>
+          <div class="chart-header-title">{this.props.title}</div>
         </div>
       )
     }

@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-
-import { operatorsReducer } from './operatorsReducer';
+import chartsReducer from './reducers/charts';
 
 const GET_OPERATORS = 'GET_OPERATORS';
 const GET_OPERATOR = 'GET_OPERATOR';
@@ -14,7 +13,7 @@ const reduxConstants = {
 };
 
 const reducers = {
-  operatorsState: operatorsReducer
+  charts: chartsReducer
 };
 
 const reduxReducers = combineReducers(reducers);

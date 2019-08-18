@@ -41,11 +41,12 @@
         .chart-filter-controls-container {
           display: flex;
           flex-direction: row;
-
+          align-items: center;
           .filter-control-label {
             color: #383842;
             font-size: 14px;
             margin-right: 42px;
+            margin-left: 5px;
           }
           .filter-control-label:nth-child(2) {
             margin-right: 0px;
