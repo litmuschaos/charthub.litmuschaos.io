@@ -12,7 +12,9 @@ import { FaArrowLeft, FaArrowUp, FaArrowDown, FaGripHorizontal } from 'react-ico
 import { getChartById } from "../redux/selectors";
 
 class Chart extends React.Component {
-
+  renderChartAndSubCharts = () => {
+    
+  }
   render() {
     return (
       <div class="chart-page-container">

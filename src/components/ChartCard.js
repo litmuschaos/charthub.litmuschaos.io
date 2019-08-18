@@ -1,6 +1,13 @@
 import * as React from 'react';
+import ColorThief from 'colorthief';
 
 export class ChartCard extends React.Component {
+  getDominantIconColor = () => {
+    const colorThief = new ColorThief();
+    const icon = new Image(200, 200);
+    icon.src = this.props.icon;
+    return 'radial-gradient(rgb(' + colorThief.getColor(icon).join(', ') + '), white)';
+  }
   render() {
     return (
       <div class="chart-card-container" onClick={this.props.navTo}>
@@ -10,7 +17,7 @@ export class ChartCard extends React.Component {
           </span>
         </div>
         <div class="icon-container">
-          <div class="logo-background-circle" style={{ backgroundColor: this.props.circleColor}}></div>
+          <div class="logo-background-circle" style={{ background: this.getDominantIconColor()}}></div>
           <div class="icon-background">
             <img class="icon" src={this.props.icon} alt="chart logo"/>
           </div>
