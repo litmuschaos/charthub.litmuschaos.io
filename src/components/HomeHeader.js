@@ -107,7 +107,7 @@ export class HomeHeader extends React.Component {
         <div class="top-header-container">
           <Link to={'/'}>
             <div class="top-header-divide-container">
-              <img alt="organization logo" src={process.env.PUBLIC_URL + '/litmus.png'} class="logo-img"/>
+              <img alt="organization logo" src={process.env.PUBLIC_URL + '/icons/litmus.png'} class="logo-img"/>
               <h3 class="page-title">Litmus</h3>
             </div>
           </Link>
