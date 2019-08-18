@@ -85,15 +85,19 @@
 
   .top-header-container {
     width: 100%;
+    position: relative;
+    z-index: 234;
     margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    a {
+      text-decoration: none;
+    }
     .top-header-divide-container {
       display: flex;
       align-items: center;
-
+      cursor: pointer;
       .page-title {
         color: white;
         font-size: 30px;
@@ -106,6 +110,12 @@
         margin-left: 15px;
         color: #FAFAFA;
         font-size: 14px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .contribute-icon-container {
+          margin-left: 5px;
+        }
       }
     }
 

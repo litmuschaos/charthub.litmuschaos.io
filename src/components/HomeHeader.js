@@ -1,4 +1,7 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom';
+
+import { FaChevronDown } from 'react-icons/fa';
 
 export class HomeHeader extends React.Component {
 
@@ -102,13 +105,15 @@ export class HomeHeader extends React.Component {
           {this.createHexagonGrid()}
         </div>
         <div class="top-header-container">
-          <div class="top-header-divide-container">
-            <img alt="organization logo" src={process.env.PUBLIC_URL + '/litmus.png'} class="logo-img"/>
-            <h3 class="page-title">Litmus</h3>
-          </div>
+          <Link to={'/'}>
+            <div class="top-header-divide-container">
+              <img alt="organization logo" src={process.env.PUBLIC_URL + '/litmus.png'} class="logo-img"/>
+              <h3 class="page-title">Litmus</h3>
+            </div>
+          </Link>
           <div class="top-header-divide-container">
             <input class="top-header-input" placeholder="Search for charts..."/>
-            <h3 class="top-header-contribute">Contribute</h3>
+            <h3 class="top-header-contribute">Contribute<span class="contribute-icon-container"><FaChevronDown /></span></h3>
           </div>
         </div>
         {this.renderHomeText()}
