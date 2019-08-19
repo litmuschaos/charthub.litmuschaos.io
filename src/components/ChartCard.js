@@ -15,7 +15,6 @@ export class ChartCard extends React.Component {
     icon.src = this.props.icon;
     var context = this;
     new Vibrant(icon).getPalette((err, palette) => {
-      console.log(palette);
       context.setState({
         gradientCircle: {
           background: `radial-gradient(rgb(${palette.DarkVibrant._rgb.join(',')}), white)`

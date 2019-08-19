@@ -81,7 +81,6 @@ Chart.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const { chartId } = ownProps.match.params;
   const chart = getChartById(state, chartId);
-  console.log('chart', chart);
   return {
     chart
   }
