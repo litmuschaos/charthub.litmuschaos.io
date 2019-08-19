@@ -12,8 +12,8 @@ import { FaArrowUp, FaArrowDown, FaGripHorizontal } from 'react-icons/fa';
 import { getChartList } from "../redux/selectors";
 
 class Home extends React.Component {
-  handleNavToChart = (id) => {
-    this.props.history.push(`/charts/${id}`);
+  handleNavToChart = (chartName) => {
+    this.props.history.push(`/charts/${chartName}`);
   }
 
   renderChartGrid = () => {
@@ -21,7 +21,7 @@ class Home extends React.Component {
       return <ChartCard
                 key={chart.id}
                 circleColor="orange"
-                navTo={this.handleNavToChart.bind(this, chart.id)}
+                navTo={this.handleNavToChart.bind(this, chart.metadata.annotations.vendor)}
                 subChartCount="4"
                 title={chart.metadata.annotations.vendor}
                 provider={chart.spec.provider.name}
