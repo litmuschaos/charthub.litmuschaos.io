@@ -15,6 +15,9 @@ class Chart extends React.Component {
   renderChartAndSubCharts = () => {
 
   }
+  handleNavHome = () => {
+    this.props.history.push('/');
+  }
   render() {
     return (
       <div className="chart-page-container">
@@ -27,12 +30,10 @@ class Chart extends React.Component {
           <div className="chart-page-header">
 
             <div className="chart-page-nav-back-container">
-              <div className="nav-back-icon-container">
-                <Link to={'/'}>
+              <div className="nav-back-icon-container" onClick={this.handleNavHome}>
                   <IconContext.Provider value={{ color: "#004ED6", size: '0.7em'}}>
                       <FaArrowLeft />
                   </IconContext.Provider>
-                </Link>
               </div>
               <div className="chart-page-title-container">
                 <h3 className="chart-page-title">{this.props.chart.spec.displayName}</h3>
