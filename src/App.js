@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Chart from './pages/Chart';
 
 class App extends React.Component {
+  componentDidMount() {
+    document.title = "Litmus charts";
+  }
   render() {
     return (
       <React.Fragment>
