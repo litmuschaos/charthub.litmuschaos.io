@@ -31,6 +31,15 @@ class Home extends React.Component {
     });
   }
 
+  sortCharts = () => {
+    if(this.props.sortAsc) {
+      this.setState({ sort: { sortAsc: false } });
+    } else {
+      this.setState({ sort: { sortAsc: true } });
+    }
+
+  }
+
   render() {
     return(
       <div className="home-container">
@@ -105,7 +114,7 @@ class Home extends React.Component {
           <div className="chart-container">
             <div className="chart-filter-container">
               <span className="chart-count"><span className="bold-number">2</span> Items</span>
-              <div className="chart-filter-controls-container">
+              <div className="chart-filter-controls-container" onClick={this.sortCharts.bind(this)}>
                 <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.7em'}}>
                   <FaArrowUp />
                   <FaArrowDown />
@@ -140,9 +149,13 @@ Home.propTypes = {
   }).isRequired
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const sort = {
+    isAsc: false
+  }
   return {
-    charts: getChartList(state)
+    charts: getChartList(state, sort),
+    sort
   }
 };
 
