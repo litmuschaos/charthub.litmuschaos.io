@@ -1,0 +1,14 @@
+filter_secrets: false
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::6}
+    - REPO=mayadata/charthub-litmuschaos-io
+sudo: required
+services:
+- docker
+script:
+- docker build -t $REPO:$COMMIT .
+after_success:
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ];
+   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker push $REPO:$COMMIT;
+  fi
