@@ -2,11 +2,26 @@ import * as React from 'react';
 import * as Vibrant from 'node-vibrant';
 
 export class ChartCard extends React.Component {
-  async getDominantIconColor() {
+  constructor() {
+    super()
+    this.state = {
+      gradientCircle: {
+        background: 'transparent'
+      }
+    }
+  }
+  componentDidMount() {
     const icon = new Image(200, 200);
     icon.src = this.props.icon;
-    const palette = await new Vibrant(icon).getPalette()
-    return `radial-gradient(rgb(${palette.Vibrant._rgb.join(',')}), white)`;
+    var context = this;
+    new Vibrant(icon).getPalette((err, palette) => {
+      console.log(palette);
+      context.setState({
+        gradientCircle: {
+          background: `radial-gradient(rgb(${palette.DarkVibrant._rgb.join(',')}), white)`
+        }
+      })
+    })
   }
   render() {
     return (
@@ -17,7 +32,7 @@ export class ChartCard extends React.Component {
           </span>
         </div>
         <div className="icon-container">
-          <div className="logo-background-circle" style={{ background: this.getDominantIconColor()}}></div>
+          <div className="logo-background-circle" style={this.state.gradientCircle}></div>
           <div className="icon-background">
             <img className="icon" src={this.props.icon} alt="chart logo"/>
           </div>
