@@ -7,7 +7,7 @@ import { HomeHeader } from '../components/HomeHeader';
 import { ChartCard } from '../components/ChartCard';
 
 import { IconContext } from "react-icons";
-import { FaArrowUp, FaArrowDown, FaGripHorizontal } from 'react-icons/fa';
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 import { getChartList } from "../redux/selectors";
 
@@ -115,16 +115,14 @@ class Home extends React.Component {
             <div className="chart-filter-container">
               <span className="chart-count"><span className="bold-number">2</span> Items</span>
               <div className="chart-filter-controls-container" onClick={this.sortCharts.bind(this)}>
-                <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.7em'}}>
+                <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.8em'}}>
                   <FaArrowUp />
                   <FaArrowDown />
                 </IconContext.Provider>
                 <span className="filter-control-label">
                   Sort
                 </span>
-                <IconContext.Provider value={{ 'margin-left': '15px', 'margin-right': '5px', size: '0.7em'}}>
-                  <FaGripHorizontal />
-                </IconContext.Provider>
+                <img alt="change view icon" src={process.env.PUBLIC_URL + '/icons/view_icon.svg'} width="15px"/>
                 <span className="filter-control-label">
                   View
                 </span>

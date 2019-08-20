@@ -7,7 +7,7 @@ import { HomeHeader } from '../components/HomeHeader';
 import { ChartDetails } from '../components/ChartDetails';
 
 import { IconContext } from "react-icons";
-import { FaArrowLeft, FaArrowUp, FaArrowDown, FaGripHorizontal } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 import { getChartById } from "../redux/selectors";
 
@@ -53,9 +53,7 @@ class Chart extends React.Component {
                   <span className="header-filter-label">Sort</span>
                 </div>
                 <div className="header-filter">
-                  <IconContext.Provider value={{ 'margin-left': '15px', 'margin-right': '5px', size: '0.7em'}}>
-                    <FaGripHorizontal />
-                  </IconContext.Provider>
+                  <img src={process.env.PUBLIC_URL + '/icons/view_icon.svg'} width="15px" alt="change view icon"/>
                   <span className="header-filter-label">View</span>
                 </div>
               </div>

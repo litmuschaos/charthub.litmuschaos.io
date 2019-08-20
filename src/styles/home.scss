@@ -42,7 +42,14 @@
           display: flex;
           flex-direction: row;
           align-items: center;
+          svg {
+            cursor: pointer;
+          }
+          img {
+            cursor: pointer;
+          }
           .filter-control-label {
+            cursor: pointer;
             color: #383842;
             font-size: 14px;
             margin-right: 42px;

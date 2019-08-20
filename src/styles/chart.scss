@@ -23,6 +23,9 @@
         .chart-header-filters-container {
           display: flex;
           .header-filter {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
             .header-filter-label {
               margin-left: 5px;
               margin-right: 20px;
