@@ -32,6 +32,7 @@
           padding-left: 10px;
           box-sizing: border-box;
         }
+
         svg {
           margin-right: 7px;
         }
@@ -100,38 +101,6 @@
           .filter-control-label:nth-child(2) {
             margin-right: 0;
           }
-        }
-      }
-    }
-
-    .filter-container {
-      width: 280px;
-      padding-bottom: 105px;
-      @include phone {
-        display: none;
-      }
-
-      .filter-title-label {
-        color: #383842;
-        font-size: 14px;
-        line-height: 17px;
-        margin-top: 46px;
-        display: inherit;
-      }
-
-      .filter-title-label:first-child {
-        margin-top: 0;
-      }
-
-      .checkbox-container {
-        margin-top: 6px;
-        display: flex;
-        align-items: center;
-
-        .checkbox-label {
-          margin-left: 15px;
-          color: #383842;
-          font-size: 16px;
         }
       }
     }

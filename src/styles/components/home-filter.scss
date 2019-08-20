@@ -1,0 +1,47 @@
+.filter-container {
+  width: 280px;
+  padding-bottom: 105px;
+  @include phone {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background-color: white;
+    z-index: 8888;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-top: 20px;
+    display: none;
+  }
+
+  .phone-filter-close {
+    display: none;
+    @include phone {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .filter-title-label {
+    color: #383842;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 46px;
+    display: inherit;
+  }
+
+  .filter-title-label:first-child {
+    margin-top: 0;
+  }
+
+  .checkbox-container {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+
+    .checkbox-label {
+      margin-left: 15px;
+      color: #383842;
+      font-size: 16px;
+    }
+  }
+}
