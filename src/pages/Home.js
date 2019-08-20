@@ -28,7 +28,6 @@ class Home extends React.Component {
   }
 
   showHideFilters = () => {
-    console.log('triggered');
     if(this.state.showFilters) {
       this.setState({ showFilters: false });
     } else {
