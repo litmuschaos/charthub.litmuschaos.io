@@ -41,7 +41,7 @@ export class HomeHeader extends React.Component {
     return (
       <div className="home-header-container" style={this.getHeaderHeight()}>
         <div className="home-hexagon-container">
-          <img alt="image of a hexagon grid" src={process.env.PUBLIC_URL + '/icons/hexagon_background.svg'} />
+          <img alt="hexagon grid" src={process.env.PUBLIC_URL + '/icons/hexagon_background.svg'} />
         </div>
         <div className="top-header-container">
           <Link to={'/'}>
