@@ -1,6 +1,5 @@
 .home-header-container {
   width: 100%;
-  // height: 612px;
   overflow: auto;
   background: linear-gradient(180deg, #008CD6 0%, #003659 100%);
   padding-left: 159px;
@@ -8,7 +7,10 @@
   box-sizing: border-box;
   position: relative;
   z-index: 5;
-  // 272.5
+  @include phone {
+    padding: 0;
+  }
+
   .chart-header-title-container {
     display: flex;
     height: 50px;
@@ -43,46 +45,6 @@
     z-index: 3;
   }
 
-  .hexagon {
-    position: absolute;
-    top: 150px;
-    transform: rotate(90deg);
-    border-radius: 20px;
-    width: 100px;
-    height: 57.74px;
-    background-color: transparent;
-    margin: 28.87px 0;
-    border-left: solid 5px white;
-    border-right: solid 5px white;
-    opacity: 0.17;
-  }
-
-  .hexagon:after,
-  .hexagon:before {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    width: 70.71px;
-    height: 70.71px;
-    -webkit-transform: scaleY(0.5774) rotate(-45deg);
-    -ms-transform: scaleY(0.5774) rotate(-45deg);
-    transform: scaleY(0.5774) rotate(-45deg);
-    background-color: inherit;
-    left: 9.6447px;
-  }
-
-  .hexagon:before {
-    top: -35.3553px;
-    border-top: solid 7.0711px white;
-    border-right: solid 7.0711px white;
-  }
-
-  .hexagon:after {
-    bottom: -35.3553px;
-    border-bottom: solid 7.0711px white;
-    border-left: solid 7.0711px white;
-  }
-
   .top-header-container {
     width: 100%;
     position: relative;
@@ -91,13 +53,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include phone{
+      flex-direction: column;
+    }
     a {
       text-decoration: none;
     }
+
     .top-header-divide-container {
       display: flex;
       align-items: center;
       cursor: pointer;
+
       .page-title {
         color: white;
         font-size: 30px;
@@ -117,6 +84,7 @@
         display: flex;
         align-items: center;
         cursor: pointer;
+
         .contribute-icon-container {
           margin-left: 5px;
         }

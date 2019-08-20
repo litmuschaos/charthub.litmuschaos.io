@@ -9,6 +9,10 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+//mixins
+@import 'styles/mixins';
+
 // pages
 @import 'styles/home';
 @import 'styles/chart';

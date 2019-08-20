@@ -38,9 +38,7 @@
 
   .icon-container {
     height: 54px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flexCenter;
     margin-top: 13px;
     background-color: white;
     z-index: 2;

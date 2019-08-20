@@ -1,0 +1,28 @@
+$breakpoints: (
+    "phone":        400px,
+    "phone-wide":   480px,
+    "phablet":      560px,
+    "tablet-small": 640px,
+    "tablet":       768px,
+    "tablet-wide":  1024px,
+    "desktop":      1248px,
+    "desktop-wide": 1440px
+);
+@mixin phone() {
+  @media only screen and (max-width: 767px) {
+      /* phones */
+      @content;
+  }
+}
+
+
+//
+// @media only screen and (max-width: 767px) and (orientation: portrait) {
+//     /* portrait phones */
+// }
+
+@mixin flexCenter() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
