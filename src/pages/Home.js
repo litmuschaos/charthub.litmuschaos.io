@@ -13,8 +13,27 @@ import { FaArrowUp, FaArrowDown, FaFilter } from 'react-icons/fa';
 import { getChartList } from "../redux/selectors";
 
 class Home extends React.Component {
+  constructor() {
+    super();
+    let isMobile = false
+    if(window.innerWidth < 768) {
+      isMobile = true
+    }
+    this.state = {
+      showFilters: !isMobile
+    }
+  }
   handleNavToChart = (chartName) => {
     this.props.history.push(`/charts/${chartName}`);
+  }
+
+  showHideFilters = () => {
+    console.log('triggered');
+    if(this.state.showFilters) {
+      this.setState({ showFilters: false });
+    } else {
+      this.setState({ showFilters: true });
+    }
   }
 
   renderChartGrid = () => {
@@ -46,9 +65,9 @@ class Home extends React.Component {
       <div className="home-container">
         <HomeHeader showHomeText={true}/>
         <div className="home-content">
-        <HomeFilter />
+        <HomeFilter show={this.state.showFilters} showHide={this.showHideFilters.bind(this)}/>
           <div className="chart-container">
-            <div className="phone-filter-button-container">
+            <div className="phone-filter-button-container" onClick={this.showHideFilters}>
               <FaFilter />
               Filters
             </div>

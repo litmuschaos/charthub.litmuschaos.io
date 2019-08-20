@@ -3,13 +3,24 @@ import * as React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 export class HomeFilter extends React.Component {
+  hideShowFilters = () => {
+    if(this.props.show === true) {
+      return {
+        display: 'block'
+      }
+    } else {
+      return {
+        display: 'none'
+      }
+    }
+  }
   render() {
     return (
-      <div className="filter-container">
-        <span className="phone-filter-close">
+      <div className="filter-container" style={this.hideShowFilters()}>
+        <span className="phone-filter-close" onClick={this.props.showHide}>
           <FaTimes /> Filters
         </span>
-        <span className="filter-title-label">
+        <span className="filter-title-label" id="first-title">
           Chaos Type
         </span>
         <div className="checkbox-container">

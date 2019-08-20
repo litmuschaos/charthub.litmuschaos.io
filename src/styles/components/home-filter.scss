@@ -4,17 +4,23 @@
   @include phone {
     position: absolute;
     width: 100%;
-    bottom: 0;
+    top: 0;
     background-color: white;
     z-index: 8888;
     box-sizing: border-box;
     padding-left: 20px;
     padding-top: 20px;
-    display: none;
+    height: 100%;
   }
 
+  #first-title {
+    @include phone {
+      margin-top: 0px;
+    }
+  }
   .phone-filter-close {
     display: none;
+    margin-bottom: 10px;
     @include phone {
       display: flex;
       align-items: center;

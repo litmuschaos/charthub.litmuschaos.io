@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { FaChevronDown } from 'react-icons/fa';
 
+
 export class HomeHeader extends React.Component {
   renderHomeText = () => {
     if(this.props.showHomeText){
