@@ -11,7 +11,11 @@
   padding-top: 13.53px;
   padding-left: 12.06px;
   padding-right: 12.06px;
-
+  @include phone {
+    margin-right: 0px;
+    margin-bottom: 20px;
+    width: auto;
+  }
   .chart-title {
     width: 100%;
     text-align: center;

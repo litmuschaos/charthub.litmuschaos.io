@@ -21,11 +21,32 @@
     .chart-container {
       flex-grow: 100;
 
+      .phone-filter-button-container {
+        display: none;
+        @include phone {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          height: 20px;
+          margin-top: 10px;
+          padding-left: 10px;
+          box-sizing: border-box;
+        }
+        svg {
+          margin-right: 7px;
+        }
+      }
+
       .chart-grid {
         display: flex;
         flex-wrap: wrap;
         box-sizing: border-box;
         padding-top: 37.55px;
+        @include phone {
+          justify-content: center;
+          padding-left: 20%;
+          padding-right: 20%;
+        }
       }
 
       .chart-filter-container {
@@ -35,6 +56,10 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        @include phone {
+          height: 40px;
+          align-items: end;
+        }
 
         .chart-count {
           .bold-number {
@@ -43,6 +68,9 @@
           color: #383842;
           font-size: 14px;
           font-weight: 300;
+          @include phone {
+            margin-left: 10px;
+          }
         }
 
         .chart-filter-controls-container {
@@ -64,6 +92,9 @@
             font-size: 14px;
             margin-right: 42px;
             margin-left: 5px;
+            @include phone {
+              margin-right: 10px;
+            }
           }
 
           .filter-control-label:nth-child(2) {

@@ -7,7 +7,7 @@ import { HomeHeader } from '../components/HomeHeader';
 import { ChartCard } from '../components/ChartCard';
 
 import { IconContext } from "react-icons";
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { FaArrowUp, FaArrowDown, FaFilter } from 'react-icons/fa';
 
 import { getChartList } from "../redux/selectors";
 
@@ -112,6 +112,11 @@ class Home extends React.Component {
           </div>
 
           <div className="chart-container">
+            <div className="phone-filter-button-container">
+              <FaFilter />
+              Filters
+            </div>
+
             <div className="chart-filter-container">
               <span className="chart-count"><span className="bold-number">2</span> Items</span>
               <div className="chart-filter-controls-container" onClick={this.sortCharts.bind(this)}>

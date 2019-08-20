@@ -50,10 +50,8 @@ export class HomeHeader extends React.Component {
               <h3 className="page-title">Litmus</h3>
             </div>
           </Link>
-          <div className="top-header-divide-container">
-            <input className="top-header-input" placeholder="Search for charts..."/>
-            <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container"><FaChevronDown /></span></h3>
-          </div>
+          <input className="top-header-input" placeholder="Search for charts..."/>
+          <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container"><FaChevronDown /></span></h3>
         </div>
         {this.renderHomeText()}
         {this.renderChartTitle()}
