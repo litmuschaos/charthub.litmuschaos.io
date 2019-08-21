@@ -20,9 +20,10 @@
   }
   .phone-filter-close {
     display: none;
-    margin-bottom: 10px;
     @include phone {
+      margin-bottom: 10px;
       display: flex;
+      cursor: pointer;
       align-items: center;
     }
   }

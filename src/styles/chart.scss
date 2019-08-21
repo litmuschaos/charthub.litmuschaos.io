@@ -8,11 +8,17 @@
   .chart-page-content {
     box-sizing: border-box;
     padding: 32.5px 153px 49px 153px;
+    @include phone {
+      padding: 0;
+    }
     .chart-page-header {
       height: 63.1px;
       padding-bottom: 11.1px;
       border-bottom: 1px solid #D1D2D9;
-
+      @include phone {
+        padding: 20px 0px 20px 20px;
+        border: none;
+      }
       .chart-page-header-breacrumbs-container {
         width: 100%;
         display: flex;
@@ -25,6 +31,9 @@
         }
         .chart-header-filters-container {
           display: flex;
+          @include phone {
+            display: none;
+          }
           .header-filter {
             display: flex;
             align-items: center;

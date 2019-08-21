@@ -73,7 +73,7 @@ export class ChartDetails extends React.Component {
             Integration with Kubernetes, so developer and application intent flows into OpenEBS
             Management of tiering to and from S3 and other targets.
           </p>
-
+          <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL</button>
           <div className="chart-details-uses-explanation">
             <span className="uses-explanation-title">Uses of this chart</span>
             <span className="uses-explanation">Lorem ipsum</span>

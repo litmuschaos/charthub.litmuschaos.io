@@ -8,9 +8,8 @@
   position: relative;
   z-index: 5;
   @include phone {
-    padding: 0 0 30px 0;
+    padding: 0 0 30px;
     height: auto !important;
-
   }
 
   .chart-header-title-container {
@@ -19,7 +18,9 @@
     flex-direction: row;
     align-items: center;
     margin-top: 113px;
-
+    @include phone {
+      margin-top: 30px;
+    }
     .chart-header-logo-container {
       width: 50px;
       height: 50px;
@@ -29,6 +30,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      @include phone {
+        margin-left: 20px;
+      }
     }
 
     .chart-header-title {
@@ -57,7 +61,7 @@
     justify-content: space-between;
     @include phone {
       flex-wrap: wrap;
-      padding: 0px 20px 0px 20px;
+      padding: 0 20px;
       box-sizing: border-box;
     }
 
@@ -122,7 +126,7 @@
     @include phone {
       margin-top: 20px;
       font-size: 35px;
-      padding: 0px 20px 0px 20px;
+      padding: 0 20px;
     }
   }
 
@@ -132,7 +136,7 @@
     font-size: 28px;
     text-align: center;
     @include phone {
-      padding: 0px 20px 0px 20px;
+      padding: 0 20px;
       font-size: 23px;
     }
   }
