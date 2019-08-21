@@ -3,6 +3,10 @@
   padding: 18px 27px 20px 27px;
   display: flex;
   flex-direction: column;
+  @include phone {
+    width: auto;
+    padding: 0;
+  }
   .modal-header {
     width: 100%;
     display: flex;
@@ -40,6 +44,9 @@
     margin: 15px 20px 20px 0px;
     padding: 8px 17px 8px 17px;
     font-size: 18px;
+    @include phone {
+      margin: 10px 10px 10px 0px;
+    }
   }
   .modal-footer-notes {
     font-size: 14px;
