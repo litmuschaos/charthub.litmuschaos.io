@@ -25,12 +25,14 @@
       .phone-filter-button-container {
         display: none;
         @include phone {
+          cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: flex-start;
           height: 20px;
-          margin-top: 10px;
-          padding-left: 10px;
+          margin-bottom: 15px;
+          margin-top: 15px;
+          padding-left: 20px;
           box-sizing: border-box;
         }
 
@@ -61,6 +63,9 @@
         @include phone {
           height: 40px;
           align-items: end;
+          box-sizing: border-box;
+          padding-left: 11px;
+          padding-right: 11px;
         }
 
         .chart-count {
