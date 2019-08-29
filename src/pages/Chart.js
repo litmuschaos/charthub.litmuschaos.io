@@ -10,7 +10,7 @@ import { IconContext } from "react-icons";
 import { FaArrowLeft, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 import { getChartById } from "../redux/selectors";
-
+import { loadCharts } from "../redux/actions";
 class Chart extends React.Component {
   renderChartAndSubCharts = () => {
 
@@ -18,13 +18,38 @@ class Chart extends React.Component {
   handleNavHome = () => {
     this.props.history.push('/');
   }
+  componentDidMount() {
+    this.props.loadCharts()
+  }
   render() {
+    let icon = ""
+    if(this.props.chart && this.props.chart.spec.icon && this.props.chart.spec.icon[0]) {
+      icon = `data:${this.props.chart.spec.icon[0].mediatype};base64, ${this.props.chart.spec.icon[0].base64data}`
+    }
+    if(!this.props.chart){
+      return (
+        <div></div>
+      )
+    }
+
+    //children of div with class called chart-header-filters-container if needed in the future
+    // <div className="header-filter">
+    //   <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.7em'}}>
+    //     <FaArrowUp />
+    //     <FaArrowDown />
+    //   </IconContext.Provider>
+    //   <span className="header-filter-label">Sort</span>
+    // </div>
+    // <div className="header-filter">
+    //   <img src={process.env.PUBLIC_URL + '/icons/view_icon.svg'} width="15px" alt="change view icon"/>
+    //   <span className="header-filter-label">View</span>
+    // </div>
     return (
       <div className="chart-page-container">
         <HomeHeader
           title={this.props.chart.spec.displayName}
           showHomeText={false}
-          icon={`data:${this.props.chart.spec.icon[0].mediatype};base64, ${this.props.chart.spec.icon[0].base64data}`}/>
+          icon={icon}/>
 
         <div className="chart-page-content">
           <div className="chart-page-header">
@@ -45,17 +70,7 @@ class Chart extends React.Component {
                 <Link to={'/'}>Home</Link> / {this.props.chart.spec.displayName}
               </div>
               <div className="chart-header-filters-container">
-                <div className="header-filter">
-                  <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.7em'}}>
-                    <FaArrowUp />
-                    <FaArrowDown />
-                  </IconContext.Provider>
-                  <span className="header-filter-label">Sort</span>
-                </div>
-                <div className="header-filter">
-                  <img src={process.env.PUBLIC_URL + '/icons/view_icon.svg'} width="15px" alt="change view icon"/>
-                  <span className="header-filter-label">View</span>
-                </div>
+
               </div>
             </div>
           </div>
@@ -84,4 +99,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-export default withRouter(connect(mapStateToProps)(Chart));
+const mapDispatchToProps = {
+  loadCharts
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Chart));

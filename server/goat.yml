@@ -1,0 +1,14 @@
+init_tasks:
+ - command: "make stop"
+ - command: "go build"
+ - command: "./go"
+   nowait: true
+
+
+watchers:
+ - extension: go
+   tasks:
+   - command: "make stop"
+   - command: "go build"
+   - command: "./go"
+     nowait: true

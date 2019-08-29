@@ -4,7 +4,7 @@ front-end for litmus community charts.
 install NPM packages
 `yarn install`.
 # usage
-in command line run: `yarn start` to run development build
+navigate into `server` folder and run `go run *.go`. then navigate back to the root folder and run run: `yarn start` to run development server,
 to create production build run `yarn build`. Open your browser and go to `http://localhost:3000/`
 
 # docker

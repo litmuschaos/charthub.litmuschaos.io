@@ -11,7 +11,7 @@ import { IconContext } from "react-icons";
 import { FaArrowUp, FaArrowDown, FaFilter } from 'react-icons/fa';
 
 import { getChartList } from "../redux/selectors";
-
+import { loadCharts } from "../redux/actions";
 class Home extends React.Component {
   constructor() {
     super();
@@ -22,6 +22,9 @@ class Home extends React.Component {
     this.state = {
       showFilters: !isMobile
     }
+  }
+  componentDidMount() {
+    this.props.loadCharts()
   }
   handleNavToChart = (chartName) => {
     this.props.history.push(`/charts/${chartName}`);
@@ -37,16 +40,20 @@ class Home extends React.Component {
 
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
+      let icon = ''
+      if(chart.spec.icon && chart.spec.icon[0]){
+        icon = `data:${chart.spec.icon[0].mediatype};base64, ${chart.spec.icon[0].base64data}`
+      }
       return <ChartCard
-                key={chart.id}
+                key={chart.metadata.name}
                 circleColor="orange"
-                navTo={this.handleNavToChart.bind(this, chart.metadata.annotations.vendor)}
+                navTo={this.handleNavToChart.bind(this, chart.metadata.name)}
                 subChartCount="4"
-                title={chart.metadata.annotations.vendor}
+                title={chart.metadata.name}
                 provider={chart.spec.provider.name}
                 text={chart.metadata.annotations.description}
-                icon={`data:${chart.spec.icon[0].mediatype};base64, ${chart.spec.icon[0].base64data}`}
-                id={chart.id}/>
+                icon={icon}
+                id={chart.metadata.name}/>
     });
   }
 
@@ -106,6 +113,10 @@ Home.propTypes = {
   }).isRequired
 };
 
+const mapDispatchToProps = {
+  loadCharts
+};
+
 const mapStateToProps = (state, ownProps) => {
   const sort = {
     isAsc: false
@@ -116,4 +127,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-export default withRouter(connect(mapStateToProps)(Home));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

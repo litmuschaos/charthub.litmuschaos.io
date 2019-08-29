@@ -24,5 +24,5 @@ export const getChartList = (store, sort) => {
 }
 
 export const getChartById = (store, chartName) => {
-  return getChartsState(store) ? getChartsState(store).charts.find((chart) => chart.metadata.annotations.vendor === chartName) : {};
+  return getChartsState(store) ? getChartsState(store).charts.find((chart) => chart.metadata.name === chartName) : {};
 }
