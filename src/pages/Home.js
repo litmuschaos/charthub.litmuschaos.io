@@ -48,7 +48,7 @@ class Home extends React.Component {
                 key={chart.metadata.name}
                 circleColor="orange"
                 navTo={this.handleNavToChart.bind(this, chart.metadata.name)}
-                subChartCount="4"
+                subChartCount={chart.subCharts ? chart.subCharts.length : 0}
                 title={chart.metadata.name}
                 provider={chart.spec.provider.name}
                 text={chart.metadata.annotations.description}
@@ -79,7 +79,7 @@ class Home extends React.Component {
             </div>
 
             <div className="chart-filter-container">
-              <span className="chart-count"><span className="bold-number">2</span> Items</span>
+              <span className="chart-count"><span className="bold-number">{this.props.charts.length}</span> Items</span>
               <div className="chart-filter-controls-container" onClick={this.sortCharts.bind(this)}>
                 <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.8em'}}>
                   <FaArrowUp />

@@ -7,26 +7,33 @@ import { HomeHeader } from '../components/HomeHeader';
 import { ChartDetails } from '../components/ChartDetails';
 
 import { IconContext } from "react-icons";
-import { FaArrowLeft, FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
+// import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
-import { getChartById } from "../redux/selectors";
-import { loadCharts } from "../redux/actions";
+import { getSelectedChart } from "../redux/selectors";
+import { loadChartById } from "../redux/actions";
+
 class Chart extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+  componentDidMount() {
+    this.props.loadChartById(this.props.match.params.chartId)
+  }
   renderChartAndSubCharts = () => {
 
   }
   handleNavHome = () => {
     this.props.history.push('/');
   }
-  componentDidMount() {
-    this.props.loadCharts()
-  }
+
   render() {
     let icon = ""
-    if(this.props.chart && this.props.chart.spec.icon && this.props.chart.spec.icon[0]) {
+    if(this.props.chart && this.props.chart.spec && this.props.chart.spec.icon && this.props.chart.spec.icon[0]) {
       icon = `data:${this.props.chart.spec.icon[0].mediatype};base64, ${this.props.chart.spec.icon[0].base64data}`
     }
-    if(!this.props.chart){
+    if(!this.props.chart.spec){
       return (
         <div></div>
       )
@@ -92,15 +99,13 @@ Chart.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const { chartId } = ownProps.match.params;
-  const chart = getChartById(state, chartId);
   return {
-    chart
+    chart: getSelectedChart(state)
   }
 };
 
 const mapDispatchToProps = {
-  loadCharts
+  loadChartById
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Chart));

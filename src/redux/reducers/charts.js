@@ -1,42 +1,24 @@
-import { GET_CHARTS, LOAD_CHARTS_ERROR, LOAD_CHARTS_LOADING, LOAD_CHARTS_SUCCESS } from "../actionTypes";
-import dummyData from '../mockData/dummyData';
+import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS } from "../actionTypes";
 
 const initialState = {
   charts: [],
-  chart: {},
-  loading: false,
-  error: ''
+  chart: {}
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_CHARTS: {
-      console.log('get charts was called');
+    case LOAD_CHART_SUCCESS: {
+      console.log(action.data);
       return {
         ...state,
-        charts: []
-      };
-    }
-    case LOAD_CHARTS_LOADING: {
-      return {
-        ...state,
-        loading: true,
-        error: ''
-      };
+        chart: action.data
+      }
     }
     case LOAD_CHARTS_SUCCESS: {
       return {
         ...state,
-        charts: action.data,
-        loading: false
+        charts: action.data
       }
-    }
-    case LOAD_CHARTS_ERROR: {
-      return {
-        ...state,
-        loading: false,
-        error: action.error
-      };
     }
     default:
       return state;

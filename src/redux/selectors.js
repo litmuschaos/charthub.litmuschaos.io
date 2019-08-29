@@ -1,8 +1,9 @@
 export const getChartsState = store => store.charts;
-
+export const getSelectedChart = (store) => {
+  return store.chart ? store.chart : {};
+}
 export const getChartList = (store, sort) => {
   const charts = getChartsState(store) ? getChartsState(store).charts : [];
-  console.log('triggered');
   if(sort) {
     charts.sort((a, b) => {
       if(a.firstname < b.firstname) {
@@ -20,9 +21,6 @@ export const getChartList = (store, sort) => {
       return 0;
     })
   }
+  console.log(charts);
   return charts;
-}
-
-export const getChartById = (store, chartName) => {
-  return getChartsState(store) ? getChartsState(store).charts.find((chart) => chart.metadata.name === chartName) : {};
 }
