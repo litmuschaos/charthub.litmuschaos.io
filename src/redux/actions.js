@@ -13,7 +13,6 @@ export const loadCharts = () => dispatch => {
   })
   fetch('http://localhost:8080/charts')
   .then(function(response) {
-    console.log(response);
     return response.json();
   })
   .then(function(data) {

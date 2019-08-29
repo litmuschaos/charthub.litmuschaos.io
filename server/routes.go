@@ -18,4 +18,10 @@ var routes = Routes{
 		"/charts",
 		GetCharts,
 	},
+	Route{
+		"GetChart",
+		"GET",
+		"/charts/{chartId}",
+		GetChart,
+	},
 }
