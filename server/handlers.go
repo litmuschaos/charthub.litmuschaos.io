@@ -43,7 +43,7 @@ func GetChart(w http.ResponseWriter, r *http.Request) {
 func getYAMLFileContent(chartName string) Chart {
 	chartServicePath := "./charts/" + chartName + "/" + chartName + ".chartserviceversion.yaml"
 	serviceFile, err := ioutil.ReadFile(chartServicePath)
-	packagePath := "./charts/" + chartName + "/" + chartName + ".package.yaml"
+	packagePath := "./charts/" + chartName + "/kubernetes.package.yaml"
 	packageFile, err := ioutil.ReadFile(packagePath)
 	if err != nil {
 		log.Printf("file path of the error", chartServicePath)
