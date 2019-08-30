@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
 import { withRouter } from 'react-router-dom';
 
-import { HomeHeader } from '../components/HomeHeader';
+import HomeHeader from '../components/HomeHeader';
 import { HomeFilter } from '../components/HomeFilter';
 import { ChartCard } from '../components/ChartCard';
 

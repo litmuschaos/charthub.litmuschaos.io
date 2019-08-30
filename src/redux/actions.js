@@ -1,16 +1,6 @@
-import { LOAD_CHART_SUCCESS, LOAD_CHARTS_BY_ID_LOADING, GET_CHARTS, LOAD_CHARTS_LOADING, LOAD_CHARTS_SUCCESS } from "./actionTypes";
-
-export const getCharts = content => ({
-  type: GET_CHARTS,
-  payload: {
-    content
-  }
-});
+import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH } from "./actionTypes";
 
 export const loadCharts = () => dispatch => {
-  dispatch({
-    type: LOAD_CHARTS_LOADING
-  })
   fetch('http://localhost:8080/charts')
   .then(function(response) {
     return response.json();
@@ -29,3 +19,7 @@ export const loadChartById = (chartId) => (dispatch) => {
     dispatch({ type: LOAD_CHART_SUCCESS, data })
   });
 };
+
+export const filterChartsOnSearch = (searchTerm) => (dispatch) => {
+  dispatch({ type: FILTER_CHARTS_ON_SEARCH, searchTerm})
+}

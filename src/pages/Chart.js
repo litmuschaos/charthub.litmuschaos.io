@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
 import { withRouter, Link } from 'react-router-dom';
 
-import { HomeHeader } from '../components/HomeHeader';
+import HomeHeader from '../components/HomeHeader';
 import { ChartDetails } from '../components/ChartDetails';
 
 import { IconContext } from "react-icons";

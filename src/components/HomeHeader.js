@@ -1,10 +1,17 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { FaChevronDown } from 'react-icons/fa';
+import { filterChartsOnSearch } from "../redux/actions";
 
-
-export class HomeHeader extends React.Component {
+class HomeHeader extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      searchTerm: ''
+    }
+  }
   renderHomeText = () => {
     if(this.props.showHomeText){
       return [
@@ -38,6 +45,11 @@ export class HomeHeader extends React.Component {
     }
   }
 
+  heandleSearchTermChange = (evt) => {
+    const searchTerm = evt.target.value
+    this.setState({ searchTerm })
+    this.props.filterChartsOnSearch(searchTerm)
+  }
   render() {
     return (
       <div className="home-header-container" style={this.getHeaderHeight()}>
@@ -51,7 +63,7 @@ export class HomeHeader extends React.Component {
               <h3 className="page-title">Litmus</h3>
             </div>
           </Link>
-          <input className="top-header-input" placeholder="Search for charts..."/>
+          <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.heandleSearchTermChange} />
           <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container"><FaChevronDown /></span></h3>
         </div>
         {this.renderHomeText()}
@@ -60,3 +72,9 @@ export class HomeHeader extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = {
+  filterChartsOnSearch
+};
+
+export default connect(null, mapDispatchToProps)(HomeHeader);
