@@ -8,7 +8,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case LOAD_CHART_SUCCESS: {
-      console.log(action.data);
+      
       return {
         ...state,
         chart: action.data

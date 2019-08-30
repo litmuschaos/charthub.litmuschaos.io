@@ -1,12 +1,12 @@
 package main
 
 type Chart struct {
-	ApiVersion string   `json:"apiVersion"`
-	Kind       string   `json:"kind"`
-	Metadata   Metadata `json:"metadata"`
-	Spec       Spec     `json:"spec"`
-	PackageInfo PackageInformation `json:"packageInfo"`
-	SubCharts []Chart `json:"subCharts"`
+	ApiVersion string   `yaml:"apiVersion"`
+	Kind       string   `yaml:"kind"`
+	Metadata   Metadata `yaml:"metadata"`
+	Spec       Spec     `yaml:"spec"`
+	PackageInfo PackageInformation `yaml:"packageInfo"`
+	SubCharts []Chart `yaml:"subCharts"`
 }
 
 type Maintainer struct {
@@ -20,46 +20,46 @@ type Link struct {
 }
 
 type Icon struct {
-	Base64data string `json:"base64data"`
-	Mediatype  string `json:"mediatype"`
+	Base64data string `yaml:"base64data"`
+	Mediatype  string `yaml:"mediatype"`
 }
 
 type Metadata struct {
-	Name        string     `json:"name"`
-	Annotations Annotation `json:"annotations"`
+	Name        string     `yaml:"name"`
+	Annotations Annotation `yaml:"annotations"`
 }
 
 type Annotation struct {
-	Categories  string `json:"categories"`
-	Vendor      string `json:"vendor"`
-	CreatedAt   string `json:"createdAt"`
-	Repository  string `json:"repository"`
-	Support     string `json:"support"`
-	Description string `json:"description"`
+	Categories  string `yaml:"categories"`
+	Vendor      string `yaml:"vendor"`
+	CreatedAt   string `yaml:"createdAt"`
+	Repository  string `yaml:"repository"`
+	Support     string `yaml:"support"`
+	Description string `yaml:"description"`
 }
 
 type Spec struct {
-	DisplayName    string       `json:"displayName"`
-	Description    string       `json:"description"`
-	Keywords       []string     `json:"keywords"`
-	Version        string       `json:"version"`
-	Maturity       string       `json:"maturity"`
-	Maintainers    []Maintainer `json:"maintainers"`
-	MinKubeVersion string       `json:"minKubeVersion"`
+	DisplayName    string       `yaml:"displayName"`
+	Description    string       `yaml:"description"`
+	Keywords       []string     `yaml:"keywords"`
+	Version        string       `yaml:"version"`
+	Maturity       string       `yaml:"maturity"`
+	Maintainers    []Maintainer `yaml:"maintainers"`
+	MinKubeVersion string       `yaml:"minKubeVersion"`
 	Provider       struct {
-		Name string `json:"name"`
-	} `json:"provider"`
-	Links []Link `json:"links"`
-	Icons []Icon `json:"icon"`
+		Name string `yaml:"name"`
+	} `yaml:"provider"`
+	Links []Link `yaml:"links"`
+	Icons []Icon `yaml:"icon"`
 }
 
 type PackageInformation struct {
-	PackageName string `json:"packageName"`
+	PackageName string `yaml:"packageName"`
 	Subcharts   []struct {
-		Name string `json:"name"`
-		CSV  string `json:"CSV"`
-		Desc string `json:"desc"`
-	} `json:"subcharts"`
+		Name string `yaml:"name"`
+		CSV  string `yaml:"CSV"`
+		Desc string `yaml:"desc"`
+	} `yaml:"subcharts"`
 }
 
 type Charts []Chart

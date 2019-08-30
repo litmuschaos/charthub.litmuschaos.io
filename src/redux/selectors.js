@@ -1,9 +1,11 @@
+import { keysToCamel } from "../common/helpers"
+
 export const getChartsState = store => store.charts;
-export const getSelectedChart = (store) => {
-  return store.chart ? store.chart : {};
-}
+export const getChartById = store => keysToCamel(store.charts.chart)
+
 export const getChartList = (store, sort) => {
-  const charts = getChartsState(store) ? getChartsState(store).charts : [];
+  let charts = getChartsState(store) ? getChartsState(store).charts : [];
+  charts = charts.map((chart) => keysToCamel(chart))
   if(sort) {
     charts.sort((a, b) => {
       if(a.firstname < b.firstname) {

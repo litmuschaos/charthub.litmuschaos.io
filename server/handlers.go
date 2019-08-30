@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -56,7 +56,7 @@ func getYAMLFileContent(chartName string) Chart {
 	err = yaml.Unmarshal([]byte(packageFile), &packageInfo)
 	chart.PackageInfo = packageInfo
 	for _, subChart := range packageInfo.Subcharts {
-		subChartPath := "./charts/" + chartName + "/" + subChart.Name + "/" + subChart.Name +".chartserviceversion.yaml"
+		subChartPath := "./charts/" + chartName + "/" + subChart.Name + "/" + subChart.Name + ".chartserviceversion.yaml"
 		subChartFile, err := ioutil.ReadFile(subChartPath)
 		if err != nil {
 			log.Printf("serviceFile.Get err #%v ", err)

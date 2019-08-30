@@ -1,50 +1,70 @@
-import * as _ from 'lodash-es';
+// import * as _ from 'lodash-es';
+//
+// const noop = Function.prototype;
 
-const noop = Function.prototype;
+export const keysToCamel = function (o) {
+  if (o === Object(o) && !Array.isArray(o) && typeof o !== 'function') {
+    const n = {};
 
-/** Implementation of the debounce function */
-export const debounce = (func, wait) => {
-  let timeout;
-  function innerFunc(...args) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  }
-  return innerFunc;
-};
+    Object.keys(o)
+      .forEach((k) => {
+        n[k.charAt(0).toLowerCase() + k.slice(1)] = keysToCamel(o[k]);
+      });
 
-const getErrorMessageFromResults = results => {
-  const responseData = _.get(results, 'response.data', results.message);
-
-  if (typeof responseData === 'string') {
-    return responseData;
-  }
-
-  const getMessages = messageObject =>
-    _.map(messageObject, next => {
-      if (_.isString(next)) {
-        return next;
-      }
-      if (_.isArray(next)) {
-        return getMessages(next);
-      }
-      return 'Unknown error';
+    return n;
+  } else if (Array.isArray(o)) {
+    return o.map((i) => {
+      return keysToCamel(i);
     });
+  }
 
-  return _.join(getMessages(responseData), '\n');
+  return o;
 };
 
-const FULFILLED_ACTION = base => `${base}_FULFILLED`;
-const PENDING_ACTION = base => `${base}_PENDING`;
-const REJECTED_ACTION = base => `${base}_REJECTED`;
+//
+// /** Implementation of the debounce function */
+// export const debounce = (func, wait) => {
+//   let timeout;
+//   function innerFunc(...args) {
+//     const context = this;
+//     clearTimeout(timeout);
+//     timeout = setTimeout(() => func.apply(context, args), wait);
+//   }
+//   return innerFunc;
+// };
+//
+// const getErrorMessageFromResults = results => {
+//   const responseData = _.get(results, 'response.data', results.message);
+//
+//   if (typeof responseData === 'string') {
+//     return responseData;
+//   }
+//
+//   const getMessages = messageObject =>
+//     _.map(messageObject, next => {
+//       if (_.isString(next)) {
+//         return next;
+//       }
+//       if (_.Array.isArray(next)) {
+//         return getMessages(next);
+//       }
+//       return 'Unknown error';
+//     });
+//
+//   return _.join(getMessages(responseData), '\n');
+// };
+//
+// const FULFILLED_ACTION = base => `${base}_FULFILLED`;
+// const PENDING_ACTION = base => `${base}_PENDING`;
+// const REJECTED_ACTION = base => `${base}_REJECTED`;
 
 export const helpers = {
-  noop,
-  debounce,
-  getErrorMessageFromResults,
-  FULFILLED_ACTION,
-  PENDING_ACTION,
-  REJECTED_ACTION
+  // noop,
+  // debounce,
+  // getErrorMessageFromResults,
+  // FULFILLED_ACTION,
+  // PENDING_ACTION,
+  // REJECTED_ACTION
 };
 
 export default helpers;

@@ -10,7 +10,7 @@ import { IconContext } from "react-icons";
 import { FaArrowLeft } from 'react-icons/fa';
 // import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
-import { getSelectedChart } from "../redux/selectors";
+import { getChartById } from "../redux/selectors";
 import { loadChartById } from "../redux/actions";
 
 class Chart extends React.Component {
@@ -27,9 +27,9 @@ class Chart extends React.Component {
   handleNavHome = () => {
     this.props.history.push('/');
   }
-  
+
   renderCharts = () => {
-    const subCharts = this.props.chart.subCharts.map(chart => <ChartDetails isCollapsed={false}/>)
+    const subCharts = this.props.chart.subCharts.map(chart => <ChartDetails name={chart.spec.displayName} isCollapsed={true}/>)
     return (
       [<ChartDetails isCollapsed={false} />, ...subCharts]
     )
@@ -107,10 +107,8 @@ Chart.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const { charts } = state
-  console.log(state);
   return {
-    chart: charts.chart
+    chart: getChartById(state, ownProps.match.params.chartId)
   }
 };
 
