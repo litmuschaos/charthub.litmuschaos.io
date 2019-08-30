@@ -31,7 +31,7 @@ class Chart extends React.Component {
   renderCharts = () => {
     const subCharts = this.props.chart.subCharts.map(chart => <ChartDetails name={chart.spec.displayName} isCollapsed={true}/>)
     return (
-      [<ChartDetails isCollapsed={false} />, ...subCharts]
+      [<ChartDetails name={this.props.chart.spec.displayName} isCollapsed={false} />, ...subCharts]
     )
 
   }
