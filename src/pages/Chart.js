@@ -27,6 +27,14 @@ class Chart extends React.Component {
   handleNavHome = () => {
     this.props.history.push('/');
   }
+  
+  renderCharts = () => {
+    const subCharts = this.props.chart.subCharts.map(chart => <ChartDetails isCollapsed={false}/>)
+    return (
+      [<ChartDetails isCollapsed={false} />, ...subCharts]
+    )
+
+  }
 
   render() {
     let icon = ""
@@ -51,6 +59,7 @@ class Chart extends React.Component {
     //   <img src={process.env.PUBLIC_URL + '/icons/view_icon.svg'} width="15px" alt="change view icon"/>
     //   <span className="header-filter-label">View</span>
     // </div>
+
     return (
       <div className="chart-page-container">
         <HomeHeader
@@ -82,8 +91,7 @@ class Chart extends React.Component {
             </div>
           </div>
 
-          <ChartDetails isCollapsed={false}/>
-          <ChartDetails isCollapsed={true}/>
+          {this.renderCharts()}
 
         </div>
       </div>
@@ -99,8 +107,10 @@ Chart.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const { charts } = state
+  console.log(state);
   return {
-    chart: getSelectedChart(state)
+    chart: charts.chart
   }
 };
 

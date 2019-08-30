@@ -21,10 +21,6 @@ export const loadCharts = () => dispatch => {
 };
 
 export const loadChartById = (chartId) => (dispatch) => {
-  dispatch({
-    type: LOAD_CHARTS_BY_ID_LOADING
-  })
-  // console.log(chartId);
   fetch(`http://localhost:8080/charts/${chartId}`)
   .then(function(response) {
     return response.json();
