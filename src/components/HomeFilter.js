@@ -1,8 +1,12 @@
 import * as React from 'react';
+import connect from 'react-redux/es/connect/connect';
 
 import { FaTimes } from 'react-icons/fa';
 
-export class HomeFilter extends React.Component {
+import { getFilters } from "../redux/selectors";
+import { applyFilters } from "../redux/actions";
+
+class HomeFilter extends React.Component {
   hideShowFilters = () => {
     if(this.props.show === true) {
       return {
@@ -14,6 +18,21 @@ export class HomeFilter extends React.Component {
       }
     }
   }
+
+  renderFilters = (prop) => {
+    console.log('renders');
+    return this.props.filters[prop].map(key => (
+      <div className="checkbox-container" key={key}>
+        <input type="checkbox" onChange={this.checkBoxClicked(prop)}/>
+        <span className="checkbox-label">{key}</span>
+      </div>))
+  }
+
+  checkBoxClicked = type => (evt) => {
+    console.log(type);
+    console.log(this.props.filters);
+  }
+
   render() {
     return (
       <div className="filter-container" style={this.hideShowFilters()}>
@@ -23,67 +42,30 @@ export class HomeFilter extends React.Component {
         <span className="filter-title-label" id="first-title">
           Chaos Type
         </span>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Application chaos</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Network chaos</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Storage chaos</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Node chaos</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Kubernetes specific chaos</span>
-        </div>
+        {this.renderFilters('type')}
 
         <span className="filter-title-label">
           Provider
         </span>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Mayadata</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Operatorhub</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Company-ABC</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Company-123</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">Kubernetes specific chaos</span>
-        </div>
+        {this.renderFilters('provider')}
 
         <span className="filter-title-label">
           Complexity
         </span>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">User - 1</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">User - 2</span>
-        </div>
-        <div className="checkbox-container">
-          <input type="checkbox" />
-          <span className="checkbox-label">User - 3</span>
-        </div>
+        {this.renderFilters('complexity')}
       </div>
     )
   }
 }
+
+const mapDispatchToProps = {
+  applyFilters
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    filters: getFilters(state)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeFilter)

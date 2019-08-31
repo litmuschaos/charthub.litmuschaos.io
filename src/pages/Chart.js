@@ -38,8 +38,8 @@ class Chart extends React.Component {
 
   render() {
     let icon = ""
-    if(this.props.chart && this.props.chart.spec && this.props.chart.spec.icon && this.props.chart.spec.icon[0]) {
-      icon = `data:${this.props.chart.spec.icon[0].mediatype};base64, ${this.props.chart.spec.icon[0].base64data}`
+    if(this.props.chart && this.props.chart.spec) {
+      icon = this.props.chart.spec.icons[0].link
     }
     if(!this.props.chart.spec){
       return (

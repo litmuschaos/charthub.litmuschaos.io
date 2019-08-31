@@ -4,14 +4,15 @@ import connect from 'react-redux/es/connect/connect';
 import { withRouter } from 'react-router-dom';
 
 import HomeHeader from '../components/HomeHeader';
-import { HomeFilter } from '../components/HomeFilter';
+import HomeFilter from '../components/HomeFilter';
 import { ChartCard } from '../components/ChartCard';
 
 import { IconContext } from "react-icons";
-import { FaArrowUp, FaArrowDown, FaFilter } from 'react-icons/fa';
+import { FaList, FaArrowUp, FaArrowDown, FaFilter } from 'react-icons/fa';
 
 import { getChartList } from "../redux/selectors";
 import { loadCharts } from "../redux/actions";
+
 class Home extends React.Component {
   constructor() {
     super();
@@ -20,7 +21,8 @@ class Home extends React.Component {
       isMobile = true
     }
     this.state = {
-      showFilters: !isMobile
+      showFilters: !isMobile,
+      isGridView: true
     }
   }
   componentDidMount() {
@@ -40,11 +42,8 @@ class Home extends React.Component {
 
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
-      let icon = ''
-      if(chart.spec.icon && chart.spec.icon[0]){
-        icon = `data:${chart.spec.icon[0].mediatype};base64, ${chart.spec.icon[0].base64data}`
-      }
       return <ChartCard
+                isCard={this.state.isGridView}
                 key={chart.metadata.name}
                 circleColor="orange"
                 navTo={this.handleNavToChart.bind(this, chart.metadata.name)}
@@ -52,21 +51,25 @@ class Home extends React.Component {
                 title={chart.metadata.name}
                 provider={chart.spec.provider.name}
                 text={chart.metadata.annotations.description}
-                icon={icon}
+                icon={chart.spec.icons[0].link}
                 id={chart.metadata.name}/>
     });
   }
 
   sortCharts = () => {
-    if(this.props.sortAsc) {
-      this.setState({ sort: { sortAsc: false } });
-    } else {
-      this.setState({ sort: { sortAsc: true } });
-    }
-
+    this.setState({ sort: { sortAsc: this.props.sortAsc ? false : true }})
   }
-
+  switchView = () => {
+    this.setState({ isGridView: this.state.isGridView ? false : true });
+  }
   render() {
+    let gridOrListIcon
+    if(this.state.isGridView) {
+      gridOrListIcon = <img alt="change view icon" src={process.env.PUBLIC_URL + '/icons/view_icon.svg'} width="15px" onClick={this.switchView}/>
+    } else {
+      gridOrListIcon = <FaList onClick={this.switchView}/>
+
+    }
     return(
       <div className="home-container">
         <HomeHeader showHomeText={true}/>
@@ -88,8 +91,8 @@ class Home extends React.Component {
                 <span className="filter-control-label">
                   Sort
                 </span>
-                <img alt="change view icon" src={process.env.PUBLIC_URL + '/icons/view_icon.svg'} width="15px"/>
-                <span className="filter-control-label">
+                {gridOrListIcon}
+                <span className="filter-control-label" onClick={this.switchView}>
                   View
                 </span>
               </div>

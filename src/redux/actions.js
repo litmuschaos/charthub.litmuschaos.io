@@ -1,4 +1,4 @@
-import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH } from "./actionTypes";
+import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH } from "./actionTypes";
 
 export const loadCharts = () => dispatch => {
   fetch('http://localhost:8080/charts')
@@ -22,4 +22,8 @@ export const loadChartById = (chartId) => (dispatch) => {
 
 export const filterChartsOnSearch = (searchTerm) => (dispatch) => {
   dispatch({ type: FILTER_CHARTS_ON_SEARCH, searchTerm})
+}
+
+export const applyFilters = (filters) => (dispatch) => {
+  dispatch({ type: FILTER_CHARTS_BY_FILTERS, filters })
 }

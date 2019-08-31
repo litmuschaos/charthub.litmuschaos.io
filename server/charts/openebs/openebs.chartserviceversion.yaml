@@ -43,5 +43,5 @@ spec:
     - name: Source Code
       url: https://github.com/kubernetes/kubernetes
   icon:
-    - base64data: ""
+    - link: https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F938288857161912322%2F0j6bEwPI.jpg&f=1
       mediatype: image/png

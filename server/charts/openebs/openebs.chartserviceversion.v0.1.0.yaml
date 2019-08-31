@@ -8,28 +8,28 @@ metadata:
     createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.openebs.io/
-    description: Injects generic kubernetes chaos 
+    description: Injects generic kubernetes chaos
 spec:
   displayName: OpenEBS
   description: >
-    **Kubernetes** is an open-source system for automating deployment, scaling, and management of containerized 
-    applications. It groups containers that make up an application into logical units for easy management and discovery. 
-    Kubernetes builds upon 15 years of experience of running production workloads at Google, combined with best-of-breed 
-    ideas and practices from the community. 
+    **Kubernetes** is an open-source system for automating deployment, scaling, and management of containerized
+    applications. It groups containers that make up an application into logical units for easy management and discovery.
+    Kubernetes builds upon 15 years of experience of running production workloads at Google, combined with best-of-breed
+    ideas and practices from the community.
 
-    * **StateChaos** - Injects random pod-level and container level-failures against specified app replicas 
+    * **StateChaos** - Injects random pod-level and container level-failures against specified app replicas
 
-    * **NetworkChaos** - Injects random network jitters, delays and packet loss on the app replica pods  
+    * **NetworkChaos** - Injects random network jitters, delays and packet loss on the app replica pods
 
     ## Getting Started
-    
+
     * Learn more about these experiments [here](https://github.com/litmuschaos/litmus)
 
   keywords:
     - OpenEBS
     - CAS
     - Storage
-  version: v0.1.0 
+  version: v0.1.0
   maturity: alpha
   maintainers:
     - name: ksatchit
@@ -43,5 +43,5 @@ spec:
     - name: Source Code
       url: https://github.com/kubernetes/kubernetes
   icon:
-    - base64data: ""
+  - link: https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fsvg%2F20170803%2Fkubernetes_ui_614933.png&f=1
       mediatype: image/png

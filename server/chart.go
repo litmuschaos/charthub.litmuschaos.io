@@ -20,7 +20,7 @@ type Link struct {
 }
 
 type Icon struct {
-	Base64data string `yaml:"base64data"`
+	Link string `yaml:"link"`
 	Mediatype  string `yaml:"mediatype"`
 }
 
