@@ -64,7 +64,10 @@ class HomeHeader extends React.Component {
             </div>
           </Link>
           <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.heandleSearchTermChange} />
-          <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container"><FaChevronDown /></span></h3>
+          <a href = "https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md" target = "_blank">
+          <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container">{/*<FaChevronDown />*/}</span></h3>
+          </a>
+
         </div>
         {this.renderHomeText()}
         {this.renderChartTitle()}
