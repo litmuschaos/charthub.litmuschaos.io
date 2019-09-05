@@ -7,8 +7,9 @@ sudo: required
 services:
 - docker
 script:
-- docker build -t $REPO:$COMMIT .
+- docker build -t $REPO:$COMMIT Dockerfile.client .
+- docker build -t {$REPO}-server:$COMMIT Dockerfile.server ./server
 after_success:
 - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
-   docker push $REPO:$COMMIT;
+   docker push $REPO:$COMMIT && docker push {$REPO}-server:$COMMIT;
   fi
