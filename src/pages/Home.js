@@ -84,13 +84,13 @@ class Home extends React.Component {
             <div className="chart-filter-container">
               <span className="chart-count"><span className="bold-number">{this.props.charts.length}</span> Items</span>
               <div className="chart-filter-controls-container" onClick={this.sortCharts.bind(this)}>
-                <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.8em'}}>
+                {/* <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.8em'}}>
                   <FaArrowUp />
                   <FaArrowDown />
                 </IconContext.Provider>
                 <span className="filter-control-label">
                   Sort
-                </span>
+                </span> */}
                 {gridOrListIcon}
                 <span className="filter-control-label" onClick={this.switchView}>
                   View
