@@ -36,7 +36,7 @@ class HomeHeader extends React.Component {
   }
 
   getHeaderHeight = () => {
-    let height = '612px'
+    let height = '500px'
     if(!this.props.showHomeText) {
       height = '272.5px'
     }

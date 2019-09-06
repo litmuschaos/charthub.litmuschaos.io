@@ -24,7 +24,8 @@ export class ChartDetails extends React.Component {
     super();
     this.state = {
       showModal: false,
-      isCollapsed: props.isCollapsed
+      isCollapsed: props.isCollapsed,
+      charts: props.charts
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -38,7 +39,17 @@ export class ChartDetails extends React.Component {
       this.setState({ isCollapsed: true });
     }
   }
-
+  createLink = (listOfLink) => {
+    console.log(listOfLink);
+    let div = [];
+    for(let i=0;i<listOfLink.length;i++){
+      div.push(
+        <a key={i} href={listOfLink[i].url}>{listOfLink[i].name}</a>
+      )
+      console.log(listOfLink[i].name)
+    }
+    return div;
+  }
   handleOpenModal () {
     this.setState({ showModal: true });
   }
@@ -65,13 +76,7 @@ export class ChartDetails extends React.Component {
         </div>
         <div className={isCollapsed}>
           <p className="chart-details-text">
-            OpenEBS is a leading open source container attached storage solution that enables the use of containers for mission-critical, persistent workloads and for other stateful workloads such as logging or Prometheus for example. OpenEBS itself is deployed as just another container on your host and enables storage services that can be designated on a per pod, application, cluster or container level, including:<br />
-            <br />
-            Data persistence across nodes
-            Synchronization of data across availability zones and cloud providers
-            A common layer whether you are running on the cloud, or your bare metal
-            Integration with Kubernetes, so developer and application intent flows into OpenEBS
-            Management of tiering to and from S3 and other targets.
+             {this.props.charts.spec.description}
           </p>
           <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL</button>
           <div className="chart-details-uses-explanation">
@@ -83,8 +88,7 @@ export class ChartDetails extends React.Component {
             <span className="uses-explanation">Lorem ipsum dolor</span>
 
             <span className="uses-explanation-title">Useful links</span>
-            <span className="uses-explanation">Lorem ipsum sit amet</span>
-            <span className="uses-explanation">Lorem ipsum dolor</span>
+                {this.createLink(this.props.charts.spec.links)}
           </div>
         </div>
         <Modal
