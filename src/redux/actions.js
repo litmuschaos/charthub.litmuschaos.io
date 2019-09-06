@@ -1,6 +1,6 @@
 import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH } from "./actionTypes";
 
-var apiEnpoint =  window.location.hostname.includes('localhost')?'http://localhost:8080':'api';
+var apiEnpoint =  window.location.hostname.includes('localhost')?'http://localhost:8080':'/api';
 export const loadCharts = () => dispatch => {
   fetch(`${apiEnpoint}/charts`)
   .then(function(response) {
