@@ -1,7 +1,8 @@
 import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH } from "./actionTypes";
 
+var apiEnpoint =  window.location.hostname.includes('localhost')?'http://localhost:8080':'api';
 export const loadCharts = () => dispatch => {
-  fetch('api/charts')
+  fetch(`${apiEnpoint}/charts`)
   .then(function(response) {
     return response.json();
   })
@@ -11,7 +12,7 @@ export const loadCharts = () => dispatch => {
 };
 
 export const loadChartById = (chartId) => (dispatch) => {
-  fetch(`api/charts/${chartId}`)
+  fetch(`${apiEnpoint}/charts/${chartId}`)
   .then(function(response) {
     return response.json();
   })
