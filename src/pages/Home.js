@@ -48,7 +48,7 @@ class Home extends React.Component {
                 circleColor="orange"
                 navTo={this.handleNavToChart.bind(this, chart.metadata.name)}
                 subChartCount={chart.subCharts ? chart.subCharts.length : 0}
-                title={chart.metadata.name}
+                title={chart.spec.displayName}
                 provider={chart.spec.provider.name}
                 text={chart.metadata.annotations.description}
                 icon={chart.spec.icons[0].link}

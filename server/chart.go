@@ -1,12 +1,12 @@
 package main
 
 type Chart struct {
-	ApiVersion string   `yaml:"apiVersion"`
-	Kind       string   `yaml:"kind"`
-	Metadata   Metadata `yaml:"metadata"`
-	Spec       Spec     `yaml:"spec"`
+	ApiVersion  string             `yaml:"apiVersion"`
+	Kind        string             `yaml:"kind"`
+	Metadata    Metadata           `yaml:"metadata"`
+	Spec        Spec               `yaml:"spec"`
 	PackageInfo PackageInformation `yaml:"packageInfo"`
-	SubCharts []Chart `yaml:"subCharts"`
+	SubCharts   []Chart            `yaml:"subCharts"`
 }
 
 type Maintainer struct {
@@ -20,8 +20,8 @@ type Link struct {
 }
 
 type Icon struct {
-	Link string `yaml:"link"`
-	Mediatype  string `yaml:"mediatype"`
+	Link      string `yaml:"url"`
+	Mediatype string `yaml:"mediatype"`
 }
 
 type Metadata struct {
@@ -49,8 +49,10 @@ type Spec struct {
 	Provider       struct {
 		Name string `yaml:"name"`
 	} `yaml:"provider"`
-	Links []Link `yaml:"links"`
-	Icons []Icon `yaml:"icon"`
+	Links           []Link   `yaml:"links"`
+	Icons           []Icon   `yaml:"icon"`
+	Experiments     []string `yaml:experiments`
+	ChaosExpCRDLink string   `yaml:chaosexpcrdlink`
 }
 
 type PackageInformation struct {

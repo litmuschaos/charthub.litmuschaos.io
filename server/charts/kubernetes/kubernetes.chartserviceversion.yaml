@@ -12,7 +12,7 @@ metadata:
 spec:
   displayName: Kubernetes
   description: >
-    **Kubernetes** is an open-source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy management and discovery. Install all will install the following subcharts 
+    Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy management and discovery. Install all will install the following subcharts 
 
     - State
     - Network
@@ -38,5 +38,6 @@ spec:
     - name: Source Code
       url: https://github.com/kubernetes/kubernetes
   icon:
-    - link: https://www.stickpng.com/assets/images/58480a44cef1014c0b5e4917.png
+    - url: https://raw.githubusercontent.com/litmuschaos/charthub.litmuschaos.io/master/public/charts-logos/kubernetes.png
       mediatype: image/png
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/community-charts/master/charts/kubernetes/experiments/k8s_all_exp_crd.yaml

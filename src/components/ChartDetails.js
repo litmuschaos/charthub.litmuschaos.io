@@ -40,16 +40,30 @@ export class ChartDetails extends React.Component {
     }
   }
   createLink = (listOfLink) => {
-    console.log(listOfLink);
     let div = [];
     for(let i=0;i<listOfLink.length;i++){
       div.push(
         <a key={i} href={listOfLink[i].url}>{listOfLink[i].name}</a>
       )
-      console.log(listOfLink[i].name)
     }
     return div;
   }
+  getListOfExperiment = (listofExperiments,subchartlist) => {
+    let div = [];
+    if(subchartlist != null ){
+      div.push(<span key="-1" className="uses-explanation-title">List of Subcharts</span>)
+      for(let i=0; i<subchartlist.length;i++){
+        div.push(<span key={i} >{subchartlist[i].spec.displayName} </span>)
+      }
+    }else{
+      div.push(<span key="-1" className="uses-explanation-title">List of Experiments</span>)
+      for(let i=0; i<listofExperiments.length; i++){
+       div.push(<span key={i}> {listofExperiments[i].slice(0,-9).replace(/-/ig," ")}</span>)
+     }
+    }
+    return div;
+  }
+
   handleOpenModal () {
     this.setState({ showModal: true });
   }
@@ -80,13 +94,7 @@ export class ChartDetails extends React.Component {
           </p>
           <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL</button>
           <div className="chart-details-uses-explanation">
-            <span className="uses-explanation-title">Uses of this chart</span>
-            <span className="uses-explanation">Lorem ipsum</span>
-
-            <span className="uses-explanation-title">List of experiments</span>
-            <span className="uses-explanation">Lorem ipsum</span>
-            <span className="uses-explanation">Lorem ipsum dolor</span>
-
+                {this.getListOfExperiment(this.props.charts.spec.experiments,this.props.charts.subCharts)}
             <span className="uses-explanation-title">Useful links</span>
                 {this.createLink(this.props.charts.spec.links)}
           </div>
