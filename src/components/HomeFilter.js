@@ -23,7 +23,7 @@ class HomeFilter extends React.Component {
     console.log('renders');
     return this.props.filters[prop].map(key => (
       <div className="checkbox-container" key={key}>
-        <input type="checkbox" onChange={this.checkBoxClicked(prop)}/>
+        <input type="checkbox" onChange={this.checkBoxClicked(prop)} disabled/>
         <span className="checkbox-label">{key}</span>
       </div>))
   }
@@ -39,7 +39,7 @@ class HomeFilter extends React.Component {
         <span className="phone-filter-close" onClick={this.props.showHide}>
           <FaTimes /> Filters
         </span>
-        <span className="filter-title-label" id="first-title">
+        <span className="filter-title-label" id="first-title" >
           Chaos Type
         </span>
         {this.renderFilters('type')}
@@ -52,7 +52,7 @@ class HomeFilter extends React.Component {
         {/* <span className="filter-title-label">
           Complexity
         </span>
-        {this.renderFilters('complexity')} */}
+        {this.renderFilters('complexity')}  */}
       </div>
     )
   }
