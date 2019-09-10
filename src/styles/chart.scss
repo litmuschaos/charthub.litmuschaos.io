@@ -1,7 +1,6 @@
 .chart-page-container {
   height: 100vh;
   background-color: white;
-  width: 1366px;
   @include phone {
     width: auto;
   }
