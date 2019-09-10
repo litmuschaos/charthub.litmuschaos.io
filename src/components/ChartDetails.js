@@ -50,16 +50,24 @@ export class ChartDetails extends React.Component {
   }
   getListOfExperiment = (listofExperiments,subchartlist) => {
     let div = [];
+
     if(subchartlist != null ){
       div.push(<span key="-1" className="uses-explanation-title">List of Subcharts</span>)
       for(let i=0; i<subchartlist.length;i++){
         div.push(<span key={i} >{subchartlist[i].spec.displayName} </span>)
       }
-    }else{
+    }else if(listofExperiments != null){
       div.push(<span key="-1" className="uses-explanation-title">List of Experiments</span>)
       for(let i=0; i<listofExperiments.length; i++){
        div.push(<span key={i}> {listofExperiments[i].slice(0,-9).replace(/-/ig," ")}</span>)
      }
+    }
+    return div;
+  }
+  getMaintainerList =  (listofMaintainers) =>{
+    let div = [];
+    for(let i = 0; i<listofMaintainers.length; i++){
+      div.push(<div key={i}>{listofMaintainers[i].name}</div>, <a href={listofMaintainers[i].email} key={listofMaintainers[i].email}>{listofMaintainers[i].email} </a>)
     }
     return div;
   }
@@ -77,7 +85,7 @@ export class ChartDetails extends React.Component {
       'content-is-collapsed': this.state.isCollapsed,
       'content-is-open': !this.state.isCollapsed
     });
-    console.log(this.props.charts);
+
     return (
       <div className="chart-details-container">
         <div className="chart-details-header">
@@ -87,24 +95,26 @@ export class ChartDetails extends React.Component {
               <GoChevronDown />
             </IconContext.Provider>
           </div>
-          <button className="chart-install-button" onClick={this.handleOpenModal}>INSTALL ALL</button>
+          <button className="chart-install-button" onClick={this.handleOpenModal}>INSTALL ALL CHARTS</button>
         </div>
         <div className={isCollapsed}>
           <p className="chart-details-text">
              {this.props.charts.spec.description}
           </p>
-          <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL</button>
+          <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL CHARTS</button>
           <div className="chart-details-uses-explanation">
                 {this.getListOfExperiment(this.props.charts.spec.experiments,this.props.charts.subCharts)}
             <span className="uses-explanation-title">Useful links</span>
                 {this.createLink(this.props.charts.spec.links)}
+            <span className="uses-explanation-title">Maintainers</span>
+            {this.getMaintainerList(this.props.charts.spec.maintainers)}
           </div>
         </div>
         <Modal
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
            style={customStyles}>
-            <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} />
+            <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName}/>
             <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
         </Modal>
       </div>

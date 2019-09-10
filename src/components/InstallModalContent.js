@@ -7,15 +7,15 @@ export class InstallModalContent extends React.Component {
   }
 
   render() {
+    console.log(this.props.provider)
     return (
       <div className="install-modal-content">
         <div className="modal-header">
-          <div className="modal-img-placeholder"></div>
+          <div className="modal-img-placeholder"> <img src={this.props.logo} /></div>
           <div className="modal-header-title-container">
-            <h1 className="modal-title">OpenEBS</h1>
-            <span className="modal-subtitle">1.0.0 provided by OpenEBS project</span>
+            <h1 className="modal-title">{this.props.displayName}</h1>
+            <span className="modal-subtitle">1.0.0 provided by {this.props.provider} project</span>
           </div>
-         
         </div>
         <h3 className="install-title">Install on Kubernetes</h3>
         <div className="modal-install-instruction"><span className="modal-install-instruction-number">1 -&nbsp;</span>Install litmus Operator, a tool for for injecting chaos experiments on Kubernetes</div>
