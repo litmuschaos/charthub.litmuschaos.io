@@ -2,10 +2,6 @@
   width: 100%;
   overflow: auto;
   background: linear-gradient(180deg, #008CD6 0%, #003659 100%);
-  padding-left: 159px;
-  padding-right: 159px;
-  box-sizing: border-box;
-  position: relative;
   z-index: 5;
   @include phone {
     padding: 0 0 30px;
@@ -52,9 +48,8 @@
   }
 
   .top-header-container {
-    width: 100%;
-    position: relative;
-    z-index: 234;
+    padding-left: 2%;
+    padding-right: 2%;
     margin-top: 30px;
     display: flex;
     align-items: center;

@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from './redux/store'
 
 const rootElement = document.getElementById('root')
-
+rootElement.style.width = "100%"
 
 ReactDOM.render(
   <Provider store={store}>
