@@ -77,6 +77,7 @@ export class ChartDetails extends React.Component {
       'content-is-collapsed': this.state.isCollapsed,
       'content-is-open': !this.state.isCollapsed
     });
+    console.log(this.props.charts);
     return (
       <div className="chart-details-container">
         <div className="chart-details-header">
@@ -103,7 +104,7 @@ export class ChartDetails extends React.Component {
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
            style={customStyles}>
-            <InstallModalContent />
+            <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} />
             <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
         </Modal>
       </div>
