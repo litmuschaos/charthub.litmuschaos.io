@@ -38,6 +38,6 @@ spec:
     - name: Source Code
       url: https://github.com/kubernetes/kubernetes
   icon:
-    - url: https://raw.githubusercontent.com/litmuschaos/charthub.litmuschaos.io/master/public/charts-logos/kubernetes.png
+    - url: https://raw.githubusercontent.com/litmuschaos/charthub.litmuschaos.io/master/public/charts-logos/Kubernetes.png
       mediatype: image/png
   chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/community-charts/master/charts/kubernetes/experiments/k8s_all_exp_crd.yaml
