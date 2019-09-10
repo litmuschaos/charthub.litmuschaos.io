@@ -52,6 +52,7 @@ class HomeHeader extends React.Component {
   }
   render() {
     return (
+      <div className="hero-bg">
       <div className="home-header-container" style={this.getHeaderHeight()}>
         <div className="top-header-container">
           <Link to={'/'}>
@@ -70,6 +71,7 @@ class HomeHeader extends React.Component {
         </div>
         {this.renderHomeText()}
         {this.renderChartTitle()}
+      </div>
       </div>
     )
   }

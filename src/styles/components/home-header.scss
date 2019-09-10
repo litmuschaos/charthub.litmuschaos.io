@@ -1,7 +1,10 @@
+.hero-bg{
+  background: linear-gradient(180deg, #008CD6 0%, #003659 100%);
+}
 .home-header-container {
   width: 100%;
   overflow: auto;
-  background: linear-gradient(180deg, #008CD6 0%, #003659 100%);
+  background-image: url('/icons/hexagon_background.svg');
   z-index: 5;
   @include phone {
     padding: 0 0 30px;
@@ -14,6 +17,8 @@
     flex-direction: row;
     align-items: center;
     margin-top: 113px;
+    padding-left: 2%;
+    padding-right: 2%;
     @include phone {
       margin-top: 30px;
     }
@@ -113,7 +118,7 @@
   }
 
   .home-header-title-1 {
-    margin-top: 185px;
+    margin-top: 130px;
     color: white;
     font-size: 40px;
     font-weight: bold;
