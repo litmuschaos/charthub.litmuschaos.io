@@ -40,7 +40,7 @@ class HomeFilter extends React.Component {
           <FaTimes /> Filters
         </span>
         <span className="filter-title-label" id="first-title" >
-          Chaos Type
+          Chaos For
         </span>
         {this.renderFilters('type')}
 
