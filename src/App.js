@@ -9,7 +9,7 @@ import Subcharts from './pages/Subcharts';
 
 class App extends React.Component {
   componentDidMount() {
-    document.title = "Litmus charts";
+    document.title = "Chaos Engineering - Litmus charts for Kubernetes";
   }
   render() {
     return (

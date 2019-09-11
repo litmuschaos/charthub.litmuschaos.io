@@ -16,8 +16,8 @@ class HomeHeader extends React.Component {
     if(this.props.showHomeText){
       return [
         <h1 key="1" className="home-header-title-1">Chaos Charts for Kubernetes</h1>,
-        <h2 key="2" className="home-header-title-2">Hub for pre-defined chaos experiment for various applications running on Kubernetes and Kubernetes  </h2>,
-        <h3 key="3" className="home-header-title-3">Browse, install, tune and run chaos using these charts. Contribute new charts.</h3>
+        <h2 key="2" className="home-header-title-2">Charts are pre-defined chaos experiments. Use these charts to inject chaos into cloud native applications and Kubernetes infrastructure.</h2>,
+        <h3 key="3" className="home-header-title-3">BROWSE - RUN - CONTRIBUTE</h3>
       ]
     }
   }
@@ -55,12 +55,12 @@ class HomeHeader extends React.Component {
       <div className="hero-bg">
       <div className="home-header-container" style={this.getHeaderHeight()}>
         <div className="top-header-container">
-          <Link to={'/'}>
+          <a href="https://litmuschaos.io" target="_blank" rel="noopener noreferrer">
             <div className="top-header-divide-container">
               <img alt="organization logo" src={process.env.PUBLIC_URL + '/icons/litmus.png'} className="logo-img"/>
               <h3 className="page-title">Litmus</h3>
             </div>
-          </Link>
+          </a>
           <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.heandleSearchTermChange} />
           <a href = "https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md" target = "_blank" rel="noopener noreferrer">
           <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container">{/*<FaChevronDown />*/}</span></h3>
