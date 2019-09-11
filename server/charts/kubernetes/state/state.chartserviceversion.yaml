@@ -8,8 +8,9 @@ metadata:
     createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.kubernetes.io/
+    description: Injects Kubernetes State chaos
 spec:
-  displayName: state 
+  displayName: State 
   description: >
     Kubernetes subchart sateChaos which contains chaos to disrupt state of kubernetes resources. Experiments can inject random pod-level and container level-failures against specified app replicas. Install will add the following experiments
     - container-kill-exp.yaml

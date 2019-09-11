@@ -97,11 +97,8 @@ class Home extends React.Component {
                 </span>
               </div>
             </div>
-
             <div className="chart-grid">
-
               {this.renderChartGrid()}
-
             </div>
           </div>
         </div>

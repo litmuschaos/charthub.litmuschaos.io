@@ -8,8 +8,9 @@ metadata:
     createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.openebs.io/
+    description: Injects OpenEBS State chaos
 spec:
-  displayName: state 
+  displayName: State 
   description: >
     OpenEBS subchart sateChaos which contains chaos to disrupt state of openebs control-plane and  data-plane resources. Experiments can inject random pod-level and container level-failures against specified openebs  replicas. Install will add the following experiments
     - target-pod-delete-exp.yaml

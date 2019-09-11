@@ -35,7 +35,6 @@ export class ChartCard extends React.Component {
                     <img className="icon" src={this.props.icon} alt="chart logo"/>
                   </div>
                 </div>
-
                 <div className="chart-title">
                   {this.props.title}
                 </div>
@@ -51,7 +50,7 @@ export class ChartCard extends React.Component {
       if(this.props.isCard){
         return renderChartContent()
       } else {
-        return (<div class="list-view-width">
+        return (<div className="list-view-width">
                   {renderChartContent()}
                 </div>)
       }
@@ -59,9 +58,9 @@ export class ChartCard extends React.Component {
     return (
       <div className={listOrCardViewClass} onClick={this.props.navTo}>
         <div className="subchart-count-container">
-          <span className="subchart-count">
+         {this.props.subChartCount?( <span className="subchart-count">
             {this.props.subChartCount} Subcharts
-          </span>
+          </span>):(<span></span>)}
         </div>
         {renderChartListContainer()}
       </div>

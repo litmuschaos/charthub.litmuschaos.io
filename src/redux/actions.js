@@ -12,9 +12,6 @@ export const loadCharts = () => dispatch => {
 };
 
 export const loadChartById = (chartId) => (dispatch) => {
-  console.log(`${apiEnpoint}/charts/${chartId}`);
-  console.log(apiEnpoint);
-  console.log(chartId);
   fetch(`${apiEnpoint}/charts/${chartId}`)
   .then(function(response) {
     return response.json();
