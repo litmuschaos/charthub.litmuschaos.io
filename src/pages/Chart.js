@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 import HomeHeader from '../components/HomeHeader';
 import { ChartDetails } from '../components/ChartDetails';
+import { ChartCard } from '../components/ChartCard';
 
 import { IconContext } from "react-icons";
 import { FaArrowLeft } from 'react-icons/fa';
@@ -21,31 +22,37 @@ class Chart extends React.Component {
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
   }
-  renderChartAndSubCharts = () => {
-
-  }
   handleNavHome = () => {
     this.props.history.push('/');
   }
-
+  handleNavToSubChart = (chartName,subCharts) => {
+    this.props.history.push(`/charts/${chartName}/subcharts/${subCharts}`);
+  }
   renderCharts = () => {
-    let i=0;
+    let i = 0;
     let logo = this.props.chart.spec.icons[0].link;
     let displayName = this.props.chart.spec.displayName;
-    console.log(displayName)
-    const subCharts = this.props.chart.subCharts.map(chart => <ChartDetails charts={chart} key={i++} displayName={displayName} name={chart.spec.displayName} isCollapsed={true} logo={logo}/>)
     return (
-      [<ChartDetails key={i++} charts={this.props.chart} displayName={displayName}  name={this.props.chart.spec.displayName} isCollapsed={false} logo={logo} />, ...subCharts]
+      <ChartDetails key={i++} charts={this.props.chart} displayName={displayName} name={this.props.chart.spec.displayName} isCollapsed={false} logo={logo} />
     )
+  }
 
+  renderSubCharts = () => {
+    let i = 0;
+    let logo = this.props.chart.spec.icons[0].link;
+    let displayName = this.props.chart.metadata.name;
+    const subCharts = this.props.chart.subCharts.map(chart => <ChartCard   navTo={this.handleNavToSubChart.bind(this,displayName, chart.metadata.name)} isCard='true' key={chart.metadata.name} title={chart.spec.displayName} provider={chart.spec.provider.name} text={chart.metadata.annotations.description} icon={logo} id={chart.metadata.name} />)
+    return (
+      [...subCharts]
+    )
   }
 
   render() {
     let icon = ""
-    if(this.props.chart && this.props.chart.spec) {
+    if (this.props.chart && this.props.chart.spec) {
       icon = this.props.chart.spec.icons[0].link
     }
-    if(!this.props.chart.spec){
+    if (!this.props.chart.spec) {
       return (
         <div></div>
       )
@@ -69,16 +76,16 @@ class Chart extends React.Component {
         <HomeHeader
           title={this.props.chart.spec.displayName}
           showHomeText={false}
-          icon={icon}/>
+          icon={icon} />
 
         <div className="chart-page-content">
           <div className="chart-page-header">
 
             <div className="chart-page-nav-back-container">
               <div className="nav-back-icon-container" onClick={this.handleNavHome}>
-                  <IconContext.Provider value={{ color: "#004ED6", size: '0.7em'}}>
-                      <FaArrowLeft />
-                  </IconContext.Provider>
+                <IconContext.Provider value={{ color: "#004ED6", size: '0.7em' }}>
+                  <FaArrowLeft />
+                </IconContext.Provider>
               </div>
               <div className="chart-page-title-container">
                 <h3 className="chart-page-title">{this.props.chart.spec.displayName}</h3>
@@ -96,7 +103,10 @@ class Chart extends React.Component {
           </div>
 
           {this.renderCharts()}
-
+          <h3>Subcharts</h3>
+          <div className="d-flex">
+            {this.renderSubCharts()}
+          </div>
         </div>
       </div>
     );

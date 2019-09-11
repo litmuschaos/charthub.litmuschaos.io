@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 
 import Home from './pages/Home';
 import Chart from './pages/Chart';
+import Subcharts from './pages/Subcharts';
 
 class App extends React.Component {
   componentDidMount() {
@@ -14,11 +15,11 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Switch>
-          <Route path="/charts/:chartId" component={Chart} />
-          <Route path="/" component={Home} />
+          <Route path="/charts/:chartId" exact component={Chart} />
+          <Route path="/" exact component={Home} />
+          <Route path="/charts/:chartId/subcharts/:subchartID" component={Subcharts}/>
           <Redirect from="*" to="/" key="default-route" />
         </Switch>
-
       </React.Fragment>
     );
   }
