@@ -3,13 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
-	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"path/filepath"
 	"strings"
+
+	"github.com/gorilla/mux"
+	"gopkg.in/yaml.v3"
 )
 
 func GetCharts(w http.ResponseWriter, r *http.Request) {
@@ -43,7 +44,7 @@ func GetChart(w http.ResponseWriter, r *http.Request) {
 func getYAMLFileContent(chartName string) Chart {
 	chartServicePath := "./charts/" + chartName + "/" + chartName + ".chartserviceversion.yaml"
 	serviceFile, err := ioutil.ReadFile(chartServicePath)
-	packagePath := "./charts/" + chartName + "/kubernetes.package.yaml"
+	packagePath := "./charts/" + chartName + "/" + chartName + ".package.yaml"
 	packageFile, err := ioutil.ReadFile(packagePath)
 	if err != nil {
 		log.Printf("file path of the error", chartServicePath)
