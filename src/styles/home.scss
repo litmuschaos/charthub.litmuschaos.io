@@ -113,7 +113,9 @@
 .d-flex{
   display: flex;
 }
-
+.flex-column{
+  flex-direction: column
+}
 .gray-text-color{
   color:#999aa7;
 }

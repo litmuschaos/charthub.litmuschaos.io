@@ -59,15 +59,27 @@
       min-height: 300px;
       box-sizing: border-box;
       border-radius: 4px;
-      background-color: rgba(230,252,255, .5);
-      padding-left: 10px;
-      padding-top: 8px;
+      background-color: #efefef;
+      padding: 8px 10px;
       display: flex;
       flex-direction: column;
       @include phone {
         width: 100%;
       }
-
+       .item-block{
+         margin-top: 10px;
+         margin-bottom: 10px;
+         border-bottom: 1px solid #d5cece;
+         .items{
+           margin-left: 10px;
+         }
+         span, a{
+           margin-bottom: 5px;
+         }
+       }
+       .item-block:last-child{
+        border: none;
+      }
       .uses-explanation-title {
         color: #999AA7;
         font-size: 16px;
@@ -128,6 +140,10 @@
   }
 }
 
+
+.dark-gray{
+  color: #46474b;
+}
 .modal-close-button {
   border: none;
   background-color: transparent;
