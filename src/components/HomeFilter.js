@@ -7,6 +7,14 @@ import { getFilters } from "../redux/selectors";
 import { applyFilters } from "../redux/actions";
 
 class HomeFilter extends React.Component {
+  
+  constructor() {
+    super() 
+    this.state = {
+       filter_state_info : []      
+    }
+  }
+ 
   hideShowFilters = () => {
     if(this.props.show === true) {
       return {
@@ -20,17 +28,32 @@ class HomeFilter extends React.Component {
   }
 
   renderFilters = (prop) => {
-    console.log('renders');
     return this.props.filters[prop].map(key => (
-      <div className="checkbox-container" key={key}>
-        <input type="checkbox" onChange={this.checkBoxClicked(prop)} disabled/>
+      <div className="checkbox-container" key={key} worker={this.state.filter_state_info.push({name: key, annotation: prop, state_value: false})}>
+        <input type="checkbox" onChange={this.checkBoxClicked(prop, key)}/>
         <span className="checkbox-label">{key}</span>
       </div>))
   }
 
-  checkBoxClicked = type => (evt) => {
-    console.log(type);
-    console.log(this.props.filters);
+  checkBoxClicked = (type, key) => (evt) => {
+    
+    // console.log(type);
+    // console.log(key);
+    const temp_filter_state_info = this.state.filter_state_info;
+    var index = -1 ;
+
+    temp_filter_state_info.map(item => {
+      index = index + 1;
+      if(item.annotation === type && item.name === key) {
+        temp_filter_state_info[index].state_value = !temp_filter_state_info[index].state_value;
+      }
+      
+    })
+    this.state.filter_state_info = temp_filter_state_info;
+    console.log(this.state.filter_state_info);
+    this.props.applyFilters(temp_filter_state_info);
+
+
   }
 
   render() {

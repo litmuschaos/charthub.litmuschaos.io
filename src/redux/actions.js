@@ -26,5 +26,6 @@ export const filterChartsOnSearch = (searchTerm) => (dispatch) => {
 }
 
 export const applyFilters = (filters) => (dispatch) => {
+  // console.log(filters)
   dispatch({ type: FILTER_CHARTS_BY_FILTERS, filters })
 }
