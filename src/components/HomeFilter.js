@@ -46,8 +46,8 @@ class HomeFilter extends React.Component {
       let temp_filters_container = temp_category_container[category] // either complexity[] or provider[] or type[]
       for(let filter of temp_filters_container){
         if(filter === key){
-          console.log(type);
-          console.log(key);
+          // console.log(type);
+          // console.log(key);
           if(!this.handleFilterQueryExistenceCheck(key)) {
             this.state.filter_state_info.push({name: key, annotation: category, state_value: true});
             // console.log(this.state.filter_state_info);
