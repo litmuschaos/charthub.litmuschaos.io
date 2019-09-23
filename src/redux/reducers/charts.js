@@ -49,25 +49,23 @@ export default function(state = initialState, action) {
             pool.push (x.name)
           }
         })
-        
-
-
         termsFilter.map(term => {
-
           if(term.state_value === true) {
-            charts = state.loadedCharts.filter(chart => pool.some(pool_item=> chart.Metadata.Annotations.Categories === pool_item));
-            // charts.push(state.loadedCharts.filter(chart => chart.Metadata.Annotations.Categories === term.name));
+            console.log(pool);
+            let charts_Categories = []
+            let charts_Provider = []
+            charts_Categories = termsFilter ? state.loadedCharts.filter(chart => pool.some(pool_item => chart.Metadata.Annotations.Categories === pool_item)) : state.loadedCharts;
+            charts_Provider = termsFilter ? state.loadedCharts.filter(chart => pool.some(pool_item => chart.Spec.Provider.Name === pool_item)) : state.loadedCharts;
+            
+            if (charts_Provider.length !=0 && charts_Categories.length !=0 ) {
+              charts = charts_Categories.filter(x => charts_Provider.includes(x));
+            }
+            else {
+              charts = [...new Set ([...charts_Provider, ...charts_Categories])];
+            }
+               
           }
-          // else {
-          //   termsFilter.pop(term);
-          //   console.log(termsFilter)
-          //   }
         })
-
-
-
-
-
 
       }
 
@@ -76,63 +74,12 @@ export default function(state = initialState, action) {
         charts
       }
     }
-      
-     
-
-
-
-
-
-
-
-/*
-
-      termsFilter.map(item => {
-          // console.log(item)
-        if (item.state_value) {
-
-          switch (item.annotation) {
-            case "type" : {
-              // charts = termsFilter ? state.loadedCharts.filter(chart => chart.Metadata.Annotations.Categories === item.name) : state.loadedCharts
-              charts = state.loadedCharts
-              state.loadedCharts.map(unit => {
-                if(unit.Metadata.Annotations.Categories === item.name){
-                  if(!item.state) {
-                    charts.pop(unit)
-                  }
-                  
-                }
-              })
-              
-              charts = '';
-              return {
-                ...state,
-                charts
-              }
-              break;
-            }
-            case "provider" : {
-              charts = termsFilter ? state.loadedCharts.filter(chart => chart.Spec.Provider.Name === item.name) : state.loadedCharts
-              // state.loadedCharts = charts
-              console.log(charts)
-              return {
-                ...state,
-                charts
-              }
-              // break;
-            }
-            default :{
-              console.log()
-            }
-          }
-        } 
-      });
-        */
-      
-  
-    // }
     
     default:
       return state;
   }
 }
+
+
+
+             
