@@ -5,6 +5,7 @@ import { FaTimes } from 'react-icons/fa';
 
 import { getFilters } from "../redux/selectors";
 import { applyFilters } from "../redux/actions";
+import { thisExpression } from '@babel/types';
 
 class HomeFilter extends React.Component {
   
@@ -29,29 +30,36 @@ class HomeFilter extends React.Component {
 
   renderFilters = (prop) => {
     return this.props.filters[prop].map(key => (
-      <div className="checkbox-container" key={key} worker={this.state.filter_state_info.push({name: key, annotation: prop, state_value: false})}>
+      <div className="checkbox-container" key={key} >
         <input type="checkbox" onChange={this.checkBoxClicked(prop, key)}/>
         <span className="checkbox-label">{key}</span>
       </div>))
   }
 
-  checkBoxClicked = (type, key) => (evt) => {
-    
-    // console.log(type);
-    // console.log(key);
-    const temp_filter_state_info = this.state.filter_state_info;
-    var index = -1 ;
+  handleFilterQueryExistenceCheck(key) {
+    return this.state.filter_state_info.some(item=> key === item.name); 
+  }
 
-    temp_filter_state_info.map(item => {
-      index = index + 1;
-      if(item.annotation === type && item.name === key) {
-        temp_filter_state_info[index].state_value = !temp_filter_state_info[index].state_value;
+  checkBoxClicked = (type, key) => (evt) => {
+    let temp_category_container= this.props.filters; // => complexity=>[], provider=>[], type=>[] (filter_container)
+    for(let category in temp_category_container){
+      let temp_filters_container = temp_category_container[category] // either complexity[] or provider[] or type[]
+      for(let filter of temp_filters_container){
+        if(filter === key){
+          console.log(type);
+          console.log(key);
+          if(!this.handleFilterQueryExistenceCheck(key)) {
+            this.state.filter_state_info.push({name: key, annotation: category, state_value: true});
+            // console.log(this.state.filter_state_info);
+          }
+          else {
+            this.state.filter_state_info.map(item => key === item.name ? item.state_value ? item.state_value = false : item.state_value = true : '');
+            // console.log(this.state.filter_state_info);
+          }
+        }
       }
-      
-    })
-    this.state.filter_state_info = temp_filter_state_info;
-    console.log(this.state.filter_state_info);
-    this.props.applyFilters(temp_filter_state_info);
+    }
+  this.props.applyFilters(this.state.filter_state_info);
 
 
   }
