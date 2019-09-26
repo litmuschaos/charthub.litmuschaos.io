@@ -7,7 +7,6 @@ export class InstallModalContent extends React.Component {
   }
 
   render() {
-    console.log(this.props.provider)
     return (
       <div className="install-modal-content">
         <div className="modal-header">

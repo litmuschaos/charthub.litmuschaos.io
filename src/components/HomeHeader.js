@@ -45,7 +45,7 @@ class HomeHeader extends React.Component {
     }
   }
 
-  heandleSearchTermChange = (evt) => {
+  handleSearchTermChange = (evt) => { 
     const searchTerm = evt.target.value
     this.setState({ searchTerm })
     this.props.filterChartsOnSearch(searchTerm)
@@ -61,7 +61,7 @@ class HomeHeader extends React.Component {
               <h3 className="page-title">Litmus</h3>
             </div>
           </a>
-          <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.heandleSearchTermChange} />
+          <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.handleSearchTermChange} />
           <a href = "https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md" target = "_blank" rel="noopener noreferrer">
           <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container">{/*<FaChevronDown />*/}</span></h3>
           </a>

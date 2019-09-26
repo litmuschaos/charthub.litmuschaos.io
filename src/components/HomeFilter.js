@@ -5,8 +5,17 @@ import { FaTimes } from 'react-icons/fa';
 
 import { getFilters } from "../redux/selectors";
 import { applyFilters } from "../redux/actions";
+import { thisExpression } from '@babel/types';
 
 class HomeFilter extends React.Component {
+  
+  constructor() {
+    super() 
+    this.state = {
+       filter_state_info : []      
+    }
+  }
+ 
   hideShowFilters = () => {
     if(this.props.show === true) {
       return {
@@ -20,17 +29,36 @@ class HomeFilter extends React.Component {
   }
 
   renderFilters = (prop) => {
-    console.log('renders');
     return this.props.filters[prop].map(key => (
-      <div className="checkbox-container" key={key}>
-        <input type="checkbox" onChange={this.checkBoxClicked(prop)} disabled/>
+      <div className="checkbox-container" key={key} >
+        <input type="checkbox" onClick={this.checkBoxClicked(prop, key)}/>
         <span className="checkbox-label">{key}</span>
       </div>))
   }
 
-  checkBoxClicked = type => (evt) => {
-    console.log(type);
-    console.log(this.props.filters);
+  handleFilterQueryExistenceCheck(key) {
+    return this.state.filter_state_info.find(item=> key === item.name); 
+  }
+
+  checkBoxClicked = (type, key) => (evt) => {
+    let temp_category_container= this.props.filters; // => complexity=>[], provider=>[], type=>[] (filter_container)
+    for(let category in temp_category_container){
+      let temp_filters_container = temp_category_container[category] // either complexity[] or provider[] or type[]
+      for(let filter of temp_filters_container){
+        if(filter === key){
+        
+          if(!this.handleFilterQueryExistenceCheck(key)) {
+            this.state.filter_state_info.push({name: key, annotation: category, state_value: true});
+          }
+          else {
+            this.state.filter_state_info.map(item => key === item.name ? item.state_value ? item.state_value = false : item.state_value = true : '');
+          }
+        }
+      }
+    }
+  this.props.applyFilters(this.state.filter_state_info);
+
+
   }
 
   render() {

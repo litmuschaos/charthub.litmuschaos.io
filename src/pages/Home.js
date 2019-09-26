@@ -22,7 +22,9 @@ class Home extends React.Component {
     }
     this.state = {
       showFilters: !isMobile,
-      isGridView: true
+      isGridView: true, 
+      sortDesc: true
+      
     }
   }
   componentDidMount() {
@@ -55,9 +57,15 @@ class Home extends React.Component {
                 id={chart.metadata.name}/>
     });
   }
-
+  
   sortCharts = () => {
-    this.setState({ sort: { sortAsc: this.props.sortAsc ? false : true }})
+    
+    this.setState({sortDesc : !this.state.sortDesc});
+    if (this.state.sortDesc) {
+      this.props.charts.sort((a,b)=> a.metadata.name.toUpperCase() > b.metadata.name.toUpperCase() ? -1 : b.metadata.name.toUpperCase() > a.metadata.name.toUpperCase() ? 1 : 0)
+    } else {
+      this.props.charts.sort((a,b)=> a.metadata.name.toUpperCase() < b.metadata.name.toUpperCase() ? -1 : b.metadata.name.toUpperCase() < a.metadata.name.toUpperCase() ? 1 : 0)
+    }
   }
   switchView = () => {
     this.setState({ isGridView: this.state.isGridView ? false : true });
@@ -68,8 +76,9 @@ class Home extends React.Component {
       gridOrListIcon = <img alt="change view icon" src={process.env.PUBLIC_URL + '/icons/view_icon.svg'} width="15px" onClick={this.switchView}/>
     } else {
       gridOrListIcon = <FaList onClick={this.switchView}/>
-
     }
+    
+    
     return(
       <div className="home-container">
         <HomeHeader showHomeText={true}/>
@@ -84,13 +93,13 @@ class Home extends React.Component {
             <div className="chart-filter-container">
               <span className="chart-count"><span className="bold-number">{this.props.charts.length}</span> primary chaos charts</span>
               <div className="chart-filter-controls-container" onClick={this.sortCharts.bind(this)}>
-                {/* <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.8em'}}>
+                <IconContext.Provider value={{ 'margin-left': "15px", 'margin-right': "5px", size: '0.8em'}}>
                   <FaArrowUp />
                   <FaArrowDown />
                 </IconContext.Provider>
-                <span className="filter-control-label">
+                <span className="filter-control-label" onClick = {this.sortCharts}>
                   Sort
-                </span> */}
+                </span>
                 {gridOrListIcon}
                 <span className="filter-control-label" onClick={this.switchView}>
                   View
