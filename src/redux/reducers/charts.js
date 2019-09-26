@@ -50,8 +50,8 @@ export default function(state = initialState, action) {
           if(term.state_value === true) {
             let charts_Categories = []
             let charts_Provider = []
-            charts_Categories = termsFilter ? state.loadedCharts.filter(chart => pool.some(pool_item => chart.Metadata.Annotations.Categories === pool_item)) : state.loadedCharts;
-            charts_Provider = termsFilter ? state.loadedCharts.filter(chart => pool.some(pool_item => chart.Spec.Provider.Name === pool_item)) : state.loadedCharts;
+            charts_Categories = state.loadedCharts.filter(chart => pool.some(pool_item => chart.Metadata.Annotations.Categories === pool_item));
+            charts_Provider = state.loadedCharts.filter(chart => pool.some(pool_item => chart.Spec.Provider.Name === pool_item));
             
             if (charts_Provider.length !=0 && charts_Categories.length !=0 ) {
               charts = charts_Categories.filter(x => charts_Provider.includes(x));

@@ -77,7 +77,7 @@ class Home extends React.Component {
     } else {
       gridOrListIcon = <FaList onClick={this.switchView}/>
     }
-    // let assortedCharts 
+    
     
     return(
       <div className="home-container">
