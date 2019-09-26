@@ -37,6 +37,5 @@ export const getFilters = store => {
     res[names[ind]] = filterArr
     return res
   }, {})
-  console.log('filters were returned');
   return filters
 }

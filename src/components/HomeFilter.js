@@ -31,13 +31,13 @@ class HomeFilter extends React.Component {
   renderFilters = (prop) => {
     return this.props.filters[prop].map(key => (
       <div className="checkbox-container" key={key} >
-        <input type="checkbox" onChange={this.checkBoxClicked(prop, key)}/>
+        <input type="checkbox" onClick={this.checkBoxClicked(prop, key)}/>
         <span className="checkbox-label">{key}</span>
       </div>))
   }
 
   handleFilterQueryExistenceCheck(key) {
-    return this.state.filter_state_info.some(item=> key === item.name); 
+    return this.state.filter_state_info.find(item=> key === item.name); 
   }
 
   checkBoxClicked = (type, key) => (evt) => {

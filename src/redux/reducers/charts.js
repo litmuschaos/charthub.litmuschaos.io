@@ -25,10 +25,7 @@ export default function(state = initialState, action) {
     
     case FILTER_CHARTS_ON_SEARCH: {
       const term = action.searchTerm.toUpperCase()
-      console.log(term)
-      console.log(state.loadedCharts)
       let charts = action.searchTerm ? state.loadedCharts.filter(chart => chart.Metadata.Name.toUpperCase().indexOf(term) > -1) : state.loadedCharts
-      // console.log(charts)
       return {
         ...state,
         charts
@@ -51,7 +48,6 @@ export default function(state = initialState, action) {
         })
         termsFilter.map(term => {
           if(term.state_value === true) {
-            console.log(pool);
             let charts_Categories = []
             let charts_Provider = []
             charts_Categories = termsFilter ? state.loadedCharts.filter(chart => pool.some(pool_item => chart.Metadata.Annotations.Categories === pool_item)) : state.loadedCharts;

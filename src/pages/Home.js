@@ -61,7 +61,6 @@ class Home extends React.Component {
   sortCharts = () => {
     
     this.setState({sortDesc : !this.state.sortDesc});
-    // console.log(this.props.charts)
     if (this.state.sortDesc) {
       this.props.charts.sort((a,b)=> a.metadata.name.toUpperCase() > b.metadata.name.toUpperCase() ? -1 : b.metadata.name.toUpperCase() > a.metadata.name.toUpperCase() ? 1 : 0)
     } else {

@@ -45,11 +45,9 @@ class HomeHeader extends React.Component {
     }
   }
 
-  handleSearchTermChange = (evt) => { //corrected typo in method name
+  handleSearchTermChange = (evt) => { 
     const searchTerm = evt.target.value
-    console.log(searchTerm)
     this.setState({ searchTerm })
-    console.log(this.setState)
     this.props.filterChartsOnSearch(searchTerm)
   }
   render() {
