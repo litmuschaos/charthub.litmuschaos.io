@@ -95,13 +95,13 @@ export class ChartDetails extends React.Component {
               <GoChevronDown />
             </IconContext.Provider>
           </div>
-          <button className="chart-install-button" onClick={this.handleOpenModal}>INSTALL ALL CHARTS</button>
+          <button className="chart-install-button" onClick={this.handleOpenModal}>INSTALL ALL EXPERIMENTS</button>
         </div>
         <div className={isCollapsed}>
           <p className="chart-details-text">
             {this.props.charts.spec.description}
           </p>
-          <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL CHARTS</button>
+          <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL EXPERIMENTS</button>
           <div className="chart-details-uses-explanation">
             <div className="d-flex item-block">
               <i className="mi-check-list dark-gray"></i>

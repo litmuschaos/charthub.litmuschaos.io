@@ -103,7 +103,7 @@ class Chart extends React.Component {
           </div>
 
           {this.renderCharts()}
-          <h3>Subcharts</h3>
+          <h3>Experiments</h3>
           <div className="d-flex">
             {this.renderSubCharts()}
           </div>
