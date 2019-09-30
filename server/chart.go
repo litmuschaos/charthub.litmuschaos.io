@@ -6,7 +6,7 @@ type Chart struct {
 	Metadata    Metadata           `yaml:"metadata"`
 	Spec        Spec               `yaml:"spec"`
 	PackageInfo PackageInformation `yaml:"packageInfo"`
-	SubCharts   []Chart            `yaml:"subCharts"`
+	Experiments []Chart            `yaml:"experiments"`
 }
 
 type Maintainer struct {
@@ -30,23 +30,23 @@ type Metadata struct {
 }
 
 type Annotation struct {
-	Categories  string `yaml:"categories"`
-	Vendor      string `yaml:"vendor"`
-	CreatedAt   string `yaml:"createdAt"`
-	Repository  string `yaml:"repository"`
-	Support     string `yaml:"support"`
-	Description string `yaml:"description"`
+	Categories string `yaml:"categories"`
+	// Vendor      string `yaml:"vendor"`
+	// CreatedAt   string `yaml:"createdAt"`
+	// Repository  string `yaml:"repository"`
+	// Support     string `yaml:"support"`
+	ChartDescription string `yaml:"chartDescription"`
 }
 
 type Spec struct {
-	DisplayName    string       `yaml:"displayName"`
-	Description    string       `yaml:"description"`
-	Keywords       []string     `yaml:"keywords"`
-	Version        string       `yaml:"version"`
-	Maturity       string       `yaml:"maturity"`
-	Maintainers    []Maintainer `yaml:"maintainers"`
-	MinKubeVersion string       `yaml:"minKubeVersion"`
-	Provider       struct {
+	DisplayName         string       `yaml:"displayName"`
+	CategoryDescription string       `yaml:"categoryDescription"`
+	Keywords            []string     `yaml:"keywords"`
+	Version             string       `yaml:"version"`
+	Maturity            string       `yaml:"maturity"`
+	Maintainers         []Maintainer `yaml:"maintainers"`
+	MinKubeVersion      string       `yaml:"minKubeVersion"`
+	Provider            struct {
 		Name string `yaml:"name"`
 	} `yaml:"provider"`
 	Links           []Link   `yaml:"links"`
@@ -57,11 +57,11 @@ type Spec struct {
 
 type PackageInformation struct {
 	PackageName string `yaml:"packageName"`
-	Subcharts   []struct {
+	Experiments []struct {
 		Name string `yaml:"name"`
 		CSV  string `yaml:"CSV"`
 		Desc string `yaml:"desc"`
-	} `yaml:"subcharts"`
+	} `yaml:"experiments"`
 }
 
 type Charts []Chart

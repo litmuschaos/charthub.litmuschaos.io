@@ -1,22 +1,21 @@
 apiVersion: litmuchaos.io/v1alpha1
 kind: ChartServiceVersion
 metadata:
-  name: kubernetes-network-v0.1.0 
+  name: Pod-delete 
   annotations:
     categories: "Kubernetes"
     vendor: "CNCF"
     createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.kubernetes.io/
-    description: Injects Kubernetes Network chaos
 spec:
-  displayName: Network
+  displayName: Pod_delete
   description: >
-    Kubernetes subchart networkChaos which contains chaos to disrupt network connectivity of kubernetes pods. Experiments can inject random network jitters, delays and packet loss on the app replica pods. Install will add the experiments mention in "List of Experiments" section.
+    Pod delete contains chaos to disrupt state of kubernetes resources. Experiments can inject random pod delete failures against specified application. 
   keywords:
     - Kubernetes
-    - Network
-  version: v0.1.0
+    - State 
+  version: {{ VERSION }}
   maturity: alpha
   maintainers:
     - name: ksatchit
@@ -30,8 +29,9 @@ spec:
     - name: Source Code
       url: https://github.com/kubernetes/kubernetes
   icon:
-    - base64data: ""
+    - url: 
       mediatype: ""
   experiments:
-    - pod-network-delay-exp.yaml
-  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/community-charts/master/charts/kubernetes/network/experiments/k8s_nw_all_exp_crd.yaml 
+    - container-kill-exp.yaml
+    - pod-delete-exp.yaml
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/community-charts/master/charts/kubernetes/state/experiments/k8s_state_all_exp_crd.yaml

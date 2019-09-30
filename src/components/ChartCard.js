@@ -10,21 +10,7 @@ export class ChartCard extends React.Component {
       }
     }
   }
-  componentDidMount() {
-    //comment it out until we figure out how the images will be loaded
-    // const icon = new Image(200, 200);
-    // icon.src = this.props.icon;
-    // var context = this;
-    // icon.onload = () => {
-    //   new Vibrant(icon).getPalette((err, palette) => {
-    //     context.setState({
-    //       gradientCircle: {
-    //         background: `radial-gradient(rgb(${palette.DarkVibrant._rgb.join(',')}), white)`
-    //       }
-    //     })
-    //   })
-    // }
-  }
+  
   render() {
     const listOrCardViewClass = this.props.isCard ? "chart-card-container" : "chart-card-container list-view"
     const renderChartContent = () => {
@@ -44,6 +30,7 @@ export class ChartCard extends React.Component {
                 <p className="chart-description">
                   {this.props.text}
                 </p>
+                
               </div>)
     }
     const renderChartListContainer = (content) => {

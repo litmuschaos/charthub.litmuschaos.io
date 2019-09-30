@@ -1,22 +1,21 @@
 apiVersion: litmuchaos.io/v1alpha1
 kind: ChartServiceVersion
 metadata:
-  name: kubernetes-state-v0.1.0 
+  name: Pod-delete-v.0.1.0
   annotations:
     categories: "Kubernetes"
     vendor: "CNCF"
     createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.kubernetes.io/
-    description: Injects Kubernetes State chaos
 spec:
-  displayName: State 
+  displayName: Pod_delete
   description: >
-    Kubernetes subchart stateChaos which contains chaos to disrupt state of kubernetes resources. Experiments can inject random pod-level and container level-failures against specified app replicas. Install will add the experiments mention in "List of Experiments" section.
+    Pod delete contains chaos to disrupt state of kubernetes resources. Experiments can inject random pod delete failures against specified application. 
   keywords:
     - Kubernetes
     - State 
-  version: v0.1.0
+  version: 0.1.0
   maturity: alpha
   maintainers:
     - name: ksatchit
