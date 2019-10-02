@@ -11,7 +11,9 @@ front-end for litmus community charts.
 - install Go server dependencies
 
     `go get github.com/gorilla/mux`
-    `go github.com/gorilla/mux`
+
+    `go get gopkg.in/yaml.v3`
+`
 # usage
 navigate into `server` folder and run `go run *.go`. then navigate back to the root folder and run run: `yarn start` to run development server,
 to create production build run `yarn build`. Open your browser and go to `http://localhost:3000/`
