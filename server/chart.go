@@ -30,11 +30,11 @@ type Metadata struct {
 }
 
 type Annotation struct {
-	Categories string `yaml:"categories"`
-	// Vendor      string `yaml:"vendor"`
-	// CreatedAt   string `yaml:"createdAt"`
-	// Repository  string `yaml:"repository"`
-	// Support     string `yaml:"support"`
+	Categories       string `yaml:"categories"`
+	Vendor           string `yaml:"vendor"`
+	CreatedAt        string `yaml:"createdAt"`
+	Repository       string `yaml:"repository"`
+	Support          string `yaml:"support"`
 	ChartDescription string `yaml:"chartDescription"`
 }
 
@@ -51,8 +51,8 @@ type Spec struct {
 	} `yaml:"provider"`
 	Links           []Link   `yaml:"links"`
 	Icons           []Icon   `yaml:"icon"`
-	Experiments     []string `yaml:experiments`
-	ChaosExpCRDLink string   `yaml:chaosexpcrdlink`
+	Experiments     []string `yaml:"experiments"`
+	ChaosExpCRDLink string   `yaml:"chaosexpcrdlink"`
 }
 
 type PackageInformation struct {

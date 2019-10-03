@@ -10,7 +10,7 @@ metadata:
     support: https://slack.kubernetes.io/
 spec:
   displayName: pod-network-delay
-  description: >
+  categoryDescription: >
     Pod-network-delay contains chaos to disrupt network connectivity of kubernetes pods. Experiments can inject random network jitters, delays and packet loss on the app replica pods. 
   keywords:
     - Kubernetes

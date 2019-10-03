@@ -5,7 +5,7 @@ import { FaTimes } from 'react-icons/fa';
 
 import { getFilters } from "../redux/selectors";
 import { applyFilters } from "../redux/actions";
-import { thisExpression } from '@babel/types';
+// import { thisExpression } from '@babel/types';
 
 class HomeFilter extends React.Component {
   

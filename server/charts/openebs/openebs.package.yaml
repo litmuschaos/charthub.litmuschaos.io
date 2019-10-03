@@ -1,5 +1,5 @@
 packageName: openebs
-subcharts:
-  - name: Pod-delete
+experiments:
+  - name: pod_delete
     CSV: pod_delete.chartserviceversion.yaml 
     desc: "Pod-delete"
