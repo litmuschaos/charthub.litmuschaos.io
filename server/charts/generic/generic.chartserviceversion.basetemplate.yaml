@@ -1,12 +1,17 @@
 apiVersion: litmuchaos.io/v1alpha1
 kind: ChartServiceVersion
 metadata:
-  name: generic-v0.1.0
+  name: generic
   annotations:
     categories: "Kubernetes"
+    vendor: "CNCF"
+    createdAt: 2019-08-12T10:28:08Z
+    repository: https://github.com/litmuschaos/community-charts
+    support: https://slack.kubernetes.io/
     chartDescription: Injects generic kubernetes chaos 
 spec:
   displayName: Generic Chaos
+  
   categoryDescription: >
     Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy management and discovery. Install will all the experiments which can be used to inject chaos into containerized appications.
 

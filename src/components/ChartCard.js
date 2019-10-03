@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Vibrant from 'node-vibrant';
+// import * as Vibrant from 'node-vibrant';
 
 export class ChartCard extends React.Component {
   constructor(props) {
@@ -12,6 +12,7 @@ export class ChartCard extends React.Component {
   }
   
   render() {
+    console.log(this.props.navTo);
     const listOrCardViewClass = this.props.isCard ? "chart-card-container" : "chart-card-container list-view"
     const renderChartContent = () => {
       return (<div>
@@ -44,9 +45,9 @@ export class ChartCard extends React.Component {
     }
     return (
       <div className={listOrCardViewClass} onClick={this.props.navTo}>
-        <div className="subchart-count-container">
-         {this.props.subChartCount?( <span className="subchart-count">
-            {this.props.subChartCount} Subcharts
+        <div className="experiment-count-container">
+         {this.props.experimentCount ?( <span className="experiment-count">
+            {this.props.experimentCount} Chaos Experiments
           </span>):(<span></span>)}
         </div>
         {renderChartListContainer()}

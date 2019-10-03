@@ -9,8 +9,8 @@ metadata:
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.kubernetes.io/
 spec:
-  displayName: Pod_delete
-  description: >
+  displayName: pod-delete
+  categoryDescription: >
     Pod delete contains chaos to disrupt state of kubernetes resources. Experiments can inject random pod delete failures against specified application. 
   keywords:
     - Kubernetes

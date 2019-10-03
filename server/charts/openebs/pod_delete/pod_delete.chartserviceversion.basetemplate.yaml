@@ -10,7 +10,7 @@ metadata:
     support: https://slack.openebs.io/
 spec:
   displayName: Pod-Delete 
-  description: >
+  categoryDescription: >
      Pod delete contains chaos to disrupt state of openebs control-plane and  data-plane resources. Experiments can inject random pod delete against specified openebs replicas. 
 
   keywords:

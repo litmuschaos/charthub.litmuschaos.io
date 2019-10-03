@@ -9,8 +9,8 @@ metadata:
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.kubernetes.io/
 spec:
-  displayName: Container-kill
-  description: >
+  displayName: container-kill
+  categoryDescription: >
    Container kill contains chaos to disrupt state of kubernetes resources. Experiments can inject random container delete failures against specified application. 
   keywords:
     - Kubernetes

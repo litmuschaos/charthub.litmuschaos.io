@@ -11,9 +11,9 @@ import { FaArrowLeft } from 'react-icons/fa';
 // import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 import { getChartById } from "../redux/selectors";
-import { loadChartById, loadCharts } from "../redux/actions";
+import { loadChartById } from "../redux/actions";
 
-class SubCharts extends React.Component {
+class Experiments extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -25,6 +25,7 @@ class SubCharts extends React.Component {
 
 
   handleNavHome = () => {
+    console.log()
     this.props.history.push(`/charts/${this.props.match.params.chartId}`);
   }
 
@@ -32,14 +33,15 @@ class SubCharts extends React.Component {
     let i=0;
     let logo = this.props.chart.spec.icons[0].link;
     let displayName = this.props.chart.spec.displayName;
-    let subchartName = this.props.match.params.subchartID
-    let  subchart = this.props.chart.subCharts.filter(function(subchart) {    
-      if(subchart.metadata.name == subchartName){
-       return subchart;}
+    let experimentName = this.props.match.params.experimentID;
+    let experiment = this.props.chart.experiments.filter(function(experiment) {    
+      if(experiment.metadata.name === experimentName){
+       return experiment;}
     });
-   let  showsubchart = subchart.map(chart => <ChartDetails key={i++} charts={chart} displayName={displayName}  name={chart.spec.displayName} isCollapsed={false} logo={logo} />)
+
+   let showexperiment = experiment.map(chart => <ChartDetails key={i++} charts={chart} displayName={displayName}  name={chart.spec.displayName} isCollapsed={false} logo={logo} />)
     return (
-      [...showsubchart]
+      [...showexperiment]
     )
 
   }
@@ -56,10 +58,10 @@ class SubCharts extends React.Component {
     }
 
 
-    let subchartName = this.props.match.params.subchartID
-    let subchart = this.props.chart.subCharts.filter(function(subchart) {    
-      if(subchart.metadata.name == subchartName){
-       return subchart;}
+    let experimentName = this.props.match.params.experimentID
+    let experiment = this.props.chart.experiments.filter(function(experiment) {    
+      if(experiment.metadata.name === experimentName){
+       return experiment;}
     });
     return (
       <div className="chart-page-container">
@@ -77,15 +79,14 @@ class SubCharts extends React.Component {
                   </IconContext.Provider>
               </div>
               <div className="chart-page-title-container">
-                <h3 className="chart-page-title">{subchart[0].spec.displayName}</h3>
+                <h3 className="chart-page-title">{experiment[0].spec.displayName}</h3>
               </div>
             </div>
             <div className="chart-page-header-breacrumbs-container">
               <div className="breadcrumbs">
-                <Link to={`/charts/${this.props.chart.metadata.name}`}>Home/ {this.props.chart.spec.displayName}</Link> /{subchart[0].spec.displayName}
+                <Link to={`/charts/${this.props.chart.metadata.name}`}>Home/ {this.props.chart.spec.displayName}</Link> /{experiment[0].spec.displayName}
               </div>
               <div className="chart-header-filters-container">
-
               </div>
             </div>
           </div>
@@ -97,7 +98,7 @@ class SubCharts extends React.Component {
 }
 
 
-SubCharts.propTypes = {
+Experiments.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired
@@ -113,4 +114,4 @@ const mapDispatchToProps = {
   loadChartById
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SubCharts));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Experiments));
