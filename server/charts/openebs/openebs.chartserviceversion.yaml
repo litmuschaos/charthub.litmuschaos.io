@@ -37,4 +37,4 @@ spec:
   icon:
     - url: https://avatars.slack-edge.com/2018-01-23/302618690369_83c3b381e778d3d0ccd1_132.png
       mediatype: image/png
-  chaosexpcrdlink: 
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/openebs/experiment.yaml

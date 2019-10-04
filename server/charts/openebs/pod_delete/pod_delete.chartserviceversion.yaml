@@ -33,4 +33,4 @@ spec:
   icon:
     - url: ""
       mediatype: ""
-  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/chaos-charts/blob/master/charts/openebs/pod_delete/experiment.yaml
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/openebs/pod_delete/experiment.yaml
