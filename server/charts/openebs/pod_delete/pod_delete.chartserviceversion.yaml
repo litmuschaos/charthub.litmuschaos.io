@@ -1,23 +1,23 @@
 apiVersion: litmuchaos.io/v1alpha1
 kind: ChartServiceVersion
 metadata:
-  name: openebs-network 
+  name: pod-delete-v0.1.0 
   annotations:
     categories: "OpenEBS"
     vendor: "CNCF"
     createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.openebs.io/
-    description: Injects OpenEBS Network chaos
 spec:
-  displayName: Network
-  description: >
-    OpenEBS subchart networkChaos which contains chaos to disrupt network connectivity of kubernetes pods. Experiments can inject random network jitters, delays and packet loss on the app replica pods. Install will add the experiments mention in "List of Experiments" section.
+  displayName: Pod-Delete 
+  categoryDescription: >
+     Pod delete contains chaos to disrupt state of openebs control-plane and  data-plane resources. Experiments can inject random pod delete against specified openebs replicas. 
+
   keywords:
     - Kubernetes
-    - Network
+    - Pod
     - OpenEBS
-  version: {{ VERSION }}
+  version: 0.1.0
   maturity: alpha
   maintainers:
     - name: ksatchit
@@ -31,6 +31,6 @@ spec:
     - name: Source Code
       url: https://github.com/openebs/openebs
   icon:
-    - base64data: ""
+    - url: ""
       mediatype: ""
-  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/community-charts/master/charts/openebs/network/experiments/openebs_nw_all_exp_crd.yaml 
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/openebs/pod_delete/experiment.yaml

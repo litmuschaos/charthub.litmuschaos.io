@@ -1,22 +1,21 @@
 apiVersion: litmuchaos.io/v1alpha1
 kind: ChartServiceVersion
 metadata:
-  name: kubernetes-network-v0.1.0 
+  name: pod-network-delay-v0.1.0 
   annotations:
     categories: "Kubernetes"
     vendor: "CNCF"
     createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.kubernetes.io/
-    description: Injects Kubernetes Network chaos
 spec:
-  displayName: Network
-  description: >
-    Kubernetes subchart networkChaos which contains chaos to disrupt network connectivity of kubernetes pods. Experiments can inject random network jitters, delays and packet loss on the app replica pods. Install will add the experiments mention in "List of Experiments" section.
+  displayName: pod-network-delay
+  categoryDescription: >
+    Pod-network-delay contains chaos to disrupt network connectivity of kubernetes pods. Experiments can inject random network jitters, delays and packet loss on the app replica pods. 
   keywords:
     - Kubernetes
     - Network
-  version: v0.1.0
+  version: 0.1.0
   maturity: alpha
   maintainers:
     - name: ksatchit
@@ -32,6 +31,5 @@ spec:
   icon:
     - base64data: ""
       mediatype: ""
-  experiments:
-    - pod-network-delay-exp.yaml
-  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/community-charts/master/charts/kubernetes/network/experiments/k8s_nw_all_exp_crd.yaml 
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/generic/pod_network_delay/experiment.yaml 
+
