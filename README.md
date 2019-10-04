@@ -1,4 +1,4 @@
-# charthub.litmuschaos.io 
+# charthub.litmuschaos.io  
 front-end for litmus community charts.
 # installation
 install NPM packages
