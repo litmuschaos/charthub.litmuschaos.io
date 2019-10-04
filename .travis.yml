@@ -16,5 +16,7 @@ after_success:
    docker push $REPO:$COMMIT && docker push ${REPO}-server:$COMMIT;
   fi
 - if [ "$TRAVIS_BRANCH" = "staging" -a "$TRAVIS_PULL_REQUEST" != "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
-   docker tag $REPO:$COMMIT $STAG_REPO:$COMMIT && docker tag ${REPO}-server:$COMMIT ${STAG_REPO}-server:$COMMIT &&  docker push $STAG_REPO:$COMMIT && docker push ${STAG_REPO}-server:$COMMIT;
+   docker tag $REPO:$COMMIT $STAG_REPO:$COMMIT;
+   docker tag ${REPO}-server:$COMMIT ${STAG_REPO}-server:$COMMIT;
+   docker push $STAG_REPO:$COMMIT && docker push ${STAG_REPO}-server:$COMMIT;
   fi  
