@@ -1,27 +1,23 @@
 apiVersion: litmuchaos.io/v1alpha1
 kind: ChartServiceVersion
 metadata:
-  name: openebs
+  name: pod-delete
   annotations:
     categories: "OpenEBS"
-    vendor: "MayaData"
+    vendor: "CNCF"
     createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/community-charts
     support: https://slack.openebs.io/
-    chartDescription: Injects generic openebs chaos 
 spec:
-  displayName: OpenEBS
+  displayName: Pod-Delete 
   categoryDescription: >
-    OpenEBS is the most active Container Attached Storage project. OpenEBS enables your DevOps teams to have their own storage policies for every workload and it is truly Kubernetes native and 100% in userspace. 
-
-  experiments:
-    - Pod-delete
+     Pod delete contains chaos to disrupt state of openebs control-plane and  data-plane resources. Experiments can inject random pod delete against specified openebs replicas. 
 
   keywords:
+    - Kubernetes
+    - Pod
     - OpenEBS
-    - CAS
-    - Storage
-  version: 0.1.0
+  version: {{ VERSION }}
   maturity: alpha
   maintainers:
     - name: ksatchit
@@ -35,6 +31,6 @@ spec:
     - name: Source Code
       url: https://github.com/openebs/openebs
   icon:
-    - url: https://avatars.slack-edge.com/2018-01-23/302618690369_83c3b381e778d3d0ccd1_132.png
-      mediatype: image/png
-  chaosexpcrdlink: 
+    - url: ""
+      mediatype: ""
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/chaos-charts/blob/master/charts/openebs/pod_delete/experiment.yaml

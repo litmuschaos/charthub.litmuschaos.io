@@ -56,15 +56,15 @@ func getYAMLFileContent(chartName string) Chart {
 	err = yaml.Unmarshal([]byte(serviceFile), &chart)
 	err = yaml.Unmarshal([]byte(packageFile), &packageInfo)
 	chart.PackageInfo = packageInfo
-	for _, subChart := range packageInfo.Subcharts {
-		subChartPath := "./charts/" + chartName + "/" + subChart.Name + "/" + subChart.Name + ".chartserviceversion.yaml"
-		subChartFile, err := ioutil.ReadFile(subChartPath)
+	for _, experiment := range packageInfo.Experiments {
+		experimentPath := "./charts/" + chartName + "/" + experiment.Name + "/" + experiment.Name + ".chartserviceversion.yaml"
+		experimentFile, err := ioutil.ReadFile(experimentPath)
 		if err != nil {
 			log.Printf("serviceFile.Get err #%v ", err)
 		}
-		var subChart Chart
-		err = yaml.Unmarshal([]byte(subChartFile), &subChart)
-		chart.SubCharts = append(chart.SubCharts, subChart)
+		var experiment Chart
+		err = yaml.Unmarshal([]byte(experimentFile), &experiment)
+		chart.Experiments = append(chart.Experiments, experiment)
 	}
 	if err != nil {
 		log.Printf("serviceFile.Get err #%v ", err)

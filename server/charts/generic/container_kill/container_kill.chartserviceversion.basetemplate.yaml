@@ -1,0 +1,37 @@
+apiVersion: litmuchaos.io/v1alpha1
+kind: ChartServiceVersion
+metadata:
+  name: Container-kill
+  annotations:
+    categories: "Kubernetes"
+    vendor: "CNCF"
+    createdAt: 2019-08-12T10:28:08Z
+    repository: https://github.com/litmuschaos/community-charts
+    support: https://slack.kubernetes.io/
+spec:
+  displayName: container-kill
+  categoryDescription: >
+   Container kill contains chaos to disrupt state of kubernetes resources. Experiments can inject random container delete failures against specified application. 
+  keywords:
+    - Kubernetes
+    - Container 
+  version: {{ VERSION }}
+  maturity: alpha
+  maintainers:
+    - name: ksatchit
+      email: karthik.s@mayadata.io
+  minKubeVersion: 1.12.0
+  provider:
+    name: Mayadata
+  links:
+    - name: Kubernetes Website
+      url: https://kubernetes.io
+    - name: Source Code
+      url: https://github.com/kubernetes/kubernetes
+  icon:
+    - url: 
+      mediatype: ""
+  experiments:
+    - container-kill-exp.yaml
+    - pod-delete-exp.yaml
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/generic/container_kill/experiment.yaml

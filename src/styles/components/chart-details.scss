@@ -19,7 +19,9 @@
   .content-is-collapsed {
     display: none;
   }
-
+  a {
+    text-decoration: none;
+  }
   .chart-details-content {
     width: 100%;
     margin-top: 21px;
