@@ -77,10 +77,6 @@ class HomeFilter extends React.Component {
         </span>
         {this.renderFilters('provider')}
 
-        {/* <span className="filter-title-label">
-          Complexity
-        </span>
-        {this.renderFilters('complexity')}  */}
       </div>
     )
   }
