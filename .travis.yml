@@ -1,5 +1,5 @@
 filter_secrets: false
-env:
+env: 
   global:
     - COMMIT=${TRAVIS_COMMIT::6}
     - REPO=mayadata/charthub-litmuschaos-io
