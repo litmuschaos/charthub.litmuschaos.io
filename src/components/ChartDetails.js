@@ -118,7 +118,7 @@ export class ChartDetails extends React.Component {
       <div className={isCollapsed}>
         <p className="chart-details-text">
           {this.props.charts.spec.categoryDescription}
-          {this.props.charts.experiments===null? "":this.showCards(true)}
+         
         </p>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL CHARTS</button>
         <div className="chart-details-uses-explanation">
@@ -141,7 +141,7 @@ export class ChartDetails extends React.Component {
         <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
-
+      {this.props.charts.experiments===null? "":this.showCards(true)}
       
     
       </div>
