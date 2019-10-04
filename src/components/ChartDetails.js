@@ -48,23 +48,7 @@ export class ChartDetails extends React.Component {
     }
     return div;
   }
-  // getListOfExperiment = (listofExperiments) => {
-  //   let div = [];
 
-  //   // if (experimentlist != null) {
-  //   //   div.push(<span key="-1" className="uses-explanation-title">  List of Subcharts</span>)
-  //   //   for (let i = 0; i < experimentlist.length; i++) {
-  //   //     div.push(<span key={i} >{experimentlist[i].spec.displayName} </span>)
-  //   //   }
-  //   // } else 
-  //   if (listofExperiments != null) {
-  //     div.push(<span key="-1" className="uses-explanation-title"> List of Experiments</span>)
-  //     for (let i = 0; i < listofExperiments.length; i++) {
-  //       div.push(<span key={i}> {listofExperiments[i].slice(0, -9).replace(/-/ig, " ")}</span>)
-  //     }
-  //   }
-  //   return div;
-  // }
   getMaintainerList = (listofMaintainers) => {
     let div = [];
     for (let i = 0; i < listofMaintainers.length; i++) {

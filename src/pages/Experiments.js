@@ -8,7 +8,6 @@ import { ChartDetails } from '../components/ChartDetails';
 
 import { IconContext } from "react-icons";
 import { FaArrowLeft } from 'react-icons/fa';
-// import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 import { getChartById } from "../redux/selectors";
 import { loadChartById } from "../redux/actions";

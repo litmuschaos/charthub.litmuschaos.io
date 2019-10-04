@@ -9,7 +9,7 @@ import { ChartCard } from '../components/ChartCard';
 
 import { IconContext } from "react-icons";
 import { FaArrowLeft } from 'react-icons/fa';
-// import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+
 
 import { getChartById } from "../redux/selectors";
 import { loadChartById } from "../redux/actions";
@@ -22,12 +22,7 @@ class Chart extends React.Component {
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
   }
-  // handleNavHome = () => {
-  //   this.props.history.push('/');
-  // }
-  // handleNavToExperiment = (chartName,experiments) => {
-  //   this.props.history.push(`/charts/${chartName}/experiments/${experiments}`);
-  // }
+ 
   renderCharts = () => {
     let i = 0;
     let logo = this.props.chart.spec.icons[0].link;
@@ -35,24 +30,11 @@ class Chart extends React.Component {
     return (
       <div>
       <ChartDetails key={i++} history = {this.props.history}charts={this.props.chart} displayName={displayName} name={this.props.chart.spec.displayName} isCollapsed={false} logo={logo} />
-      {/* <h3>Experiments</h3>
-          <div className="d-flex">
-            {this.renderExperiments()}
-      </div> */}
+     
       </div> 
     )
   }
 
-  // renderExperiments = function() {
-    
-  //   let logo = this.props.chart.spec.icons[0].link;
-  //   let displayName = this.props.chart.metadata.name;
-  //   console.log("displayName");
-  //   const experiments = this.props.chart.experiments.map(chart => <ChartCard   navTo={this.handleNavToExperiment.bind(this,displayName, chart.metadata.name)} isCard='true' key={chart.metadata.name} title={chart.spec.displayName} provider={chart.spec.provider.name} text={chart.metadata.annotations.chartDescription} icon={logo} id={chart.metadata.name} />)
-  //   return (
-  //     [...experiments]
-  //   )
-  // }
 
   render() {
     let icon = ""
