@@ -2,10 +2,10 @@ import * as React from 'react';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import { InstallModalContent } from '../components/InstallModalContent';
-
+import { ChartCard } from '../components/ChartCard';
 import { GoChevronDown } from 'react-icons/go';
 import { IconContext } from "react-icons";
-
+import { Link } from 'react-router-dom';
 const customStyles = {
   content: {
     top: '50%',
@@ -48,22 +48,7 @@ export class ChartDetails extends React.Component {
     }
     return div;
   }
-  getListOfExperiment = (listofExperiments, subchartlist) => {
-    let div = [];
 
-    if (subchartlist != null) {
-      div.push(<span key="-1" className="uses-explanation-title">  List of Subcharts</span>)
-      for (let i = 0; i < subchartlist.length; i++) {
-        div.push(<span key={i} >{subchartlist[i].spec.displayName} </span>)
-      }
-    } else if (listofExperiments != null) {
-      div.push(<span key="-1" className="uses-explanation-title"> List of Experiments</span>)
-      for (let i = 0; i < listofExperiments.length; i++) {
-        div.push(<span key={i}> {listofExperiments[i].slice(0, -9).replace(/-/ig, " ")}</span>)
-      }
-    }
-    return div;
-  }
   getMaintainerList = (listofMaintainers) => {
     let div = [];
     for (let i = 0; i < listofMaintainers.length; i++) {
@@ -74,6 +59,39 @@ export class ChartDetails extends React.Component {
 
   handleOpenModal() {
     this.setState({ showModal: true });
+  }
+
+  handleNavHome = () => {
+    this.props.history.push('/');
+  }
+  handleNavToExperiment = (chartName,experiments) => {
+    this.props.history.push(`/charts/${chartName}/experiments/${experiments}`);
+  }
+
+  renderExperiments = function() {
+    
+    let logo = this.props.charts.spec.icons[0].link;
+    let displayName = this.props.charts.metadata.name;
+    console.log("displayName");
+    const experiments = this.props.charts.experiments.map(chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}><ChartCard isCard='true' key={chart.metadata.name} title={chart.spec.displayName} provider={chart.spec.provider.name} text={chart.metadata.annotations.chartDescription} icon={logo} id={chart.metadata.name} /></Link>)
+    return (
+      [...experiments]
+    )
+  }
+
+  showCards(flag) {
+    if (!flag) {
+      return null;
+    } else {
+      return (
+        <div>
+          <h3>Chaos Experiments</h3>
+           <div className="d-flex">
+             {this.renderExperiments()}
+          </div>
+        </div>
+      );
+    }
   }
 
   handleCloseModal() {
@@ -88,46 +106,50 @@ export class ChartDetails extends React.Component {
 
     return (
       <div className="chart-details-container">
-        <div className="chart-details-header">
-          <div className="chart-details-title-container" onClick={this.handleCollapseContent}>
-            <span className="chart-details-title">{this.props.name}</span>
-            <IconContext.Provider value={{ color: "#004ED6", size: '1.5em' }}>
-              <GoChevronDown />
-            </IconContext.Provider>
-          </div>
-          <button className="chart-install-button" onClick={this.handleOpenModal}>INSTALL ALL CHARTS</button>
+      <div className="chart-details-header">
+        <div className="chart-details-title-container" onClick={this.handleCollapseContent}>
+          <span className="chart-details-title">{this.props.name}</span>
+          <IconContext.Provider value={{ color: "#004ED6", size: '1.5em' }}>
+            <GoChevronDown />
+          </IconContext.Provider>
         </div>
-        <div className={isCollapsed}>
-          <p className="chart-details-text">
-            {this.props.charts.spec.description}
-          </p>
-          <button className="chart-install-button-phone" onClick={this.handleOpenModal}>INSTALL ALL CHARTS</button>
-          <div className="chart-details-uses-explanation">
-            <div className="d-flex item-block">
-              <i className="mi-check-list dark-gray"></i>
-              <div className="d-flex flex-column items">
-                {this.getListOfExperiment(this.props.charts.spec.experiments, this.props.charts.subCharts)}
-              </div>
-            </div>
-            <div className="d-flex item-block">
-              <i className="mi-link dark-gray"></i>  <div className="d-flex flex-column items"> <span className="uses-explanation-title"> Useful links</span>
-                {this.createLink(this.props.charts.spec.links)}
-              </div>
-            </div>
-            <div className="d-flex item-block"> <i className="mi-user dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Maintainers</span>
-              {this.getMaintainerList(this.props.charts.spec.maintainers)}
-            </div>
-            </div>
-          </div>
-        </div>
-        <Modal
-          isOpen={this.state.showModal}
-          contentLabel="Minimal Modal Example"
-          style={customStyles}>
-          <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
-          <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
-        </Modal>
+        <button className="chart-install-button" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
       </div>
+      <div className={isCollapsed}>
+        <p className="chart-details-text">
+          {this.props.charts.spec.categoryDescription}
+         
+        </p>
+        <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
+        <div className="chart-details-uses-explanation">
+          
+          <div className="d-flex item-block">
+            <i className="mi-link dark-gray"></i>  <div className="d-flex flex-column items"> <span className="uses-explanation-title"> Useful links</span>
+              {this.createLink(this.props.charts.spec.links)}
+            </div>
+          </div>
+          <div className="d-flex item-block"> <i className="mi-user dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Maintainers</span>
+            {this.getMaintainerList(this.props.charts.spec.maintainers)}
+          </div>
+          </div>
+        </div>
+      </div>
+      <Modal
+        isOpen={this.state.showModal}
+        contentLabel="Minimal Modal Example"
+        style={customStyles}>
+        <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
+        <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
+      </Modal>
+      {this.props.charts.experiments===null? "":this.showCards(true)}
+      
+    
+      </div>
+      
+
+
+
+
     )
   }
 }

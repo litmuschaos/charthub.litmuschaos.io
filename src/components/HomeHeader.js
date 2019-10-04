@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { FaChevronDown } from 'react-icons/fa';
+// import { FaChevronDown } from 'react-icons/fa';
 import { filterChartsOnSearch } from "../redux/actions";
 
 class HomeHeader extends React.Component {
