@@ -122,7 +122,10 @@ export class ChartDetails extends React.Component {
         </p>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
         <div className="chart-details-uses-explanation">
-          
+          <div className="d-flex item-block"> <i className="mi-settings dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Maturity</span>
+              <span>{this.props.charts.spec.maturity}</span>
+            </div>
+          </div>
           <div className="d-flex item-block">
             <i className="mi-link dark-gray"></i>  <div className="d-flex flex-column items"> <span className="uses-explanation-title"> Useful links</span>
               {this.createLink(this.props.charts.spec.links)}
