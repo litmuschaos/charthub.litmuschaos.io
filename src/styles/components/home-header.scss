@@ -100,6 +100,16 @@
       }
     }
 
+    a.home {
+      margin-left: auto;
+      margin-right: 15px;
+    }
+
+    .top-header-home {
+      font-size: 14px;
+      color: #FAFAFA;
+    }
+
     .top-header-input {
       height: 30px;
       width: 253.75px;
@@ -108,7 +118,6 @@
       padding-left: 5px;
       box-sizing: border-box;
       background-color: #FAFAFA;
-      margin-left: auto;
       @include phone {
         order: 2;
         width: 100%;

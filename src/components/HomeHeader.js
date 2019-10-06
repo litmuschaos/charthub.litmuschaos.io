@@ -61,6 +61,11 @@ class HomeHeader extends React.Component {
               <h3 className="page-title">Litmus</h3>
             </div>
           </a>
+
+          <a href="https://hub.litmuschaos.io/" rel="noopener noreferrer" className="home">
+          <h3 className="top-header-home">Home</h3>
+          </a>
+
           <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.handleSearchTermChange} />
           <a href = "https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md" target = "_blank" rel="noopener noreferrer">
           <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container">{/*<FaChevronDown />*/}</span></h3>
