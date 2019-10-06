@@ -1,5 +1,5 @@
 import * as React from 'react'
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // import { FaChevronDown } from 'react-icons/fa';
@@ -62,9 +62,9 @@ class HomeHeader extends React.Component {
             </div>
           </a>
 
-          <a href="https://hub.litmuschaos.io/" rel="noopener noreferrer" className="home">
+          <Link to={process.env.PUBLIC_URL} className="home">
           <h3 className="top-header-home">Home</h3>
-          </a>
+          </Link>
 
           <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.handleSearchTermChange} />
           <a href = "https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md" target = "_blank" rel="noopener noreferrer">
