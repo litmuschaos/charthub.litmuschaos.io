@@ -51,11 +51,7 @@ export class InstallModalContent extends React.Component {
           install the Chaos Experiments by following command
         </div>
         <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
+          className="modal-install-code-row"
         >
           <div className="modal-code">{this.command()}</div>
           {document.queryCommandSupported("copy") && (
@@ -63,7 +59,7 @@ export class InstallModalContent extends React.Component {
               {!this.state.copied && (
                 <button
                   onClick={this.copyToClipboard}
-                  style={{ padding: 20, background: "none", border: "none" }}
+                  className="modal-install-clipboard"
                 >
                   <i className="mi-clipboard-pen"></i>
                 </button>
