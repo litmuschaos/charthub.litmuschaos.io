@@ -68,7 +68,7 @@ class HomeHeader extends React.Component {
           <a href = "https://docs.litmuschaos.io/" target = "_blank" rel="noopener noreferrer">
           <h3 className="top-header-contribute">Docs<span className="contribute-icon-container"></span></h3>
           </a>
-          <a href = "https://slack.openebs.io/" target = "_blank" rel="noopener noreferrer">
+          <a href = "https://app.slack.com/client/T09NY5SBT/CNXNB0ZTN" target = "_blank" rel="noopener noreferrer">
             <div className="top-header-contribute">
                 <img alt="organization logo" height="30" width="30" src={process.env.PUBLIC_URL + '/icons/slack-logo.png'} className="logo-img"/>
             </div>
