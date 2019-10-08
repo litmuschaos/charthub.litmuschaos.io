@@ -70,7 +70,7 @@ class HomeHeader extends React.Component {
           </a>
           <a href = "https://app.slack.com/client/T09NY5SBT/CNXNB0ZTN" target = "_blank" rel="noopener noreferrer">
             <div className="top-header-contribute">
-                <img alt="organization logo" height="30" width="30" src={process.env.PUBLIC_URL + '/icons/slack-logo.png'} className="logo-img"/>
+                <img alt="slack logo" height="30" width="30" src={process.env.PUBLIC_URL + '/icons/slack-logo.png'} className="logo-img"/>
             </div>
           </a>
         </div>
