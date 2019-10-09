@@ -72,7 +72,7 @@ export class ChartDetails extends React.Component {
     
     let logo = this.props.charts.spec.icons[0].link;
     let displayName = this.props.charts.metadata.name;
-    console.log("displayName");
+    
     const experiments = this.props.charts.experiments.map(chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}><ChartCard isCard='true' key={chart.metadata.name} title={chart.spec.displayName} provider={chart.spec.provider.name} text={chart.metadata.annotations.chartDescription} icon={logo} id={chart.metadata.name} /></Link>)
     return (
       [...experiments]
@@ -93,6 +93,10 @@ export class ChartDetails extends React.Component {
       );
     }
   }
+  getFilePath() {
+    console.log(this.props.charts.spec.displayName)
+  }
+
 
   handleCloseModal() {
     this.setState({ showModal: false });
@@ -138,10 +142,12 @@ export class ChartDetails extends React.Component {
         isOpen={this.state.showModal}
         contentLabel="Minimal Modal Example"
         style={customStyles}>
+          
         <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
+        
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
-      {this.props.charts.experiments===null? "":this.showCards(true)}
+      <div>{this.props.charts.experiments===null? "":this.showCards(true)}</div>
       
     
       </div>
