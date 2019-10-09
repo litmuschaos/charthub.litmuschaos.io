@@ -16,7 +16,6 @@ spec:
   keywords:
     - Kubernetes
     - Network
-  
   maturity: alpha
   maintainers:
     - name: ksatchit

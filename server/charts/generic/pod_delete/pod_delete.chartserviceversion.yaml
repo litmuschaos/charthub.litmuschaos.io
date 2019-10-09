@@ -16,7 +16,6 @@ spec:
   keywords:
     - Kubernetes
     - State 
-  
   maturity: alpha
   maintainers:
     - name: ksatchit
