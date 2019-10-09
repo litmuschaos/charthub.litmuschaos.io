@@ -112,10 +112,17 @@
 }
 .d-flex{
   display: flex;
+  
+  
 }
 .flex-column{
   flex-direction: column
 }
 .gray-text-color{
   color:#999aa7;
+}
+.d-flex-alignment{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

@@ -12,7 +12,7 @@ export class ChartCard extends React.Component {
   }
   
   render() {
-    console.log(this.props.navTo);
+    // console.log(this.props);
     const listOrCardViewClass = this.props.isCard ? "chart-card-container" : "chart-card-container list-view"
     const renderChartContent = () => {
       return (<div>
