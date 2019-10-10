@@ -139,6 +139,10 @@ export class ChartDetails extends React.Component {
             {this.getMaintainerList(this.props.charts.spec.maintainers)}
           </div>
           </div>
+          <div className="d-flex item-block"> <i className="mi-link dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Repository</span>
+          {<a href={this.props.charts.metadata.annotations.repository}>{this.props.charts.metadata.annotations.repository}</a>}
+        </div>
+        </div>
         </div>
       </div>
       <Modal
