@@ -4,7 +4,6 @@ env:
     - COMMIT=${TRAVIS_COMMIT::6}
     - REPO=mayadata/charthub-litmuschaos-io
     - STAG_REPO=mayadata/charthub-litmuschaos-io-stag
-sudo: required
 services:
 - docker
 script:
