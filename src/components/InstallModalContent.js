@@ -1,4 +1,6 @@
 import * as React from "react";
+import Popover, { ArrowContainer } from "react-tiny-popover";
+import { FaCopy } from "react-icons/fa";
 
 export class InstallModalContent extends React.Component {
   constructor(props) {
@@ -7,7 +9,6 @@ export class InstallModalContent extends React.Component {
   }
 
   copyToClipboard = e => {
-    console.log("got it");
     var textField = document.createElement("textarea");
     textField.innerText = this.command();
     document.body.appendChild(textField);
@@ -15,6 +16,7 @@ export class InstallModalContent extends React.Component {
     document.execCommand("copy");
     textField.remove();
     e.target.focus();
+    // sechedules a call to setState to hide the popover in 5 seconds
     setTimeout(
       function() {
         this.setState({ copied: false });
@@ -50,22 +52,43 @@ export class InstallModalContent extends React.Component {
           <span className="modal-install-instruction-number"></span>You can
           install the Chaos Experiments by following command
         </div>
-        <div
-          className="modal-install-code-row"
-        >
+        <div className="modal-install-code-row">
           <div className="modal-code">{this.command()}</div>
           {document.queryCommandSupported("copy") && (
-            <div>
-              {!this.state.copied && (
-                <button
-                  onClick={this.copyToClipboard}
-                  className="modal-install-clipboard"
+            <Popover
+              containerStyle={{ zIndex: 1000 }}
+              isOpen={this.state.copied}
+              position={"bottom"}
+              content={({ position, targetRect, popoverRect }) => (
+                <ArrowContainer
+                  position={position}
+                  targetRect={targetRect}
+                  popoverRect={popoverRect}
+                  arrowColor="#b0b0b0"
+                  arrowSize={3}
+                  arrowStyle={{ opacity: 0.7 }}
                 >
-                  <i className="mi-clipboard-pen"></i>
-                </button>
+                  <div
+                    style={{
+                      "border-style": "solid",
+                      "border-width": "1px",
+                      "border-color": "#b0b0b0",
+                      "font-size": ".9em",
+                      padding: "8px 12px 8px 12px"
+                    }}
+                  >
+                    Copied
+                  </div>
+                </ArrowContainer>
               )}
-              {this.state.copied && <span>Copied</span>}
-            </div>
+            >
+              <button
+                onClick={this.copyToClipboard}
+                className="modal-install-clipboard"
+              >
+                <FaCopy />
+              </button>
+            </Popover>
           )}
         </div>
         <div className="modal-install-instruction">
