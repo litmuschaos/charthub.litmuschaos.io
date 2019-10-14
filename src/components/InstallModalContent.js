@@ -56,6 +56,7 @@ export class InstallModalContent extends React.Component {
           <div className="modal-code">{this.command()}</div>
           {document.queryCommandSupported("copy") && (
             <Popover
+              // Allows the popover to show over the modal
               containerStyle={{ zIndex: 1000 }}
               isOpen={this.state.copied}
               position={"bottom"}
@@ -68,17 +69,7 @@ export class InstallModalContent extends React.Component {
                   arrowSize={3}
                   arrowStyle={{ opacity: 0.7 }}
                 >
-                  <div
-                    style={{
-                      "border-style": "solid",
-                      "border-width": "1px",
-                      "border-color": "#b0b0b0",
-                      "font-size": ".9em",
-                      padding: "8px 12px 8px 12px"
-                    }}
-                  >
-                    Copied
-                  </div>
+                  <div className="modal-install-popover-content">Copied</div>
                 </ArrowContainer>
               )}
             >
