@@ -18,7 +18,6 @@ class App extends React.Component {
           <Route path="/charts/:chartId" exact component={Chart} />
           <Route path="/" exact component={Home} />
           <Route path="/charts/:chartId/experiments/:experimentID" component={Experiments}/>
-
           <Redirect from="*" to="/" key="default-route" />
         </Switch>
       </React.Fragment>

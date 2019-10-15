@@ -100,9 +100,9 @@ export class ChartDetails extends React.Component {
       );
     }
   }
-  
-
-
+  getFilePath() {
+    console.log(this.props.charts.spec.displayName)
+  }
   handleCloseModal() {
     this.setState({ showModal: false });
   }
