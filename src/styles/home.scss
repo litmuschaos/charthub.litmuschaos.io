@@ -112,9 +112,11 @@
 }
 .d-flex{
   display: flex;
+  flex-wrap: wrap;
 }
 .flex-column{
-  flex-direction: column
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 .gray-text-color{
   color:#999aa7;

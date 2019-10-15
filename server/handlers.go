@@ -6,12 +6,64 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strings"
 
 	"github.com/gorilla/mux"
+	"gopkg.in/src-d/go-git.v4"
+	. "gopkg.in/src-d/go-git.v4/_examples"
 	"gopkg.in/yaml.v3"
 )
+
+const repoPath = "/home/daitya/go/src/github.com/litmuschaos/hub-litmus/rest-api/chaoscharts/"
+
+func pathParser(w http.ResponseWriter, path string) {
+	var fileLookedPath = repoPath + path
+	dat, _ := ioutil.ReadFile(fileLookedPath)
+	// check(err)
+	fmt.Fprintf(w, string(dat))
+
+}
+
+func triggerCloning() {
+
+	_, _ = git.PlainClone(repoPath, false, &git.CloneOptions{
+		URL:      "https://github.com/litmuschaos/chaos-charts",
+		Progress: os.Stdout,
+	})
+
+}
+
+func triggerUpdate() {
+
+	// We instantiate a new repository targeting the given path (the .git folder)
+	r, err := git.PlainOpen(repoPath)
+	CheckIfError(err)
+
+	// Get the working directory for the repository
+	w, err := r.Worktree()
+	CheckIfError(err)
+
+	// Pull the latest changes from the origin remote and merge into the current branch
+	Info("git pull origin")
+	err = w.Pull(&git.PullOptions{RemoteName: "origin"})
+	CheckIfError(err)
+
+}
+
+func fileHandler(w http.ResponseWriter, r *http.Request) {
+
+	keys, ok := r.URL.Query()["key"]
+
+	if !ok || len(keys[0]) < 1 {
+		return
+	}
+	key := keys[0]
+
+	var path = string(key)
+	pathParser(w, path)
+}
 
 func GetCharts(w http.ResponseWriter, r *http.Request) {
 	files, err := filepath.Glob("charts/*")
@@ -56,15 +108,15 @@ func getYAMLFileContent(chartName string) Chart {
 	err = yaml.Unmarshal([]byte(serviceFile), &chart)
 	err = yaml.Unmarshal([]byte(packageFile), &packageInfo)
 	chart.PackageInfo = packageInfo
-	for _, subChart := range packageInfo.Subcharts {
-		subChartPath := "./charts/" + chartName + "/" + subChart.Name + "/" + subChart.Name + ".chartserviceversion.yaml"
-		subChartFile, err := ioutil.ReadFile(subChartPath)
+	for _, experiment := range packageInfo.Experiments {
+		experimentPath := "./charts/" + chartName + "/" + experiment.Name + "/" + experiment.Name + ".chartserviceversion.yaml"
+		experimentFile, err := ioutil.ReadFile(experimentPath)
 		if err != nil {
 			log.Printf("serviceFile.Get err #%v ", err)
 		}
-		var subChart Chart
-		err = yaml.Unmarshal([]byte(subChartFile), &subChart)
-		chart.SubCharts = append(chart.SubCharts, subChart)
+		var experiment Chart
+		err = yaml.Unmarshal([]byte(experimentFile), &experiment)
+		chart.Experiments = append(chart.Experiments, experiment)
 	}
 	if err != nil {
 		log.Printf("serviceFile.Get err #%v ", err)

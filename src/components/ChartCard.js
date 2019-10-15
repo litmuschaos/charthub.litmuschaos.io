@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Vibrant from 'node-vibrant';
+// import * as Vibrant from 'node-vibrant';
 
 export class ChartCard extends React.Component {
   constructor(props) {
@@ -10,22 +10,9 @@ export class ChartCard extends React.Component {
       }
     }
   }
-  componentDidMount() {
-    //comment it out until we figure out how the images will be loaded
-    // const icon = new Image(200, 200);
-    // icon.src = this.props.icon;
-    // var context = this;
-    // icon.onload = () => {
-    //   new Vibrant(icon).getPalette((err, palette) => {
-    //     context.setState({
-    //       gradientCircle: {
-    //         background: `radial-gradient(rgb(${palette.DarkVibrant._rgb.join(',')}), white)`
-    //       }
-    //     })
-    //   })
-    // }
-  }
+  
   render() {
+   
     const listOrCardViewClass = this.props.isCard ? "chart-card-container" : "chart-card-container list-view"
     const renderChartContent = () => {
       return (<div>
@@ -44,6 +31,7 @@ export class ChartCard extends React.Component {
                 <p className="chart-description">
                   {this.props.text}
                 </p>
+                
               </div>)
     }
     const renderChartListContainer = (content) => {
@@ -57,9 +45,9 @@ export class ChartCard extends React.Component {
     }
     return (
       <div className={listOrCardViewClass} onClick={this.props.navTo}>
-        <div className="subchart-count-container">
-         {this.props.subChartCount?( <span className="subchart-count">
-            {this.props.subChartCount} Subcharts
+        <div className="experiment-count-container">
+         {this.props.experimentCount ?( <span className="experiment-count">
+            {this.props.experimentCount} Chaos Experiments
           </span>):(<span></span>)}
         </div>
         {renderChartListContainer()}

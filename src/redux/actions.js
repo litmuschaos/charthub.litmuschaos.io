@@ -28,3 +28,4 @@ export const filterChartsOnSearch = (searchTerm) => (dispatch) => {
 export const applyFilters = (filters) => (dispatch) => {
   dispatch({ type: FILTER_CHARTS_BY_FILTERS, filters })
 }
+

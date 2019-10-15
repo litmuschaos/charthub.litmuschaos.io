@@ -44,15 +44,16 @@ class Home extends React.Component {
 
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
+      
       return <ChartCard
                 isCard={this.state.isGridView}
                 key={chart.metadata.name}
                 circleColor="orange"
                 navTo={this.handleNavToChart.bind(this, chart.metadata.name)}
-                subChartCount={chart.subCharts ? chart.subCharts.length : 0}
+                experimentCount={chart.experiments ? chart.experiments.length : 0}
                 title={chart.spec.displayName}
                 provider={chart.spec.provider.name}
-                text={chart.metadata.annotations.description}
+                text={chart.metadata.annotations.chartDescription}
                 icon={chart.spec.icons[0].link}
                 id={chart.metadata.name}/>
     });

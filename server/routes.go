@@ -13,6 +13,12 @@ type Routes []Route
 
 var routes = Routes{
 	Route{
+		"apiForFile",
+		"GET",
+		"/api/",
+		fileHandler,
+	},
+	Route{
 		"GetCharts",
 		"GET",
 		"/charts",
