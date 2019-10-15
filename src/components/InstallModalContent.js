@@ -6,13 +6,13 @@ export class InstallModalContent extends React.Component {
     super();
     this.state = 
       {value:'', copied:false};
-      
-    
   }
-
+ 
   render() {
     return (
+
       <div className="install-modal-content">
+     
         <div className="modal-header">
           <div className="modal-img-placeholder"> <img src={this.props.logo} /></div>
           <div className="modal-header-title-container">

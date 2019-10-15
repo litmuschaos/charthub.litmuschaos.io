@@ -29,6 +29,7 @@ export class ChartDetails extends React.Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.host = null;
   }
 
   handleCollapseContent = () => {
@@ -80,9 +81,10 @@ export class ChartDetails extends React.Component {
   }
 
   displayLinkCreator = () => {
+    this.host = window.location.host
     var path = this.props.charts.spec.chaosExpCRDLink
     path = path.split("/charts/")[1]
-    var displayRepoPath = "https://hub.litmuschaos.io/api/charts/" + path
+    var displayRepoPath = "https://"+this.host+"/api/charts/" + path
     return displayRepoPath
   }
 
