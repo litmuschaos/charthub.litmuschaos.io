@@ -74,9 +74,11 @@
          border-bottom: 1px solid #d5cece;
          .items{
            margin-left: 10px;
+           width: 90%
          }
          span, a{
            margin-bottom: 5px;
+           word-wrap: break-word;
          }
        }
        .item-block:last-child{

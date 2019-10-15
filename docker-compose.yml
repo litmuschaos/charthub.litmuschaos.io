@@ -1,0 +1,16 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    image: litmuschaos/charthub-server
+    ports:
+      - "8080:8080"
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    image: litmuschaos/charthub-client
+    ports:
+      - "80:80"
