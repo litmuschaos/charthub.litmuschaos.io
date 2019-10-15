@@ -6,51 +6,59 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
+	// "os"
 	"path/filepath"
 	"strings"
 
 	"github.com/gorilla/mux"
-	"gopkg.in/src-d/go-git.v4"
-	. "gopkg.in/src-d/go-git.v4/_examples"
+	// "gopkg.in/src-d/go-git.v4"
+	// . "gopkg.in/src-d/go-git.v4/_examples"
 	"gopkg.in/yaml.v3"
 )
 
 const repoPath = "/home/daitya/go/src/github.com/litmuschaos/hub-litmus/rest-api/chaoscharts/"
 
+func CheckIfError(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 func pathParser(w http.ResponseWriter, path string) {
 	var fileLookedPath = repoPath + path
-	dat, _ := ioutil.ReadFile(fileLookedPath)
-	// check(err)
+	dat, err := ioutil.ReadFile(fileLookedPath)
+	CheckIfError(err)
 	fmt.Fprintf(w, string(dat))
 
 }
 
-func triggerCloning() {
+// TODO
+// func triggerCloning() {
 
-	_, _ = git.PlainClone(repoPath, false, &git.CloneOptions{
-		URL:      "https://github.com/litmuschaos/chaos-charts",
-		Progress: os.Stdout,
-	})
+// 	_, _ = git.PlainClone(repoPath, false, &git.CloneOptions{
+// 		URL:      "https://github.com/litmuschaos/chaos-charts",
+// 		Progress: os.Stdout,
+// 	})
 
-}
+// }
 
-func triggerUpdate() {
+// TODO
+// func triggerUpdate() {
 
-	// We instantiate a new repository targeting the given path (the .git folder)
-	r, err := git.PlainOpen(repoPath)
-	CheckIfError(err)
+// 	// We instantiate a new repository targeting the given path (the .git folder)
+// 	r, err := git.PlainOpen(repoPath)
+// 	CheckIfError(err)
 
-	// Get the working directory for the repository
-	w, err := r.Worktree()
-	CheckIfError(err)
+// 	// Get the working directory for the repository
+// 	w, err := r.Worktree()
+// 	CheckIfError(err)
 
-	// Pull the latest changes from the origin remote and merge into the current branch
-	Info("git pull origin")
-	err = w.Pull(&git.PullOptions{RemoteName: "origin"})
-	CheckIfError(err)
+// 	// Pull the latest changes from the origin remote and merge into the current branch
+// 	Info("git pull origin")
+// 	err = w.Pull(&git.PullOptions{RemoteName: "origin"})
+// 	CheckIfError(err)
 
-}
+// }
 
 func fileHandler(w http.ResponseWriter, r *http.Request) {
 
