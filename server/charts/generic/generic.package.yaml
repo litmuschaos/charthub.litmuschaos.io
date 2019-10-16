@@ -1,11 +1,14 @@
 packageName: kubernetes 
 experiments:
-  - name: pod_delete
-    CSV: pod_delete.chartserviceversion.yaml
-    desc: "Pod delete"
-  - name: container_kill
-    CSV:  container_kill.chartserviceversion.yaml
+  - name: pod-delete
+    CSV: pod-delete.chartserviceversion.yaml
+    desc: "pod delete"
+  - name: container-kill
+    CSV:  container-kill.chartserviceversion.yaml
     desc: "container kill"
-  - name: pod_network_delay
-    CSV: pod_network_delay.chartserviceversion.yaml
-    desc: "Pod network delay"
+  - name: pod-network-loss
+    CSV: pod-network-loss.chartserviceversion.yaml
+    desc: "pod network loss"
+  - name: pod-network-latency
+    CSV: pod-network-latency.chartserviceversion.yaml
+    desc: "pod network latency"

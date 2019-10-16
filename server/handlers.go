@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	// "os"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -16,7 +16,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const repoPath = "/home/daitya/go/src/github.com/litmuschaos/hub-litmus/rest-api/chaoscharts/"
+var chartsLocation = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/server/"
 
 func CheckIfError(err error) {
 	if err != nil {
@@ -25,7 +25,7 @@ func CheckIfError(err error) {
 }
 
 func pathParser(w http.ResponseWriter, path string) {
-	var fileLookedPath = repoPath + path
+	var fileLookedPath = chartsLocation + path
 	dat, err := ioutil.ReadFile(fileLookedPath)
 	CheckIfError(err)
 	fmt.Fprintf(w, string(dat))
