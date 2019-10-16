@@ -6,12 +6,38 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strings"
-
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v3"
 )
+
+var root = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/server/"
+
+func checkError(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func pathParser(w http.ResponseWriter, path string) {
+	var fileLookedPath = root + path
+	dat, err := ioutil.ReadFile(fileLookedPath)
+	checkError(err)
+	fmt.Fprintf(w, string(dat))
+
+}
+
+func fileHandler(w http.ResponseWriter, r *http.Request) {
+	keys, ok := r.URL.Query()["key"]
+	if !ok || len(keys[0]) < 1 {
+		return
+	}
+	key := keys[0]
+	var path = string(key)
+	pathParser(w, path)
+}
 
 func GetCharts(w http.ResponseWriter, r *http.Request) {
 	files, err := filepath.Glob("charts/*")

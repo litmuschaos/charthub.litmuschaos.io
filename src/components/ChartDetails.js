@@ -29,6 +29,7 @@ export class ChartDetails extends React.Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.host = null;
   }
 
   handleCollapseContent = () => {
@@ -79,6 +80,14 @@ export class ChartDetails extends React.Component {
     )
   }
 
+  displayLinkCreator = () => {
+    this.host = window.location.host
+    var path = this.props.charts.spec.chaosExpCRDLink
+    path = path.split("/charts/")[1]
+    var displayRepoPath = "http://"+this.host+"/api/file/?key=charts/" + path
+    return displayRepoPath
+  }
+
   showCards(flag) {
     if (!flag) {
       return null;
@@ -126,29 +135,34 @@ export class ChartDetails extends React.Component {
         </p>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
         <div className="chart-details-uses-explanation">
-          <div className="d-flex item-block"> <i className="mi-settings dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Maturity</span>
+
+          {/* <TDL> <div className="d-flex item-block"> <i className="mi-settings dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Maturity</span>
               <span>{this.props.charts.spec.maturity}</span>
             </div>
-          </div>
+          </div> */}
           <div className="d-flex item-block">
-            <i className="mi-link dark-gray"></i>  <div className="d-flex flex-column items"> <span className="uses-explanation-title"> Useful links</span>
+            <i className="mi-link dark-gray"></i>  
+            <div className="d-flex flex-column items"> 
+              <span className="uses-explanation-title"> Useful links</span>
               {this.createLink(this.props.charts.spec.links)}
             </div>
           </div>
-          <div className="d-flex item-block"> <i className="mi-user dark-gray"></i>
-            <div className="d-flex flex-column items"> <span className="uses-explanation-title">Maintainers</span>
+          <div className="d-flex item-block"> 
+            <i className="mi-user dark-gray"></i>
+            <div className="d-flex flex-column items"> 
+              <span className="uses-explanation-title">Maintainers</span>
               {this.getMaintainerList(this.props.charts.spec.maintainers)}
             </div>
           </div>
-          <div className="d-flex item-block"> <i className="mi-application dark-gray"></i>
+          {/* <TDL><div className="d-flex item-block"> <i className="mi-application dark-gray"></i>
             <div className="d-flex flex-column items"> <span className="uses-explanation-title">Version</span>
               {this.props.charts.spec.version}
             </div>
-          </div>
-          <div className="d-flex item-block"> <i className="mi-link dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Repository</span>
+          </div> */}
+          {/* <TDL> <div className="d-flex item-block"> <i className="mi-link dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Repository</span>
           {<a href={this.props.charts.metadata.annotations.repository}>{this.props.charts.metadata.annotations.repository}</a>}
-        </div>
-        </div>
+        </div> 
+        </div>*/}
         </div>
       </div>
       <Modal
@@ -156,7 +170,7 @@ export class ChartDetails extends React.Component {
         contentLabel="Minimal Modal Example"
         style={customStyles}>
           
-        <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
+        <InstallModalContent expcrdurl={this.displayLinkCreator()} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
         
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
