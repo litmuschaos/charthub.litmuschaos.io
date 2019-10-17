@@ -15,7 +15,7 @@ var routes = Routes{
 	Route{
 		"fileapi",
 		"GET",
-		"/api/",
+		"/api",
 		fileHandler,
 	},
 	Route{
