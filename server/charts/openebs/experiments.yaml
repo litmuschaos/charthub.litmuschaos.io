@@ -1,6 +1,4 @@
 ---
-
----
 apiVersion: litmuschaos.io/v1alpha1
 description:
   message: |
@@ -36,7 +34,6 @@ spec:
         parameters.yml: |
 ---
 
----
 apiVersion: litmuschaos.io/v1alpha1
 description:
   message: |
@@ -151,4 +148,3 @@ spec:
         parameters.yml: |
 
 ---
-
