@@ -153,7 +153,7 @@ export class ChartDetails extends React.Component {
           <div className="d-flex item-block"> 
             <i className="mi-user dark-gray"></i>
             <div className="d-flex flex-column items"> 
-              <span className="uses-explanation-title">Maintainers</span>
+              <span className="uses-explanation-title"> Maintainers</span>
               {this.getMaintainerList(this.props.charts.spec.maintainers)}
             </div>
           </div>

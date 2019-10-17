@@ -26,7 +26,7 @@ export class ChartCard extends React.Component {
                   {this.props.title}
                 </div>
                 <div className="chart-provider">
-                  Provided by {this.props.provider}
+                  Contributed by {this.props.provider}
                 </div>
                 <p className="chart-description">
                   {this.props.text}
