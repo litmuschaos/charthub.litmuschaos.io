@@ -86,7 +86,7 @@ export class ChartDetails extends React.Component {
     this.host = window.location.host
     var path = this.props.charts.spec.chaosExpCRDLink
     path = path.split("/charts/")[1]
-    var displayRepoPath = "http://"+this.host+"/api/file/?key=charts/" + path
+    var displayRepoPath = "http://"+this.host+"/api/?file=charts/" + path
     return displayRepoPath
   }
 
@@ -136,12 +136,6 @@ export class ChartDetails extends React.Component {
         </p>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
         <div className="chart-details-uses-explanation">
-
-          {/* <TDL> <div className="d-flex item-block"> <i className="mi-settings dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Maturity</span>
-              <span>{this.props.charts.spec.maturity}</span>
-            </div>
-          </div> */}
-
           <div className="d-flex item-block">
             <i className="mi-link dark-gray"></i>  
             <div className="d-flex flex-column items"> 
@@ -158,15 +152,6 @@ export class ChartDetails extends React.Component {
             </div>
           </div>
 
-          {/* <TDL> <div className="d-flex item-block"> <i className="mi-application dark-gray"></i>
-            <div className="d-flex flex-column items"> <span className="uses-explanation-title">Version</span>
-              {this.props.charts.spec.version}
-            </div>
-          </div> */}
-          {/* <TDL> <div className="d-flex item-block"> <i className="mi-link dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Repository</span>
-          {<a href={this.props.charts.metadata.annotations.repository}>{this.props.charts.metadata.annotations.repository}</a>}
-        </div> 
-        </div>*/}
         </div>
       </div>
       <Modal

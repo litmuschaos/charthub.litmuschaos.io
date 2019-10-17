@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v3"
 )
@@ -30,7 +31,7 @@ func pathParser(w http.ResponseWriter, path string) {
 }
 
 func fileHandler(w http.ResponseWriter, r *http.Request) {
-	keys, ok := r.URL.Query()["key"]
+	keys, ok := r.URL.Query()["file"]
 	if !ok || len(keys[0]) < 1 {
 		return
 	}
