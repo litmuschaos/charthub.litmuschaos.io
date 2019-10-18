@@ -22,11 +22,19 @@ to create production build, run `yarn build`. This conjoined process starts up t
 Open your browser and go to `http://localhost:3000/`.
 
 # docker
-Build and tag the Docker image:
-`docker build -t sample:dev .`.
-Once the build is done run: `docker run -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm sample:dev`.
 
-Go to your browser and open: `http://172.17.0.2:3000/`
+Install docker compose [Instructions here!](https://docs.docker.com/compose/install/)
 
-Using the production Dockerfile, build and tag the Docker image: `docker build -f Dockerfile-prod -t sample:prod .`.
-Spin up the container: `docker run -it -p 80:80 --rm sample:prod`
+Run the containers using docker-compose
+
+```docker-compose up```
+
+Go to your browser and open: `http://localhost`
+
+You can also run server and client seperately using the commands
+
+```docker-compose up server```
+
+and
+
+```docker-compose up client```
