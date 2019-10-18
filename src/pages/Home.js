@@ -31,7 +31,6 @@ class Home extends React.Component {
     this.props.loadCharts()
   }
   handleNavToChart = (chartName) => {
-    console.log(this.props)
     this.props.history.push(`/charts/${chartName}`);
   }
 
@@ -45,6 +44,7 @@ class Home extends React.Component {
 
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
+      
       return <ChartCard
                 isCard={this.state.isGridView}
                 key={chart.metadata.name}

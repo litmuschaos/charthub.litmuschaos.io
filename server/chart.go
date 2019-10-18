@@ -26,6 +26,7 @@ type Icon struct {
 
 type Metadata struct {
 	Name        string     `yaml:"name"`
+	Version     string     `yaml:"version"`
 	Annotations Annotation `yaml:"annotations"`
 }
 
@@ -39,14 +40,14 @@ type Annotation struct {
 }
 
 type Spec struct {
-	DisplayName         string       `yaml:"displayName"`
-	CategoryDescription string       `yaml:"categoryDescription"`
-	Keywords            []string     `yaml:"keywords"`
-	Version             string       `yaml:"version"`
-	Maturity            string       `yaml:"maturity"`
-	Maintainers         []Maintainer `yaml:"maintainers"`
-	MinKubeVersion      string       `yaml:"minKubeVersion"`
-	Provider            struct {
+	DisplayName         string   `yaml:"displayName"`
+	CategoryDescription string   `yaml:"categoryDescription"`
+	Keywords            []string `yaml:"keywords"`
+
+	Maturity       string       `yaml:"maturity"`
+	Maintainers    []Maintainer `yaml:"maintainers"`
+	MinKubeVersion string       `yaml:"minKubeVersion"`
+	Provider       struct {
 		Name string `yaml:"name"`
 	} `yaml:"provider"`
 	Links           []Link   `yaml:"links"`

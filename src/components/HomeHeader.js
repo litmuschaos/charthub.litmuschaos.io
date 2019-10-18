@@ -58,7 +58,6 @@ class HomeHeader extends React.Component {
           <a href="https://litmuschaos.io" target="_blank" rel="noopener noreferrer">
             <div className="top-header-divide-container">
               <img alt="organization logo" src={process.env.PUBLIC_URL + '/icons/litmus.png'} className="logo-img"/>
-              <h3 className="page-title">Litmus</h3>
             </div>
           </a>
           <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.handleSearchTermChange} />

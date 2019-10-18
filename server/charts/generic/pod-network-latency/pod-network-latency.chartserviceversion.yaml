@@ -1,0 +1,35 @@
+apiVersion: litmuchaos.io/v1alpha1
+kind: ChartServiceVersion
+metadata:
+  name: pod-network-latency
+  version: 0.1.1
+  annotations:
+    categories: Kubernetes
+    vendor: CNCF
+    repository: https://github.com/litmuschaos/chaos-charts
+    support: https://slack.kubernetes.io/
+spec:
+  displayName: pod-network-latency
+  categoryDescription: |
+    Pod-network-latency contains chaos to disrupt network connectivity of kubernetes pods. Experiments can inject random network delays on the app replica pods. 
+    - Causes flaky access to application replica by injecting network delay using pumba.
+    - The application pod should be healthy once chaos is stopped. Service-requests should be served despite chaos.
+  keywords:
+    - Kubernetes
+    - Network
+  maturity: alpha
+  maintainers:
+    - name: ksatchit
+      email: karthik.s@mayadata.io
+  minKubeVersion: 1.12.0
+  provider:
+    name: Mayadata
+  links:
+    - name: Kubernetes Website
+      url: https://kubernetes.io
+    - name: Source Code
+      url: https://github.com/kubernetes/kubernetes
+  icon:
+    - base64data: ""
+      mediatype: ""
+  chaosexpcrdlink: https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/generic/pod-network-latency/experiment.yaml 
