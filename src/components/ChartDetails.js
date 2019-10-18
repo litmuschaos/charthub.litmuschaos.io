@@ -86,7 +86,7 @@ export class ChartDetails extends React.Component {
     this.host = window.location.host
     var path = this.props.charts.spec.chaosExpCRDLink
     path = path.split("/charts/")[1]
-    var displayRepoPath = "https://"+this.host+"/api?file=charts/" + path
+    var displayRepoPath = "https://"+this.host+"/api/chaos?file=charts/" + path
     return displayRepoPath
   }
 
