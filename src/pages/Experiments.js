@@ -83,7 +83,7 @@ class Experiments extends React.Component {
             </div>
             <div className="chart-page-header-breacrumbs-container">
               <div className="breadcrumbs">
-                <Link to={`/charts/${this.props.chart.metadata.name}`}>Home/ {this.props.chart.spec.displayName}</Link> / {experiment[0].spec.displayName}
+                <Link to={`/charts/${this.props.chart.metadata.name}`}><span className="breadcrumb-text">Home </span> > <span className="breadcrumb-text">{this.props.chart.spec.displayName}</span></Link> > <span className="breadcrumb-text">{experiment[0].spec.displayName}</span>
               </div>
               <div className="chart-header-filters-container">
               </div>

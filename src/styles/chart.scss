@@ -27,6 +27,10 @@
         margin-top: 10px;
         .breadcrumbs {
           font-size: 12px;
+          .breadcrumb-text {
+            margin-left: 2px;
+            margin-right: 2px;
+          }
         }
         .chart-header-filters-container {
           display: flex;
