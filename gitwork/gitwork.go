@@ -80,10 +80,7 @@ func driver() {
 
 func main() {
 	for true {
-		if time.Now().Hour()%6 == 0 {
-			time.Sleep(100 * time.Millisecond)
-			go driver()
-
-		}
+		go driver()
+		time.Sleep(6 * time.Hour)
 	}
 }
