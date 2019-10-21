@@ -59,10 +59,6 @@ func CheckIfError(err error) {
 
 	if err != nil {
 		log.Fatal("---> ", err)
-		if err == "repository already exists" {
-			fmt.Println("Hello")
-		}
-
 	}
 
 }
