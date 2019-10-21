@@ -5,9 +5,19 @@ import (
 	"net/http"
 )
 
-func main() {
+func listenerFunc() {
 
 	router := NewRouter()
-
 	log.Fatal(http.ListenAndServe(":8080", router))
+
+}
+
+func gitFunc() {
+
+}
+
+func main() {
+
+	listenerFunc()
+
 }
