@@ -12,8 +12,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v3"
-	// "gopkg.in/src-d/go-git.v4"
-	// . "gopkg.in/src-d/go-git.v4/_examples"
+	
 )
 
 var root = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/server/"

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -57,10 +58,10 @@ func triggerUpdate() {
 func CheckIfError(err error) {
 
 	if err != nil {
-		// log.Fatal("---> ", err)
-		// if err == "repository already exists" {
-		// 	fmt.Println("Hello")
-		// }
+		log.Fatal("---> ", err)
+		if err == "repository already exists" {
+			fmt.Println("Hello")
+		}
 
 	}
 
@@ -83,7 +84,7 @@ func driver() {
 
 func main() {
 	for true {
-		if time.Now().Second()%2 == 0 {
+		if time.Now().Hour()%6 == 0 {
 			time.Sleep(100 * time.Millisecond)
 			go driver()
 
