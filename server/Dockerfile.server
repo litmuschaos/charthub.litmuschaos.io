@@ -4,9 +4,9 @@ RUN go get github.com/gorilla/mux
 
 RUN go get gopkg.in/yaml.v3
 
-RUN "gopkg.in/src-d/go-git.v4"
+RUN go get gopkg.in/src-d/go-git.v4
 
-RUN "gopkg.in/src-d/go-git.v4/_examples"
+RUN go get gopkg.in/src-d/go-git.v4/_examples
 
 RUN mkdir /app
 
