@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"strings"
 	"time"
@@ -126,14 +125,6 @@ func exists(path string) (bool, error) {
 	}
 	return true, err
 }
-func CheckIfError(err error) {
-
-	if err != nil {
-		log.Fatal("---> ", err)
-	}
-
-}
-
 func driver() {
 
 	existenceValue, err := exists(repoPath)
