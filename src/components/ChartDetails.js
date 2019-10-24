@@ -6,6 +6,8 @@ import { ChartCard } from '../components/ChartCard';
 import { GoChevronDown } from 'react-icons/go';
 import { IconContext } from "react-icons";
 import { Link } from 'react-router-dom';
+const ReactDOM = require('react-dom')
+const ReactMarkdown = require('react-markdown')
 const customStyles = {
   content: {
     top: '50%',
@@ -29,6 +31,7 @@ export class ChartDetails extends React.Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.host = null;
   }
 
   handleCollapseContent = () => {
@@ -72,11 +75,19 @@ export class ChartDetails extends React.Component {
     
     let logo = this.props.charts.spec.icons[0].link;
     let displayName = this.props.charts.metadata.name;
-    console.log("displayName");
+    
     const experiments = this.props.charts.experiments.map(chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}><ChartCard isCard='true' key={chart.metadata.name} title={chart.spec.displayName} provider={chart.spec.provider.name} text={chart.metadata.annotations.chartDescription} icon={logo} id={chart.metadata.name} /></Link>)
     return (
       [...experiments]
     )
+  }
+
+  displayLinkCreator = () => {
+    this.host = window.location.host
+    var path = this.props.charts.spec.chaosExpCRDLink
+    path = path.split("/charts/")[1]
+    var displayRepoPath = "https://"+this.host+"/api/chaos?file=charts/" + path
+    return displayRepoPath
   }
 
   showCards(flag) {
@@ -93,6 +104,10 @@ export class ChartDetails extends React.Component {
       );
     }
   }
+  getFilePath() {
+    console.log(this.props.charts.spec.displayName)
+  }
+
 
   handleCloseModal() {
     this.setState({ showModal: false });
@@ -117,31 +132,38 @@ export class ChartDetails extends React.Component {
       </div>
       <div className={isCollapsed}>
         <p className="chart-details-text">
-          {this.props.charts.spec.categoryDescription}
-         
+          <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
         </p>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
         <div className="chart-details-uses-explanation">
-          
           <div className="d-flex item-block">
-            <i className="mi-link dark-gray"></i>  <div className="d-flex flex-column items"> <span className="uses-explanation-title"> Useful links</span>
+            <i className="mi-link dark-gray"></i>  
+            <div className="d-flex flex-column items"> 
+              <span className="uses-explanation-title"> Useful links</span>
               {this.createLink(this.props.charts.spec.links)}
             </div>
           </div>
-          <div className="d-flex item-block"> <i className="mi-user dark-gray"></i> <div className="d-flex flex-column items"> <span className="uses-explanation-title">Maintainers</span>
-            {this.getMaintainerList(this.props.charts.spec.maintainers)}
+
+          <div className="d-flex item-block"> 
+            <i className="mi-user dark-gray"></i>
+            <div className="d-flex flex-column items"> 
+              <span className="uses-explanation-title"> Maintainers</span>
+              {this.getMaintainerList(this.props.charts.spec.maintainers)}
+            </div>
           </div>
-          </div>
+
         </div>
       </div>
       <Modal
         isOpen={this.state.showModal}
         contentLabel="Minimal Modal Example"
         style={customStyles}>
-        <InstallModalContent expcrdurl={this.props.charts.spec.chaosExpCRDLink} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
+          
+        <InstallModalContent expcrdurl={this.displayLinkCreator()} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
+        
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
-      {this.props.charts.experiments===null? "":this.showCards(true)}
+      <div>{this.props.charts.experiments===null? "":this.showCards(true)}</div>
       
     
       </div>
