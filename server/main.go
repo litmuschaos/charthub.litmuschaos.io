@@ -12,12 +12,8 @@ func listenerFunc() {
 
 }
 
-func gitFunc() {
-
-}
-
 func main() {
-
+	go Trigger()
 	listenerFunc()
 
 }
