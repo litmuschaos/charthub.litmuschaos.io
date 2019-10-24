@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { FaHome } from 'react-icons/fa';
 
 // import { FaChevronDown } from 'react-icons/fa';
 import { filterChartsOnSearch } from "../redux/actions";
@@ -63,7 +64,7 @@ class HomeHeader extends React.Component {
           </a>
 
           <Link to={process.env.PUBLIC_URL} className="home">
-          <h3 className="top-header-home">Home</h3>
+          <h3 className="top-header-home">{<FaHome />}</h3>
           </Link>
 
           <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.handleSearchTermChange} />
