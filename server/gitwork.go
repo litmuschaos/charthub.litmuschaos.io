@@ -11,7 +11,7 @@ import (
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
-const TIME_INTERVAL = 3 * time.Second
+const TIME_INTERVAL = 6 * time.Hour
 
 type GitConfig struct {
 	RepositoryName string
