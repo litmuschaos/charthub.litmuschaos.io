@@ -135,24 +135,26 @@ export class ChartDetails extends React.Component {
           <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
         </p>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
-        <div className="chart-details-uses-explanation">
-          <div className="d-flex item-block">
-            <i className="mi-link dark-gray"></i>  
-            <div className="d-flex flex-column items"> 
-              <span className="uses-explanation-title"> Useful links</span>
-              {this.createLink(this.props.charts.spec.links)}
+          <div style={{position: "absolute", right: "10.5%"}}>
+          <div className="chart-details-uses-explanation">
+            <div className="d-flex item-block">
+              <i className="mi-link dark-gray"></i>  
+              <div className="d-flex flex-column items"> 
+                <span className="uses-explanation-title"> Useful links</span>
+                {this.createLink(this.props.charts.spec.links)}
+              </div>
             </div>
-          </div>
 
-          <div className="d-flex item-block"> 
-            <i className="mi-user dark-gray"></i>
-            <div className="d-flex flex-column items"> 
-              <span className="uses-explanation-title"> Maintainers</span>
-              {this.getMaintainerList(this.props.charts.spec.maintainers)}
+            <div className="d-flex item-block"> 
+              <i className="mi-user dark-gray"></i>
+              <div className="d-flex flex-column items"> 
+                <span className="uses-explanation-title"> Maintainers</span>
+                {this.getMaintainerList(this.props.charts.spec.maintainers)}
+              </div>
             </div>
-          </div>
 
-        </div>
+          </div>
+          </div>
       </div>
       <Modal
         isOpen={this.state.showModal}
@@ -163,7 +165,7 @@ export class ChartDetails extends React.Component {
         
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
-      <div>{this.props.charts.experiments===null? "":this.showCards(true)}</div>
+      <div >{this.props.charts.experiments===null? "":this.showCards(true)}</div>
       
     
       </div>
