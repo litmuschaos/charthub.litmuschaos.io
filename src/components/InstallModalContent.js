@@ -10,6 +10,16 @@ export class InstallModalContent extends React.Component {
     
   }
 
+  onClick = ({target}) => {
+    console.log(target)
+    var aux = document.createElement("input");
+    aux.setAttribute("value", target.innerHTML);
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand("copy");
+  };
+
+
   render() {
     return (
       <div className="install-modal-content">
@@ -24,7 +34,8 @@ export class InstallModalContent extends React.Component {
         <h3 className="install-title">Install the Chaos Experiments</h3>
 
         <div className="modal-install-instruction"><span className="modal-install-instruction-number"></span>You can install the Chaos Experiments by following command</div>
-        <div className="modal-code">kubectl create -f  {this.props.expcrdurl}</div>
+  
+        <div className="modal-code" onClick={this.onClick}>kubectl create -f  {this.props.expcrdurl}</div>
         <div className="modal-install-instruction"><span className="modal-install-instruction-number gray-text-color">Notes:</span></div>
 
         <div className="modal-install-instruction"><span className="modal-install-instruction-number"></span><a href="https://github.com/litmuschaos/chaos-operator/blob/master/README.md">Install Litmus Operator, </a>a tool for for injecting chaos experiments on Kubernetes</div>
