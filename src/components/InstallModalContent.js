@@ -88,7 +88,7 @@ export class InstallModalContent extends React.Component {
         <div className="modal-install-instruction">
           <span className="modal-install-instruction-number"></span>
           <a href="https://github.com/litmuschaos/chaos-operator/blob/master/README.md">
-            Install Litmus Operator,{" "}
+            Install Litmus Operator
           </a>
           a tool for for injecting chaos experiments on Kubernetes
         </div>
