@@ -12,7 +12,6 @@ import (
 
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v3"
-	
 )
 
 var root = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/server/"
@@ -42,14 +41,10 @@ func fileHandler(w http.ResponseWriter, r *http.Request) {
 	pathParser(w, path)
 }
 
-func triggerClone() {
-
-}
-
 func GetCharts(w http.ResponseWriter, r *http.Request) {
-	files, err := filepath.Glob(os.Getenv("GOPATH") + "/src/github.com/litmuschaos/chaos-charts/charts/*")
+	files, err := filepath.Glob(chaosChartPath + "charts/*")
 	if err != nil {
-		log.Printf("reading file path failed", err)
+		log.Printf("reading file path failed %s", err)
 	}
 	var charts []Chart
 	for _, fileName := range files {
@@ -81,12 +76,12 @@ func getYAMLFileContent(chartName string) Chart {
 	packagePath := chaosChartPath + "charts/" + chartName + "/" + chartName + ".package.yaml"
 	packageFile, err := ioutil.ReadFile(packagePath)
 	if err != nil {
-		log.Printf("file path of the error", chartServicePath)
+		log.Printf("file path of the error %s", chartServicePath)
 		log.Printf("serviceFile.Get err #%v ", err)
 	}
 	var chart Chart
 	var packageInfo PackageInformation
-	log.Printf("package info", packageInfo)
+	log.Printf("package info %s", packageInfo)
 	err = yaml.Unmarshal([]byte(serviceFile), &chart)
 	err = yaml.Unmarshal([]byte(packageFile), &packageInfo)
 	chart.PackageInfo = packageInfo
