@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -10,6 +11,7 @@ import (
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
+
 const TIME_INTERVAL = 6 * time.Hour
 
 type GitConfig struct {
@@ -23,28 +25,24 @@ type GitConfig struct {
 // Trigger is reposible for setting off the go routine for git-op
 func Trigger() {
 
-	object := GitConfig{
-		RepositoryName: os.Getenv("GOPATH") + "/src/github.com/litmuschaos/chaos-charts/",
+	gitConfig := GitConfig{
+		RepositoryName: chaosChartPath,
 		RepositoryURL:  "https://github.com/litmuschaos/chaos-charts",
 		LocalCommit:    "",
 		RemoteCommit:   "",
 		RemoteName:     "origin",
 	}
 	for true {
-		object.GitOpDriver()
+		err := gitConfig.chaosChartSyncHandler()
+		if err != nil {
+			log.Error(err)
+		}
 		time.Sleep(TIME_INTERVAL)
 	}
 }
 
-// CheckERROR is used to handle errors thrown by any git-op called
-func CheckERROR(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-// CheckIfRepositoryExists checks for the existence of this past existence of this repository
-func (object GitConfig) CheckIfRepositoryExists() (bool, error) {
+// isRepositoryExists checks for the existence of this past existence of this repository
+func (object GitConfig) isRepositoryExists() (bool, error) {
 	_, err := os.Stat(object.RepositoryName)
 	if err == nil {
 		return true, nil
@@ -56,70 +54,82 @@ func (object GitConfig) CheckIfRepositoryExists() (bool, error) {
 }
 
 // CompareLocalandRemoteCommit compares local and remote latest commit
-func (object GitConfig) CompareLocalandRemoteCommit() bool {
+func (object GitConfig) CompareLocalandRemoteCommit() (bool, error) {
 
 	r, err := git.PlainOpen(object.RepositoryName)
-	CheckERROR(err)
-
+	if err != nil {
+		return false, fmt.Errorf("error in executing PlainOpen: %s", err)
+	}
 	log.Info("git rev-parse master")
 	h, err := r.ResolveRevision(plumbing.Revision("master"))
-	CheckERROR(err)
+	if err != nil {
+		return false, fmt.Errorf("error in executing ResolveRevision: %s", err)
+
+	}
 	object.RemoteCommit = h.String()
 	log.Info("LocalCommit  = ", object.LocalCommit)
 	log.Info("RemoteCommit = ", object.RemoteCommit)
 	if object.RemoteCommit == object.LocalCommit {
-		return true
+		return true, nil
 	}
-	return false
+	return false, nil
 }
 
 // GitGetStatus excutes "git get status --porcelain" for the provided Repository Path,
 // returns false if the repository is clean
-// and true if the repository is dirty
-func (object GitConfig) GitGetStatus() bool {
+// and true if the repository is dirtygitConfig
+func (object GitConfig) GitGetStatus() (bool, error) {
 	log.Info("executing GitGetStatus() ...")
 	// Opens an already existing repository.
 	r, err := git.PlainOpen(object.RepositoryName)
-	CheckERROR(err)
-
+	if err != nil {
+		return true, fmt.Errorf("error in executing PlainOpen: %s", err)
+	}
 	w, err := r.Worktree()
-	CheckERROR(err)
-	// fmt.Println(status == nil)
+	if err != nil {
+		return true, fmt.Errorf("error in executing Worktree: %s", err)
+	}
+
 	// We can verify the current status of the worktree using the method Status.
 	log.Info("git status --porcelain")
 	status, err := w.Status()
-	CheckERROR(err)
-
+	if err != nil {
+		return true, fmt.Errorf("error in executing Status: %s", err)
+	}
 	var listOfFilesChanged []string
 	for file := range status {
 		listOfFilesChanged = append(listOfFilesChanged, file)
 	}
 	if len(listOfFilesChanged) == 0 {
-		return false //==> clean
+		return false, nil //==> clean
 	}
-	return true //==> dirty
+	return true, nil //==> dirty
 }
 
 // GitHardReset executes "git reset --hard HEAD" in provided Repository Path
-func (object GitConfig) GitHardReset() {
+func (object GitConfig) GitHardReset() error {
 
 	log.Info("executing GitHardReset() ...")
 
 	// Opens an already existing repository.
 	r, err := git.PlainOpen(object.RepositoryName)
-	CheckERROR(err)
-
+	if err != nil {
+		return fmt.Errorf("error in executing PlainOpen: %s", err)
+	}
 	w, err := r.Worktree()
-	CheckERROR(err)
-
+	if err != nil {
+		return fmt.Errorf("error in executing Worktree: %s", err)
+	}
 	log.Info("git reset --hard")
-
 	err = w.Reset(&git.ResetOptions{Mode: git.HardReset})
-
+	if err != nil {
+		return fmt.Errorf("error in executing Reset: %s", err)
+	}
+	return nil
 }
 
 // GitPlainClone clones the repository through the provided URL in provided Path
-func (object GitConfig) GitPlainClone() {
+func (object GitConfig) GitPlainClone() error {
 
 	log.Info("executing GitPlainClone() ...")
 
@@ -130,90 +140,127 @@ func (object GitConfig) GitPlainClone() {
 	})
 
 	// Retrieve the branch pointed by HEAD
-	CheckERROR(err)
+	if err != nil {
+		return fmt.Errorf("error in executing PlainClone: %s", err)
+	}
+
 	log.Info("git rev-parse HEAD")
 
 	t, err := r.Head()
-	CheckERROR(err)
+	if err != nil {
+		return fmt.Errorf("error in executing Head: %s", err)
+	}
 	object.LocalCommit = strings.Split(t.String(), " ")[0]
 	log.Info("Local Commit = ", object.LocalCommit)
+	return nil
 }
 
 // GitPull updates the repository in provided Path
-func (object GitConfig) GitPull() {
+func (object GitConfig) GitPull() error {
 
 	log.Info("executing GitPull() ...")
 
 	// We instantiate a new repository targeting the given path (the .git folder)
 	r, err := git.PlainOpen(object.RepositoryName)
-	CheckERROR(err)
+	if err != nil {
+		return fmt.Errorf("error in executing PlainOpen: %s", err)
+	}
 
 	// Get the working directory for the repository
 	w, err := r.Worktree()
-	CheckERROR(err)
+	if err != nil {
+		return fmt.Errorf("error in executing Worktree: %s", err)
+	}
 
 	// Pull the latest changes from the origin remote and merge into the current branch
 	log.Info("git pull origin")
 	err = w.Pull(&git.PullOptions{RemoteName: object.RemoteName})
-	// CheckERROR(err)
+	if err != nil {
+		return fmt.Errorf("error in executing Pull: %s", err)
+	}
 
 	// Retrieve the branch pointed by HEAD
 	log.Info("git rev-parse HEAD")
 	t, err := r.Head()
-	CheckERROR(err)
+	if err != nil {
+		return fmt.Errorf("error in executing Head: %s", err)
+	}
 	object.LocalCommit = strings.Split(t.String(), " ")[0]
 	log.Info("Local Commit = ", object.LocalCommit)
-
+	return nil
 }
 
-// GitOpDriver is responsible for all the handler functions
-func (object GitConfig) GitOpDriver() {
+// chaosChartSyncHandler is responsible for all the handler functions
+func (object GitConfig) chaosChartSyncHandler() error {
 
-	repositoryExists, err := object.CheckIfRepositoryExists()
-	CheckERROR(err)
+	repositoryExists, err := object.isRepositoryExists()
+	if err != nil {
+		return fmt.Errorf("Error while checking repo exists, err: %s", err)
+	}
 	log.WithFields(log.Fields{
 		"repositoryExists": repositoryExists,
-	}).Info("Executed CheckIfRepositoryExists()... ")
+	}).Info("Executed isRepositoryExists()... ")
 
 	if !repositoryExists {
 
-		object.GitPlainClone()
+		err := object.GitPlainClone()
+		if err != nil {
+			return err
+		}
 		log.WithFields(log.Fields{
 			"execution": "complete",
 		}).Info("Executed GitPlainClone()... ")
 	} else {
-		dirtyStatus := object.GitGetStatus()
+		dirtyStatus, err := object.GitGetStatus()
+		if err != nil {
+			return err
+		}
 		log.WithFields(log.Fields{
 			"DirtyStatus": dirtyStatus,
 		}).Info("Executed GitGetStatus()... ")
 
 		if !dirtyStatus {
 			// for clean status
-			MatchValue := object.CompareLocalandRemoteCommit()
+			MatchValue, err := object.CompareLocalandRemoteCommit()
+			if err != nil {
+				return err
+			}
 			log.WithFields(log.Fields{
 				"MatchValue": MatchValue,
 			}).Info("Executed CompareLocalandRemoteCommit()... ")
 
 			if !MatchValue {
-				object.GitPull()
+				err := object.GitPull()
+				if err != nil {
+					return err
+				}
 				log.WithFields(log.Fields{
 					"execution": "complete",
 				}).Info("Executed GitPull()... ")
 			}
 		} else {
 			// for dirty status
-			object.GitHardReset()
+			err := object.GitHardReset()
+			if err != nil {
+				return err
+			}
 			log.WithFields(log.Fields{
 				"execution": "complete",
 			}).Info("Executed GitHardReset()... ")
 
-			MatchValue := object.CompareLocalandRemoteCommit()
+			MatchValue, err := object.CompareLocalandRemoteCommit()
+			if err != nil {
+				return err
+			}
 			log.WithFields(log.Fields{
 				"MatchValue": MatchValue,
 			}).Info("Executed CompareLocalandRemoteCommit()... ")
 
 			if !MatchValue {
-				object.GitPull()
+				err := object.GitPull()
+				if err != nil {
+					return err
+				}
 				log.WithFields(log.Fields{
 					"execution": "complete",
 				}).Info("Executed GitPull()... ")
@@ -221,4 +268,5 @@ func (object GitConfig) GitOpDriver() {
 
 		}
 	}
+	return nil
 }
