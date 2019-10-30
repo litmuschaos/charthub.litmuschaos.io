@@ -5,7 +5,6 @@ import { withRouter, Link } from 'react-router-dom';
 
 import HomeHeader from '../components/HomeHeader';
 import { ChartDetails } from '../components/ChartDetails';
-import { ChartCard } from '../components/ChartCard';
 
 import { IconContext } from "react-icons";
 import { FaArrowLeft } from 'react-icons/fa';
@@ -17,7 +16,9 @@ import { loadChartById } from "../redux/actions";
 class Chart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      logo : "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"
+    }
   }
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
@@ -25,11 +26,19 @@ class Chart extends React.Component {
  
   renderCharts = () => {
     let i = 0;
-    let logo = this.props.chart.spec.icons[0].link;
+    
     let displayName = this.props.chart.spec.displayName;
     return (
       <div>
-      <ChartDetails key={i++} install_button_text="INSTALL ALL EXPERIMENTS" history = {this.props.history}charts={this.props.chart} displayName={displayName} name={this.props.chart.spec.displayName} isCollapsed={false} logo={logo} />
+      <ChartDetails 
+      key={i++} 
+      install_button_text="INSTALL ALL EXPERIMENTS" 
+      istory = {this.props.history}
+      charts={this.props.chart} 
+      displayName={displayName} 
+      name={this.props.chart.spec.displayName} 
+      isCollapsed={false} 
+      logo={this.state.logo + this.props.chart.metadata.name + "/icons/" + this.props.chart.metadata.name +".png"}  />
      
       </div> 
     )
@@ -42,7 +51,7 @@ class Chart extends React.Component {
     let icon = ""
     if (this.props.chart && this.props.chart.spec) {
     
-      icon = this.props.chart.spec.icons[0].link
+      icon = this.state.logo + this.props.chart.metadata.name +".png"
     }
     if (!this.props.chart.spec) {
       return (
@@ -55,7 +64,7 @@ class Chart extends React.Component {
         <HomeHeader
           title={this.props.chart.spec.displayName}
           showHomeText={false}
-          icon={icon} />
+          icon={this.state.logo + this.props.chart.metadata.name + "/icons/" + this.props.chart.metadata.name +".png"} />
 
         <div className="chart-page-content">
           <div className="chart-page-header">
