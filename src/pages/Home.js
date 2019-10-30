@@ -44,7 +44,7 @@ class Home extends React.Component {
 
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
-      let logo = "https://raw.githubusercontent.com/aditya109/chaos-charts/add-icons/charts/"+chart.metadata.name+"/icons/"
+      let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+chart.metadata.name+"/icons/"
       return <ChartCard
                 isCard={this.state.isGridView}
                 key={chart.metadata.name}

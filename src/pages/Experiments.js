@@ -16,7 +16,7 @@ class Experiments extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      logo : "https://raw.githubusercontent.com/aditya109/chaos-charts/add-icons/charts/"
+      logo : "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"
     }
     
   }
