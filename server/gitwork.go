@@ -41,18 +41,7 @@ func Trigger() {
 	}
 }
 
-// // isRepositoryExists checks for the existence of this past existence of this repository
-// func (object GitConfig) isRepositoryExists() (bool, error) {
-// 	_, err := os.Stat(object.RepositoryName)
-// 	if err == nil {
-// 		return true, nil
-// 	}
-// 	if os.IsNotExist(err) {
-// 		return false, nil
-// 	}
-// 	return false, err
-// }
-
+// isRepositoryExists checks for the existence of this past existence of this repository
 func (object GitConfig) isRepositoryExists() (bool, error) {
 	_, err := os.Stat(object.RepositoryName)
 	if err != nil {
@@ -191,7 +180,7 @@ func (object GitConfig) GitPull() error {
 	}
 
 	// Retrieve the branch pointed by HEAD
-	log.Info("git rev-parse HEAD")
+	log.Info("git rev-parse HEA--D")
 	t, err := r.Head()
 	if err != nil {
 		return fmt.Errorf("error in executing Head: %s", err)
