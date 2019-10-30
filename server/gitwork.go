@@ -41,16 +41,27 @@ func Trigger() {
 	}
 }
 
-// isRepositoryExists checks for the existence of this past existence of this repository
+// // isRepositoryExists checks for the existence of this past existence of this repository
+// func (object GitConfig) isRepositoryExists() (bool, error) {
+// 	_, err := os.Stat(object.RepositoryName)
+// 	if err == nil {
+// 		return true, nil
+// 	}
+// 	if os.IsNotExist(err) {
+// 		return false, nil
+// 	}
+// 	return false, err
+// }
+
 func (object GitConfig) isRepositoryExists() (bool, error) {
 	_, err := os.Stat(object.RepositoryName)
-	if err == nil {
-		return true, nil
+	if err != nil {
+		if os.IsNotExist(err) {
+			return false, nil
+		}
+		return false, err
 	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-	return false, err
+	return true, nil
 }
 
 // CompareLocalandRemoteCommit compares local and remote latest commit
