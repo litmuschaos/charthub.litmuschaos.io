@@ -37,9 +37,7 @@ export class InstallModalContent extends React.Component {
           <div className="modal-img-placeholder"> <img src={this.props.logo} /></div>
           <div className="modal-header-title-container">
             <h1 className="modal-title">{this.props.displayName}</h1>
-            <span className="modal-subtitle">
-              Provided by {this.props.provider}
-            </span>
+            <span className="modal-subtitle">Contributed by {this.props.provider}</span>
           </div>
         </div>
 
