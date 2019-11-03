@@ -1,9 +1,0 @@
-FROM golang:1.10.4
-RUN go get github.com/gorilla/mux gopkg.in/yaml.v3
-WORKDIR $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/server
-COPY ./server .
-RUN go build -o /app/main .
-
-CMD ["/app/main"]
-
-EXPOSE 8080
