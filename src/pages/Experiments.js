@@ -15,22 +15,26 @@ import { loadChartById } from "../redux/actions";
 class Experiments extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      logo : "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"
+    }
+    
   }
   
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
+  
   }
 
 
   handleNavHome = () => {
-    console.log()
     this.props.history.push(`/charts/${this.props.match.params.chartId}`);
   }
 
+ 
   renderCharts = () => {
     let i=0;
-    let logo = this.props.chart.spec.icons[0].link;
+    
     let displayName = this.props.chart.spec.displayName;
     let experimentName = this.props.match.params.experimentID;
     let experiment = this.props.chart.experiments.filter(function(experiment) {    
@@ -38,7 +42,16 @@ class Experiments extends React.Component {
        return experiment;}
     });
 
-   let showexperiment = experiment.map(chart => <ChartDetails key={i++} install_button_text="INSTALL EXPERIMENT" charts={chart} displayName={displayName}  name={chart.spec.displayName} isCollapsed={false} logo={logo} />)
+   let showexperiment = experiment.map(chart => 
+   <ChartDetails 
+   key={i++} 
+   install_button_text="INSTALL EXPERIMENT" 
+   charts={chart} 
+   displayName={displayName}  
+   name={chart.spec.displayName} 
+   isCollapsed={false} 
+   logo={this.state.logo + this.props.chart.metadata.name + "/icons/" + chart.metadata.name +".png"}  
+   />)
     return (
       [...showexperiment]
     )
@@ -47,8 +60,9 @@ class Experiments extends React.Component {
 
   render() {
     let icon = ""
+
     if(this.props.chart && this.props.chart.spec) {
-      icon = this.props.chart.spec.icons[0].link
+      icon = this.state.logo + this.props.chart.metadata.name + "/icons/" + this.props.chart.metadata.name +".png"
     }
     if(!this.props.chart.spec){
       return (

@@ -72,11 +72,19 @@ export class ChartDetails extends React.Component {
   }
 
   renderExperiments = function() {
-    
-    let logo = this.props.charts.spec.icons[0].link;
+    let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+this.props.charts.metadata.name+"/icons/"
     let displayName = this.props.charts.metadata.name;
-    
-    const experiments = this.props.charts.experiments.map(chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}><ChartCard isCard='true' key={chart.metadata.name} title={chart.spec.displayName} provider={chart.spec.provider.name} text={chart.metadata.annotations.chartDescription} icon={logo} id={chart.metadata.name} /></Link>)
+    const experiments = this.props.charts.experiments.map(chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}>
+      <ChartCard 
+      isCard='true' 
+      key={chart.metadata.name} 
+      title={chart.spec.displayName} 
+      provider={chart.spec.provider.name}
+      text={chart.metadata.annotations.chartDescription} 
+      icon={logo + chart.metadata.name +".png"} 
+      id={chart.metadata.name} />
+
+      </Link>)
     return (
       [...experiments]
     )
@@ -159,7 +167,7 @@ export class ChartDetails extends React.Component {
         contentLabel="Minimal Modal Example"
         style={customStyles}>
           
-        <InstallModalContent expcrdurl={this.displayLinkCreator()} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.displayName} />
+        <InstallModalContent expcrdurl={this.displayLinkCreator()} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.charts.spec.displayName} />
         
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
