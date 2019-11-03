@@ -1,6 +1,7 @@
 import * as React from 'react'
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { FaHome } from 'react-icons/fa';
 
 // import { FaChevronDown } from 'react-icons/fa';
 import { filterChartsOnSearch } from "../redux/actions";
@@ -60,6 +61,11 @@ class HomeHeader extends React.Component {
               <img alt="organization logo" src={process.env.PUBLIC_URL + '/icons/litmus.png'} className="logo-img"/>
             </div>
           </a>
+
+          <Link to={process.env.PUBLIC_URL} className="home">
+          <h3 className="top-header-home">{<FaHome />}</h3>
+          </Link>
+
           <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.handleSearchTermChange} />
           <a href = "https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md" target = "_blank" rel="noopener noreferrer">
           <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container">{/*<FaChevronDown />*/}</span></h3>
