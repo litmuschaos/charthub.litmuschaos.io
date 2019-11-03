@@ -6,7 +6,6 @@ metadata:
   annotations:
     categories: OpenEBS
     vendor: MayaData
-    createdAt: 2019-08-12T10:28:08Z
     repository: https://github.com/litmuschaos/chaos-charts
     support: https://slack.openebs.io/
     chartDescription: Injects generic openebs chaos 
@@ -14,6 +13,7 @@ spec:
   displayName: OpenEBS
   categoryDescription: >
     OpenEBS is the most active Container Attached Storage project. OpenEBS enables your DevOps teams to have their own storage policies for every workload and it is truly Kubernetes native and 100% in userspace. 
+
   experiments:
     - openebs-pool-failure
     - openebs-target-failure
