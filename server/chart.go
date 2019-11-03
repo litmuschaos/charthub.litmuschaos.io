@@ -19,10 +19,6 @@ type Link struct {
 	Url  string
 }
 
-type Icon struct {
-	Link      string `yaml:"url"`
-	Mediatype string `yaml:"mediatype"`
-}
 
 type Metadata struct {
 	Name        string     `yaml:"name"`
@@ -51,7 +47,7 @@ type Spec struct {
 		Name string `yaml:"name"`
 	} `yaml:"provider"`
 	Links           []Link   `yaml:"links"`
-	Icons           []Icon   `yaml:"icon"`
+	
 	Experiments     []string `yaml:"experiments"`
 	ChaosExpCRDLink string   `yaml:"chaosexpcrdlink"`
 }
