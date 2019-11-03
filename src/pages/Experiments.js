@@ -18,23 +18,18 @@ class Experiments extends React.Component {
     this.state = {
       logo : "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"
     }
-    
   }
   
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
-  
   }
-
 
   handleNavHome = () => {
-    this.props.history.push(`/charts/${this.props.match.params.chartId}`);
+    this.props.history.push(`/charts/ ${this.props.match.params.chartId}`);
   }
-
  
   renderCharts = () => {
     let i=0;
-    
     let displayName = this.props.chart.spec.displayName;
     let experimentName = this.props.match.params.experimentID;
     let experiment = this.props.chart.experiments.filter(function(experiment) {    
@@ -60,7 +55,6 @@ class Experiments extends React.Component {
 
   render() {
     let icon = ""
-
     if(this.props.chart && this.props.chart.spec) {
       icon = this.state.logo + this.props.chart.metadata.name + "/icons/" + this.props.chart.metadata.name +".png"
     }
@@ -69,8 +63,6 @@ class Experiments extends React.Component {
         <div></div>
       )
     }
-
-
     let experimentName = this.props.match.params.experimentID
     let experiment = this.props.chart.experiments.filter(function(experiment) {    
       if(experiment.metadata.name === experimentName){
@@ -109,7 +101,6 @@ class Experiments extends React.Component {
     );
   }
 }
-
 
 Experiments.propTypes = {
   history: PropTypes.shape({
