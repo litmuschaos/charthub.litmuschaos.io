@@ -24,7 +24,7 @@ func checkError(err error) {
 }
 
 func pathParser(w http.ResponseWriter, path string) {
-	var fileLookedPath = root + path
+	var fileLookedPath = chaosChartPath + path
 	dat, err := ioutil.ReadFile(fileLookedPath)
 	checkError(err)
 	fmt.Fprintf(w, string(dat))
