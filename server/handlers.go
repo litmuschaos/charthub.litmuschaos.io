@@ -14,7 +14,6 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var root = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/server/"
 var chaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/chaos-charts/"
 
 func checkError(err error) {
