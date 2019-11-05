@@ -2,7 +2,8 @@ package routes
 
 import (
 	"net/http"
-	handler "github.com/litmuschaos/charthub.litmuschaos.io/server/controller/handler"
+
+	"github.com/litmuschaos/charthub.litmuschaos.io/server/controller/handler"
 )
 
 type Route struct {

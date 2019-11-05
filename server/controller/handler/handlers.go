@@ -14,7 +14,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var chaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/chaos-charts/"
+// ChaosChartPath refers the location of the freshly updated repository
+var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/chaos-charts/"
 
 func checkError(err error) {
 	if err != nil {
@@ -23,7 +24,7 @@ func checkError(err error) {
 }
 
 func pathParser(w http.ResponseWriter, path string) {
-	var fileLookedPath = chaosChartPath + path
+	var fileLookedPath = ChaosChartPath + path
 	dat, err := ioutil.ReadFile(fileLookedPath)
 	checkError(err)
 	fmt.Fprintf(w, string(dat))
@@ -45,7 +46,7 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 
 // GetCharts is used to create list of YAML objects from charts' directories
 func GetCharts(w http.ResponseWriter, r *http.Request) {
-	files, err := filepath.Glob(chaosChartPath + "charts/*")
+	files, err := filepath.Glob(ChaosChartPath + "charts/*")
 	if err != nil {
 		log.Printf("reading file path failed %s", err)
 	}
@@ -76,9 +77,9 @@ func GetChart(w http.ResponseWriter, r *http.Request) {
 }
 
 func getYAMLFileContent(chartName string) Chart {
-	chartServicePath := chaosChartPath + "charts/" + chartName + "/" + chartName + ".chartserviceversion.yaml"
+	chartServicePath := ChaosChartPath + "charts/" + chartName + "/" + chartName + ".chartserviceversion.yaml"
 	serviceFile, err := ioutil.ReadFile(chartServicePath)
-	packagePath := chaosChartPath + "charts/" + chartName + "/" + chartName + ".package.yaml"
+	packagePath := ChaosChartPath + "charts/" + chartName + "/" + chartName + ".package.yaml"
 	packageFile, err := ioutil.ReadFile(packagePath)
 	if err != nil {
 		log.Printf("file path of the error %s", chartServicePath)
@@ -91,7 +92,7 @@ func getYAMLFileContent(chartName string) Chart {
 	err = yaml.Unmarshal([]byte(packageFile), &packageInfo)
 	chart.PackageInfo = packageInfo
 	for _, experiment := range packageInfo.Experiments {
-		experimentPath := chaosChartPath + "charts/" + chartName + "/" + experiment.Name + "/" + experiment.Name + ".chartserviceversion.yaml"
+		experimentPath := ChaosChartPath + "charts/" + chartName + "/" + experiment.Name + "/" + experiment.Name + ".chartserviceversion.yaml"
 		experimentFile, err := ioutil.ReadFile(experimentPath)
 		if err != nil {
 			log.Printf("serviceFile.Get err #%v ", err)
