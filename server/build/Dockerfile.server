@@ -1,0 +1,20 @@
+FROM golang:1.10.4 AS builder
+
+WORKDIR $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/server
+
+ADD . $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/server
+
+RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh     
+		
+RUN dep ensure -v
+
+RUN go build -o ./build/_output/bin/charthub-server -v
+
+
+FROM golang:1.10.4 
+
+COPY --from=builder $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/server/build/_output/bin/charthub-server /
+
+CMD ["/charthub-server"]
+
+EXPOSE 8080
