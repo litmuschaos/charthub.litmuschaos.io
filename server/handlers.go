@@ -14,7 +14,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var root = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/server/"
+var chaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/chaos-charts/"
 
 func checkError(err error) {
 	if err != nil {
@@ -23,7 +23,7 @@ func checkError(err error) {
 }
 
 func pathParser(w http.ResponseWriter, path string) {
-	var fileLookedPath = root + path
+	var fileLookedPath = chaosChartPath + path
 	dat, err := ioutil.ReadFile(fileLookedPath)
 	checkError(err)
 	fmt.Fprintf(w, string(dat))
@@ -41,13 +41,14 @@ func fileHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetCharts(w http.ResponseWriter, r *http.Request) {
-	files, err := filepath.Glob("charts/*")
+	files, err := filepath.Glob(chaosChartPath + "charts/*")
 	if err != nil {
-		log.Printf("reading file path failed", err)
+		log.Printf("reading file path failed %s", err)
 	}
 	var charts []Chart
 	for _, fileName := range files {
-		chartName := strings.Split(fileName, "/")[1]
+		chartPathSplitted := strings.Split(fileName, "/")
+		chartName := chartPathSplitted[len(chartPathSplitted)-1]
 		chart := getYAMLFileContent(chartName)
 		charts = append(charts, chart)
 	}
@@ -69,22 +70,22 @@ func GetChart(w http.ResponseWriter, r *http.Request) {
 }
 
 func getYAMLFileContent(chartName string) Chart {
-	chartServicePath := "./charts/" + chartName + "/" + chartName + ".chartserviceversion.yaml"
+	chartServicePath := chaosChartPath + "charts/" + chartName + "/" + chartName + ".chartserviceversion.yaml"
 	serviceFile, err := ioutil.ReadFile(chartServicePath)
-	packagePath := "./charts/" + chartName + "/" + chartName + ".package.yaml"
+	packagePath := chaosChartPath + "charts/" + chartName + "/" + chartName + ".package.yaml"
 	packageFile, err := ioutil.ReadFile(packagePath)
 	if err != nil {
-		log.Printf("file path of the error", chartServicePath)
+		log.Printf("file path of the error %s", chartServicePath)
 		log.Printf("serviceFile.Get err #%v ", err)
 	}
 	var chart Chart
 	var packageInfo PackageInformation
-	log.Printf("package info", packageInfo)
+	log.Printf("package info %s", packageInfo)
 	err = yaml.Unmarshal([]byte(serviceFile), &chart)
 	err = yaml.Unmarshal([]byte(packageFile), &packageInfo)
 	chart.PackageInfo = packageInfo
 	for _, experiment := range packageInfo.Experiments {
-		experimentPath := "./charts/" + chartName + "/" + experiment.Name + "/" + experiment.Name + ".chartserviceversion.yaml"
+		experimentPath := chaosChartPath + "charts/" + chartName + "/" + experiment.Name + "/" + experiment.Name + ".chartserviceversion.yaml"
 		experimentFile, err := ioutil.ReadFile(experimentPath)
 		if err != nil {
 			log.Printf("serviceFile.Get err #%v ", err)

@@ -4,6 +4,10 @@ RUN go get github.com/gorilla/mux
 
 RUN go get gopkg.in/yaml.v3
 
+RUN go get -u gopkg.in/src-d/go-git.v4
+
+RUN go get -u github.com/sirupsen/logrus
+
 RUN mkdir /app
 
 RUN mkdir $GOPATH/src/github.com/litmuschaos
