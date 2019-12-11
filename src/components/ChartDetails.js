@@ -61,8 +61,6 @@ export class ChartDetails extends React.Component {
   }
   getPlatformList = (listofPlatforms) => {
     let div = [];
-
-    console.log('hello..................................', listofPlatforms);
     if (listofPlatforms != null && listofPlatforms.length > 0) {
       div.push(<span className="uses-explanation-title"> Platforms</span>)
       for (let i = 0; i < listofPlatforms.length; i++) {
