@@ -176,7 +176,7 @@ export class ChartDetails extends React.Component {
               {this.getMaintainerList(this.props.charts.spec.maintainers)}
             </div>
           </div>
-          {this.props.charts.spec.maturity != null &&
+          {this.props.charts.spec.maturity != '' &&
             <div className="d-flex item-block">
               <i className="mi-user dark-gray"></i>
               <div className="d-flex flex-column items">
