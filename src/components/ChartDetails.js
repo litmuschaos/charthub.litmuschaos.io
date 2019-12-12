@@ -70,6 +70,15 @@ export class ChartDetails extends React.Component {
     return div
   }
 
+  getMaturityOfExperiment = (maturityOfExperiment) => {
+    let div = [];
+    if (maturityOfExperiment != '') {
+      div.push(<span className="uses-explanation-title"> Maturity</span>)
+        div.push(<span >{maturityOfExperiment}</span>)
+    }
+    return div
+  }
+
   handleOpenModal() {
     this.setState({ showModal: true });
   }
@@ -177,6 +186,13 @@ export class ChartDetails extends React.Component {
               {this.getMaintainerList(this.props.charts.spec.maintainers)}
             </div>
           </div>
+          {this.props.charts.spec.maturity != '' &&
+            <div className="d-flex item-block">
+              <div className="d-flex flex-column items">
+                {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}
+              </div>
+            </div>
+            }
 
           {this.props.charts.spec.platforms != null &&
             <div className="d-flex item-block">
