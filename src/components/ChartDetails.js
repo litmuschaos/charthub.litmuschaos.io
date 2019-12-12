@@ -59,6 +59,16 @@ export class ChartDetails extends React.Component {
     }
     return div;
   }
+  getPlatformList = (listofPlatforms) => {
+    let div = [];
+    if (listofPlatforms != null && listofPlatforms.length > 0) {
+      div.push(<span className="uses-explanation-title"> Platforms</span>)
+      for (let i = 0; i < listofPlatforms.length; i++) {
+        div.push(<span key={i}>{listofPlatforms[i]}</span>)
+      }
+    }
+    return div
+  }
 
   handleOpenModal() {
     this.setState({ showModal: true });
@@ -167,6 +177,15 @@ export class ChartDetails extends React.Component {
               {this.getMaintainerList(this.props.charts.spec.maintainers)}
             </div>
           </div>
+
+          {this.props.charts.spec.platforms != null &&
+            <div className="d-flex item-block">
+              <i className="mi-user dark-gray"></i>
+              <div className="d-flex flex-column items">
+                {this.getPlatformList(this.props.charts.spec.platforms)}
+              </div>
+            </div>
+            }
 
         </div>
       </div>

@@ -65,6 +65,7 @@ type Spec struct {
 
 	Experiments     []string `yaml:"experiments"`
 	ChaosExpCRDLink string   `yaml:"chaosexpcrdlink"`
+	Platforms       []string `yaml:"platforms"`
 }
 
 type PackageInformation struct {
