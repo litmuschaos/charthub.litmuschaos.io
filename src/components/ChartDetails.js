@@ -62,7 +62,7 @@ export class ChartDetails extends React.Component {
 
   getMaturityOfExperiment = (maturityOfExperiment) => {
     let div = [];
-    if (maturityOfExperiment != "") {
+    if (maturityOfExperiment != '') {
       div.push(<span className="uses-explanation-title"> Maturity</span>)
         div.push(<span >{maturityOfExperiment}</span>)
     }
@@ -178,7 +178,6 @@ export class ChartDetails extends React.Component {
           </div>
           {this.props.charts.spec.maturity != '' &&
             <div className="d-flex item-block">
-              <i className="mi-user dark-gray"></i>
               <div className="d-flex flex-column items">
                 {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}
               </div>
