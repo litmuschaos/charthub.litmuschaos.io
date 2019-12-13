@@ -33,11 +33,11 @@ class Chart extends React.Component {
       <ChartDetails 
       key={i++} 
       install_button_text="INSTALL ALL EXPERIMENTS" 
-      istory = {this.props.history}
+      history = {this.props.history}
       charts={this.props.chart} 
       displayName={displayName} 
       name={this.props.chart.spec.displayName} 
-      isCollapsed={false} 
+      isCollapsed={false}
       logo={this.state.logo + this.props.chart.metadata.name + "/icons/" + this.props.chart.metadata.name +".png"}  />
      
       </div> 

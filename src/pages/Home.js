@@ -42,7 +42,8 @@ class Home extends React.Component {
     }
   }
 
-  renderChartGrid = () => {
+
+  renderChartGrid = () => {   
     return this.props.charts.map((chart) => {
       let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+chart.metadata.name+"/icons/"
       return <ChartCard
@@ -51,14 +52,16 @@ class Home extends React.Component {
                 circleColor="orange"
                 navTo={this.handleNavToChart.bind(this, chart.metadata.name)}
                 experimentCount={chart.experiments ? chart.experiments.length : 0}
+                
+                //experimentCount={ chart.spec.platforms }
                 title={chart.spec.displayName}
                 provider={chart.spec.provider.name}
+                platforms={chart.spec.platforms}
                 text={chart.metadata.annotations.chartDescription}
                 icon={logo + chart.metadata.name +".png"} 
                 id={chart.metadata.name}/>
     });
   }
-  
   sortCharts = () => {
     
     this.setState({sortDesc : !this.state.sortDesc});
@@ -84,7 +87,7 @@ class Home extends React.Component {
       <div className="home-container">
         <HomeHeader showHomeText={true}/>
         <div className="home-content">
-        <HomeFilter show={this.state.showFilters} showHide={this.showHideFilters.bind(this)}/>
+        <HomeFilter experiments={this.props.charts} show={this.state.showFilters} showHide={this.showHideFilters.bind(this)}/>
           <div className="chart-container">
             <div className="phone-filter-button-container" onClick={this.showHideFilters}>
               <FaFilter />

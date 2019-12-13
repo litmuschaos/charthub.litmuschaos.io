@@ -79,7 +79,7 @@ export class ChartDetails extends React.Component {
       isCard='true' 
       key={chart.metadata.name} 
       title={chart.spec.displayName} 
-      provider={chart.spec.provider.name}
+      provider={chart.spec.provider.name}     
       text={chart.metadata.annotations.chartDescription} 
       icon={logo + chart.metadata.name +".png"} 
       id={chart.metadata.name} />
