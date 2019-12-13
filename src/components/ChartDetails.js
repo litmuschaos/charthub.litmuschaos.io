@@ -178,7 +178,6 @@ export class ChartDetails extends React.Component {
               {this.createLink(this.props.charts.spec.links)}
             </div>
           </div>
-
           <div className="d-flex item-block"> 
             <i className="mi-user dark-gray"></i>
             <div className="d-flex flex-column items"> 
@@ -186,23 +185,22 @@ export class ChartDetails extends React.Component {
               {this.getMaintainerList(this.props.charts.spec.maintainers)}
             </div>
           </div>
-          {this.props.charts.spec.maturity != '' &&
-            <div className="d-flex item-block">
-              <div className="d-flex flex-column items">
-                {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}
-              </div>
-            </div>
-            }
-
           {this.props.charts.spec.platforms != null &&
             <div className="d-flex item-block">
-              <i className="mi-user dark-gray"></i>
+              <i className="mi-container dark-gray"></i>
               <div className="d-flex flex-column items">
                 {this.getPlatformList(this.props.charts.spec.platforms)}
               </div>
             </div>
             }
-
+          {this.props.charts.spec.maturity != '' &&
+            <div className="d-flex item-block">
+              <i className="mi-chart-bar-up dark-gray"></i>
+              <div className="d-flex flex-column items">
+                {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}
+              </div>
+            </div>
+            }
         </div>
       </div>
       <Modal
