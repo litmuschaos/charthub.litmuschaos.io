@@ -56,7 +56,7 @@ class Home extends React.Component {
                 //experimentCount={ chart.spec.platforms }
                 title={chart.spec.displayName}
                 provider={chart.spec.provider.name}
-                platforms={chart.spec.platforms}
+                Platforms={chart.spec.platforms}
                 text={chart.metadata.annotations.chartDescription}
                 icon={logo + chart.metadata.name +".png"} 
                 id={chart.metadata.name}/>
