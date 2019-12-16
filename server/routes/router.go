@@ -7,7 +7,7 @@ import (
 	"github.com/litmuschaos/charthub.litmuschaos.io/server/controller/logger"
 )
 
-// NewRouter creates a mux-router for all respective routes
+// NewRouter creates a mux-router for all the respective routes
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
