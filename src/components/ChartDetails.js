@@ -59,6 +59,25 @@ export class ChartDetails extends React.Component {
     }
     return div;
   }
+  getPlatformList = (listofPlatforms) => {
+    let div = [];
+    if (listofPlatforms != null && listofPlatforms.length > 0) {
+      div.push(<span className="uses-explanation-title"> Platforms</span>)
+      for (let i = 0; i < listofPlatforms.length; i++) {
+        div.push(<span key={i}>{listofPlatforms[i]}</span>)
+      }
+    }
+    return div
+  }
+
+  getMaturityOfExperiment = (maturityOfExperiment) => {
+    let div = [];
+    if (maturityOfExperiment != '') {
+      div.push(<span className="uses-explanation-title"> Maturity</span>)
+        div.push(<span >{maturityOfExperiment}</span>)
+    }
+    return div
+  }
 
   getMaturityOfExperiment = (maturityOfExperiment) => {
     let div = [];
@@ -168,7 +187,6 @@ export class ChartDetails extends React.Component {
               {this.createLink(this.props.charts.spec.links)}
             </div>
           </div>
-
           <div className="d-flex item-block"> 
             <i className="mi-user dark-gray"></i>
             <div className="d-flex flex-column items"> 
@@ -176,8 +194,17 @@ export class ChartDetails extends React.Component {
               {this.getMaintainerList(this.props.charts.spec.maintainers)}
             </div>
           </div>
+          {this.props.charts.spec.platforms != null &&
+            <div className="d-flex item-block">
+              <i className="mi-container dark-gray"></i>
+              <div className="d-flex flex-column items">
+                {this.getPlatformList(this.props.charts.spec.platforms)}
+              </div>
+            </div>
+            }
           {this.props.charts.spec.maturity != '' &&
             <div className="d-flex item-block">
+              <i className="mi-chart-bar-up dark-gray"></i>
               <div className="d-flex flex-column items">
                 {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}
               </div>
