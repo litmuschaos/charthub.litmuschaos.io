@@ -85,7 +85,7 @@ class Home extends React.Component {
       <div className="home-container">
         <HomeHeader showHomeText={true}/>
         <div className="home-content">
-        <HomeFilter show={this.state.showFilters} showHide={this.showHideFilters.bind(this)}/>
+        <HomeFilter experiments={this.props.charts} show={this.state.showFilters} showHide={this.showHideFilters.bind(this)}/>
           <div className="chart-container">
             <div className="phone-filter-button-container" onClick={this.showHideFilters}>
               <FaFilter />

@@ -76,8 +76,13 @@ class HomeFilter extends React.Component {
           Contributor
         </span>
         {this.renderFilters('provider')}
-
+        
+        <span className="filter-title-label">
+          Maturity
+        </span>
+        {this.renderFilters('maturity')}
       </div>
+
     )
   }
 }

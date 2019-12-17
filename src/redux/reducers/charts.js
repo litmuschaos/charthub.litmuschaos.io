@@ -50,16 +50,30 @@ export default function(state = initialState, action) {
           if(term.state_value === true) {
             let charts_Categories = []
             let charts_Provider = []
+            let charts_Maturity = []
             charts_Categories = state.loadedCharts.filter(chart => pool.some(pool_item => chart.Metadata.Annotations.Categories === pool_item));
             charts_Provider = state.loadedCharts.filter(chart => pool.some(pool_item => chart.Spec.Provider.Name === pool_item));
-            
-            if (charts_Provider.length !==0 && charts_Categories.length !==0 ) {
+            charts_Maturity = state.loadedCharts.filter(chart => {
+              console.log(chart, 'CHARTTTTTTT');
+              let maturityInfo = []
+              let maturityData
+              let experimentsSpec = chart.Experiments.map(el => el.Spec);
+              maturityData = experimentsSpec.map(el => el.Maturity);
+              maturityInfo = Array.from(new Set(maturityData))
+              const newMaturity = Array.from(new Set(maturityInfo))
+              console.log(newMaturity, 'newPlatforms');
+              const filterMaturity = newMaturity.find(maturity => term.annotation === 'maturity' && term.name === maturity)
+              console.log(filterMaturity, 'filterPlatforms');
+              console.log(pool, 'poool');
+
+              return pool.some(pool_item => filterMaturity === pool_item)
+            });
+            if (charts_Provider.length !==0 && charts_Categories.length !==0 && charts_Maturity.length ) {
               charts = charts_Categories.filter(x => charts_Provider.includes(x));
             }
             else {
-              charts = [...new Set ([...charts_Provider, ...charts_Categories])];
-            }
-               
+              charts = [...new Set ([...charts_Provider, ...charts_Categories, ...charts_Maturity])];
+            }            
           }
         })
 
@@ -69,8 +83,7 @@ export default function(state = initialState, action) {
         ...state,
         charts
       }
-    }
-    
+    } 
     default:
       return state;
   }
