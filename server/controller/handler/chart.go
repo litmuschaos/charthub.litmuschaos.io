@@ -33,6 +33,7 @@ type Maintainer struct {
 type Link struct {
 	Name string
 	Url  string
+	Docs string
 }
 
 type Metadata struct {
