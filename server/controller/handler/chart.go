@@ -66,7 +66,6 @@ type Spec struct {
 	Experiments     []string `yaml:"experiments"`
 	ChaosExpCRDLink string   `yaml:"chaosexpcrdlink"`
 	Platforms       []string `yaml:"platforms"`
-	ChaosTypeDescription string `yaml:"chaosTypeDescription"`
 	ChaosType  		string `yaml:"chaosType"`
 }
 
