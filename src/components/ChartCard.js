@@ -16,7 +16,7 @@ export class ChartCard extends React.Component {
     const listOrCardViewClass = this.props.isCard ? "chart-card-container" : "chart-card-container list-view"
     const renderChartContent = () => {
       return (<div>
-                <div className={"icon-container"}>
+                <div className={"icon-container"}  >
                   <div className="logo-background-circle" style={this.state.gradientCircle}></div>
                   <div className="icon-background">
                     <img className="icon" src={this.props.icon} alt="chart logo"/>
@@ -31,10 +31,10 @@ export class ChartCard extends React.Component {
                 <p className="chart-description">
                   {this.props.text}
                 </p>
-                
               </div>)
     }
     const renderChartListContainer = (content) => {
+
       if(this.props.isCard){
         return renderChartContent()
       } else {
@@ -48,7 +48,14 @@ export class ChartCard extends React.Component {
         <div className="experiment-count-container">
          {this.props.experimentCount ?( <span className="experiment-count">
             {this.props.experimentCount} Chaos Experiments
-          </span>):(<span></span>)}
+          </span>):
+          (<span className="experiment-chaos-type" >
+             {this.props.chaosType ?( <i className ="mi-application infra-icon"></i>):(<span></span>)}
+             <span className="chaos-tooltiptext ">
+                    { this.props.chartType=="generic" ? ('Intra-level :- Multiple application might be impact')
+                                        :'Intra-level :-  Multiple volume sharing the same pool might be impact' }
+             </span>
+           </span>)}
         </div>
         {renderChartListContainer()}
       </div>
