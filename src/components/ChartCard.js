@@ -50,11 +50,12 @@ export class ChartCard extends React.Component {
             {this.props.experimentCount} Chaos Experiments
           </span>):
           (<span className="experiment-chaos-type" >
-             {this.props.chaosType ?( <i className ="mi-application infra-icon"></i>):(<span></span>)}
+             {this.props.chaosType ?( <i className ="mi-application infra-icon">
              <span className="chaos-tooltiptext ">
-                    { this.props.chartType=="generic" ? ('Intra-level :- Multiple application might be impact')
-                                        :'Intra-level :-  Multiple volume sharing the same pool might be impact' }
+                    { this.props.chartType=="generic" ? ('Intra-Level :- Multiple application might be impact')
+                                        :'Intra-Level :-  Multiple volume sharing the same pool might be impact' }
              </span>
+             </i>):(<span></span>)}
            </span>)}
         </div>
         {renderChartListContainer()}
