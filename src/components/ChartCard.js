@@ -16,7 +16,7 @@ export class ChartCard extends React.Component {
     const listOrCardViewClass = this.props.isCard ? "chart-card-container" : "chart-card-container list-view"
     const renderChartContent = () => {
       return (<div>
-                <div className={"icon-container"}  >
+                <div className={"icon-container"}>
                   <div className="logo-background-circle" style={this.state.gradientCircle}></div>
                   <div className="icon-background">
                     <img className="icon" src={this.props.icon} alt="chart logo"/>
@@ -52,8 +52,8 @@ export class ChartCard extends React.Component {
           (<span className="experiment-chaos-type" >
              {this.props.chaosType ?( <i className ="mi-application infra-icon">
              <span className="chaos-tooltiptext ">
-                    { this.props.chartType=="generic" ? ('Infra-Level :- Multiple application might be impacted')
-                                        :'Infra-Level :-  Multiple volumes sharing the same pool might be impacted' }
+                    { this.props.chartType=="generic" ? ('Infra-Chaos :- Multiple application might be impacted')
+                                        :'Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted' }
              </span>
              </i>):(<span></span>)}
            </span>)}
