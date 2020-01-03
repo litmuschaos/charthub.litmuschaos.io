@@ -52,7 +52,7 @@ export class ChartCard extends React.Component {
           (<span className="experiment-chaos-type" >
              {this.props.chaosType ?( <i className ="mi-application infra-icon">
              <span className="chaos-tooltiptext ">
-                    { this.props.chartType=="generic" ? ('Infra-Chaos :- Multiple application might be impacted')
+                    { this.props.chartType=="generic" ? ('Infra-Chaos :- Multiple applications might be impacted')
                                         :'Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted' }
              </span>
              </i>):(<span></span>)}
