@@ -124,6 +124,34 @@
       position: relative;
     }
   }
+  .experiment-chaos-type{
+    font-size: 12px;
+    float: right;
+    padding: 2px 9px;
+    position: relative;
+    font-weight: 700;
+
+    &:hover .chaos-tooltiptext{
+      visibility: visible;
+    }
+   .chaos-tooltiptext{
+    visibility: hidden;    
+    width: 140px;
+    font-size: 13px;
+    font-family:Lato;
+    margin-left: 2px;
+    background-color: grey;
+    padding: 5px;
+    color: #fff;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 2;
+    }
+    .infra-icon{
+      color: #fc8c03;
+      font-size: 23px;
+    }
+  }
 }
 
 .chart-card-container:hover {
