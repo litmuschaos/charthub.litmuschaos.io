@@ -48,15 +48,19 @@ export class ChartCard extends React.Component {
         <div className="experiment-count-container">
          {this.props.experimentCount ?( <span className="experiment-count">
             {this.props.experimentCount} Chaos Experiments
-          </span>):
-          (<span className="experiment-chaos-type" >
+          </span>):<div className="experiment-count-container">
+          <div className="experiment-chaos-type" >
              {this.props.chaosType ?( <i className ="mi-application infra-icon">
              <span className="chaos-tooltiptext ">
                     { this.props.chartType=="generic" ? ('Infra-Chaos :- Multiple applications might be impacted')
                                         :'Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted' }
              </span>
-             </i>):(<span></span>)}
-           </span>)}
+             </i>):(<span></span>)}</div>
+             <div className = "analytics"> 
+              { this.props.analytics.length ? this.props.analytics[0].Count : 0} 
+                <span className = "chaos-tooltiptext " > Execution Count </span> 
+             </div> 
+           </div>}
         </div>
         {renderChartListContainer()}
       </div>

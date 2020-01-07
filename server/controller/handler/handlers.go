@@ -27,6 +27,7 @@ import (
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/litmuschaos/charthub.litmuschaos.io/server/pkg/analytics"
 	"gopkg.in/yaml.v3"
 )
 
@@ -45,6 +46,13 @@ func pathParser(w http.ResponseWriter, path string) {
 	checkError(err)
 	fmt.Fprintf(w, string(dat))
 
+}
+
+// GetAnalyticsData gets the GA data from GA instance
+func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
+	out, _ := json.Marshal(analytics.GAResponseJSONObject)
+	writeHeaders(&w, 200)
+	w.Write(out)
 }
 
 // FileHandler takes out the file paths from the query params respectives URLs
