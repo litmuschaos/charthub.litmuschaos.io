@@ -31,10 +31,10 @@ export class ChartCard extends React.Component {
                 <p className="chart-description">
                   {this.props.text}
                 </p>
-                
               </div>)
     }
     const renderChartListContainer = (content) => {
+
       if(this.props.isCard){
         return renderChartContent()
       } else {
@@ -48,7 +48,15 @@ export class ChartCard extends React.Component {
         <div className="experiment-count-container">
          {this.props.experimentCount ?( <span className="experiment-count">
             {this.props.experimentCount} Chaos Experiments
-          </span>):(<span></span>)}
+          </span>):
+          (<span className="experiment-chaos-type" >
+             {this.props.chaosType ?( <i className ="mi-application infra-icon">
+             <span className="chaos-tooltiptext ">
+                    { this.props.chartType=="generic" ? ('Infra-Chaos :- Multiple application might be impacted')
+                                        :'Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted' }
+             </span>
+             </i>):(<span></span>)}
+           </span>)}
         </div>
         {renderChartListContainer()}
       </div>

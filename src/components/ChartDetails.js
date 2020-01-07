@@ -93,16 +93,18 @@ export class ChartDetails extends React.Component {
   renderExperiments = function() {
     let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+this.props.charts.metadata.name+"/icons/"
     let displayName = this.props.charts.metadata.name;
-    const experiments = this.props.charts.experiments.map(chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}>
+        const experiments = this.props.charts.experiments.map(
+      chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}>
       <ChartCard 
       isCard='true' 
       key={chart.metadata.name} 
       title={chart.spec.displayName} 
+      chaosType={chart.spec.chaosType}
+      chartType={this.props.charts.metadata.name}
       provider={chart.spec.provider.name}
       text={chart.metadata.annotations.chartDescription} 
       icon={logo + chart.metadata.name +".png"} 
       id={chart.metadata.name} />
-
       </Link>)
     return (
       [...experiments]
