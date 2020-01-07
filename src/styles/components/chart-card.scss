@@ -125,22 +125,23 @@
     }
   }
   .analytics {
-    font-size: 12px;
+    font-size: 17px;
     float: left;
     padding: 2px 9px;
     position: relative;
     font-weight: 700;
+    color: #fc8c03;
     &:hover .chaos-tooltiptext{
       visibility: visible;
     }
    .chaos-tooltiptext{
     visibility: hidden;    
-    width: 140px;
-    font-size: 13px;
+    width: 121px;
+    font-size: 10px;
     font-family:Lato;
     margin-left: 2px;
     background-color: grey;
-    padding: 5px;
+    padding: 4px;
     color: #fff;
     border-radius: 6px;
     position: absolute;

@@ -58,7 +58,7 @@ export class ChartCard extends React.Component {
              </i>):(<span></span>)}</div>
              <div className = "analytics"> 
               { this.props.analytics.length ? this.props.analytics[0].Count : 0} 
-                <span className = "chaos-tooltiptext " > Execution Count </span> 
+                <span className = "chaos-tooltiptext " >Total Experiment Execution Count</span> 
              </div> 
            </div>}
         </div>
