@@ -82,7 +82,7 @@ class Chart extends React.Component {
 
             <div className="chart-page-header-breacrumbs-container">
               <div className="breadcrumbs">
-                <Link to={'/'}>Home</Link> / {this.props.chart.spec.displayName}
+                <Link to={'/'}><span className="breadcrumb-text">Home</span></Link> > <span className="breadcrumb-text">{this.props.chart.spec.displayName}</span>
               </div>
               <div className="chart-header-filters-container">
 

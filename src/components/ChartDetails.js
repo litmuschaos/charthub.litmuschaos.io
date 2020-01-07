@@ -59,6 +59,25 @@ export class ChartDetails extends React.Component {
     }
     return div;
   }
+  getPlatformList = (listofPlatforms) => {
+    let div = [];
+    if (listofPlatforms != null && listofPlatforms.length > 0) {
+      div.push(<span className="uses-explanation-title"> Platforms</span>)
+      for (let i = 0; i < listofPlatforms.length; i++) {
+        div.push(<span key={i}>{listofPlatforms[i]}</span>)
+      }
+    }
+    return div
+  }
+
+  getMaturityOfExperiment = (maturityOfExperiment) => {
+    let div = [];
+    if (maturityOfExperiment != '') {
+      div.push(<span className="uses-explanation-title"> Maturity</span>)
+        div.push(<span >{maturityOfExperiment}</span>)
+    }
+    return div
+  }
 
   handleOpenModal() {
     this.setState({ showModal: true });
@@ -74,16 +93,18 @@ export class ChartDetails extends React.Component {
   renderExperiments = function() {
     let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+this.props.charts.metadata.name+"/icons/"
     let displayName = this.props.charts.metadata.name;
-    const experiments = this.props.charts.experiments.map(chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}>
+        const experiments = this.props.charts.experiments.map(
+      chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}>
       <ChartCard 
       isCard='true' 
       key={chart.metadata.name} 
       title={chart.spec.displayName} 
+      chaosType={chart.spec.chaosType}
+      chartType={this.props.charts.metadata.name}
       provider={chart.spec.provider.name}
       text={chart.metadata.annotations.chartDescription} 
       icon={logo + chart.metadata.name +".png"} 
       id={chart.metadata.name} />
-
       </Link>)
     return (
       [...experiments]
@@ -92,9 +113,17 @@ export class ChartDetails extends React.Component {
 
   displayLinkCreator = () => {
     this.host = window.location.host
+    this.hostname = window.location.hostname
     var path = this.props.charts.spec.chaosExpCRDLink
     path = path.split("/charts/")[1]
-    var displayRepoPath = "https://"+this.host+"/api/chaos?file=charts/" + path
+    var prefixPath = "https://"
+    var suffixPath = "/api/chaos?file=charts/"
+    if (this.hostname === "localhost") {
+      prefixPath = "http://"
+      this.host = "localhost:8080"
+      suffixPath = "/chaos?file=charts/"
+    }
+    var displayRepoPath = prefixPath+this.host+suffixPath+path
     return displayRepoPath
   }
 
@@ -151,7 +180,6 @@ export class ChartDetails extends React.Component {
               {this.createLink(this.props.charts.spec.links)}
             </div>
           </div>
-
           <div className="d-flex item-block"> 
             <i className="mi-user dark-gray"></i>
             <div className="d-flex flex-column items"> 
@@ -159,7 +187,22 @@ export class ChartDetails extends React.Component {
               {this.getMaintainerList(this.props.charts.spec.maintainers)}
             </div>
           </div>
-
+          {this.props.charts.spec.platforms != null &&
+            <div className="d-flex item-block">
+              <i className="mi-container dark-gray"></i>
+              <div className="d-flex flex-column items">
+                {this.getPlatformList(this.props.charts.spec.platforms)}
+              </div>
+            </div>
+            }
+          {this.props.charts.spec.maturity != '' &&
+            <div className="d-flex item-block">
+              <i className="mi-chart-bar-up dark-gray"></i>
+              <div className="d-flex flex-column items">
+                {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}
+              </div>
+            </div>
+            }
         </div>
       </div>
       <Modal
