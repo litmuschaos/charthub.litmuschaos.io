@@ -48,9 +48,10 @@ func pathParser(w http.ResponseWriter, path string) {
 
 }
 
-// GetAnalyticsData gets the GA data from GA instance
+// GetAnalyticsData gets the data from GA instance
 func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
-	out, _ := json.Marshal(analytics.GAResponseJSONObject)
+	out, err := json.Marshal(analytics.GAResponseJSONObject)
+	log.Printf("unable to get data from GA instance %s", err)
 	writeHeaders(&w, 200)
 	w.Write(out)
 }
