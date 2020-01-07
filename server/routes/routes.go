@@ -51,7 +51,7 @@ var routes = Routes{
 		handler.GetChart,
 	},
 	Route{
-		"GetAnalresponseStatusCodeyticsData",
+		"GetAnalyticsData",
 		"GET",
 		"/analytics",
 		handler.GetAnalyticsData,

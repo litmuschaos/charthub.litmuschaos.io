@@ -1,7 +1,5 @@
 package analytics
 
-// package main
-
 import (
 	"fmt"
 	"io/ioutil"
@@ -12,7 +10,6 @@ import (
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/analytics/v3"
 )
-
 
 const (
 	timeInterval = 1 * time.Hour
@@ -25,16 +22,16 @@ const (
 
 // GAResponseJSON is the global entity which defines the structure for holding the GA data
 type GAResponseJSON struct {
-	Label string  
-	Count string	  
+	Label string
+	Count string
 }
 // GAResponseJSONObject is the array of GAResponse struct
 var GAResponseJSONObject []GAResponseJSON
 
-// Driver is responsible for the looping the EventReceiver()
+// Driver is responsible for the looping the UpdateAnalyticsData()
 func Driver() {
 	for true {
-		err := EventReceiver()
+		err := UpdateAnalyticsData()
 		if err != nil {
 			log.Error(err)
 		}
@@ -42,11 +39,14 @@ func Driver() {
 	}
 }
 
-// EventReceiver sends the GET request to the GA instance and receives the events' metrics at every t time intervals
+// UpdateAnalyticsData sends the GET request to the GA instance and receives the events' metrics at every t time intervals
 // and writes it to a file analytics.txtfunc GAParamInit() (MeasurementProtocolParam, error) {
-func EventReceiver() error {
+func UpdateAnalyticsData() error {
 	GAResponseJSONObject = nil
-	key, _ := ioutil.ReadFile("/home/daitya/key.json")
+	key, err := ioutil.ReadFile("/etc/analytics/auth.json")
+	if err != nil {
+		return fmt.Errorf("Error while getting the auth.json file, err: %s", err)
+	}
 	jwtConf, err := google.JWTConfigFromJSON(
 		key,
 		analytics.AnalyticsReadonlyScope,
@@ -60,20 +60,16 @@ func EventReceiver() error {
 		return fmt.Errorf("Error while setting up NewClient, err: %s", err)
 	}
 	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, metrics).Dimensions(dimensions).Do()
+	if err != nil {
+		return fmt.Errorf("Error while getting response, err: %s", err)
+	}
 	GAResponse := response.Rows
 	for i := range GAResponse {
-		var label string
-		var count string
-		label = GAResponse[i][0]
-		count = GAResponse[i][1]
-		 object := GAResponseJSON {
-			Label : label,
-			Count : count,
-		 }
+		object := GAResponseJSON{
+			Label: GAResponse[i][0],
+			Count: GAResponse[i][1],
+		}
 		GAResponseJSONObject = append(GAResponseJSONObject, object)
-	}
-	if err != nil {
-		return fmt.Errorf("Error while getting associated profiles, err: %s", err)
 	}
 	return nil
 }

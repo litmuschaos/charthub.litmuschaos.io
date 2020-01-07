@@ -11,7 +11,7 @@ import (
 
 func main() {
 	
-	// Driver is go-routine which synchronously calls the git-ops function Driver()
+	// Driver is go-routine which synchronously calls the git-ops function UpdateAnalyticsData()
 	go analytics.Driver()
 	// Trigger is go-routine which synchronously calls the git-ops function Trigger()
 	go gitops.Trigger()
