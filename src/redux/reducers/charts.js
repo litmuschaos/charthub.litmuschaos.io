@@ -1,9 +1,10 @@
-import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, FILTER_CHARTS_BY_FILTERS } from "../actionTypes";
+import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, FILTER_CHARTS_BY_FILTERS, LOAD_ANALYTICS_DATA} from "../actionTypes";
 
 const initialState = {
   charts: [],
   chart: {},
-  loadedCharts: []
+  loadedCharts: [],
+  analytics: [],
 };
 
 export default function(state = initialState, action) {
@@ -71,6 +72,12 @@ export default function(state = initialState, action) {
       }
     }
     
+    case LOAD_ANALYTICS_DATA:{
+      return {
+        ...state,
+        analytics: action.data
+      }
+    }
     default:
       return state;
   }

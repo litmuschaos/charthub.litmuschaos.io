@@ -78,7 +78,7 @@ export class ChartDetails extends React.Component {
     }
     return div
   }
-
+  
   handleOpenModal() {
     this.setState({ showModal: true });
   }
@@ -93,12 +93,13 @@ export class ChartDetails extends React.Component {
   renderExperiments = function() {
     let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+this.props.charts.metadata.name+"/icons/"
     let displayName = this.props.charts.metadata.name;
-        const experiments = this.props.charts.experiments.map(
+      const experiments = this.props.charts.experiments.map(
       chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}>
       <ChartCard 
       isCard='true' 
       key={chart.metadata.name} 
       title={chart.spec.displayName} 
+      analytics={this.props.analytics.filter(exp=>exp.Label == chart.metadata.name)}
       chaosType={chart.spec.chaosType}
       chartType={this.props.charts.metadata.name}
       provider={chart.spec.provider.name}

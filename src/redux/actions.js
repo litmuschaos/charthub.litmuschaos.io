@@ -1,4 +1,4 @@
-import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH } from "./actionTypes";
+import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, LOAD_ANALYTICS_DATA } from "./actionTypes";
 
 var apiEnpoint =  window.location.hostname.includes('localhost')?'http://localhost:8080':'/api';
 export const loadCharts = () => dispatch => {
@@ -28,3 +28,13 @@ export const filterChartsOnSearch = (searchTerm) => (dispatch) => {
 export const applyFilters = (filters) => (dispatch) => {
   dispatch({ type: FILTER_CHARTS_BY_FILTERS, filters })
 }
+
+export const analyticsData = () => dispatch => {
+  fetch(`${apiEnpoint}/analytics`)
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(data){
+    dispatch({type: LOAD_ANALYTICS_DATA, data})
+  });
+};
