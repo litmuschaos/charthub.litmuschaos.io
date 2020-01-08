@@ -22,7 +22,6 @@ class HomeHeader extends React.Component {
       ]
     }
   }
-
   renderChartTitle = () => {
     if(!this.props.showHomeText){
       return (
@@ -53,7 +52,7 @@ class HomeHeader extends React.Component {
   }
   render() {
     return (
-      <div className="hero-bg">
+      <div className="hero-bg"> 
       <div className="home-header-container" style={this.getHeaderHeight()}>
         <div className="top-header-container">
           <a href="https://litmuschaos.io" target="_blank" rel="noopener noreferrer">

@@ -28,6 +28,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v3"
+
+	"github.com/litmuschaos/charthub.litmuschaos.io/server/pkg/analytics"
 )
 
 // ChaosChartPath refers the location of the freshly updated repository
@@ -45,6 +47,14 @@ func pathParser(w http.ResponseWriter, path string) {
 	checkError(err)
 	fmt.Fprintf(w, string(dat))
 
+}
+
+// GetAnalyticsData gets the data from GA instance
+func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
+	out, err := json.Marshal(analytics.GAResponseJSONObject)
+	log.Printf("unable to get data from GA instance %s", err)
+	writeHeaders(&w, 200)
+	w.Write(out)
 }
 
 // FileHandler takes out the file paths from the query params respectives URLs
