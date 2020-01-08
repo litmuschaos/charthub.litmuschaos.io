@@ -28,8 +28,8 @@ type GAResponseJSON struct {
 // GAResponseJSONObject is the array of GAResponse struct
 var GAResponseJSONObject []GAResponseJSON
 
-// Driver is responsible for the looping the UpdateAnalyticsData()
-func Driver() {
+// Handler is responsible for the looping the UpdateAnalyticsData()
+func Handler() {
 	for true {
 		err := UpdateAnalyticsData()
 		if err != nil {
@@ -40,7 +40,7 @@ func Driver() {
 }
 
 // UpdateAnalyticsData sends the GET request to the GA instance and receives the events' metrics at every t time intervals
-// and writes it to a file analytics.txtfunc GAParamInit() (MeasurementProtocolParam, error) {
+// and updates the global JSON object for containing the response
 func UpdateAnalyticsData() error {
 	GAResponseJSONObject = nil
 	key, err := ioutil.ReadFile("/etc/analytics/auth.json")

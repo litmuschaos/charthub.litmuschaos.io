@@ -11,8 +11,8 @@ import (
 
 func main() {
 	
-	// Driver is go-routine which synchronously calls the git-ops function UpdateAnalyticsData()
-	go analytics.Driver()
+	// Handler is go-routine which synchronously calls the git-ops function UpdateAnalyticsData()
+	go analytics.Handler()
 	// Trigger is go-routine which synchronously calls the git-ops function Trigger()
 	go gitops.Trigger()
 	router := routes.NewRouter()

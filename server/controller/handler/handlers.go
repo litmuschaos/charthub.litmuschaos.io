@@ -25,9 +25,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/gorilla/mux"
 	"github.com/litmuschaos/charthub.litmuschaos.io/server/pkg/analytics"
+	"github.com/gorilla/mux"
 	"gopkg.in/yaml.v3"
 )
 
