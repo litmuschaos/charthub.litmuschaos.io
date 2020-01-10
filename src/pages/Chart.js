@@ -24,7 +24,7 @@ class Chart extends React.Component {
     this.props.loadChartById(this.props.match.params.chartId)
     this.props.analyticsData();
   }
-  /*---> TODO*/
+  /*---> TODO : Refactor this func*/
   func = (chart) => {
     let parentChartCount = 0;
     let analytics = this.props.analytics;
