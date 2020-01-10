@@ -63,6 +63,7 @@ func UpdateAnalyticsData() error {
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
+	
 	GAResponse := response.Rows
 	for i := range GAResponse {
 		object := GAResponseJSON{
