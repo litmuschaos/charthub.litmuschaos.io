@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import HomeHeader from '../components/HomeHeader';
 import HomeFilter from '../components/HomeFilter';
+import Footer from '../components/Footer';
 import { ChartCard } from '../components/ChartCard';
 
 import { IconContext } from "react-icons";
@@ -114,6 +115,12 @@ class Home extends React.Component {
               {this.renderChartGrid()}
             </div>
           </div>
+        </div>
+        <div className= "footer-view"> 
+        <Footer
+          text="hhhhhh"
+        >
+        </Footer>
         </div>
       </div>
     );
