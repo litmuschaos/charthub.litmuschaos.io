@@ -43,7 +43,8 @@ func Handler() {
 // and updates the global JSON object for containing the response
 func UpdateAnalyticsData() error {
 	GAResponseJSONObject = nil
-	key, err := ioutil.ReadFile("/etc/analytics/auth.json")
+	// key, err := ioutil.ReadFile("/etc/analytics/auth.json")
+	key, err := ioutil.ReadFile("/home/daitya/key.json")
 	if err != nil {
 		return fmt.Errorf("Error while getting the auth.json file, err: %s", err)
 	}

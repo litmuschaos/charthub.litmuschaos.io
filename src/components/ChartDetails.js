@@ -33,7 +33,7 @@ export class ChartDetails extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.host = null;
   }
-
+  
   handleCollapseContent = () => {
     const isCollapsed = this.state.isCollapsed;
     if (isCollapsed) {
@@ -69,7 +69,7 @@ export class ChartDetails extends React.Component {
     }
     return div
   }
-
+  
   getMaturityOfExperiment = (maturityOfExperiment) => {
     let div = [];
     if (maturityOfExperiment != '') {
@@ -167,6 +167,8 @@ export class ChartDetails extends React.Component {
           </IconContext.Provider>
         </div>
         <button className="chart-install-button" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
+      </div>
+      <div className="metrics-message">{this.props.CountMessage} = {this.props.ChartCount}
       </div>
       <div className={isCollapsed}>
         <p className="chart-details-text">
