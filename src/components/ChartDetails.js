@@ -168,7 +168,7 @@ export class ChartDetails extends React.Component {
         </div>
         <button className="chart-install-button" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
       </div>
-      <div className="metrics-message">{this.props.CountMessage} = {this.props.ChartCount}
+      <div className="metrics-message">{this.props.CountMessage} : {this.props.ChartCount}
       </div>
       <div className={isCollapsed}>
         <p className="chart-details-text">

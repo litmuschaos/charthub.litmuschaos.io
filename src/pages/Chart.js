@@ -24,6 +24,7 @@ class Chart extends React.Component {
     this.props.loadChartById(this.props.match.params.chartId)
     this.props.analyticsData();
   }
+  /*---> TODO*/
   func = (chart) => {
     let parentChartCount = 0;
     let analytics = this.props.analytics;
@@ -43,7 +44,6 @@ class Chart extends React.Component {
   renderCharts = () => {
     let i = 0;
     let displayName = this.props.chart.spec.displayName;
-    console.log(this.props.chart)
     return (
       <div>
       <ChartDetails 
@@ -51,7 +51,7 @@ class Chart extends React.Component {
       install_button_text="INSTALL ALL EXPERIMENTS" 
       istory = {this.props.history}
       charts={this.props.chart} 
-      CountMessage="Cumulative total experiments run"
+      CountMessage="Total experiments run count"
       ChartCount={this.func()}
       analytics={this.props.analytics}
       displayName={displayName} 
