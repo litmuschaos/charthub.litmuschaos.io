@@ -24,7 +24,23 @@ class Chart extends React.Component {
     this.props.loadChartById(this.props.match.params.chartId)
     this.props.analyticsData();
   }
- 
+  /*---> TODO : Refactor this func*/
+  func = (chart) => {
+    let parentChartCount = 0;
+    let analytics = this.props.analytics;
+    let exp = this.props.chart.experiments
+    if (this.props.analytics.length != 0) {
+      for (let i = 0; i < exp.length;i++) {
+        let matchingExperiment = exp[i].metadata.name
+        for (let i = 0; i< analytics.length;i++) {
+          let matchingEvent = analytics[i]
+          if(matchingExperiment == matchingEvent.Label)
+            parentChartCount = parentChartCount + parseInt(matchingEvent.Count)
+        }
+      }
+    }
+    return parentChartCount
+}
   renderCharts = () => {
     let i = 0;
     let displayName = this.props.chart.spec.displayName;
@@ -35,6 +51,8 @@ class Chart extends React.Component {
       install_button_text="INSTALL ALL EXPERIMENTS" 
       istory = {this.props.history}
       charts={this.props.chart} 
+      CountMessage="Total experiments run count"
+      ChartCount={this.func()}
       analytics={this.props.analytics}
       displayName={displayName} 
       name={this.props.chart.spec.displayName} 

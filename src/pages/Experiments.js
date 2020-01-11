@@ -10,7 +10,7 @@ import { IconContext } from "react-icons";
 import { FaArrowLeft } from 'react-icons/fa';
 
 import { getChartById } from "../redux/selectors";
-import { loadChartById } from "../redux/actions";
+import { loadChartById, analyticsData } from "../redux/actions";
 
 class Experiments extends React.Component {
   constructor(props) {
@@ -22,12 +22,18 @@ class Experiments extends React.Component {
   
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
+    this.props.analyticsData();
   }
 
   handleNavHome = () => {
     this.props.history.push(`/charts/ ${this.props.match.params.chartId}`);
   }
- 
+  func = (chart) => {
+    let ChartCount = 0;
+    let analytics = this.props.analytics;
+    let count = this.props.analytics.filter(exp=>exp.Label == chart.spec.displayName)[0]
+    return (count != undefined ? count.Count:"")
+  }
   renderCharts = () => {
     let i=0;
     let displayName = this.props.chart.spec.displayName;
@@ -42,6 +48,9 @@ class Experiments extends React.Component {
    key={i++} 
    install_button_text="INSTALL EXPERIMENT" 
    charts={chart} 
+   analytics={this.props.analytics}
+   CountMessage="Total experiment run"
+   ChartCount={this.func(chart)}
    displayName={displayName}  
    name={chart.spec.displayName} 
    isCollapsed={false} 
@@ -110,12 +119,14 @@ Experiments.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    chart: getChartById(state, ownProps.match.params.chartId)
+    chart: getChartById(state, ownProps.match.params.chartId),
+    analytics: state.charts.analytics
   }
 };
 
 const mapDispatchToProps = {
-  loadChartById
+  loadChartById,
+  analyticsData
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Experiments));

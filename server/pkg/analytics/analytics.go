@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	timeInterval = 1 * time.Hour
+	timeInterval = 5 * time.Minute
 	viewID       = "ga:208521052"
 	startDate    = "2019-12-01"
 	endDate      = "today"
