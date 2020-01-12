@@ -11,7 +11,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 
 import { getChartById } from "../redux/selectors";
-import { loadChartById } from "../redux/actions";
+import { loadChartById, analyticsData } from "../redux/actions";
 
 class Chart extends React.Component {
   constructor(props) {
@@ -22,11 +22,27 @@ class Chart extends React.Component {
   }
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
+    this.props.analyticsData();
   }
- 
+  /*---> TODO : Refactor this func*/
+  func = (chart) => {
+    let parentChartCount = 0;
+    let analytics = this.props.analytics;
+    let exp = this.props.chart.experiments
+    if (this.props.analytics.length != 0) {
+      for (let i = 0; i < exp.length;i++) {
+        let matchingExperiment = exp[i].metadata.name
+        for (let i = 0; i< analytics.length;i++) {
+          let matchingEvent = analytics[i]
+          if(matchingExperiment == matchingEvent.Label)
+            parentChartCount = parentChartCount + parseInt(matchingEvent.Count)
+        }
+      }
+    }
+    return parentChartCount
+}
   renderCharts = () => {
     let i = 0;
-    
     let displayName = this.props.chart.spec.displayName;
     return (
       <div>
@@ -35,6 +51,9 @@ class Chart extends React.Component {
       install_button_text="INSTALL ALL EXPERIMENTS" 
       istory = {this.props.history}
       charts={this.props.chart} 
+      CountMessage="Total experiments run count"
+      ChartCount={this.func()}
+      analytics={this.props.analytics}
       displayName={displayName} 
       name={this.props.chart.spec.displayName} 
       isCollapsed={false} 
@@ -68,7 +87,6 @@ class Chart extends React.Component {
 
         <div className="chart-page-content">
           <div className="chart-page-header">
-
             <div className="chart-page-nav-back-container">
               <div className="nav-back-icon-container" onClick={this.handleNavHome}>
                 <IconContext.Provider value={{ color: "#004ED6", size: '0.7em' }}>
@@ -79,13 +97,11 @@ class Chart extends React.Component {
                 <h3 className="chart-page-title">{this.props.chart.spec.displayName}</h3>
               </div>
             </div>
-
             <div className="chart-page-header-breacrumbs-container">
               <div className="breadcrumbs">
                 <Link to={'/'}><span className="breadcrumb-text">Home</span></Link> > <span className="breadcrumb-text">{this.props.chart.spec.displayName}</span>
               </div>
               <div className="chart-header-filters-container">
-
               </div>
             </div>
           </div>
@@ -107,12 +123,14 @@ Chart.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    chart: getChartById(state, ownProps.match.params.chartId)
+    chart: getChartById(state, ownProps.match.params.chartId),
+    analytics: state.charts.analytics
   }
 };
 
 const mapDispatchToProps = {
-  loadChartById
+  loadChartById,
+  analyticsData
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Chart));

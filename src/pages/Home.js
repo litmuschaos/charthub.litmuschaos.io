@@ -56,7 +56,9 @@ class Home extends React.Component {
                 Platforms={chart.spec.platforms}
                 text={chart.metadata.annotations.chartDescription}
                 icon={logo + chart.metadata.name +".png"} 
-                id={chart.metadata.name}/>
+                id={chart.metadata.name}
+                analytics={this.props.charts}
+                />
     });
   }
   

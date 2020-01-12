@@ -33,7 +33,7 @@ export class ChartDetails extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.host = null;
   }
-
+  
   handleCollapseContent = () => {
     const isCollapsed = this.state.isCollapsed;
     if (isCollapsed) {
@@ -69,7 +69,7 @@ export class ChartDetails extends React.Component {
     }
     return div
   }
-
+  
   getMaturityOfExperiment = (maturityOfExperiment) => {
     let div = [];
     if (maturityOfExperiment != '') {
@@ -78,7 +78,7 @@ export class ChartDetails extends React.Component {
     }
     return div
   }
-
+  
   handleOpenModal() {
     this.setState({ showModal: true });
   }
@@ -93,12 +93,13 @@ export class ChartDetails extends React.Component {
   renderExperiments = function() {
     let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+this.props.charts.metadata.name+"/icons/"
     let displayName = this.props.charts.metadata.name;
-        const experiments = this.props.charts.experiments.map(
+      const experiments = this.props.charts.experiments.map(
       chart => <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}>
       <ChartCard 
       isCard='true' 
       key={chart.metadata.name} 
       title={chart.spec.displayName} 
+      analytics={this.props.analytics.filter(exp=>exp.Label == chart.metadata.name)}
       chaosType={chart.spec.chaosType}
       chartType={this.props.charts.metadata.name}
       provider={chart.spec.provider.name}
@@ -166,6 +167,8 @@ export class ChartDetails extends React.Component {
           </IconContext.Provider>
         </div>
         <button className="chart-install-button" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
+      </div>
+      <div className="metrics-message">{this.props.CountMessage} : {this.props.ChartCount}
       </div>
       <div className={isCollapsed}>
         <p className="chart-details-text">
