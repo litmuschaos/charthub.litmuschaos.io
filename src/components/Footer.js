@@ -1,4 +1,5 @@
 import * as React from 'react';
+import CountUp from 'react-countup';
 class Footer extends React.Component {
     
     render() {
@@ -6,15 +7,21 @@ class Footer extends React.Component {
          <footer className = "footer">
            <div className="metrics">
                   <div className="installation-metrics">
-                    <div className="metrics-numeric">{this.props.operatorMetrics?this.props.operatorMetrics:0}</div>
+                    <div className="metrics-numeric">
+                    <CountUp start = {0} end = {this.props.operatorMetrics?this.props.operatorMetrics:0} duration={8}></CountUp>
+                    </div>
                     <div className="metrics-label">CHAOS OPERATOR INSTALLED</div>
                   </div>
                   <div className="installation-metrics">
-                  <div className="metrics-numeric">{this.props.totalExperiments?this.props.totalExperiments:0}</div>
+                    <div className="metrics-numeric">
+                    <CountUp start = {0} end = {this.props.totalExperiments?this.props.totalExperiments:0} duration={8}></CountUp>
+                    </div>
                     <div className="metrics-label">TOTAL EXPERIMENTS</div>
                   </div>
                   <div className="installation-metrics">
-                    <div className="metrics-numeric">100</div>
+                    <div className="metrics-numeric">
+                    <CountUp start = {0} end = {this.props.totalExperimentsRun?this.props.totalExperimentsRun:0} duration={8}></CountUp>
+                    </div>
                     <div className="metrics-label">TOTAL EXPERIMENTS RUN</div>
                   </div>
                   {/* <div className="installation-metrics">

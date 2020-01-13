@@ -45,23 +45,29 @@ export class ChartCard extends React.Component {
     }
     return (
       <div className={listOrCardViewClass} onClick={this.props.navTo}>
-        <div className="experiment-count-container">
-         {this.props.experimentCount ?( <span className="experiment-count">
-            {this.props.experimentCount} Chaos Experiments
-          </span>):<div className="experiment-count-container">
-          <div className="experiment-chaos-type" >
-             {this.props.chaosType ?( <i className ="mi-application infra-icon">
-             <span className="chaos-tooltiptext ">
-                    { this.props.chartType=="generic" ? ('Infra-Chaos :- Multiple applications might be impacted')
-                                        :'Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted' }
-             </span>
-             </i>):(<span></span>)}</div>
-             <div className = "analytics"> 
-              { this.props.analytics.length ? this.props.analytics[0].Count : 0} 
-                <span className = "chaos-tooltiptext " >Total Experiment Execution Count</span> 
+          {this.props.experimentCount ? 
+            (<div className="experiment-count-container">
+              <div className = "experiment-analytics"> 
+                {this.props.totalChartExpCount } 
+                <span className = "chaos-tooltiptext">Total Runs</span> 
+              </div> 
+              <div className="experiment-count">
+                {this.props.experimentCount} Chaos Experiments
+              </div>
+            </div>):
+            (<div className="experiment-count-container">
+              <div className = "experiment-analytics"> 
+              {this.props.analytics.length ? this.props.analytics[0].Count : 0} 
+                <span className = "chaos-tooltiptext" >Total Run</span> 
              </div> 
-           </div>}
-        </div>
+              <div className="experiment-chaos-type" >
+                {this.props.chaosType ?
+                (<i className ="mi-application infra-icon">
+                  <span className="chaos-tooltiptext "> 
+                  {this.props.chartType=="generic" ? ('Infra-Chaos :- Multiple applications might be impacted') :'Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted' }
+                  </span></i>):(<span></span>)}
+              </div>  
+            </div>)}        
         {renderChartListContainer()}
       </div>
     )

@@ -68,7 +68,6 @@ class HomeHeader extends React.Component {
           <Link to={process.env.PUBLIC_URL} className="home">
           <h3 className="top-header-home">{<FaHome />}</h3>
           </Link>
-          <div className= "operator-analytics">174</div>
           <input className="top-header-input" placeholder="Search for charts..." value={this.state.searchTerm} onChange={this.handleSearchTermChange} />
           <a href = "https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md" target = "_blank" rel="noopener noreferrer">
           <h3 className="top-header-contribute">Contribute<span className="contribute-icon-container">{/*<FaChevronDown />*/}</span></h3>

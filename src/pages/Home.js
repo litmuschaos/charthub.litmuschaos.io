@@ -56,12 +56,38 @@ class Home extends React.Component {
     var metrics = result.length ? this.props.analytics[0].Count : 0
     return metrics
   }
-  experimentCountRun = () => {
-  
+  experimentCountRun = (chart) => {
+    let totalChartCount = 0;
+    let analytics = this.props.analytics;
+    if (this.props.analytics.length != 0) {
+      for (let i = 0; i < analytics.length;i++) {
+          let matchingEvent = analytics[i]
+          if(matchingEvent.Label != "Chaos-Operator")
+          totalChartCount = totalChartCount + parseInt(matchingEvent.Count)
+      }
+    }
+    return totalChartCount
+  }
+  /*---> TODO : Refactor this func*/
+  totalChartExpCount = (chart) => {
+    let parentChartCount = 0;
+    let analytics = this.props.analytics;
+    
+      let exp = chart.experiments
+      if (this.props.analytics.length != 0) {
+        for (let i = 0; i < exp.length;i++) {
+          let matchingExperiment = exp[i].metadata.name
+          for (let i = 0; i< analytics.length;i++) {
+            let matchingEvent = analytics[i]
+            if(matchingExperiment == matchingEvent.Label)
+              parentChartCount = parentChartCount + parseInt(matchingEvent.Count)
+          }
+        }
+      }
+    return parentChartCount
   }
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
-      // this.storeTotalExperiments(chart)
       let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+chart.metadata.name+"/icons/"
       return <ChartCard
                 isCard={this.state.isGridView}
@@ -76,6 +102,7 @@ class Home extends React.Component {
                 icon={logo + chart.metadata.name +".png"} 
                 id={chart.metadata.name}
                 analytics={this.props.analytics}
+                totalChartExpCount={this.totalChartExpCount(chart)}
                 />
     });
   }
@@ -136,6 +163,7 @@ class Home extends React.Component {
         <Footer
         totalExperiments={this.storeTotalExperiments(this.props.charts)}
         operatorMetrics={this.operatorMetrics()}
+        totalExperimentsRun={this.experimentCountRun()}
         />
         </div>
       </div>
