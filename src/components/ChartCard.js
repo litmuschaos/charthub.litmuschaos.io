@@ -58,7 +58,7 @@ export class ChartCard extends React.Component {
             (<div className="experiment-count-container">
               <div className = "experiment-analytics"> 
               {this.props.analytics.length ? this.props.analytics[0].Count : 0} 
-                <span className = "chaos-tooltiptext" >Total Run</span> 
+                <span className = "chaos-tooltiptext" >Total Runs</span> 
              </div> 
               <div className="experiment-chaos-type" >
                 {this.props.chaosType ?
