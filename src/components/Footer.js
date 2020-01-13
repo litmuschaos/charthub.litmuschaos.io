@@ -1,44 +1,64 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import connect from 'react-redux/es/connect/connect';
-import { withRouter } from 'react-router-dom';
-import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
-import { analyticsData } from "../redux/actions";
-
 class Footer extends React.Component {
-    constructor(props) {
-        super();
-    }
-    componentDidMount() {
-        this.props.analyticsData();
-    }
+    
     render() {
         return (
-            <MDBFooter color="unique-color-dark" className="page-footer font-small pt-0">
-            <div style={{ backgroundColor: "#23232A" }}>
-              <MDBContainer fluid className="text-center text-md-left">
-                <MDBRow className="py-4 d-flex align-items-center">
-                  <MDBCol md="6" lg="5" className="text-center text-md-left mb-4 mb-md-0">
-                    <h6 className="mb-0 white-text">
-                      Get connected with us on social networks!
-                    </h6>
-                  </MDBCol>
-                </MDBRow>
-              </MDBContainer>
-            </div>
-            </MDBFooter>
+         <footer className = "footer">
+           <div className="metrics">
+                  <div className="installation-metrics">
+                    <div className="metrics-numeric">{this.props.operatorMetrics?this.props.operatorMetrics:0}</div>
+                    <div className="metrics-label">CHAOS OPERATOR INSTALLED</div>
+                  </div>
+                  <div className="installation-metrics">
+                  <div className="metrics-numeric">{this.props.totalExperiments?this.props.totalExperiments:0}</div>
+                    <div className="metrics-label">TOTAL EXPERIMENTS</div>
+                  </div>
+                  <div className="installation-metrics">
+                    <div className="metrics-numeric">100</div>
+                    <div className="metrics-label">TOTAL EXPERIMENTS RUN</div>
+                  </div>
+                  {/* <div className="installation-metrics">
+                    <div className="metrics-numeric">600</div>
+                    <div className="metrics-label">GITHUB STARS</div>
+                  </div>
+                  <div className="installation-metrics">
+                    <div className="metrics-numeric">1000</div>
+                    <div className="metrics-label">SLACK MEMBERS</div>
+                  </div> */}
+                  
+           </div>
+           <div className = "footer-bottom">
+              <div>{this.func}</div>
+                
+                <div className="copyright">
+                  <div>
+                    <img alt="organization logo" src={process.env.PUBLIC_URL + '/icons/mayadata-white-logo.png'} className="logo-img"/>
+                  </div>
+                  <div className ="copyright-text">
+                  Copyright &copy; 2020 MayaData Inc. 
+                  </div>
+                </div>
+                <div className="links-content">
+                  <span className="link"> 
+                      <a href="https://twitter.com/LitmusChaos" >Twitter</a>
+                  </span>
+                  <span className="link"> 
+                      <a href="https://blog.mayadata.io/tag/litmus" >Blog</a>
+                  </span> 
+                  <span className="link"> 
+                      <a href="https://litmuschaos.io/" >Litmuschaos.io</a>
+                  </span> 
+                  <span className="link"> 
+                      <a href="https://mayadata.io/aboutus" >About Us</a>
+                  </span>
+                </div>
+               
+           </div>
+         </footer>
+        
     )} 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-      analytics: state.charts.analytics
-    }
-  };
   
-  const mapDispatchToProps = {
-    analyticsData
-  };
-  
-  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Footer));
+ export default (Footer);
   
