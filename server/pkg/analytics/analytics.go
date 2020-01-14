@@ -46,8 +46,7 @@ func Handler() {
 // and updates the global JSON object for containing the response
 func UpdateAnalyticsData() error {
 	GAResponseJSONObject = nil
-	key, err := ioutil.ReadFile("/home/daitya/key.json")
-
+	key, err := ioutil.ReadFile("/etc/analytics/auth.json")
 	if err != nil {
 		return fmt.Errorf("Error while getting the auth.json file, err: %s", err)
 	}
@@ -78,7 +77,6 @@ func UpdateAnalyticsData() error {
 			if GAResponse[i][0] != "Chaos-Operator" {
 				count,_ := strconv.ParseInt(object.Count, 10, 64)
 				sum = sum + count
-				println(string(count))
 			}
 			GAResponseJSONObject = append(GAResponseJSONObject, object)
 		}

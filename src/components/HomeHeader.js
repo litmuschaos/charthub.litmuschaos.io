@@ -14,6 +14,7 @@ class HomeHeader extends React.Component {
       searchTerm: ''
     }
   }
+  
   componentDidMount() {
     this.props.analyticsData();
   }
@@ -27,6 +28,7 @@ class HomeHeader extends React.Component {
       ]
     }
   }
+
   renderChartTitle = () => {
     if(!this.props.showHomeText){
       return (
@@ -55,6 +57,7 @@ class HomeHeader extends React.Component {
     this.setState({ searchTerm })
     this.props.filterChartsOnSearch(searchTerm)
   }
+
   render() {
     return (
       <div className="hero-bg"> 
