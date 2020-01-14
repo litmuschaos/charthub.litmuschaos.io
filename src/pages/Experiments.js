@@ -26,7 +26,7 @@ class Experiments extends React.Component {
   }
 
   handleNavHome = () => {
-    this.props.history.push(`/charts/ ${this.props.match.params.chartId}`);
+    this.props.history.push(`/charts/${this.props.match.params.chartId}`);
   }
   func = (chart) => {
     let ChartCount = 0;
