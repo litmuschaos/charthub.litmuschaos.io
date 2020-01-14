@@ -14,7 +14,7 @@ class HomeHeader extends React.Component {
       searchTerm: ''
     }
   }
-  
+
   componentDidMount() {
     this.props.analyticsData();
   }
@@ -94,6 +94,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+  filterChartsOnSearch,
   analyticsData
 };
 

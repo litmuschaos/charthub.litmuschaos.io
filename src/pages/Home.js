@@ -45,18 +45,18 @@ class Home extends React.Component {
     }
   }
   storeTotalExperiments = (chart) => {
-    var temp = 0
+    var totalExpCount = 0
     chart.map((chart)=> {
-      temp = temp + chart.experiments.length
+      totalExpCount = totalExpCount + chart.experiments.length
     })
-    return temp 
+    return totalExpCount 
   }
   operatorMetrics = () => {
     var result = this.props.analytics.filter(exp=>exp.Label == "Chaos-Operator")
     var metrics = result.length ? this.props.analytics[0].Count : 0
     return metrics
   }
-  experimentCountRun = (chart) => {
+  experimentRunCount  = (chart) => {
     let totalChartCount = 0;
     let analytics = this.props.analytics;
     if (this.props.analytics.length != 0) {
@@ -163,7 +163,7 @@ class Home extends React.Component {
         <Footer
         totalExperiments={this.storeTotalExperiments(this.props.charts)}
         operatorMetrics={this.operatorMetrics()}
-        totalExperimentsRun={this.experimentCountRun()}
+        totalExperimentsRun={this.experimentRunCount ()}
         />
         </div>
       </div>

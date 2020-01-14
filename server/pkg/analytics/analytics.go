@@ -20,6 +20,8 @@ const (
 	metrics      = "ga:totalEvents"
 	dimensions   = "ga:eventLabel"
 	filters      = "ga:eventCategory!=key1"
+	base 		 = 10
+	bitSize		 = 64
 )
 
 // GAResponseJSON is the global entity which defines the structure for holding the GA data
@@ -66,7 +68,7 @@ func UpdateAnalyticsData() error {
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
-	var sum int64
+	var chaosOperatorCount int64
 	GAResponse := response.Rows
 	for i := range GAResponse {
 		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" {
@@ -75,15 +77,15 @@ func UpdateAnalyticsData() error {
 				Count: GAResponse[i][1],
 			}
 			if GAResponse[i][0] != "Chaos-Operator" {
-				count,_ := strconv.ParseInt(object.Count, 10, 64)
-				sum = sum + count
+				count,_ := strconv.ParseInt(object.Count, base, bitSize)
+				chaosOperatorCount = chaosOperatorCount + count
 			}
 			GAResponseJSONObject = append(GAResponseJSONObject, object)
 		}
 	}
 	object:= GAResponseJSON{
 		Label: "Total-Count",
-		Count: strconv.FormatInt(sum, 10),
+		Count: strconv.FormatInt(chaosOperatorCount, base),
 	}
 	GAResponseJSONObject = append(GAResponseJSONObject, object)
 	return nil
