@@ -70,14 +70,21 @@ func UpdateAnalyticsData() error {
 	}
 	var chaosOperatorCount int64
 	GAResponse := response.Rows
+	/* TODO --- this for-block needs to be refactored later
+		*/ 
 	for i := range GAResponse {
+		/* TODO --- this if-block needs to be refactored later
+		*/ 
 		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" {
 			object := GAResponseJSON{
 				Label: GAResponse[i][0],
 				Count: GAResponse[i][1],
 			}
 			if GAResponse[i][0] != "Chaos-Operator" {
-				count,_ := strconv.ParseInt(object.Count, base, bitSize)
+				count, err := strconv.ParseInt(object.Count, base, bitSize)
+				if err != nil {
+					return fmt.Errorf("Error while converting count to string, err: %s", err)
+				}
 				chaosOperatorCount = chaosOperatorCount + count
 			}
 			GAResponseJSONObject = append(GAResponseJSONObject, object)
