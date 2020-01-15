@@ -40,7 +40,7 @@ class Chart extends React.Component {
       }
     }
     return parentChartCount
-}
+  }
   renderCharts = () => {
     let i = 0;
     let displayName = this.props.chart.spec.displayName;
@@ -49,7 +49,7 @@ class Chart extends React.Component {
       <ChartDetails 
       key={i++} 
       install_button_text="INSTALL ALL EXPERIMENTS" 
-      istory = {this.props.history}
+      history = {this.props.history}
       charts={this.props.chart} 
       CountMessage="Total experiments run count"
       ChartCount={this.func()}

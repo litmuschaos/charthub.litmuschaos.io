@@ -142,14 +142,15 @@ export class ChartDetails extends React.Component {
       );
     }
   }
+
   getFilePath() {
     console.log(this.props.charts.spec.displayName)
   }
 
-
   handleCloseModal() {
     this.setState({ showModal: false });
   }
+
   render() {
     const isCollapsed = classNames({
       'chart-details-content': true,
@@ -218,14 +219,7 @@ export class ChartDetails extends React.Component {
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
       <div>{this.props.charts.experiments===null? "":this.showCards(true)}</div>
-      
-    
       </div>
-      
-
-
-
-
     )
   }
 }
