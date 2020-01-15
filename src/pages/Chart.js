@@ -40,7 +40,7 @@ class Chart extends React.Component {
       }
     }
     return parentChartCount
-}
+  }
   renderCharts = () => {
     let i = 0;
     let displayName = this.props.chart.spec.displayName;

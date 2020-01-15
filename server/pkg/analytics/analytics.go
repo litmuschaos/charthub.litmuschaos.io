@@ -3,6 +3,7 @@ package analytics
 import (
 	"fmt"
 	"io/ioutil"
+	"strconv"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -18,6 +19,9 @@ const (
 	endDate      = "today"
 	metrics      = "ga:totalEvents"
 	dimensions   = "ga:eventLabel"
+	filters      = "ga:eventCategory!=key1"
+	base 		 = 10
+	bitSize		 = 64
 )
 
 // GAResponseJSON is the global entity which defines the structure for holding the GA data
@@ -25,6 +29,7 @@ type GAResponseJSON struct {
 	Label string
 	Count string
 }
+
 // GAResponseJSONObject is the array of GAResponse struct
 var GAResponseJSONObject []GAResponseJSON
 
@@ -59,17 +64,36 @@ func UpdateAnalyticsData() error {
 	if err != nil {
 		return fmt.Errorf("Error while setting up NewClient, err: %s", err)
 	}
-	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, metrics).Dimensions(dimensions).Do()
+	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, metrics).Dimensions(dimensions).Filters(filters).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
+	var chaosOperatorCount int64
 	GAResponse := response.Rows
+	/* TODO --- this for-block needs to be refactored later
+		*/ 
 	for i := range GAResponse {
-		object := GAResponseJSON{
-			Label: GAResponse[i][0],
-			Count: GAResponse[i][1],
+		/* TODO --- this if-block needs to be refactored later
+		*/ 
+		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" {
+			object := GAResponseJSON{
+				Label: GAResponse[i][0],
+				Count: GAResponse[i][1],
+			}
+			if GAResponse[i][0] != "Chaos-Operator" {
+				count, err := strconv.ParseInt(object.Count, base, bitSize)
+				if err != nil {
+					return fmt.Errorf("Error while converting count to string, err: %s", err)
+				}
+				chaosOperatorCount = chaosOperatorCount + count
+			}
+			GAResponseJSONObject = append(GAResponseJSONObject, object)
 		}
-		GAResponseJSONObject = append(GAResponseJSONObject, object)
 	}
+	object:= GAResponseJSON{
+		Label: "Total-Count",
+		Count: strconv.FormatInt(chaosOperatorCount, base),
+	}
+	GAResponseJSONObject = append(GAResponseJSONObject, object)
 	return nil
 }

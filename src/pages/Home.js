@@ -5,13 +5,14 @@ import { withRouter } from 'react-router-dom';
 
 import HomeHeader from '../components/HomeHeader';
 import HomeFilter from '../components/HomeFilter';
+import Footer from '../components/Footer';
 import { ChartCard } from '../components/ChartCard';
 
 import { IconContext } from "react-icons";
 import { FaList, FaArrowUp, FaArrowDown, FaFilter } from 'react-icons/fa';
 
 import { getChartList } from "../redux/selectors";
-import { loadCharts } from "../redux/actions";
+import { loadCharts, analyticsData } from "../redux/actions";
 
 class Home extends React.Component {
   constructor() {
@@ -23,12 +24,14 @@ class Home extends React.Component {
     this.state = {
       showFilters: !isMobile,
       isGridView: true, 
-      sortDesc: true
+      sortDesc: true,
+      expTotal:0,
       
     }
   }
   componentDidMount() {
     this.props.loadCharts()
+    this.props.analyticsData()
   }
   handleNavToChart = (chartName) => {
     this.props.history.push(`/charts/${chartName}`);
@@ -41,7 +44,48 @@ class Home extends React.Component {
       this.setState({ showFilters: true });
     }
   }
-
+  storeTotalExperiments = (chart) => {
+    var totalExpCount = 0
+    chart.map((chart)=> {
+      totalExpCount = totalExpCount + chart.experiments.length
+    })
+    return totalExpCount 
+  }
+  operatorMetrics = () => {
+    var result = this.props.analytics.filter(exp=>exp.Label == "Chaos-Operator")
+    var metrics = result.length ? this.props.analytics[0].Count : 0
+    return metrics
+  }
+  experimentRunCount  = (chart) => {
+    let totalChartCount = 0;
+    let analytics = this.props.analytics;
+    if (this.props.analytics.length != 0) {
+      for (let i = 0; i < analytics.length;i++) {
+          let matchingEvent = analytics[i]
+          if(matchingEvent.Label != "Chaos-Operator")
+          totalChartCount = totalChartCount + parseInt(matchingEvent.Count)
+      }
+    }
+    return totalChartCount
+  }
+  /*---> TODO : Refactor this func*/
+  totalChartExpCount = (chart) => {
+    let parentChartCount = 0;
+    let analytics = this.props.analytics;
+    
+      let exp = chart.experiments
+      if (this.props.analytics.length != 0) {
+        for (let i = 0; i < exp.length;i++) {
+          let matchingExperiment = exp[i].metadata.name
+          for (let i = 0; i< analytics.length;i++) {
+            let matchingEvent = analytics[i]
+            if(matchingExperiment == matchingEvent.Label)
+              parentChartCount = parentChartCount + parseInt(matchingEvent.Count)
+          }
+        }
+      }
+    return parentChartCount
+  }
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
       let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+chart.metadata.name+"/icons/"
@@ -57,7 +101,8 @@ class Home extends React.Component {
                 text={chart.metadata.annotations.chartDescription}
                 icon={logo + chart.metadata.name +".png"} 
                 id={chart.metadata.name}
-                analytics={this.props.charts}
+                analytics={this.props.analytics}
+                totalChartExpCount={this.totalChartExpCount(chart)}
                 />
     });
   }
@@ -81,8 +126,7 @@ class Home extends React.Component {
     } else {
       gridOrListIcon = <FaList onClick={this.switchView}/>
     }
-    
-    
+        
     return(
       <div className="home-container">
         <HomeHeader showHomeText={true}/>
@@ -115,6 +159,13 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
+        <div className="footer-content">
+        <Footer
+        totalExperiments={this.storeTotalExperiments(this.props.charts)}
+        operatorMetrics={this.operatorMetrics()}
+        totalExperimentsRun={this.experimentRunCount ()}
+        />
+        </div>
       </div>
     );
   }
@@ -126,18 +177,19 @@ Home.propTypes = {
   }).isRequired
 };
 
-const mapDispatchToProps = {
-  loadCharts
-};
-
 const mapStateToProps = (state, ownProps) => {
   const sort = {
     isAsc: false
   }
   return {
     charts: getChartList(state, sort),
-    sort
+    sort,
+    analytics : state.charts.analytics
   }
+};
+const mapDispatchToProps = {
+  loadCharts,
+  analyticsData
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
