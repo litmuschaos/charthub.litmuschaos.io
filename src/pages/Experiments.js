@@ -32,7 +32,7 @@ class Experiments extends React.Component {
     let ChartCount = 0;
     let analytics = this.props.analytics;
     let count = this.props.analytics.filter(exp=>exp.Label == chart.spec.displayName)[0]
-    return (count != undefined ? count.Count:"")
+    return (count != undefined ? count.Count:"0")
   }
   renderCharts = () => {
     let i=0;
@@ -49,7 +49,7 @@ class Experiments extends React.Component {
    install_button_text="INSTALL EXPERIMENT" 
    charts={chart} 
    analytics={this.props.analytics}
-   CountMessage="Total experiment run"
+   CountMessage="Total runs"
    ChartCount={this.func(chart)}
    displayName={displayName}  
    name={chart.spec.displayName} 
