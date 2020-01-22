@@ -29,7 +29,7 @@ import (
 	"github.com/litmuschaos/charthub.litmuschaos.io/server/controller/handler"
 )
 
-const Time_Interval = 6 * time.Hour
+const TimeInterval = 1 * time.Hour
 
 type GitConfig struct {
 	RepositoryName string
@@ -54,7 +54,7 @@ func Trigger() {
 		if err != nil {
 			log.Error(err)
 		}
-		time.Sleep(Time_Interval)
+		time.Sleep(TimeInterval)
 	}
 }
 
