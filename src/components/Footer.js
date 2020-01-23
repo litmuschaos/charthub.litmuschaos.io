@@ -1,5 +1,4 @@
 import * as React from 'react';
-import CountUp from 'react-countup';
 class Footer extends React.Component {
     
     render() {
@@ -8,27 +7,29 @@ class Footer extends React.Component {
            <div className="metrics">
                   <div className="installation-metrics">
                     <div className="metrics-numeric">
-                    <CountUp start = {0} end = {this.props.operatorMetrics?this.props.operatorMetrics:0} duration={8}></CountUp>
+                    {this.props.operatorMetrics?this.props.operatorMetrics:0}
                     </div>
                     <div className="metrics-label">CHAOS OPERATOR INSTALLED</div>
                   </div>
                   <div className="installation-metrics">
                     <div className="metrics-numeric">
-                    <CountUp start = {0} end = {this.props.totalExperiments?this.props.totalExperiments:0} duration={8}></CountUp>
+                    {this.props.totalExperiments?this.props.totalExperiments:0}
                     </div>
                     <div className="metrics-label">TOTAL EXPERIMENTS</div>
                   </div>
                   <div className="installation-metrics">
                     <div className="metrics-numeric">
-                    <CountUp start = {0} end = {this.props.totalExperimentsRun?this.props.totalExperimentsRun:0} duration={8}></CountUp>
+                    {this.props.totalExperimentsRun?this.props.totalExperimentsRun:0}
                     </div>
                     <div className="metrics-label">TOTAL EXPERIMENTS RUN</div>
                   </div>
-                  {/* <div className="installation-metrics">
-                    <div className="metrics-numeric">600</div>
+                  <div className="installation-metrics">
+                    <div className="metrics-numeric">
+                    {this.props.githubStars?this.props.githubStars:0}
+                    </div>
                     <div className="metrics-label">GITHUB STARS</div>
                   </div>
-                  <div className="installation-metrics">
+                  {/* <div className="installation-metrics">
                     <div className="metrics-numeric">1000</div>
                     <div className="metrics-label">SLACK MEMBERS</div>
                   </div> */}

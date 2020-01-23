@@ -12,7 +12,7 @@ import { IconContext } from "react-icons";
 import { FaList, FaArrowUp, FaArrowDown, FaFilter } from 'react-icons/fa';
 
 import { getChartList } from "../redux/selectors";
-import { loadCharts, analyticsData } from "../redux/actions";
+import { loadCharts, analyticsData, githubData } from "../redux/actions";
 
 class Home extends React.Component {
   constructor() {
@@ -32,6 +32,7 @@ class Home extends React.Component {
   componentDidMount() {
     this.props.loadCharts()
     this.props.analyticsData()
+    this.props.githubData()
   }
   handleNavToChart = (chartName) => {
     this.props.history.push(`/charts/${chartName}`);
@@ -51,11 +52,26 @@ class Home extends React.Component {
     })
     return totalExpCount 
   }
+  addMetricsSuffix = (num) => {
+    
+    if (num > 1000000) {
+      let suffix = "M+"
+      let k1 = ((num*1.0)/ 1000000).toFixed(1)
+      return (k1 + suffix)
+    } else if (num > 1000) {
+      let suffix = "K+"
+      let k1 = ((num*1.0)/ 1000).toFixed(1)
+      return(k1 + suffix)
+     } else {
+      return (num+"")
+     }
+  }
   operatorMetrics = () => {
     var result = this.props.analytics.filter(exp=>exp.Label == "Chaos-Operator")
-    var metrics = result.length ? this.props.analytics[0].Count : 0
-    return metrics
+    var metrics = result.length ? this.props.analytics[0].Count : "0"
+    return this.addMetricsSuffix(parseInt(metrics,10)) 
   }
+  
   /*---> TODO : Refactor this func*/
   totalChartExpCount = (chart) => {
     let parentChartCount = 0;
@@ -72,8 +88,9 @@ class Home extends React.Component {
           }
         }
       }
-    return parentChartCount
+    return this.addMetricsSuffix(parseInt(parentChartCount,10))
   }
+  
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
       let logo = "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"+chart.metadata.name+"/icons/"
@@ -114,7 +131,6 @@ class Home extends React.Component {
     } else {
       gridOrListIcon = <FaList onClick={this.switchView}/>
     }
-        
     return(
       <div className="home-container">
         <HomeHeader showHomeText={true}/>
@@ -151,7 +167,8 @@ class Home extends React.Component {
         <Footer
         totalExperiments={this.storeTotalExperiments(this.props.charts)}
         operatorMetrics={this.operatorMetrics()}
-        totalExperimentsRun={this.props.analytics.length ? this.props.analytics[this.props.analytics.length-1].Count :"0"}
+        totalExperimentsRun={this.props.analytics.length ? this.addMetricsSuffix(parseInt(this.props.analytics[this.props.analytics.length-1].Count)) :"0"}
+        githubStars={this.props.githubjson !== undefined? this.addMetricsSuffix(parseInt(this.props.githubjson.stargazers_count,10)):""}
         />
         </div>
       </div>
@@ -172,12 +189,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     charts: getChartList(state, sort),
     sort,
-    analytics : state.charts.analytics
+    analytics : state.charts.analytics,
+    githubjson : state.charts.githubdata,
   }
 };
 const mapDispatchToProps = {
   loadCharts,
-  analyticsData
+  analyticsData,
+  githubData,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

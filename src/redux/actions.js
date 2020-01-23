@@ -1,4 +1,4 @@
-import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, LOAD_ANALYTICS_DATA } from "./actionTypes";
+import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, LOAD_ANALYTICS_DATA, LOAD_GITHUB_STARS } from "./actionTypes";
 
 var apiEnpoint =  window.location.hostname.includes('localhost')?'http://localhost:8080':'/api';
 export const loadCharts = () => dispatch => {
@@ -36,5 +36,16 @@ export const analyticsData = () => dispatch => {
   })
   .then(function(data){
     dispatch({type: LOAD_ANALYTICS_DATA, data})
+  });
+};
+
+export const githubData = () => (dispatch) => {
+  fetch(`https://api.github.com/repos/litmuschaos/litmus`)
+  .then(function (response) {
+    return response.json();
+
+  })
+  .then(function(data){
+    dispatch({type: LOAD_GITHUB_STARS, data})
   });
 };

@@ -28,11 +28,25 @@ class Experiments extends React.Component {
   handleNavHome = () => {
     this.props.history.push(`/charts/${this.props.match.params.chartId}`);
   }
+  addMetricsSuffix = (num) => {
+    
+    if (num > 1000000) {
+      let suffix = "M+"
+      let k1 = ((num*1.0)/ 1000000).toFixed(1)
+      return (k1 + suffix)
+    } else if (num > 1000) {
+      let suffix = "K+"
+      let k1 = ((num*1.0)/ 1000).toFixed(1)
+      return(k1 + suffix)
+     } else {
+      return (num+"")
+     }
+  }
   func = (chart) => {
     let ChartCount = 0;
     let analytics = this.props.analytics;
     let count = this.props.analytics.filter(exp=>exp.Label == chart.spec.displayName)[0]
-    return (count != undefined ? count.Count:"0")
+    return (count != undefined ? this.addMetricsSuffix(parseInt(count.Count,10)):"0")
   }
   renderCharts = () => {
     let i=0;

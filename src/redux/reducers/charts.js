@@ -1,4 +1,4 @@
-import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, FILTER_CHARTS_BY_FILTERS, LOAD_ANALYTICS_DATA} from "../actionTypes";
+import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, FILTER_CHARTS_BY_FILTERS, LOAD_ANALYTICS_DATA, LOAD_GITHUB_STARS} from "../actionTypes";
 
 const initialState = {
   charts: [],
@@ -78,6 +78,13 @@ export default function(state = initialState, action) {
         analytics: action.data
       }
     }
+    case LOAD_GITHUB_STARS:{
+      return {
+        ...state,
+        githubdata:action.data
+      }
+    }
+
     default:
       return state;
   }

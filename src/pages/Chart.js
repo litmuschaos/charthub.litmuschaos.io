@@ -24,6 +24,20 @@ class Chart extends React.Component {
     this.props.loadChartById(this.props.match.params.chartId)
     this.props.analyticsData();
   }
+  addMetricsSuffix = (num) => {
+    
+    if (num > 1000000) {
+      let suffix = "M+"
+      let k1 = ((num*1.0)/ 1000000).toFixed(1)
+      return (k1 + suffix)
+    } else if (num > 1000) {
+      let suffix = "K+"
+      let k1 = ((num*1.0)/ 1000).toFixed(1)
+      return(k1 + suffix)
+     } else {
+      return (num+"")
+     }
+  }
   /*---> TODO : Refactor this func*/
   func = (chart) => {
     let parentChartCount = 0;
@@ -39,7 +53,7 @@ class Chart extends React.Component {
         }
       }
     }
-    return parentChartCount
+    return this.addMetricsSuffix(parseInt(parentChartCount,10))
   }
   renderCharts = () => {
     let i = 0;
