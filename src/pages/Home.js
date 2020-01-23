@@ -56,18 +56,6 @@ class Home extends React.Component {
     var metrics = result.length ? this.props.analytics[0].Count : 0
     return metrics
   }
-  experimentRunCount  = (chart) => {
-    let totalChartCount = 0;
-    let analytics = this.props.analytics;
-    if (this.props.analytics.length != 0) {
-      for (let i = 0; i < analytics.length;i++) {
-          let matchingEvent = analytics[i]
-          if(matchingEvent.Label != "Chaos-Operator")
-          totalChartCount = totalChartCount + parseInt(matchingEvent.Count)
-      }
-    }
-    return totalChartCount
-  }
   /*---> TODO : Refactor this func*/
   totalChartExpCount = (chart) => {
     let parentChartCount = 0;
@@ -163,7 +151,7 @@ class Home extends React.Component {
         <Footer
         totalExperiments={this.storeTotalExperiments(this.props.charts)}
         operatorMetrics={this.operatorMetrics()}
-        totalExperimentsRun={this.experimentRunCount ()}
+        totalExperimentsRun={this.props.analytics.length ? this.props.analytics[this.props.analytics.length-1].Count :"0"}
         />
         </div>
       </div>
