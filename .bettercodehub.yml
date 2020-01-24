@@ -1,0 +1,13 @@
+component_depth: 3
+languages: 
+- javascript
+- go
+exclude :
+- /.idea/.*
+- /config/.*
+- /nginx/.*
+- /node_modules/.*
+- /public/.*
+- /scripts/.*
+- /src/.*
+- /server/vendor/.*

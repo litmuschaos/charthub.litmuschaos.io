@@ -22,6 +22,24 @@ const customStyles = {
   }
 };
 
+
+class UsesExplanation extends React.Component {
+  constructor(props) {
+    super();
+  }
+  render() {
+    return (
+      <div className="d-flex item-block">
+        <i className={this.props.classCSS}></i>  
+        <div className="d-flex flex-column items"> 
+          {this.props.displaylabel != "" ? (<span className="uses-explanation-title">(this.props.displaylabel)</span>) : ""}
+          {this.props.displaytext}
+        </div>
+      </div>
+    )
+  }
+}
+
 export class ChartDetails extends React.Component {
   constructor(props) {
     super();
@@ -192,36 +210,10 @@ export class ChartDetails extends React.Component {
         </div>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
         <div className="chart-details-uses-explanation">
-          <div className="d-flex item-block">
-            <i className="mi-link dark-gray"></i>  
-            <div className="d-flex flex-column items"> 
-              <span className="uses-explanation-title"> Useful links</span>
-              {this.createLink(this.props.charts.spec.links.filter(link=>link.name!="Video"))}
-            </div>
-          </div>
-          <div className="d-flex item-block"> 
-            <i className="mi-user dark-gray"></i>
-            <div className="d-flex flex-column items"> 
-              <span className="uses-explanation-title"> Maintainers</span>
-              {this.getMaintainerList(this.props.charts.spec.maintainers)}
-            </div>
-          </div>
-          {this.props.charts.spec.platforms != null &&
-            <div className="d-flex item-block">
-              <i className="mi-container dark-gray"></i>
-              <div className="d-flex flex-column items">
-                {this.getPlatformList(this.props.charts.spec.platforms)}
-              </div>
-            </div>
-            }
-          {this.props.charts.spec.maturity != '' &&
-            <div className="d-flex item-block">
-              <i className="mi-chart-bar-up dark-gray"></i>
-              <div className="d-flex flex-column items">
-                {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}
-              </div>
-            </div>
-            }
+          <UsesExplanation classCSS = "mi-link dark-gray" displaylabel = "Useful Links" displaytext = {this.createLink(this.props.charts.spec.links)}/>
+          <UsesExplanation classCSS = "mi-link dark-gray" displaylabel = "Maintainers" displaytext = {this.getMaintainerList(this.props.charts.spec.maintainers)}/>
+          {this.props.charts.spec.platforms != null && <UsesExplanation classCSS = "mi-container dark-gray" displaylabel = "" displaytext = {this.getPlatformList(this.props.charts.spec.platforms)}/>}
+          {this.props.charts.spec.maturity != '' &&  <UsesExplanation classCSS = "mi-chart-bar-up dark-gray" displaylabel = "" displaytext = {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}/>}
         </div>
       </div>
       <Modal
