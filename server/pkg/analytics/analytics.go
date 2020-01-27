@@ -20,8 +20,8 @@ const (
 	metrics      = "ga:totalEvents"
 	dimensions   = "ga:eventLabel"
 	filters      = "ga:eventCategory!=key1"
-	base 		 = 10
-	bitSize		 = 64
+	base         = 10
+	bitSize      = 64
 )
 
 // GAResponseJSON is the global entity which defines the structure for holding the GA data
@@ -48,7 +48,8 @@ func Handler() {
 // and updates the global JSON object for containing the response
 func UpdateAnalyticsData() error {
 	GAResponseJSONObject = nil
-	key, err := ioutil.ReadFile("/etc/analytics/auth.json")
+	// key, err := ioutil.ReadFile("/etc/analytics/auth.json")
+	key, err := ioutil.ReadFile("/home/daitya/key.json")
 	if err != nil {
 		return fmt.Errorf("Error while getting the auth.json file, err: %s", err)
 	}
@@ -71,11 +72,11 @@ func UpdateAnalyticsData() error {
 	var chaosOperatorCount int64
 	GAResponse := response.Rows
 	/* TODO --- this for-block needs to be refactored later
-		*/ 
+	 */
 	for i := range GAResponse {
 		/* TODO --- this if-block needs to be refactored later
-		*/ 
-		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" && GAResponse[i][0] != "drain-node"{
+		 */
+		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" && GAResponse[i][0] != "drain-node" {
 			object := GAResponseJSON{
 				Label: GAResponse[i][0],
 				Count: GAResponse[i][1],
@@ -90,7 +91,7 @@ func UpdateAnalyticsData() error {
 			GAResponseJSONObject = append(GAResponseJSONObject, object)
 		}
 	}
-	object:= GAResponseJSON{
+	object := GAResponseJSON{
 		Label: "Total-Count",
 		Count: strconv.FormatInt(chaosOperatorCount, base),
 	}

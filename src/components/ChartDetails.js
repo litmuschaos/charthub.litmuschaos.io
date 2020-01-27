@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { Component } from 'react'
+import ReactPlayer from 'react-player';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import { InstallModalContent } from '../components/InstallModalContent';
@@ -6,6 +7,8 @@ import { ChartCard } from '../components/ChartCard';
 import { GoChevronDown } from 'react-icons/go';
 import { IconContext } from "react-icons";
 import { Link } from 'react-router-dom';
+import { rgbToHsl } from 'node-vibrant/lib/util';
+import { VideoModalContent } from './VideoModalContent';
 const ReactDOM = require('react-dom')
 const ReactMarkdown = require('react-markdown')
 const customStyles = {
@@ -26,11 +29,14 @@ export class ChartDetails extends React.Component {
     super();
     this.state = {
       showModal: false,
+      showVideoModal: false,
       isCollapsed: props.isCollapsed,
       charts: props.charts
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleVideoOpenModal = this.handleVideoOpenModal.bind(this);
+    this.handleVideoCloseModal = this.handleVideoCloseModal.bind(this);
     this.host = null;
   }
   
@@ -81,6 +87,12 @@ export class ChartDetails extends React.Component {
   
   handleOpenModal() {
     this.setState({ showModal: true });
+  }
+  handleVideoOpenModal(){ 
+    this.setState({showVideoModal:true});
+  }
+  handleVideoCloseModal() {
+    this.setState({ showVideoModal: false });
   }
 
   handleNavHome = () => {
@@ -172,9 +184,14 @@ export class ChartDetails extends React.Component {
       <div className="metrics-message">{this.props.CountMessage} : {this.props.ChartCount}
       </div>
       <div className={isCollapsed}>
-        <p className="chart-details-text">
-          <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
-        </p>
+        <div className = "chart-details-text-container">
+          <div className="chart-details-text">
+            <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
+          </div>
+          <div className = "tutorial-video-container">
+            {this.props.video!="" && this.props.charts.experiments===null ? (<button className ="tutorial-button" onClick={this.handleVideoOpenModal}><span className = "tutorial-title">Experiment Demo</span> <img className="tutorial-img" src={process.env.PUBLIC_URL + '/assets/maya-icons/play-square.png'}/></button>):("")}
+          </div>
+        </div>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
         <div className="chart-details-uses-explanation">
           <div className="d-flex item-block">
@@ -213,11 +230,21 @@ export class ChartDetails extends React.Component {
         isOpen={this.state.showModal}
         contentLabel="Minimal Modal Example"
         style={customStyles}>
-          
         <InstallModalContent expcrdurl={this.displayLinkCreator()} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.charts.spec.displayName} />
-        
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
+      <Modal
+      isOpen={this.state.showVideoModal}
+      contentLabel="Minimal Modal Example"
+      style={customStyles}>
+        <VideoModalContent
+        video={this.props.video}
+        >
+          
+        </VideoModalContent>
+        <button className="modal-close-button" onClick={this.handleVideoCloseModal}><span className="modal-close rounded"></span></button>
+      </Modal>
+      
       <div>{this.props.charts.experiments===null? "":this.showCards(true)}</div>
       </div>
     )
