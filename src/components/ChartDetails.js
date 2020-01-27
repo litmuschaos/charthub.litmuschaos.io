@@ -198,7 +198,7 @@ export class ChartDetails extends React.Component {
             <i className="mi-link dark-gray"></i>  
             <div className="d-flex flex-column items"> 
               <span className="uses-explanation-title"> Useful links</span>
-              {this.createLink(this.props.charts.spec.links)}
+              {this.createLink(this.props.charts.spec.links.filter(link=>link.name!="Video"))}
             </div>
           </div>
           <div className="d-flex item-block"> 
