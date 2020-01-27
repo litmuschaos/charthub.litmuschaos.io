@@ -47,7 +47,7 @@ func pathParser(path string) ([]byte, error) {
 	return file, nil
 }
 
-//FileHandler takes out the file paths from the query params respectives URLs */
+//FileHandler takes out the file paths from the query params respectives URLs 
 func FileHandler(w http.ResponseWriter, r *http.Request) {
 
 	keys, ok := r.URL.Query()["file"]
@@ -60,8 +60,7 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 	}
-	fmt.Fprintf(w, string(dat))
-
+	fmt.Fprintf(w, string(file))
 }
 
 // GetAnalyticsData gets the data from GA instance
