@@ -7,8 +7,6 @@ export class VideoModalContent extends React.Component {
     super();
     this.state = 
       {value:'', copied:false};
-      
-    
   }
 
   render() {
