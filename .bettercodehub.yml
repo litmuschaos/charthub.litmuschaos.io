@@ -3,15 +3,8 @@ languages:
 - javascript
 - go
 exclude :
-<<<<<<< Updated upstream
-- /.idea/.*
 - /config/.*
 - /nginx/.*
-- /node_modules/.*
-=======
-- /config/.*
-- /nginx/.*
->>>>>>> Stashed changes
 - /public/.*
 - /scripts/.*
 - /src/.*
