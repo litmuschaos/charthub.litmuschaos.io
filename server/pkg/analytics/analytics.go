@@ -77,8 +77,7 @@ func CreateJSONObject(GAResponse [][]string) error {
 }
 
 func getterJWTConfig() (*http.Client, error) {
-	// key, err := ioutil.ReadFile("/etc/analytics/auth.json")
-	key, err := ioutil.ReadFile("/home/daitya/key.json")
+	key, err := ioutil.ReadFile("/etc/analytics/auth.json")
 	if err != nil {
 		return nil, fmt.Errorf("Error while getting the auth.json file, err: %s", err)
 	}
