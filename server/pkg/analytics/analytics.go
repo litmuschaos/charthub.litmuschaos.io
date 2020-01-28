@@ -96,21 +96,20 @@ func getterSVC(httpClient *http.Client) (*analytics.Service, error) {
 	}
 	return svc, nil
 }
-func checkIfError(err error) error {
-	if err != nil {
-		return err
-	}
-	return nil
-}
+
 
 // UpdateAnalyticsData sends the GET request to the GA instance and receives the events' metrics at every t time intervals
 // and updates the global JSON object for containing the response
 func UpdateAnalyticsData() error {
 	GAResponseJSONObject = nil
 	httpClient, err := getterJWTConfig()
-	checkIfError(err)
+	if err != nil {
+		return fmt.Errorf("error while getting HTTPclient, err :%s", err)
+	}
 	svc, err := getterSVC(httpClient)
-	checkIfError(err)
+	if err != nil {
+		return fmt.Errorf("error while getting service account, err :%s", err)
+	}
 	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, metrics).Dimensions(dimensions).Filters(filters).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
