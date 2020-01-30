@@ -34,7 +34,7 @@ type GAResponseJSON struct {
 
 // GAResponseJSONObject is the array of GAResponse struct
 var GAResponseJSONObject []GAResponseJSON
-var chaosOperatorCount int64
+// var chaosOperatorCount int64
 
 // Handler is responsible for the looping the UpdateAnalyticsData()
 func Handler() {
@@ -47,24 +47,27 @@ func Handler() {
 	}
 }
 
-func responseCheck(object GAResponseJSON, label string) error {
+func responseCheck(object GAResponseJSON, label string) (int64, error) {
+	var chaosOperatorCount int64
 	if label != "Chaos-Operator" {
 		count, err := strconv.ParseInt(object.Count, base, bitSize)
 		if err != nil {
-			return fmt.Errorf("Error while converting count to string, err: %s", err)
+			return chaosOperatorCount ,fmt.Errorf("Error while converting count to string, err: %s", err)
 		}
 		chaosOperatorCount = chaosOperatorCount + count
 	}
-	return nil
+	return chaosOperatorCount, nil
 
 }
 
 // CreateJSONObject manufactures GA JSON Object
 func CreateJSONObject(GAResponse [][]string) error {
+	var chaosOperatorCount int64
+	var err error
 	for i := range GAResponse { // TODO --- this for-block needs to be refactored later
 		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" { // TODO --- this if-block needs to be refactored later
 			object := GAResponseJSON{Label: GAResponse[i][0], Count: GAResponse[i][1]}
-			err := responseCheck(object, GAResponse[i][0])
+			chaosOperatorCount, err = responseCheck(object, GAResponse[i][0])
 			if err != nil {
 				return err
 			}
@@ -96,7 +99,6 @@ func getterSVC(httpClient *http.Client) (*analytics.Service, error) {
 	}
 	return svc, nil
 }
-
 
 // UpdateAnalyticsData sends the GET request to the GA instance and receives the events' metrics at every t time intervals
 // and updates the global JSON object for containing the response
