@@ -1,4 +1,4 @@
-import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, FILTER_CHARTS_BY_FILTERS, LOAD_ANALYTICS_DATA, LOAD_GITHUB_STARS} from "../actionTypes";
+import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, FILTER_CHARTS_BY_FILTERS, LOAD_ENGINE_SUCCESS, LOAD_GITHUB_STARS, LOAD_ANALYTICS_DATA} from "../actionTypes";
 
 const initialState = {
   charts: [],
@@ -60,10 +60,8 @@ export default function(state = initialState, action) {
             else {
               charts = [...new Set ([...charts_Provider, ...charts_Categories])];
             }
-               
           }
         })
-
       }
 
       return {
@@ -82,6 +80,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         githubdata:action.data
+      }
+    }
+    case LOAD_ENGINE_SUCCESS :{
+      return {
+        ...state,
+        engine: action.data
       }
     }
     default:

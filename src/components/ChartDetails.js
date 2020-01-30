@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import { InstallModalContent } from '../components/InstallModalContent';
+import { EngineViewerModalContent } from '../components/EngineViewerModalContent';
 import { ChartCard } from '../components/ChartCard';
 import { GoChevronDown } from 'react-icons/go';
 import { IconContext } from "react-icons";
@@ -46,6 +47,7 @@ export class ChartDetails extends React.Component {
     this.state = {
       showModal: false,
       showVideoModal: false,
+      showCEVModal: false,
       isCollapsed: props.isCollapsed,
       charts: props.charts
     };
@@ -53,6 +55,8 @@ export class ChartDetails extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleVideoOpenModal = this.handleVideoOpenModal.bind(this);
     this.handleVideoCloseModal = this.handleVideoCloseModal.bind(this);
+    this.handleOpenCEVModal = this.handleOpenCEVModal.bind(this);
+    this.handleCloseCEVModal = this.handleCloseCEVModal.bind(this);
     this.host = null;
   }
   
@@ -110,6 +114,11 @@ export class ChartDetails extends React.Component {
   handleVideoCloseModal() {
     this.setState({ showVideoModal: false });
   }
+
+  handleOpenCEVModal() {
+    this.setState({ showCEVModal: true });
+  }
+
 
   handleNavHome = () => {
     this.props.history.push('/');
@@ -179,6 +188,10 @@ export class ChartDetails extends React.Component {
     this.setState({ showModal: false });
   }
 
+  handleCloseCEVModal() {
+    this.setState({ showCEVModal: false });
+  }
+
   render() {
     const isCollapsed = classNames({
       'chart-details-content': true,
@@ -200,9 +213,19 @@ export class ChartDetails extends React.Component {
       <div className="metrics-message">{this.props.CountMessage} : {this.props.ChartCount}
       </div>
       <div className={isCollapsed}>
-        <div className = "chart-details-text-container">
-          <div className="chart-details-text">
-            <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
+        <p className="chart-details-text">
+          <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
+          {this.props.charts.experiments===null ? 
+          (<button className="yaml-view-button" onClick={this.handleOpenCEVModal}>View Engine YAML</button>):""}
+        </p>
+        <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
+        <div className="chart-details-uses-explanation">
+          <div className="d-flex item-block">
+            <i className="mi-link dark-gray"></i>  
+            <div className="d-flex flex-column items"> 
+              <span className="uses-explanation-title"> Useful links</span>
+              {this.createLink(this.props.charts.spec.links)}
+            </div>
           </div>
           <div className = "tutorial-video-container">
             {this.props.video!="" && this.props.charts.experiments===null ? (<button className ="tutorial-button" onClick={this.handleVideoOpenModal}><span className = "tutorial-title">Experiment Demo</span> <img className="tutorial-img" src={process.env.PUBLIC_URL + '/icons/play-square.png'}/></button>):("")}
@@ -232,7 +255,15 @@ export class ChartDetails extends React.Component {
         </VideoModalContent>
         <button className="modal-close-button" onClick={this.handleVideoCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
-      
+      <Modal
+        isOpen={this.state.showCEVModal}
+        contentLabel="Minimal Modal Example"
+        style={customStyles}>
+          
+        <EngineViewerModalContent displayName={this.props.charts.spec.displayName} />
+        
+        <button className="modal-close-button" onClick={this.handleCloseCEVModal}><span className="modal-close rounded"></span></button>
+      </Modal>
       <div>{this.props.charts.experiments===null? "":this.showCards(true)}</div>
       </div>
     )

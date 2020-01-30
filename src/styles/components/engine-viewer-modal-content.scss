@@ -1,0 +1,52 @@
+.install-modal-content {
+  width: 894px;
+  padding: 18px 27px 20px 27px;
+  display: flex;
+  flex-direction: column;
+  @include phone {
+    width: auto;
+    padding: 0;
+  }
+  .chart-details-uses-explanation {
+    width: 325px;
+    min-height: 300px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #efefef;
+    padding: 8px 10px;
+    // display: flex;
+    // flex-direction: column;
+    @include phone {
+      width: 100%;
+    }
+     .item-block{
+       margin-top: 10px;
+       margin-bottom: 10px;
+       border-bottom: 1px solid #d5cece;
+       .items{
+         margin-left: 10px;
+         width: 90%
+       }
+       span, a{
+         margin-bottom: 5px;
+         word-wrap: break-word;
+       }
+     }
+     .item-block:last-child{
+      border: none;
+    }
+    
+  }
+  .modal-header {
+    width: 100%;
+    // display: flex;
+    
+    }
+    .modal-header-title-container {
+      margin-left: 10px;
+      .modal-title {
+        margin: 0;
+        font-size: 20px;
+      }
+    }
+  }

@@ -11,7 +11,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 import { getChartById } from "../redux/selectors";
 import {standardizeMetrics} from "../common/addMetrics";
-import { loadChartById, analyticsData } from "../redux/actions";
+import { loadChartById, analyticsData , loadEngineById} from "../redux/actions";
 
 class Experiments extends React.Component {
   constructor(props) {
@@ -24,14 +24,16 @@ class Experiments extends React.Component {
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
     this.props.analyticsData();
+    // http://localhost:8080/chaos?file=charts/generic/container-kill/experiments.yaml
+    this.props.loadEngineById("charts/generic/container-kill")
+    console.log(this.props.engine)
+    
   }
 
   handleNavHome = () => {
     this.props.history.push(`/charts/${this.props.match.params.chartId}`);
   }
   func = (chart) => {
-    let ChartCount = 0;
-    let analytics = this.props.analytics;
     let count = this.props.analytics.filter(exp=>exp.Label == chart.spec.displayName)[0]
     return (count != undefined ? standardizeMetrics(parseInt(count.Count,10)):"0")
   }
@@ -122,13 +124,15 @@ Experiments.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     chart: getChartById(state, ownProps.match.params.chartId),
-    analytics: state.charts.analytics
+    analytics: state.charts.analytics,
+    engine: state.charts.engine,
   }
 };
 
 const mapDispatchToProps = {
   loadChartById,
-  analyticsData
+  analyticsData,
+  loadEngineById,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Experiments));

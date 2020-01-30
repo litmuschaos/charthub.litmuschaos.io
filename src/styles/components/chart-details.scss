@@ -84,6 +84,26 @@
         }
         
       }
+      .yaml-view-button{
+        height: 32px;
+        width: auto;
+        border-radius: 4px;
+        background-color: gray;
+        border: 3px solid gray;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.5s;
+        @include phone {
+          width: auto;
+          display: none;
+        }
+
+        &:hover {
+          color: black;
+          background-color: white;
+        }
+      }
     }
 
     .chart-details-uses-explanation {

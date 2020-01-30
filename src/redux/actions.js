@@ -1,4 +1,4 @@
-import { LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, FILTER_CHARTS_BY_FILTERS, LOAD_ANALYTICS_DATA, LOAD_GITHUB_STARS} from "./actionTypes";
+import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, LOAD_ANALYTICS_DATA, LOAD_GITHUB_STARS, LOAD_ENGINE_SUCCESS } from "./actionTypes";
 
 var apiEnpoint =  window.location.hostname.includes('localhost')?'http://localhost:8080':'/api';
 export const loadCharts = () => dispatch => {
@@ -18,6 +18,16 @@ export const loadChartById = (chartId) => (dispatch) => {
   })
   .then(function(data) {
     dispatch({ type: LOAD_CHART_SUCCESS, data })
+  });
+};
+
+export const loadEngineById = (expId) => (dispatch) => {
+  fetch(`${apiEnpoint}/chaos?file=${expId}/engine.yaml`)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    dispatch({ type: LOAD_ENGINE_SUCCESS, data })
   });
 };
 
