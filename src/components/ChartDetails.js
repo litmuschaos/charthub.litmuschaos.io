@@ -189,7 +189,7 @@ export class ChartDetails extends React.Component {
             <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
           </div>
           <div className = "tutorial-video-container">
-            {this.props.video!="" && this.props.charts.experiments===null ? (<button className ="tutorial-button" onClick={this.handleVideoOpenModal}><span className = "tutorial-title">Experiment Demo</span> <img className="tutorial-img" src={process.env.PUBLIC_URL + '/assets/maya-icons/play-square.png'}/></button>):("")}
+            {this.props.video!="" && this.props.charts.experiments===null ? (<button className ="tutorial-button" onClick={this.handleVideoOpenModal}><span className = "tutorial-title">Experiment Demo</span> <img className="tutorial-img" src={process.env.PUBLIC_URL + '/icons/play-square.png'}/></button>):("")}
           </div>
         </div>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
@@ -235,12 +235,10 @@ export class ChartDetails extends React.Component {
       </Modal>
       <Modal
       isOpen={this.state.showVideoModal}
-      contentLabel="Minimal Modal Example"
+      contentLabel="Video Modal Example"
       style={customStyles}>
         <VideoModalContent
-        video={this.props.video}
-        >
-          
+        video={this.props.video}>
         </VideoModalContent>
         <button className="modal-close-button" onClick={this.handleVideoCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
