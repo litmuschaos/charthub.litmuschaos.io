@@ -57,6 +57,7 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 	fileContent, err := pathParser(string(filePath[0]))
 	if err != nil {
 		log.Error(err)
+		fmt.Fprint(w, "file content parsing error, err : "+ err.Error())
 	}
 	fmt.Fprintf(w, string(fileContent))
 }
@@ -68,6 +69,7 @@ func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 		responseStatusCode = 500
+		fmt.Fprint(w, "unable to get analytics data, err : "+ err.Error())
 	}
 	writeHeaders(&w, responseStatusCode)
 	w.Write(out)
@@ -81,6 +83,7 @@ func GetChart(w http.ResponseWriter, r *http.Request) {
 	responseStatusCode := 200
 	if err != nil {
 		responseStatusCode = 500
+		fmt.Fprint(w, "chart retrieval error, err : "+ err.Error())
 	}
 	writeHeaders(&w, responseStatusCode)
 	fmt.Fprint(w, string(response))
@@ -149,10 +152,14 @@ func GetCharts(w http.ResponseWriter, r *http.Request) {
 		chart, err := getYAMLFileContent(chartPathSplitted[len(chartPathSplitted)-1])
 		if err != nil {
 			log.Error(err)
+			fmt.Fprint(w, "file content yaml conversion error, err : "+ err.Error())
 		}
 		charts = append(charts, chart)
 	}
 	response, err := json.Marshal(charts)
+	if err!=nil {
+		fmt.Fprint(w, "chart marshalling error, err : "+ err.Error())
+	}
 	writeHeaders(&w, 200)
 	fmt.Fprint(w, string(response))
 }
