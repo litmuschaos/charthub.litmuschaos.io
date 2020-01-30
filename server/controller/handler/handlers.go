@@ -40,36 +40,36 @@ var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/chaos-ch
 */
 func pathParser(path string) ([]byte, error) {
 	var fileLookedPath = ChaosChartPath + path
-	file, err := ioutil.ReadFile(fileLookedPath)
+	fileContent, err := ioutil.ReadFile(fileLookedPath)
 	if err != nil {
-		return nil, fmt.Errorf("path err %v", err)
+		return nil, fmt.Errorf("unable to read file, error: %v", err)
 	}
-	return file, nil
+	return fileContent, nil
 }
 
 //FileHandler takes out the file paths from the query params respectives URLs 
 func FileHandler(w http.ResponseWriter, r *http.Request) {
 
-	keys, ok := r.URL.Query()["file"]
-	if !ok || len(keys[0]) < 1 {
+	filePath, ok := r.URL.Query()["file"]
+	if !ok || len(filePath[0]) < 1 {
 		return
 	}
-	key := keys[0]
-	var path = string(key)
-	file, err := pathParser(path)
+	fileContent, err := pathParser(string(filePath[0]))
 	if err != nil {
 		log.Error(err)
 	}
-	fmt.Fprintf(w, string(file))
+	fmt.Fprintf(w, string(fileContent))
 }
 
 // GetAnalyticsData gets the data from GA instance
 func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
 	out, err := json.Marshal(analytics.GAResponseJSONObject)
+	responseStatusCode := 200
 	if err != nil {
 		log.Error(err)
+		responseStatusCode = 500
 	}
-	writeHeaders(&w, 200)
+	writeHeaders(&w, responseStatusCode)
 	w.Write(out)
 }
 
