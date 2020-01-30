@@ -7,7 +7,6 @@ import { ChartCard } from '../components/ChartCard';
 import { GoChevronDown } from 'react-icons/go';
 import { IconContext } from "react-icons";
 import { Link } from 'react-router-dom';
-import { rgbToHsl } from 'node-vibrant/lib/util';
 import { VideoModalContent } from './VideoModalContent';
 const ReactDOM = require('react-dom')
 const ReactMarkdown = require('react-markdown')
