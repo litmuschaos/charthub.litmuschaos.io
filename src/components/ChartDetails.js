@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactPlayer from 'react-player';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import { InstallModalContent } from '../components/InstallModalContent';
