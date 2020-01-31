@@ -42,7 +42,6 @@ class Experiments extends React.Component {
       if(experiment.metadata.name === experimentName){
        return experiment;}
     });
-
    let showexperiment = experiment.map(chart => 
    <ChartDetails 
    key={i++} 
@@ -54,6 +53,7 @@ class Experiments extends React.Component {
    displayName={displayName}  
    name={chart.spec.displayName} 
    isCollapsed={false} 
+   video={experiment[0].spec.links[2].url}
    logo={this.state.logo + this.props.chart.metadata.name + "/icons/" + chart.metadata.name +".png"}  
    />)
     return (
@@ -77,6 +77,7 @@ class Experiments extends React.Component {
       if(experiment.metadata.name === experimentName){
        return experiment;}
     });
+
     return (
       <div className="chart-page-container">
         <HomeHeader
