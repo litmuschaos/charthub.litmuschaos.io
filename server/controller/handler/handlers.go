@@ -47,7 +47,32 @@ func pathParser(path string) ([]byte, error) {
 	return fileContent, nil
 }
 
-//FileHandler takes out the file paths from the query params respectives URLs
+func convert(i interface{}) interface{} {
+	switch x := i.(type) {
+	case map[interface{}]interface{}:
+		m2 := map[string]interface{}{}
+		for k, v := range x {
+			m2[k.(string)] = convert(v)
+		}
+		return m2
+	case []interface{}:
+		for i, v := range x {
+			x[i] = convert(v)
+		}
+	}
+	return i
+}
+func getFileFromLink(keys []string) ([]byte, error){
+	key := keys[0]
+	var path = string(key)
+	file, err := pathParser(path)
+	if err != nil {
+		return file, err
+	}
+	return file, nil
+}
+
+//FileHandler takes out the file paths from the query params respectives URLs */
 func FileHandler(w http.ResponseWriter, r *http.Request) {
 
 	filePath, ok := r.URL.Query()["file"]
@@ -59,7 +84,32 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 		log.Error(err)
 		fmt.Fprint(w, "file content parsing error, err : "+err.Error())
 	}
-	fmt.Fprintf(w, string(fileContent))
+	writeHeaders(&w, 200)
+	fmt.Fprintf(w, string(file))
+	
+}
+
+//GetEngineYAML asdsada
+func GetEngineYAML(w http.ResponseWriter, r *http.Request){
+	keys, ok := r.URL.Query()["file"]
+	if !ok || len(keys[0]) < 1 {
+		return
+	}
+	file, err := getFileFromLink(keys)
+	if err!= nil {
+		log.Error(err)
+	}
+	var body interface{}
+	if err := yaml.Unmarshal([]byte(file), &body); err != nil {
+		log.Error(err)
+	}
+	body = convert(body)
+	var b []byte
+	if b, err = json.Marshal(body); err != nil {
+		panic(err)
+	} 
+	writeHeaders(&w, 200)
+	w.Write(b)
 }
 
 // GetAnalyticsData gets the data from GA instance

@@ -23,7 +23,6 @@ class Chart extends React.Component {
   }
   componentDidMount() {
     this.props.loadChartById(this.props.match.params.chartId)
-    console.log(this.props.match.params.chartId)
     this.props.analyticsData();
   }
   /*---> TODO : Refactor this func*/

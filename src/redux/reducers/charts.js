@@ -5,6 +5,7 @@ const initialState = {
   chart: {},
   loadedCharts: [],
   analytics: [],
+  engine: [],
 };
 
 export default function(state = initialState, action) {

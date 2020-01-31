@@ -56,4 +56,16 @@ var routes = Routes{
 		"/analytics",
 		handler.GetAnalyticsData,
 	},
+	Route{
+		"GetAnalyticsData",
+		"GET",
+		"/analytics",
+		handler.GetAnalyticsData,
+	},
+	Route{
+		"GetEngineYaml",
+		"GET",
+		"/engine",
+		handler.GetEngineYAML,
+	},
 }

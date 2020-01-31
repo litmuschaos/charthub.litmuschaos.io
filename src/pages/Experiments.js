@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+// import Json2Yaml from '../common/json2yaml';
 import connect from 'react-redux/es/connect/connect';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -17,17 +18,15 @@ class Experiments extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      logo : "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/"
+      logo : "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/",
     }
   }
   
   componentDidMount() {
-    this.props.loadChartById(this.props.match.params.chartId)
-    this.props.analyticsData();
-    // http://localhost:8080/chaos?file=charts/generic/container-kill/experiments.yaml
-    this.props.loadEngineById("charts/generic/container-kill")
-    console.log(this.props.engine)
     
+    this.props.loadChartById(this.props.match.params.chartId)
+    this.props.analyticsData();    
+    this.props.loadEngineById("charts/"+this.props.match.params.chartId+"/"+this.props.match.params.experimentID)
   }
 
   handleNavHome = () => {
@@ -37,7 +36,7 @@ class Experiments extends React.Component {
     let count = this.props.analytics.filter(exp=>exp.Label == chart.spec.displayName)[0]
     return (count != undefined ? standardizeMetrics(parseInt(count.Count,10)):"0")
   }
-  renderCharts = () => {
+   renderCharts = () => {
     let i=0;
     let displayName = this.props.chart.spec.displayName;
     let experimentName = this.props.match.params.experimentID;
@@ -66,6 +65,7 @@ class Experiments extends React.Component {
   }
 
   render() {
+    // console.log(Json2Yaml(this.props.engine))
     let icon = ""
     if(this.props.chart && this.props.chart.spec) {
       icon = this.state.logo + this.props.chart.metadata.name + "/icons/" + this.props.chart.metadata.name +".png"
