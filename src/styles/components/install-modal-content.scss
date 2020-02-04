@@ -45,22 +45,43 @@
       color: gray;
     }
   }
-  .modal-code {
-    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-    background-color: #E6EDFF;
-    width: 95%;
-    align-self: flex-end;
-    box-sizing: border-box;
-    margin: 15px 20px 20px 0px;
-    padding: 8px 17px 8px 17px;
-    font-size: 15px;
-    @include phone {
-      margin: 10px 10px 10px 0px;
+  .modal-install-code-row {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .modal-code {
+      font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+        background-color: #E6EDFF;
+        width: 95%;
+        align-self: flex-end;
+        box-sizing: border-box;
+        margin: 15px 20px 20px 0px;
+        padding: 8px 17px 8px 17px;
+        font-size: 15px;
+        @include phone {
+            margin: 10px 10px 10px 0px;
+        }
+    }
+    .modal-footer-notes {
+        font-size: 14px;
+        color: #383842;
+        margin-top: 20px;
+    }
+
+    .modal-install-clipboard {
+        padding: 0;
+        background: none;
+        border: none;
     }
   }
-  .modal-footer-notes {
-    font-size: 14px;
-    color: #383842;
-    margin-top: 20px;
-  }
+}
+.react-tiny-popover-container {
+    .modal-install-popover-content {
+        border-style: solid;
+        border-width: 1px;
+        border-color: #b0b0b0;
+        font-size: .9em;
+        padding: 8px 12px 8px 12px;
+    }
 }
