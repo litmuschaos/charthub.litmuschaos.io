@@ -48,7 +48,11 @@ export class InstallModalContent extends React.Component {
           install the Chaos Experiments by following command
         </div>
         <div className="modal-install-code-row">
+<<<<<<< HEAD
           <div className="modal-code">{this.command()}
+=======
+          <div className="modal-code">{this.command()}</div>
+>>>>>>> Add copy to clipboard to InstallModalContent (#36)
           {document.queryCommandSupported("copy") && (
             <Popover
               // Allows the popover to show over the modal
