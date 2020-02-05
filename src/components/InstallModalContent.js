@@ -48,7 +48,7 @@ export class InstallModalContent extends React.Component {
           install the Chaos Experiments by following command
         </div>
         <div className="modal-install-code-row">
-          <div className="modal-code">{this.command()}</div>
+          <div className="modal-code">{this.command()}
           {document.queryCommandSupported("copy") && (
             <Popover
               // Allows the popover to show over the modal
@@ -75,7 +75,7 @@ export class InstallModalContent extends React.Component {
                 <FaCopy />
               </button>
             </Popover>
-          )}
+          )}</div>
         </div>
         <div className="modal-install-instruction">
           <span className="modal-install-instruction-number gray-text-color">
