@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-
 	// Handler is go-routine which synchronously calls the git-ops function UpdateAnalyticsData()
 	go analytics.Handler()
 	// Trigger is go-routine which synchronously calls the git-ops function Trigger()
