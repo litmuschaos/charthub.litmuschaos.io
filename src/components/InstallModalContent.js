@@ -49,10 +49,14 @@ export class InstallModalContent extends React.Component {
         </div>
         <div className="modal-install-code-row">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <div className="modal-code">{this.command()}
 =======
           <div className="modal-code">{this.command()}</div>
 >>>>>>> Add copy to clipboard to InstallModalContent (#36)
+=======
+          <div className="modal-code">{this.command()}
+>>>>>>> copy-button
           {document.queryCommandSupported("copy") && (
             <Popover
               // Allows the popover to show over the modal
