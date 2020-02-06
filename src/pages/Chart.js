@@ -12,6 +12,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 import { getChartById } from "../redux/selectors";
 import { loadChartById, analyticsData } from "../redux/actions";
+import {standardizeMetrics} from "../common/addMetrics";
 
 class Chart extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Chart extends React.Component {
         }
       }
     }
-    return parentChartCount
+    return standardizeMetrics(parseInt(parentChartCount,10))
   }
   renderCharts = () => {
     let i = 0;

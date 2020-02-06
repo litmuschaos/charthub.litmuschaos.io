@@ -12,8 +12,8 @@ import { IconContext } from "react-icons";
 import { FaList, FaArrowUp, FaArrowDown, FaFilter } from 'react-icons/fa';
 
 import { getChartList } from "../redux/selectors";
-import { loadCharts, analyticsData } from "../redux/actions";
-
+import { loadCharts, analyticsData, githubData } from "../redux/actions";
+import {standardizeMetrics} from "../common/addMetrics.js";
 class Home extends React.Component {
   constructor() {
     super();
@@ -32,6 +32,7 @@ class Home extends React.Component {
   componentDidMount() {
     this.props.loadCharts()
     this.props.analyticsData()
+    this.props.githubData()
   }
   handleNavToChart = (chartName) => {
     this.props.history.push(`/charts/${chartName}`);
@@ -54,7 +55,7 @@ class Home extends React.Component {
   operatorMetrics = () => {
     var result = this.props.analytics.filter(exp=>exp.Label == "Chaos-Operator")
     var metrics = result.length ? this.props.analytics[0].Count : 0
-    return metrics
+    return standardizeMetrics(parseInt(metrics,10))
   }
   /*---> TODO : Refactor this func*/
   totalChartExpCount = (chart) => {
@@ -72,7 +73,7 @@ class Home extends React.Component {
           }
         }
       }
-    return parentChartCount
+      return standardizeMetrics(parseInt(parentChartCount,10))
   }
   renderChartGrid = () => {
     return this.props.charts.map((chart) => {
@@ -151,7 +152,8 @@ class Home extends React.Component {
         <Footer
         totalExperiments={this.storeTotalExperiments(this.props.charts)}
         operatorMetrics={this.operatorMetrics()}
-        totalExperimentsRun={this.props.analytics.length ? this.props.analytics[this.props.analytics.length-1].Count :"0"}
+        totalExperimentsRun={this.props.analytics.length ? standardizeMetrics(parseInt(this.props.analytics[this.props.analytics.length-1].Count)) :"0"}
+        githubStars={this.props.githubjson !== undefined? standardizeMetrics(parseInt(this.props.githubjson.stargazers_count,10)):""}
         />
         </div>
       </div>
@@ -172,12 +174,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     charts: getChartList(state, sort),
     sort,
-    analytics : state.charts.analytics
+    analytics : state.charts.analytics,
+    githubjson : state.charts.githubdata,
   }
 };
 const mapDispatchToProps = {
   loadCharts,
-  analyticsData
+  analyticsData,
+  githubData,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
