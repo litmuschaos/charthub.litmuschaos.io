@@ -48,15 +48,7 @@ export class InstallModalContent extends React.Component {
           install the Chaos Experiments by following command
         </div>
         <div className="modal-install-code-row">
-<<<<<<< HEAD
-<<<<<<< HEAD
           <div className="modal-code">{this.command()}
-=======
-          <div className="modal-code">{this.command()}</div>
->>>>>>> Add copy to clipboard to InstallModalContent (#36)
-=======
-          <div className="modal-code">{this.command()}
->>>>>>> copy-button
           {document.queryCommandSupported("copy") && (
             <Popover
               // Allows the popover to show over the modal
@@ -80,7 +72,7 @@ export class InstallModalContent extends React.Component {
                 onClick={this.copyToClipboard}
                 className="modal-install-clipboard"
               >
-                <FaCopy />
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
               </button>
             </Popover>
           )}</div>
