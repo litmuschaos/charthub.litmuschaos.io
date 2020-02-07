@@ -32,7 +32,7 @@ class UsesExplanation extends React.Component {
       <div className="d-flex item-block">
         <i className={this.props.classCSS}></i>  
         <div className="d-flex flex-column items"> 
-          {this.props.displaylabel != "" ? (<span className="uses-explanation-title">(this.props.displaylabel)</span>) : ""}
+          {this.props.displaylabel != "" ? (<span className="uses-explanation-title">{this.props.displaylabel}</span>) : ""}
           {this.props.displaytext}
         </div>
       </div>
