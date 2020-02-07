@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react'
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import { InstallModalContent } from '../components/InstallModalContent';
@@ -6,6 +6,7 @@ import { ChartCard } from '../components/ChartCard';
 import { GoChevronDown } from 'react-icons/go';
 import { IconContext } from "react-icons";
 import { Link } from 'react-router-dom';
+import { VideoModalContent } from './VideoModalContent';
 const ReactDOM = require('react-dom')
 const ReactMarkdown = require('react-markdown')
 const customStyles = {
@@ -21,16 +22,37 @@ const customStyles = {
   }
 };
 
+
+class UsesExplanation extends React.Component {
+  constructor(props) {
+    super();
+  }
+  render() {
+    return (
+      <div className="d-flex item-block">
+        <i className={this.props.classCSS}></i>  
+        <div className="d-flex flex-column items"> 
+          {this.props.displaylabel != "" ? (<span className="uses-explanation-title">{this.props.displaylabel}</span>) : ""}
+          {this.props.displaytext}
+        </div>
+      </div>
+    )
+  }
+}
+
 export class ChartDetails extends React.Component {
   constructor(props) {
     super();
     this.state = {
       showModal: false,
+      showVideoModal: false,
       isCollapsed: props.isCollapsed,
       charts: props.charts
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleVideoOpenModal = this.handleVideoOpenModal.bind(this);
+    this.handleVideoCloseModal = this.handleVideoCloseModal.bind(this);
     this.host = null;
   }
   
@@ -81,6 +103,12 @@ export class ChartDetails extends React.Component {
   
   handleOpenModal() {
     this.setState({ showModal: true });
+  }
+  handleVideoOpenModal(){ 
+    this.setState({showVideoModal:true});
+  }
+  handleVideoCloseModal() {
+    this.setState({ showVideoModal: false });
   }
 
   handleNavHome = () => {
@@ -172,52 +200,39 @@ export class ChartDetails extends React.Component {
       <div className="metrics-message">{this.props.CountMessage} : {this.props.ChartCount}
       </div>
       <div className={isCollapsed}>
-        <p className="chart-details-text">
-          <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
-        </p>
+        <div className = "chart-details-text-container">
+          <div className="chart-details-text">
+            <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
+          </div>
+          <div className = "tutorial-video-container">
+            {this.props.video!="" && this.props.charts.experiments===null ? (<button className ="tutorial-button" onClick={this.handleVideoOpenModal}><span className = "tutorial-title">Experiment Demo</span> <img className="tutorial-img" src={process.env.PUBLIC_URL + '/icons/play-square.png'}/></button>):("")}
+          </div>
+        </div>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
         <div className="chart-details-uses-explanation">
-          <div className="d-flex item-block">
-            <i className="mi-link dark-gray"></i>  
-            <div className="d-flex flex-column items"> 
-              <span className="uses-explanation-title"> Useful links</span>
-              {this.createLink(this.props.charts.spec.links)}
-            </div>
-          </div>
-          <div className="d-flex item-block"> 
-            <i className="mi-user dark-gray"></i>
-            <div className="d-flex flex-column items"> 
-              <span className="uses-explanation-title"> Maintainers</span>
-              {this.getMaintainerList(this.props.charts.spec.maintainers)}
-            </div>
-          </div>
-          {this.props.charts.spec.platforms != null &&
-            <div className="d-flex item-block">
-              <i className="mi-container dark-gray"></i>
-              <div className="d-flex flex-column items">
-                {this.getPlatformList(this.props.charts.spec.platforms)}
-              </div>
-            </div>
-            }
-          {this.props.charts.spec.maturity != '' &&
-            <div className="d-flex item-block">
-              <i className="mi-chart-bar-up dark-gray"></i>
-              <div className="d-flex flex-column items">
-                {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}
-              </div>
-            </div>
-            }
+          <UsesExplanation classCSS = "mi-link dark-gray" displaylabel = "Useful Links" displaytext = {this.createLink(this.props.charts.spec.links)}/>
+          <UsesExplanation classCSS = "mi-link dark-gray" displaylabel = "Maintainers" displaytext = {this.getMaintainerList(this.props.charts.spec.maintainers)}/>
+          {this.props.charts.spec.platforms != null && <UsesExplanation classCSS = "mi-container dark-gray" displaylabel = "" displaytext = {this.getPlatformList(this.props.charts.spec.platforms)}/>}
+          {this.props.charts.spec.maturity != '' &&  <UsesExplanation classCSS = "mi-chart-bar-up dark-gray" displaylabel = "" displaytext = {this.getMaturityOfExperiment(this.props.charts.spec.maturity)}/>}
         </div>
       </div>
       <Modal
         isOpen={this.state.showModal}
         contentLabel="Minimal Modal Example"
         style={customStyles}>
-          
         <InstallModalContent expcrdurl={this.displayLinkCreator()} provider={this.props.charts.spec.provider.name} logo={this.props.logo} display displayName={this.props.charts.spec.displayName} />
-        
         <button className="modal-close-button" onClick={this.handleCloseModal}><span className="modal-close rounded"></span></button>
       </Modal>
+      <Modal
+      isOpen={this.state.showVideoModal}
+      contentLabel="Video Modal Example"
+      style={customStyles}>
+        <VideoModalContent
+        video={this.props.video}>
+        </VideoModalContent>
+        <button className="modal-close-button" onClick={this.handleVideoCloseModal}><span className="modal-close rounded"></span></button>
+      </Modal>
+      
       <div>{this.props.charts.experiments===null? "":this.showCards(true)}</div>
       </div>
     )

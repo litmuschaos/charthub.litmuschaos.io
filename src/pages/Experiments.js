@@ -10,6 +10,7 @@ import { IconContext } from "react-icons";
 import { FaArrowLeft } from 'react-icons/fa';
 
 import { getChartById } from "../redux/selectors";
+import {standardizeMetrics} from "../common/addMetrics";
 import { loadChartById, analyticsData } from "../redux/actions";
 
 class Experiments extends React.Component {
@@ -32,7 +33,7 @@ class Experiments extends React.Component {
     let ChartCount = 0;
     let analytics = this.props.analytics;
     let count = this.props.analytics.filter(exp=>exp.Label == chart.spec.displayName)[0]
-    return (count != undefined ? count.Count:"0")
+    return (count != undefined ? standardizeMetrics(parseInt(count.Count,10)):"0")
   }
   renderCharts = () => {
     let i=0;
@@ -42,7 +43,6 @@ class Experiments extends React.Component {
       if(experiment.metadata.name === experimentName){
        return experiment;}
     });
-
    let showexperiment = experiment.map(chart => 
    <ChartDetails 
    key={i++} 
@@ -54,6 +54,7 @@ class Experiments extends React.Component {
    displayName={displayName}  
    name={chart.spec.displayName} 
    isCollapsed={false} 
+   video={experiment[0].spec.links[2].url}
    logo={this.state.logo + this.props.chart.metadata.name + "/icons/" + chart.metadata.name +".png"}  
    />)
     return (
@@ -77,6 +78,7 @@ class Experiments extends React.Component {
       if(experiment.metadata.name === experimentName){
        return experiment;}
     });
+
     return (
       <div className="chart-page-container">
         <HomeHeader

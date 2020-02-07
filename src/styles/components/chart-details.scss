@@ -54,10 +54,35 @@
       }
     }
 
-    .chart-details-text {
-      width: 733px;
-      @include phone {
+    .chart-details-text-container{
+      .chart-details-text {
         width: auto;
+        @include phone {
+          width: auto;
+        }
+      }
+      .tutorial-video-container{
+        color: #004ED6;
+        .tutorial-title {
+          font-weight: 500;
+          font-size: 15px;
+        }
+        .tutorial-img {
+          height: 12px;
+          width: auto;
+        }
+        .tutorial-button{
+          height: 25px;
+          width: auto;
+          border-radius: 4px;
+          background-color: #d1d2d9;
+          border: 3px solid #d1d2d9;
+          color: black;
+          font-size: 14px;
+          cursor: pointer;
+          transition: 0.5s;
+        }
+        
       }
     }
 
