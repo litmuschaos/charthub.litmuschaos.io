@@ -198,7 +198,7 @@ export class ChartDetails extends React.Component {
       'content-is-collapsed': this.state.isCollapsed,
       'content-is-open': !this.state.isCollapsed
     });
-
+    console.log(this.props)
     return (
       <div className="chart-details-container">
       <div className="chart-details-header">
@@ -213,11 +213,14 @@ export class ChartDetails extends React.Component {
       <div className="metrics-message">{this.props.CountMessage} : {this.props.ChartCount}
       </div>
       <div className={isCollapsed}>
-        <p className="chart-details-text">
-          <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
-          {this.props.charts.experiments===null ? 
-          (<button className="yaml-view-button" onClick={this.handleOpenCEVModal}>View Engine YAML</button>):""}
-        </p>
+        <div className = "chart-details-text-container">
+          <div className="chart-details-text">
+            <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
+          </div>
+          <div className = "tutorial-video-container">
+            {this.props.video!="" && this.props.charts.experiments===null ? (<button className ="tutorial-button" onClick={this.handleVideoOpenModal}><span className = "tutorial-title">Experiment Demo</span> <img className="tutorial-img" src={process.env.PUBLIC_URL + '/icons/play-square.png'}/></button>):("")}
+          </div>
+        </div>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
         <div className="chart-details-uses-explanation">
           <div className="d-flex item-block">

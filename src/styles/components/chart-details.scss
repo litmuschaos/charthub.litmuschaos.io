@@ -98,8 +98,23 @@
           width: auto;
           display: none;
         }
-
-        &:hover {
+      }
+      .tutorial-video-container{
+        color: #004ED6;
+        .tutorial-title {
+          font-weight: 500;
+          font-size: 15px;
+        }
+        .tutorial-img {
+          height: 12px;
+          width: auto;
+        }
+        .tutorial-button{
+          height: 25px;
+          width: auto;
+          border-radius: 4px;
+          background-color: #d1d2d9;
+          border: 3px solid #d1d2d9;
           color: black;
           background-color: white;
         }
