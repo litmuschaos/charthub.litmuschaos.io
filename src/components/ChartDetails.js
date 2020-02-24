@@ -205,7 +205,9 @@ export class ChartDetails extends React.Component {
             <ReactMarkdown source={this.props.charts.spec.categoryDescription} />         
           </div>
           <div className = "tutorial-video-container">
-            {this.props.video!="" && this.props.charts.experiments===null ? (<button className ="tutorial-button" onClick={this.handleVideoOpenModal}><span className = "tutorial-title">Experiment Demo</span> <img className="tutorial-img" src={process.env.PUBLIC_URL + '/icons/play-square.png'}/></button>):("")}
+            {this.props.video!="" && this.props.charts.experiments===null ? (<button className ="tutorial-button" onClick={this.handleVideoOpenModal}>
+              <span className = "tutorial-title">Experiment Demo</span> 
+              <div><img className="tutorial-img" src={process.env.PUBLIC_URL + '/icons/play-square.png'}/></div></button>):("")}
           </div>
         </div>
         <button className="chart-install-button-phone" onClick={this.handleOpenModal}>{this.props.install_button_text}</button>
