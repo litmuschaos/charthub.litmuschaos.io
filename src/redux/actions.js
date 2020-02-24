@@ -1,11 +1,4 @@
-import {
-  FILTER_CHARTS_BY_FILTERS,
-  LOAD_CHART_SUCCESS,
-  LOAD_CHARTS_SUCCESS,
-  FILTER_CHARTS_ON_SEARCH,
-  LOAD_ANALYTICS_DATA,
-  LOAD_ENGINE_SUCCESS
-} from "./actionTypes";
+import { FILTER_CHARTS_BY_FILTERS, LOAD_CHART_SUCCESS, LOAD_CHARTS_SUCCESS, FILTER_CHARTS_ON_SEARCH, LOAD_ANALYTICS_DATA, LOAD_GITHUB_STARS, LOAD_ENGINE_SUCCESS } from "./actionTypes";
 
 var apiEnpoint = window.location.hostname.includes('localhost') ? 'http://localhost:8080' : '/api';
 export const loadCharts = () => dispatch => {
