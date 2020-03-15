@@ -1,5 +1,6 @@
-# charthub.litmuschaos.io  
-Front-end for litmus community charts.
+# Front-end for litmus community charts.
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io?ref=badge_shield)
 
 # Installation
 - Install Golang. Follow the instructions [here](https://golang.org/doc/install).
@@ -38,3 +39,7 @@ You can also run server and client seperately using the commands
 and
 
 ```docker-compose up client```
+
+# License
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io?ref=badge_large)
