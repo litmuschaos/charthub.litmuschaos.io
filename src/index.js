@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import store from './redux/store'
+import store from './redux/store';
 
-const rootElement = document.getElementById('root')
-rootElement.style.width = "100%"
+const rootElement = document.getElementById('root');
+rootElement.style.width = '100%';
 
 ReactDOM.render(
   <Provider store={store}>
