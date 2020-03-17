@@ -2,7 +2,7 @@
   width: 100%;
   padding: 18px 30px 25px 13px;
   box-sizing: border-box;
-  box-shadow: 0 0 5px 0 #D0D3E2;
+  box-shadow: 0 0 5px 0 #d0d3e2;
   border-radius: 4px;
   margin-top: 34px;
   @include phone {
@@ -12,11 +12,11 @@
     text-align: justify;
   }
   .metrics-message {
-    width:100%;
+    width: 100%;
     font-size: 13px;
     font-family: lato;
   }
-  
+
   .content-is-open {
     display: flex;
   }
@@ -46,46 +46,44 @@
         width: 100%;
         margin-bottom: 10px;
         border-radius: 4px;
-        background-color: #004ED6;
-        border: 3px solid #004ED6;
+        background-color: #004ed6;
+        border: 3px solid #004ed6;
         color: white;
         font-size: 14px;
         cursor: pointer;
       }
     }
 
-    .chart-details-text-container{
+    .chart-details-text-container {
       .chart-details-text {
         width: auto;
         @include phone {
           width: auto;
         }
       }
-      .tutorial-video-container{
-        color: #004ED6;
+      .tutorial-video-container {
+        color: #004ed6;
         .tutorial-title {
           font-weight: 500;
           font-size: 15px;
-          color: #004ED6;
-
+          color: #004ed6;
         }
         .tutorial-img {
           height: 89px;
           width: 139px;
           padding-top: 4px;
         }
-        .tutorial-button{
+        .tutorial-button {
           height: 101px;
           width: 139px;
           border-radius: 4px;
-          background-color:white;
+          background-color: white;
           border: 3px solid white;
           color: black;
           font-size: 14px;
           cursor: pointer;
           transition: 0.5s;
         }
-        
       }
     }
 
@@ -101,24 +99,25 @@
       @include phone {
         width: 100%;
       }
-       .item-block{
-         margin-top: 10px;
-         margin-bottom: 10px;
-         border-bottom: 1px solid #d5cece;
-         .items{
-           margin-left: 10px;
-           width: 90%
-         }
-         span, a{
-           margin-bottom: 5px;
-           word-wrap: break-word;
-         }
-       }
-       .item-block:last-child{
+      .item-block {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #d5cece;
+        .items {
+          margin-left: 10px;
+          width: 90%;
+        }
+        span,
+        a {
+          margin-bottom: 5px;
+          word-wrap: break-word;
+        }
+      }
+      .item-block:last-child {
         border: none;
       }
       .uses-explanation-title {
-        color: #999AA7;
+        color: #999aa7;
         font-size: 16px;
         margin-top: 21px;
       }
@@ -148,7 +147,7 @@
 
       .chart-details-title {
         font-weight: bold;
-        color: #23232A;
+        color: #23232a;
         font-size: 18px;
         margin-right: 5px;
       }
@@ -158,8 +157,8 @@
       height: 32px;
       width: 325px;
       border-radius: 4px;
-      background-color: #004ED6;
-      border: 3px solid #004ED6;
+      background-color: #004ed6;
+      border: 3px solid #004ed6;
       color: white;
       font-size: 14px;
       cursor: pointer;
@@ -170,15 +169,14 @@
       }
 
       &:hover {
-        color: #004ED6;
+        color: #004ed6;
         background-color: white;
       }
     }
   }
 }
 
-
-.dark-gray{
+.dark-gray {
   color: #46474b;
 }
 .modal-close-button {
