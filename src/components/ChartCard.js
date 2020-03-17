@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import * as Vibrant from 'node-vibrant';
 
 export class ChartCard extends React.Component {
   constructor(props) {
@@ -13,9 +12,17 @@ export class ChartCard extends React.Component {
 
   render() {
     try {
-      const listOrCardViewClass = this.props.isCard
-        ? 'chart-card-container'
-        : 'chart-card-container list-view';
+      const listOrCardViewClass = () => {
+        if (this.props.isCard && this.props.experimentCount !== 0) {
+          return 'chart-card-container';
+        } else if (this.props.isCard && this.props.experimentCount === 0) {
+          return 'chart-card-container ribbon ribbon-top-left disabled';
+        } else if (!this.props.isCard && this.props.experimentCount === 0) {
+          return 'chart-card-container list-view ribbon span disabled';
+        } else {
+          return 'chart-card-container list-view';
+        }
+      }
       const renderChartContent = () => {
         return (
           <div>
@@ -43,9 +50,11 @@ export class ChartCard extends React.Component {
           return <div className='list-view-width'>{renderChartContent()}</div>;
         }
       };
-      return (
-        <div className={listOrCardViewClass} onClick={this.props.navTo}>
-          {this.props.experimentCount ? (
+      const renderChartCards = () => {
+        if (this.props.experimentCount === 0) {
+          return <span>Coming Soon</span>
+        } else if (this.props.experimentCount > 0) {
+          return (
             <div className='experiment-count-container'>
               <div className='experiment-analytics'>
                 {this.props.totalChartExpCount}
@@ -54,29 +63,36 @@ export class ChartCard extends React.Component {
               <div className='experiment-count'>
                 {this.props.experimentCount}
                 {this.props.experimentCount <= 1 ? ' Experiment' : ' Experiments'}
-            </div>
-            </div>
-          ) : (
-              <div className='experiment-count-container'>
-                <div className='experiment-analytics'>
-                  {this.props.analytics.length ? this.props.analytics[0].Count : 0}
-                  <span className='chaos-tooltiptext'>Total Runs</span>
-                </div>
-                <div className='experiment-chaos-type'>
-                  {this.props.chaosType ? (
-                    <i className='mi-application infra-icon'>
-                      <span className='chaos-tooltiptext '>
-                        {this.props.chartType === 'generic'
-                          ? 'Infra-Chaos :- Multiple applications might be impacted'
-                          : 'Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted'}
-                      </span>
-                    </i>
-                  ) : (
-                      <span></span>
-                    )}
-                </div>
               </div>
-            )}
+            </div>
+          )
+        } else {
+          return (
+            <div className='experiment-count-container'>
+              <div className='experiment-analytics'>
+                {this.props.analytics.length ? this.props.analytics[0].Count : 0}
+                <span className='chaos-tooltiptext'>Total Runs</span>
+              </div>
+              <div className='experiment-chaos-type'>
+                {this.props.chaosType ? (
+                  <i className='mi-application infra-icon'>
+                    <span className='chaos-tooltiptext '>
+                      {this.props.chartType === 'generic'
+                        ? 'Infra-Chaos :- Multiple applications might be impacted'
+                        : 'Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted'}
+                    </span>
+                  </i>
+                ) : (
+                    <span></span>
+                  )}
+              </div>
+            </div>
+          )
+        }
+      }
+      return (
+        <div className={listOrCardViewClass()} onClick={this.props.navTo}>
+          {renderChartCards()}
           {renderChartListContainer()}
         </div>
       );

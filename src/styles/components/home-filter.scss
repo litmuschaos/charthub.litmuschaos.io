@@ -1,6 +1,7 @@
 .filter-container {
   width: 280px;
   padding-bottom: 105px;
+  margin-right: 50px;
   @include phone {
     position: absolute;
     width: 100%;
