@@ -48,13 +48,17 @@ class Home extends React.Component {
       this.setState({ showFilters: true });
     }
   };
-  storeTotalExperiments = chart => {
+  storeTotalExperiments = charts => {
     try {
       var totalExpCount = 0;
-      chart.map(chart => {
-        totalExpCount = totalExpCount + chart.experiments.length;
-        return totalExpCount;
-      });
+      if (charts.length > 0) {
+        charts.forEach(element => {
+          if (element.experiments != null) {
+            totalExpCount = totalExpCount + element.experiments.length;
+          }
+        });
+      }
+      return totalExpCount;
     } catch (e) {
       console.log('Catch error:', e);
     }
@@ -77,7 +81,7 @@ class Home extends React.Component {
       let analytics = this.props.analytics;
 
       let exp = chart.experiments;
-      if (this.props.analytics.length !== 0) {
+      if (exp !== null && this.props.analytics.length !== 0) {
         for (let i = 0; i < exp.length; i++) {
           let matchingExperiment = exp[i].metadata.name;
           for (let i = 0; i < analytics.length; i++) {
