@@ -9,16 +9,19 @@ import Experiments from './pages/Experiments';
 
 class App extends React.Component {
   componentDidMount() {
-    document.title = "Chaos Engineering - Litmus charts for Kubernetes";
+    document.title = 'Chaos Engineering - Litmus charts for Kubernetes';
   }
   render() {
     return (
       <React.Fragment>
         <Switch>
-          <Route path="/charts/:chartId" exact component={Chart} />
-          <Route path="/" exact component={Home} />
-          <Route path="/charts/:chartId/experiments/:experimentID" component={Experiments}/>
-          <Redirect from="*" to="/" key="default-route" />
+          <Route path='/charts/:chartId' exact component={Chart} />
+          <Route path='/' exact component={Home} />
+          <Route
+            path='/charts/:chartId/experiments/:experimentID'
+            component={Experiments}
+          />
+          <Redirect from='*' to='/' key='default-route' />
         </Switch>
       </React.Fragment>
     );

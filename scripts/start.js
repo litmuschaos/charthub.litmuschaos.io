@@ -14,7 +14,6 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
-
 const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
@@ -25,7 +24,7 @@ const {
   choosePort,
   createCompiler,
   prepareProxy,
-  prepareUrls,
+  prepareUrls
 } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
@@ -83,8 +82,7 @@ checkBrowsers(paths.appPath, isInteractive)
     const devSocket = {
       warnings: warnings =>
         devServer.sockWrite(devServer.sockets, 'warnings', warnings),
-      errors: errors =>
-        devServer.sockWrite(devServer.sockets, 'errors', errors),
+      errors: errors => devServer.sockWrite(devServer.sockets, 'errors', errors)
     };
     // Create a webpack compiler that is configured with custom messages.
     const compiler = createCompiler({
@@ -94,7 +92,7 @@ checkBrowsers(paths.appPath, isInteractive)
       urls,
       useYarn,
       useTypeScript,
-      webpack,
+      webpack
     });
     // Load proxy config
     const proxySetting = require(paths.appPackageJson).proxy;
