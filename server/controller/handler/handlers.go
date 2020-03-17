@@ -59,6 +59,7 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 		log.Error(err)
 		fmt.Fprint(w, "file content parsing error, err : "+err.Error())
 	}
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprintf(w, string(fileContent))
 }
 
@@ -72,6 +73,7 @@ func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "unable to get analytics data, err : "+err.Error())
 	}
 	writeHeaders(&w, responseStatusCode)
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(out)
 }
 
@@ -86,6 +88,7 @@ func GetChart(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "chart retrieval error, err : "+err.Error())
 	}
 	writeHeaders(&w, responseStatusCode)
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprint(w, string(response))
 }
 
@@ -162,6 +165,7 @@ func GetCharts(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "chart marshalling error, err : "+err.Error())
 	}
 	writeHeaders(&w, 200)
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprint(w, string(response))
 }
 
