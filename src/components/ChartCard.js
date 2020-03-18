@@ -16,9 +16,9 @@ export class ChartCard extends React.Component {
         if (this.props.isCard && this.props.experimentCount !== 0) {
           return 'chart-card-container';
         } else if (this.props.isCard && this.props.experimentCount === 0) {
-          return 'chart-card-container ribbon ribbon-top-left disabled';
+          return 'chart-card-container disabled';
         } else if (!this.props.isCard && this.props.experimentCount === 0) {
-          return 'chart-card-container list-view ribbon span disabled';
+          return 'chart-card-container list-view disabled';
         } else {
           return 'chart-card-container list-view';
         }
@@ -52,7 +52,7 @@ export class ChartCard extends React.Component {
       };
       const renderChartCards = () => {
         if (this.props.experimentCount === 0) {
-          return <span>Coming Soon</span>
+          return <div></div>
         } else if (this.props.experimentCount > 0) {
           return (
             <div className='experiment-count-container'>
