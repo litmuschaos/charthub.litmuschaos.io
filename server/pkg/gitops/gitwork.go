@@ -37,6 +37,7 @@ type GitConfig struct {
 	RemoteName     string
 	LocalCommit    string
 	RemoteCommit   string
+	TargetBranch   string
 }
 
 var (
@@ -50,12 +51,16 @@ var (
 
 // Trigger is reposible for setting off the go routine for git-op
 func Trigger() {
+	targetBranch, ok := os.LookupEnv("CHAOS_CHART_BRANCH")
+	if !ok {
+		log.Error("CHAOS_CHART_BRANCH environment variable required")
+		return
+	}
 	gitConfig := GitConfig{
-		RepositoryName: handler.ChaosChartPath, RepositoryURL: "https://github.com/litmuschaos/chaos-charts", LocalCommit: "", RemoteCommit: "", RemoteName: "origin",
+		RepositoryName: handler.ChaosChartPath, RepositoryURL: "https://github.com/litmuschaos/chaos-charts", LocalCommit: "", RemoteCommit: "", RemoteName: "origin", TargetBranch: targetBranch,
 	}
 	for true {
-		err := gitConfig.chaosChartSyncHandler()
-		if err != nil {
+		if err := gitConfig.chaosChartSyncHandler(); err != nil {
 			log.Error(err)
 		}
 		time.Sleep(TimeInterval)
@@ -80,8 +85,8 @@ func (object GitConfig) CompareLocalandRemoteCommit() (bool, error) {
 	if err != nil {
 		return false, fmt.Errorf("error in executing PlainOpen: %s", err)
 	}
-	log.Info("git rev-parse master")
-	h, err := r.ResolveRevision(plumbing.Revision("master"))
+	log.Infof("git rev-parse %s", object.TargetBranch)
+	h, err := r.ResolveRevision(plumbing.Revision(object.TargetBranch))
 	if err != nil {
 		return false, fmt.Errorf("error in executing ResolveRevision: %s", err)
 	}
@@ -135,8 +140,8 @@ func (object GitConfig) GitHardReset() error {
 
 // GitPlainClone clones the repository through the provided URL in provided Path
 func (object GitConfig) GitPlainClone() error {
-	log.Info("executing GitPlainClone() ... git clone ", object.RepositoryURL)
-	r, err := git.PlainClone(object.RepositoryName, false, &git.CloneOptions{URL: object.RepositoryURL, Progress: os.Stdout})
+	log.Infof("executing GitPlainClone() ... git clone '%s' of branch '%s'", object.RepositoryURL, object.TargetBranch)
+	r, err := git.PlainClone(object.RepositoryName, false, &git.CloneOptions{URL: object.RepositoryURL, Progress: os.Stdout, ReferenceName: plumbing.NewBranchReferenceName(object.TargetBranch)})
 	if err != nil { // Retrieve the branch pointed by HEAD
 		return fmt.Errorf("error in executing PlainClone: %s", err)
 	}
@@ -171,7 +176,7 @@ func (object GitConfig) GitPull() error {
 		return err
 	}
 	log.Info("git pull origin")
-	if w.Pull(&git.PullOptions{RemoteName: object.RemoteName}) != nil { // Pull the latest changes from the origin remote and merge into the current branch
+	if w.Pull(&git.PullOptions{RemoteName: object.RemoteName, ReferenceName: plumbing.NewBranchReferenceName(object.TargetBranch)}) != nil { // Pull the latest changes from the origin remote and merge into the current branch
 		return fmt.Errorf("error in executing Pull: %s", w.Pull(&git.PullOptions{RemoteName: object.RemoteName}))
 	}
 	log.Info("git rev-parse HEA--D") // Retrieve the branch pointed by HEAD
