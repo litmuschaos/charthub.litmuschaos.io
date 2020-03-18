@@ -53,6 +53,7 @@ class Experiments extends React.Component {
   renderCharts = () => {
     try {
       let i = 0;
+      let videoLink = ""
       let displayName = this.props.chart.spec.displayName;
       let experimentName = this.props.match.params.experimentID;
       let experiment = this.props.chart.experiments.filter(function (
@@ -63,6 +64,9 @@ class Experiments extends React.Component {
         }
         return null
       });
+      if (experiment[0].spec.links[2]) {
+        videoLink = experiment[0].spec.links[2].url
+      }
       let showexperiment = experiment.map(chart => (
         <ChartDetails
           key={i++}
@@ -74,7 +78,7 @@ class Experiments extends React.Component {
           displayName={displayName}
           name={chart.spec.displayName}
           isCollapsed={false}
-          video={experiment[0].spec.links[2].url}
+          video={videoLink}
           logo={
             this.state.logo +
             this.props.chart.metadata.name +
