@@ -33,7 +33,7 @@ import (
 )
 
 // ChaosChartPath refers the location of the freshly updated repository
-var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/chaos-charts/"
+var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/public/chaos-charts/"
 
 /*	pathParser reads the path in the csv file <path> forms the system-path <fileLookedPath>
 	and returns the file
