@@ -100,7 +100,9 @@ class Home extends React.Component {
   renderChartGrid = () => {
     try {
       return this.props.charts.map(chart => {
-        let logo = './chaos-charts/charts/' + chart.metadata.name + '/icons/';
+        let logo = 'https://raw.githubusercontent.com/litmuschaos/chaos-charts/staging/charts/' +
+        chart.metadata.name +
+        '/icons/';
         return (
           <ChartCard
             isCard={this.state.isGridView}
