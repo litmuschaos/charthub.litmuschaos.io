@@ -176,7 +176,7 @@ func (object GitConfig) GitPull() error {
 		return err
 	}
 	log.Info("git pull origin")
-	if w.Pull(&git.PullOptions{RemoteName: object.RemoteName}) != nil { // Pull the latest changes from the origin remote and merge into the current branch
+	if w.Pull(&git.PullOptions{RemoteName: object.RemoteName, ReferenceName: plumbing.NewBranchReferenceName(object.TargetBranch)}) != nil { // Pull the latest changes from the origin remote and merge into the current branch
 		return fmt.Errorf("error in executing Pull: %s", w.Pull(&git.PullOptions{RemoteName: object.RemoteName}))
 	}
 	log.Info("git rev-parse HEA--D") // Retrieve the branch pointed by HEAD
