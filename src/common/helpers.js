@@ -16,6 +16,15 @@ export const keysToCamel = function(o) {
   return o;
 };
 
+export const getVersion = function(versions) {
+  const setVersion = localStorage.getItem('version');
+  if (setVersion !== "" && setVersion !== null) {
+    return setVersion
+  }
+  // returning the latest released version
+  return versions[0]
+}
+
 export const helpers = {};
 
 export default helpers;
