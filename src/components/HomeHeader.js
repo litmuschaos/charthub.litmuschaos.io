@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FaHome } from 'react-icons/fa';
 import { withRouter } from 'react-router-dom';
-import { analyticsData } from '../redux/actions';
-
-import { filterChartsOnSearch } from '../redux/actions';
+import { analyticsData, loadVersion} from '../redux/actions';
+import { filterChartsOnSearch, loadCharts } from '../redux/actions';
+import { getVersion } from "../common/helpers"
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 class HomeHeader extends React.Component {
   constructor() {
@@ -16,7 +18,26 @@ class HomeHeader extends React.Component {
   }
 
   componentDidMount() {
+    this.props.loadVersion()
+    // TODO: Remove the usases of setInterval
+    this.timer = setInterval(
+      () =>  {
+        this.props.loadCharts(getVersion(this.props.versions));
+        if (this.props.versions.length > 0 ) {
+          const version = localStorage.getItem('version')
+          if (version === null || version === "") {
+            localStorage.setItem('version', this.props.versions[0]);
+          }
+          clearInterval(this.timer)
+        }
+      },
+      500,
+    );
     this.props.analyticsData();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   renderHomeText = () => {
@@ -50,7 +71,7 @@ class HomeHeader extends React.Component {
   };
 
   getHeaderHeight = () => {
-    let height = '500px';
+    let height = '300px';
     if (!this.props.showHomeText) {
       height = '272.5px';
     }
@@ -70,6 +91,13 @@ class HomeHeader extends React.Component {
       console.log('Catch error:', e);
     }
   };
+
+  changeVersion = version => {
+    localStorage.setItem('version', version.value);
+    this.props.loadCharts(localStorage.getItem('version'));
+    this.props.history.push('/');
+    window.location.reload();
+  }
 
   render() {
     try {
@@ -120,6 +148,7 @@ class HomeHeader extends React.Component {
                   Docs<span className='contribute-icon-container'></span>
                 </h3>
               </a>
+              <Dropdown options={this.props.versions.reverse()} onChange={this.changeVersion} value={getVersion(this.props.versions)}/>
             </div>
             {this.renderHomeText()}
             {this.renderChartTitle()}
@@ -136,7 +165,8 @@ const mapStateToProps = state => {
   try {
     if (state) {
       return {
-        analytics: state.charts.analytics
+        analytics: state.charts.analytics,
+        versions: state.charts.versions
       };
     }
   } catch (e) {
@@ -146,7 +176,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   filterChartsOnSearch,
-  analyticsData
+  analyticsData,
+  loadCharts,
+  loadVersion
 };
 
 export default withRouter(

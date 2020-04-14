@@ -7,6 +7,8 @@ import { GoChevronDown } from 'react-icons/go';
 import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
 import { VideoModalContent } from './VideoModalContent';
+import { getVersion } from "../common/helpers"
+
 const ReactMarkdown = require('react-markdown');
 const customStyles = {
   content: {
@@ -187,16 +189,17 @@ export class ChartDetails extends React.Component {
 
   displayLinkCreator = () => {
     try {
+      const chartVersion = getVersion(this.props.versions)
       this.host = window.location.host;
       this.hostname = window.location.hostname;
       var path = this.props.charts.spec.chaosExpCRDLink;
       path = path.split('/charts/')[1];
       var prefixPath = 'https://';
-      var suffixPath = '/api/chaos?file=charts/';
+      var suffixPath = '/api/chaos/'+ chartVersion +'?file=charts/';
       if (this.hostname === 'localhost') {
         prefixPath = 'http://';
         this.host = 'localhost:8080';
-        suffixPath = '/chaos?file=charts/';
+        suffixPath = '/chaos/'+ chartVersion +'?file=charts/';
       }
       var displayRepoPath = prefixPath + this.host + suffixPath + path;
       return displayRepoPath;

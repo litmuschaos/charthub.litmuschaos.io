@@ -35,19 +35,19 @@ var routes = Routes{
 	Route{
 		"FileHandler",
 		"GET",
-		"/chaos",
+		"/chaos/{version}",
 		handler.FileHandler,
 	},
 	Route{
 		"GetCharts",
 		"GET",
-		"/charts",
+		"/charts/{version}",
 		handler.GetCharts,
 	},
 	Route{
 		"GetChart",
 		"GET",
-		"/charts/{chartId}",
+		"/charts/{version}/{chartId}",
 		handler.GetChart,
 	},
 	Route{
@@ -55,5 +55,11 @@ var routes = Routes{
 		"GET",
 		"/analytics",
 		handler.GetAnalyticsData,
+	},
+	Route{
+		"Version",
+		"GET",
+		"/version",
+		handler.GetChartVersion,
 	},
 }
