@@ -4,29 +4,47 @@ import {
   FILTER_CHARTS_ON_SEARCH,
   FILTER_CHARTS_BY_FILTERS,
   LOAD_ANALYTICS_DATA,
-  LOAD_GITHUB_STARS
+  LOAD_GITHUB_STARS,
+  LOAD_VERSION_SUCCESS
 } from './actionTypes';
 
 var apiEnpoint = window.location.hostname.includes('localhost')
   ? 'http://localhost:8080'
   : '/api';
-export const loadCharts = () => dispatch => {
-  fetch(`${apiEnpoint}/charts`)
+
+export const loadVersion = () => dispatch => {
+    fetch(`${apiEnpoint}/version`)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        if (data) {
+          dispatch({ type: LOAD_VERSION_SUCCESS, data });
+        }
+      });
+  };
+
+export const loadCharts = version => dispatch => {
+  fetch(`${apiEnpoint}/charts/${version}`)
     .then(function(response) {
       return response.json();
     })
     .then(function(data) {
-      dispatch({ type: LOAD_CHARTS_SUCCESS, data });
+      if (data) {
+        dispatch({ type: LOAD_CHARTS_SUCCESS, data });
+      }
     });
 };
 
-export const loadChartById = chartId => dispatch => {
-  fetch(`${apiEnpoint}/charts/${chartId}`)
+export const loadChartById = (version,chartId) => dispatch => {
+  fetch(`${apiEnpoint}/charts/${version}/${chartId}`)
     .then(function(response) {
       return response.json();
     })
-    .then(function(data) {
-      dispatch({ type: LOAD_CHART_SUCCESS, data });
+    .then(function (data) {
+      if (data) {
+        dispatch({ type: LOAD_CHART_SUCCESS, data });
+      }
     });
 };
 
@@ -40,20 +58,24 @@ export const applyFilters = filters => dispatch => {
 
 export const analyticsData = () => dispatch => {
   fetch(`${apiEnpoint}/analytics`)
-    .then(function(response) {
+    .then(function (response) {
       return response.json();
     })
     .then(function(data) {
-      dispatch({ type: LOAD_ANALYTICS_DATA, data });
+      if (data) {
+        dispatch({ type: LOAD_ANALYTICS_DATA, data });
+      }
     });
 };
 
 export const githubData = () => dispatch => {
   fetch(`https://api.github.com/repos/litmuschaos/litmus`)
-    .then(function(response) {
+    .then(function (response) {
       return response.json();
     })
-    .then(function(data) {
-      dispatch({ type: LOAD_GITHUB_STARS, data });
+    .then(function (data) {
+      if (data) {
+        dispatch({ type: LOAD_GITHUB_STARS, data });
+      }
     });
 };

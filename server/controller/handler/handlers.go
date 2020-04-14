@@ -49,12 +49,12 @@ func pathParser(path string) ([]byte, error) {
 
 //FileHandler takes out the file paths from the query params respectives URLs
 func FileHandler(w http.ResponseWriter, r *http.Request) {
-
+	vars := mux.Vars(r)
 	filePath, ok := r.URL.Query()["file"]
 	if !ok || len(filePath[0]) < 1 {
 		return
 	}
-	fileContent, err := pathParser(string(filePath[0]))
+	fileContent, err := pathParser(vars["version"] + "/" + string(filePath[0]))
 	if err != nil {
 		log.Error(err)
 		fmt.Fprint(w, "file content parsing error, err : "+err.Error())
@@ -80,7 +80,8 @@ func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
 // GetChart is used to create YAML objects from experiments' directories from the respective charts'
 func GetChart(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	chart, err := getYAMLFileContent(vars["chartId"])
+	filePath := ChaosChartPath + vars["version"] + "/charts/" + vars["chartId"]
+	chart, err := getYAMLFileContent(filePath)
 	response, err := json.Marshal(chart)
 	responseStatusCode := 200
 	if err != nil {
@@ -92,52 +93,56 @@ func GetChart(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(response))
 }
 
-func getCSVFile(chartName string) (Chart, error) {
+func readCSVFile(path string) (Chart, error) {
 	var chart Chart
-	csvFile, err := ioutil.ReadFile(ChaosChartPath + "charts/" + chartName + "/" + chartName + ".chartserviceversion.yaml")
+	csvFile, err := ioutil.ReadFile(path)
 	if err != nil {
-		return chart, fmt.Errorf("file path of the error "+ChaosChartPath+"charts/"+chartName+"/"+chartName+".chartserviceversion.yaml\n"+"serviceFile.Get, err:", err)
+		return chart, fmt.Errorf("unable to read file, err: %+v", err)
 	}
 	err = yaml.Unmarshal([]byte(csvFile), &chart)
 	return chart, err
 }
 
-func getPackageInfo(chartName string) (PackageInformation, error) {
+func readPackageFile(path string) (PackageInformation, error) {
 	var packageInfo PackageInformation
-	packageFile, err := ioutil.ReadFile(ChaosChartPath + "charts/" + chartName + "/" + chartName + ".package.yaml")
+	packageFile, err := ioutil.ReadFile(path)
 	if err != nil {
-		return packageInfo, fmt.Errorf("file path of the error "+ChaosChartPath+"charts/"+chartName+"/"+chartName+".chartserviceversion.yaml\n"+"serviceFile.Get, err:", err)
+		return packageInfo, fmt.Errorf("file path of the,err: %+v", err)
 	}
 	log.Printf("package info %s", packageInfo)
 	err = yaml.Unmarshal([]byte(packageFile), &packageInfo)
 	return packageInfo, err
 }
 
-func getExpUnmarshal(chartName string, expName string) (Chart, error) {
+func readExperimentFile(path string) (Chart, error) {
 	var experiment Chart
-	experimentFile, err := ioutil.ReadFile(ChaosChartPath + "charts/" + chartName + "/" + expName + "/" + expName + ".chartserviceversion.yaml")
+	experimentFile, err := ioutil.ReadFile(path)
 	if err != nil {
-		return experiment, fmt.Errorf("file path of the error "+ChaosChartPath+"charts/"+chartName+"/"+chartName+".chartserviceversion.yaml\n"+"serviceFile.Get, err:", err)
+		return experiment, fmt.Errorf("file path of the, err: %+v", err)
 	}
 	if yaml.Unmarshal([]byte(experimentFile), &experiment) != nil {
 		return experiment, err
 	}
 	return experiment, nil
 }
-func getYAMLFileContent(chartName string) (Chart, error) {
-	chart, err := getCSVFile(chartName)
+func getYAMLFileContent(fileLocation string) (Chart, error) {
+	chartPathSplitted := strings.Split(fileLocation, "/")
+	CSVFilePath := fileLocation + "/" + chartPathSplitted[len(chartPathSplitted)-1] + ".chartserviceversion.yaml"
+	packageFilePath := fileLocation + "/" + chartPathSplitted[len(chartPathSplitted)-1] + ".package.yaml"
+	chart, err := readCSVFile(CSVFilePath)
 	if err != nil {
 		return chart, err
 	}
-	packageInfo, err := getPackageInfo(chartName)
+	packageInfo, err := readPackageFile(packageFilePath)
 	if err != nil {
 		return chart, err
 	}
 	chart.PackageInfo = packageInfo
 	for _, exp := range packageInfo.Experiments {
-		experiment, err := getExpUnmarshal(chartName, exp.Name)
+		experimentFilePath := fileLocation + "/" + exp.Name + "/" + exp.Name + ".chartserviceversion.yaml"
+		experiment, err := readExperimentFile(experimentFilePath)
 		if err != nil {
-			return chart, fmt.Errorf("file path of the error "+ChaosChartPath+"charts/"+chartName+"/"+chartName+".chartserviceversion.yaml\n"+"serviceFile.Get, err:", err)
+			return chart, fmt.Errorf("file path of the error: %+v", err)
 		}
 		chart.Experiments = append(chart.Experiments, experiment)
 	}
@@ -146,14 +151,14 @@ func getYAMLFileContent(chartName string) (Chart, error) {
 
 // GetCharts is used to create list of YAML objects from charts' directories
 func GetCharts(w http.ResponseWriter, r *http.Request) {
-	files, err := filepath.Glob(ChaosChartPath + "charts/*")
+	vars := mux.Vars(r)
+	files, err := filepath.Glob(ChaosChartPath + vars["version"] + "/charts/*")
 	if err != nil {
 		log.Error(err)
 	}
 	var charts []Chart
 	for _, fileName := range files {
-		chartPathSplitted := strings.Split(fileName, "/")
-		chart, err := getYAMLFileContent(chartPathSplitted[len(chartPathSplitted)-1])
+		chart, err := getYAMLFileContent(fileName)
 		if err != nil {
 			log.Error(err)
 			fmt.Fprint(w, "file content yaml conversion error, err : "+err.Error())
@@ -167,6 +172,18 @@ func GetCharts(w http.ResponseWriter, r *http.Request) {
 	writeHeaders(&w, 200)
 	(w).Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprint(w, string(response))
+}
+
+// GetChartVersion will return the available version of chaos-chart
+func GetChartVersion(w http.ResponseWriter, r *http.Request) {
+	version, err := ioutil.ReadFile("/tmp/version.json")
+	if err != nil {
+		log.Error(err)
+		return
+	}
+	writeHeaders(&w, 200)
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	fmt.Fprint(w, string(version))
 }
 
 func writeHeaders(w *http.ResponseWriter, statusCode int) {

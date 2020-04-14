@@ -12,6 +12,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { getChartById } from '../redux/selectors';
 import { standardizeMetrics } from '../common/addMetrics';
 import { loadChartById, analyticsData } from '../redux/actions';
+import { getVersion } from "../common/helpers"
 
 class Experiments extends React.Component {
   constructor(props) {
@@ -24,7 +25,8 @@ class Experiments extends React.Component {
 
   componentDidMount() {
     try {
-      this.props.loadChartById(this.props.match.params.chartId);
+      const chartVersion = getVersion(this.props.versions)
+      this.props.loadChartById(chartVersion,this.props.match.params.chartId);
       this.props.analyticsData();
     } catch (e) {
       console.log('Catch error:', e);
