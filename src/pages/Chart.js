@@ -12,6 +12,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { getChartById } from '../redux/selectors';
 import { loadChartById, analyticsData } from '../redux/actions';
 import { standardizeMetrics } from '../common/addMetrics';
+import { getVersion } from "../common/helpers"
 
 class Chart extends React.Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class Chart extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.loadChartById(this.props.match.params.chartId);
+    const chartVersion = getVersion(this.props.versions)
+    this.props.loadChartById(chartVersion,this.props.match.params.chartId);
     this.props.analyticsData();
   }
   /*---> TODO : Refactor this func*/

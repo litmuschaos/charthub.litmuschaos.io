@@ -4,10 +4,12 @@ import {
   FILTER_CHARTS_ON_SEARCH,
   FILTER_CHARTS_BY_FILTERS,
   LOAD_ANALYTICS_DATA,
-  LOAD_GITHUB_STARS
+  LOAD_GITHUB_STARS,
+  LOAD_VERSION_SUCCESS
 } from '../actionTypes';
 
 const initialState = {
+  versions: [],
   charts: [],
   chart: {},
   loadedCharts: [],
@@ -16,6 +18,13 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case LOAD_VERSION_SUCCESS: {
+      return {
+        ...state,
+        versions: action.data
+      };
+    }
+
     case LOAD_CHART_SUCCESS: {
       return {
         ...state,

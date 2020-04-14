@@ -127,9 +127,9 @@
   }
 
   .home-header-title-1 {
-    margin-top: 130px;
+    margin-top: 50px;
     color: white;
-    font-size: 40px;
+    font-size: 37px;
     font-weight: bold;
     text-align: center;
     @include phone {
@@ -142,7 +142,7 @@
   .home-header-title-2 {
     color: #D1D2D9;
     font-family: Lato;
-    font-size: 28px;
+    font-size: 20px;
     text-align: center;
     @include phone {
       padding: 0 20px;
@@ -153,7 +153,7 @@
   .home-header-title-3 {
     color: #D1D2D9;
     font-family: Lato;
-    font-size: 18px;
+    font-size: 17px;
     text-align: center;
     @include phone {
       display: none;
