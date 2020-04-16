@@ -86,7 +86,7 @@ func (c GitConfig) getChaosChartVersion() ([]string, error) {
 	var versions []string
 	versions = append(versions, defaultBranch)
 	err = tagrefs.ForEach(func(t *plumbing.Reference) error {
-		versions = append(versions, t.Name().Short())
+		versions = append([]string{t.Name().Short()}, versions...)
 		return nil
 	})
 	if err != nil {
