@@ -19,7 +19,7 @@ class HomeHeader extends React.Component {
 
   componentDidMount() {
     this.props.loadVersion()
-    // TODO: Remove the usases of setInterval
+    // TODO: Remove the usages of setInterval
     this.timer = setInterval(
       () =>  {
         this.props.loadCharts(getVersion(this.props.versions));
@@ -148,7 +148,7 @@ class HomeHeader extends React.Component {
                   Docs<span className='contribute-icon-container'></span>
                 </h3>
               </a>
-              <Dropdown options={this.props.versions.reverse()} onChange={this.changeVersion} value={getVersion(this.props.versions)}/>
+              <Dropdown options={this.props.versions} onChange={this.changeVersion} value={getVersion(this.props.versions)}/>
             </div>
             {this.renderHomeText()}
             {this.renderChartTitle()}

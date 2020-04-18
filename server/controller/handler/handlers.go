@@ -142,7 +142,7 @@ func getYAMLFileContent(fileLocation string) (Chart, error) {
 		experimentFilePath := fileLocation + "/" + exp.Name + "/" + exp.Name + ".chartserviceversion.yaml"
 		experiment, err := readExperimentFile(experimentFilePath)
 		if err != nil {
-			return chart, fmt.Errorf("file path of the error: %+v", err)
+			log.Error(err)
 		}
 		chart.Experiments = append(chart.Experiments, experiment)
 	}
