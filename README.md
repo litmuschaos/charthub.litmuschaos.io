@@ -2,27 +2,35 @@
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io?ref=badge_shield)
 
-# Installation
-- Install Golang. Follow the instructions [here](https://golang.org/doc/install).
+# Development Setup:
+
+## Prerequisite
+ - Golang is installed and configured, If not follow the instructions [here](https://golang.org/doc/install).
 - Install Node.js and npm. Follow the instructions [here](https://nodejs.org/en/download/current/).
-- Install Yarn. Follow the instructions [here](https://yarnpkg.com/en/docs/install).
-- Install npm packages.
-  ```
-  yarn install  
-  ```
-- Install Go server dependencies.
-  ```
-  go get github.com/gorilla/mux
-  go get gopkg.in/yaml.v3
-  ```
+
+## Starting development server
+
+Clone the charthub Repo
+```
+git clone https://github.com/litmuschaos/charthub.litmuschaos.io.git
+cd charthub.litmuschaos.io
+```
+Start the backend api server
+
+```
+go run server/main.go
+```
+
+Install and start the front-end server.
+```
+npm install
+npm start
+```
 
 # Usage
-Navigate into `server` folder and run `go run *.go`. This will start the backend framework. 
-Now, navigate back to the root folder in a separate terminal and run `yarn start` to run development server; 
-to create production build, run `yarn build`. This conjoined process starts up the charthub on your localhost. 
-Open your browser and go to `http://localhost:3000/`.
+Open your browser and go to `http://localhost:3000/` for access front-end
 
-# docker
+# Run server in docker
 
 Install docker compose [Instructions here!](https://docs.docker.com/compose/install/)
 
