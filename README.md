@@ -21,14 +21,14 @@ Start the backend api server
 go run server/main.go
 ```
 
-Install and start the front-end server.
+Install and start the frontend server.
 ```
 npm install
 npm start
 ```
 
 # Usage
-Open your browser and go to `http://localhost:3000/` for access front-end
+Open your browser and go to `http://localhost:3000/` to access the frontend
 
 # Run server in docker
 
