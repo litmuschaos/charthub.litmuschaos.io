@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-	
 
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
@@ -34,7 +33,6 @@ type GAResponseJSON struct {
 
 // GAResponseJSONObject is the array of GAResponse struct
 var GAResponseJSONObject []GAResponseJSON
-// var chaosOperatorCount int64
 
 // Handler is responsible for the looping the UpdateAnalyticsData()
 func Handler() {
@@ -45,38 +43,6 @@ func Handler() {
 		}
 		time.Sleep(timeInterval)
 	}
-}
-
-func responseCheck(object GAResponseJSON, label string) (int64, error) {
-	var chaosOperatorCount int64
-	if label != "Chaos-Operator" {
-		count, err := strconv.ParseInt(object.Count, base, bitSize)
-		if err != nil {
-			return chaosOperatorCount ,fmt.Errorf("Error while converting count to string, err: %s", err)
-		}
-		chaosOperatorCount = chaosOperatorCount + count
-	}
-	return chaosOperatorCount, nil
-
-}
-
-// CreateJSONObject manufactures GA JSON Object
-func CreateJSONObject(GAResponse [][]string) error {
-	var chaosOperatorCount int64
-	var err error
-	for i := range GAResponse { // TODO --- this for-block needs to be refactored later
-		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" { // TODO --- this if-block needs to be refactored later
-			object := GAResponseJSON{Label: GAResponse[i][0], Count: GAResponse[i][1]}
-			chaosOperatorCount, err = responseCheck(object, GAResponse[i][0])
-			if err != nil {
-				return err
-			}
-			GAResponseJSONObject = append(GAResponseJSONObject, object)
-		}
-	}
-	object := GAResponseJSON{Label: "Total-Count", Count: strconv.FormatInt(chaosOperatorCount, base)}
-	GAResponseJSONObject = append(GAResponseJSONObject, object)
-	return nil
 }
 
 func getterJWTConfig() (*http.Client, error) {
@@ -116,7 +82,7 @@ func UpdateAnalyticsData() error {
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
-	var chaosOperatorCount int64
+	var totalCount int64
 	GAResponse := response.Rows
 	/* TODO --- this for-block needs to be refactored later
 	 */
@@ -133,14 +99,14 @@ func UpdateAnalyticsData() error {
 				if err != nil {
 					return fmt.Errorf("Error while converting count to string, err: %s", err)
 				}
-				chaosOperatorCount = chaosOperatorCount + count
+				totalCount = totalCount + count
 			}
 			GAResponseJSONObject = append(GAResponseJSONObject, object)
 		}
 	}
 	object := GAResponseJSON{
 		Label: "Total-Count",
-		Count: strconv.FormatInt(chaosOperatorCount, base),
+		Count: strconv.FormatInt(totalCount, base),
 	}
 	GAResponseJSONObject = append(GAResponseJSONObject, object)
 	return nil

@@ -68,7 +68,7 @@ class Home extends React.Component {
       var result = this.props.analytics.filter(
         exp => exp.Label === 'Chaos-Operator'
       );
-      var metrics = result.length ? this.props.analytics[0].Count : 0;
+      var metrics = result.length ? result[0].Count : 0;
       return standardizeMetrics(parseInt(metrics, 10));
     } catch (e) {
       console.log('Catch error:', e);
