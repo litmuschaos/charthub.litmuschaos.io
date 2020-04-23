@@ -9,7 +9,7 @@ class Footer extends React.Component {
             <div className='metrics-numeric'>
               {this.props.operatorMetrics ? this.props.operatorMetrics : 0}
             </div>
-            <div className='metrics-label'>CHAOS OPERATOR INSTALLED</div>
+            <div className='metrics-label'>CHAOS OPERATORS INSTALLED</div>
           </div>
           <div className='installation-metrics'>
             <div className='metrics-numeric'>
