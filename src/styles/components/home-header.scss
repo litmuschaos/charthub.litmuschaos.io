@@ -124,6 +124,17 @@
         margin-top: 25px;
       }
     }
+
+    .top-header-theme-changer{
+      margin-left: 16px;
+      cursor: pointer;
+      &.light{
+        color: white;
+      }
+      &.dark{
+        color: black;
+      }
+    }
   }
 
   .home-header-title-1 {

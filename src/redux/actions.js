@@ -5,7 +5,8 @@ import {
   FILTER_CHARTS_BY_FILTERS,
   LOAD_ANALYTICS_DATA,
   LOAD_GITHUB_STARS,
-  LOAD_VERSION_SUCCESS
+  LOAD_VERSION_SUCCESS,
+  TOGGLE_THEME,
 } from './actionTypes';
 
 var apiEnpoint = window.location.hostname.includes('localhost')
@@ -78,4 +79,8 @@ export const githubData = () => dispatch => {
         dispatch({ type: LOAD_GITHUB_STARS, data });
       }
     });
+};
+
+export const toggleTheme = () => dispatch => {
+  dispatch({ type: TOGGLE_THEME});
 };

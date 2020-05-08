@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FaHome } from 'react-icons/fa';
 import { withRouter } from 'react-router-dom';
 import { analyticsData, loadVersion} from '../redux/actions';
-import { filterChartsOnSearch, loadCharts } from '../redux/actions';
+import { filterChartsOnSearch, loadCharts, toggleTheme } from '../redux/actions';
 import { getVersion } from "../common/helpers"
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -16,7 +16,6 @@ class HomeHeader extends React.Component {
       searchTerm: ''
     };
   }
-
   componentDidMount() {
     this.props.loadVersion()
     // TODO: Remove the usages of setInterval
@@ -100,55 +99,68 @@ class HomeHeader extends React.Component {
   }
 
   render() {
+  console.log(this.props.isDarkTheme);
     try {
       return (
-        <div className='hero-bg'>
-          <div className='home-header-container' style={this.getHeaderHeight()}>
-            <div className='top-header-container'>
+        <div className="hero-bg">
+          <div className="home-header-container" style={this.getHeaderHeight()}>
+            <div className="top-header-container">
               <a
-                href='https://litmuschaos.io'
-                target='_blank'
-                rel='noopener noreferrer'
+                href="https://litmuschaos.io"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <div className='top-header-divide-container'>
+                <div className="top-header-divide-container">
                   <img
-                    alt='organization logo'
-                    src={process.env.PUBLIC_URL + '/icons/litmus.png'}
-                    className='logo-img'
+                    alt="organization logo"
+                    src={process.env.PUBLIC_URL + "/icons/litmus.png"}
+                    className="logo-img"
                   />
                 </div>
               </a>
-              <Link to={process.env.PUBLIC_URL} className='home'>
-                <h3 className='top-header-home'>{<FaHome />}</h3>
+              <Link to={process.env.PUBLIC_URL} className="home">
+                <h3 className="top-header-home">{<FaHome />}</h3>
               </Link>
               <input
-                className='top-header-input'
-                placeholder='Search for charts...'
+                className="top-header-input"
+                placeholder="Search for charts..."
                 value={this.state.searchTerm}
                 onChange={this.handleSearchTermChange}
               />
               <a
-                href='https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md'
-                target='_blank'
-                rel='noopener noreferrer'
+                href="https://github.com/litmuschaos/community-charts/blob/master/CONTRIBUTING.md"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <h3 className='top-header-contribute'>
+                <h3 className="top-header-contribute">
                   Contribute
-                  <span className='contribute-icon-container'>
+                  <span className="contribute-icon-container">
                     {/*<FaChevronDown />*/}
                   </span>
                 </h3>
               </a>
               <a
-                href='https://docs.litmuschaos.io/'
-                target='_blank'
-                rel='noopener noreferrer'
+                href="https://docs.litmuschaos.io/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <h3 className='top-header-contribute'>
-                  Docs<span className='contribute-icon-container'></span>
+                <h3 className="top-header-contribute">
+                  Docs<span className="contribute-icon-container"></span>
                 </h3>
               </a>
-              <Dropdown options={this.props.versions} onChange={this.changeVersion} value={getVersion(this.props.versions)}/>
+              <Dropdown
+                options={this.props.versions}
+                onChange={this.changeVersion}
+                value={getVersion(this.props.versions)}
+              />
+              <div
+                className={`top-header-theme-changer ${
+                  this.props.isDarkTheme ? "dark" : "light"
+                }`}
+                onClick={() => this.props.toggleTheme()}
+              >
+                Light
+              </div>
             </div>
             {this.renderHomeText()}
             {this.renderChartTitle()}
@@ -166,7 +178,8 @@ const mapStateToProps = state => {
     if (state) {
       return {
         analytics: state.charts.analytics,
-        versions: state.charts.versions
+        versions: state.charts.versions,
+        isDarkTheme: state.theme.isDarkTheme,
       };
     }
   } catch (e) {
@@ -178,7 +191,8 @@ const mapDispatchToProps = {
   filterChartsOnSearch,
   analyticsData,
   loadCharts,
-  loadVersion
+  loadVersion,
+  toggleTheme
 };
 
 export default withRouter(
