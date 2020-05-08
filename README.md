@@ -30,6 +30,13 @@ npm start
 # Usage
 Open your browser and go to `http://localhost:3000/` to access the frontend
 
+# Troubleshoot Guide
+If the changes in the sass file are not reflected in the browser until the frontend server is restarted again using npm start, Run the following commands:
+```
+npm install node-sass
+npm start
+```
+
 # License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io?ref=badge_large)
