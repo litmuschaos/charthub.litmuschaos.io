@@ -1,0 +1,6 @@
+.app {
+    @include themify($themes) {
+        width: 100%;
+        background-color: themed("primaryColor");
+    }
+}

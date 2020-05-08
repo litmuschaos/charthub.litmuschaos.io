@@ -1,88 +1,89 @@
 .chart-page-container {
-  height: 100vh;
-  background-color: white;
-  @include phone {
-    width: auto;
-  }
-  .chart-page-content {
-    box-sizing: border-box;
-    padding: 32.5px 153px 49px 153px;
+  @include themify($themes) {
+    background-color: themed("primaryColor");
     @include phone {
-      padding: 0;
+      width: auto;
     }
-    .chart-page-header {
-      height: 63.1px;
-      padding-bottom: 11.1px;
-      border-bottom: 1px solid #D1D2D9;
+    .chart-page-content {
+      box-sizing: border-box;
+      padding: 32.5px 153px 49px 153px;
       @include phone {
-        padding: 20px 0px 20px 20px;
-        border: none;
+        padding: 0;
       }
-      .chart-page-header-breacrumbs-container {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 20px;
-        margin-top: 10px;
-        .breadcrumbs {
-          font-size: 12px;
-          .breadcrumb-text {
-            margin-left: 2px;
-            margin-right: 2px;
-          }
+      .chart-page-header {
+        height: 63.1px;
+        padding-bottom: 11.1px;
+        border-bottom: 1px solid themed("border");
+        @include phone {
+          padding: 20px 0px 20px 20px;
+          border: none;
         }
-        .chart-header-filters-container {
+        .chart-page-header-breacrumbs-container {
+          width: 100%;
           display: flex;
-          @include phone {
-            display: none;
+          align-items: center;
+          justify-content: space-between;
+          height: 20px;
+          margin-top: 10px;
+          .breadcrumbs {
+            font-size: 12px;
+            .breadcrumb-text {
+              margin-left: 2px;
+              margin-right: 2px;
+            }
           }
-          .header-filter {
+          .chart-header-filters-container {
             display: flex;
-            align-items: center;
-            cursor: pointer;
-            .header-filter-label {
-              margin-left: 5px;
-              margin-right: 20px;
+            @include phone {
+              display: none;
+            }
+            .header-filter {
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              .header-filter-label {
+                margin-left: 5px;
+                margin-right: 20px;
+              }
             }
           }
         }
-      }
-      a {
-        text-decoration: none;
-      }
-
-      .chart-page-nav-back-container {
-        display: flex;
-        align-items: center;
-        height: 30px;
-        .nav-back-icon-container {
-          border: 2px solid #004ED6;
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          padding-top: 0.4px;
-          box-sizing: border-box;
-          transition: 0.5s;
-          &:hover {
-            background-color: #e4e4f2;
-          }
+        a {
+          text-decoration: none;
         }
-        .chart-page-title-container {
-          border-left: 2px solid #262B3E;
-          height: 100%;
-          margin-left: 16px;
+
+        .chart-page-nav-back-container {
           display: flex;
           align-items: center;
-          .chart-page-title {
-            color: #23232A;
-            font-size: 18px;
-            padding-left: 10px;
+          height: 30px;
+          .nav-back-icon-container {
+            border: 2px solid themed("accentBlue");
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding-top: 0.4px;
             box-sizing: border-box;
+            transition: 0.5s;
+            &:hover {
+              background-color: themed("hover");
+            }
+          }
+          .chart-page-title-container {
+            border-left: 2px solid themed("secondaryColor");
+            height: 100%;
+            margin-left: 16px;
+            display: flex;
+            align-items: center;
+            .chart-page-title {
+              color: themed("secondaryColor");
+              font-size: 18px;
+              padding-left: 10px;
+              box-sizing: border-box;
+            }
           }
         }
       }

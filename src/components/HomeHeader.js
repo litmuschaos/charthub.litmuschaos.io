@@ -1,57 +1,58 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { FaHome } from 'react-icons/fa';
-import { withRouter } from 'react-router-dom';
-import { analyticsData, loadVersion} from '../redux/actions';
-import { filterChartsOnSearch, loadCharts, toggleTheme } from '../redux/actions';
-import { getVersion } from "../common/helpers"
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { FaHome } from "react-icons/fa";
+import { withRouter } from "react-router-dom";
+import { analyticsData, loadVersion } from "../redux/actions";
+import {
+  filterChartsOnSearch,
+  loadCharts,
+  toggleTheme,
+} from "../redux/actions";
+import { getVersion } from "../common/helpers";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 class HomeHeader extends React.Component {
   constructor() {
     super();
     this.state = {
-      searchTerm: ''
+      searchTerm: "",
     };
   }
   componentDidMount() {
-    this.props.loadVersion()
+    this.props.loadVersion();
     // TODO: Remove the usages of setInterval
-    this.timer = setInterval(
-      () =>  {
-        this.props.loadCharts(getVersion(this.props.versions));
-        if (this.props.versions.length > 0 ) {
-          const version = localStorage.getItem('version')
-          if (version === null || version === "") {
-            localStorage.setItem('version', this.props.versions[0]);
-          }
-          clearInterval(this.timer)
+    this.timer = setInterval(() => {
+      this.props.loadCharts(getVersion(this.props.versions));
+      if (this.props.versions.length > 0) {
+        const version = localStorage.getItem("version");
+        if (version === null || version === "") {
+          localStorage.setItem("version", this.props.versions[0]);
         }
-      },
-      500,
-    );
+        clearInterval(this.timer);
+      }
+    }, 500);
     this.props.analyticsData();
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer)
+    clearInterval(this.timer);
   }
 
   renderHomeText = () => {
     if (this.props.showHomeText) {
       return [
-        <h1 key='1' className='home-header-title-1'>
+        <h1 key="1" className="home-header-title-1">
           Chaos Charts for Kubernetes
         </h1>,
-        <h2 key='2' className='home-header-title-2'>
+        <h2 key="2" className="home-header-title-2">
           Charts are pre-defined chaos experiments. Use these charts to inject
           chaos into cloud native applications and Kubernetes infrastructure.
         </h2>,
-        <h3 key='3' className='home-header-title-3'>
+        <h3 key="3" className="home-header-title-3">
           BROWSE - RUN - CONTRIBUTE
-        </h3>
+        </h3>,
       ];
     }
   };
@@ -59,27 +60,27 @@ class HomeHeader extends React.Component {
   renderChartTitle = () => {
     if (!this.props.showHomeText) {
       return (
-        <div className='chart-header-title-container'>
-          <div className='chart-header-logo-container'>
-            <img alt='org logo' src={this.props.icon} height='30px' />
+        <div className="chart-header-title-container">
+          <div className="chart-header-logo-container">
+            <img alt="org logo" src={this.props.icon} height="30px" />
           </div>
-          <div className='chart-header-title'>{this.props.title}</div>
+          <div className="chart-header-title">{this.props.title}</div>
         </div>
       );
     }
   };
 
   getHeaderHeight = () => {
-    let height = '300px';
+    let height = "300px";
     if (!this.props.showHomeText) {
-      height = '272.5px';
+      height = "272.5px";
     }
     return {
-      height
+      height,
     };
   };
 
-  handleSearchTermChange = evt => {
+  handleSearchTermChange = (evt) => {
     try {
       if (evt) {
         const searchTerm = evt.target.value;
@@ -87,19 +88,18 @@ class HomeHeader extends React.Component {
         this.props.filterChartsOnSearch(searchTerm);
       }
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   };
 
-  changeVersion = version => {
-    localStorage.setItem('version', version.value);
-    this.props.loadCharts(localStorage.getItem('version'));
-    this.props.history.push('/');
+  changeVersion = (version) => {
+    localStorage.setItem("version", version.value);
+    this.props.loadCharts(localStorage.getItem("version"));
+    this.props.history.push("/");
     window.location.reload();
-  }
+  };
 
   render() {
-  console.log(this.props.isDarkTheme);
     try {
       return (
         <div className="hero-bg">
@@ -153,27 +153,27 @@ class HomeHeader extends React.Component {
                 onChange={this.changeVersion}
                 value={getVersion(this.props.versions)}
               />
+
               <div
-                className={`top-header-theme-changer ${
-                  this.props.isDarkTheme ? "dark" : "light"
-                }`}
+                className="top-header-theme-changer"
                 onClick={() => this.props.toggleTheme()}
               >
                 Light
               </div>
             </div>
+
             {this.renderHomeText()}
             {this.renderChartTitle()}
           </div>
         </div>
       );
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   try {
     if (state) {
       return {
@@ -183,7 +183,7 @@ const mapStateToProps = state => {
       };
     }
   } catch (e) {
-    console.log('Catch error:', e);
+    console.log("Catch error:", e);
   }
 };
 
@@ -192,7 +192,7 @@ const mapDispatchToProps = {
   analyticsData,
   loadCharts,
   loadVersion,
-  toggleTheme
+  toggleTheme,
 };
 
 export default withRouter(

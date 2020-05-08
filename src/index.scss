@@ -5,16 +5,17 @@ body {
   font-family: Lato;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 //mixins
+@import 'theme';
 @import 'styles/mixins';
 
 // pages
+@import 'app';
 @import 'styles/home';
 @import 'styles/chart';
 

@@ -1,237 +1,243 @@
 .chart-details-container {
-  width: 100%;
-  padding: 18px 30px 25px 13px;
-  box-sizing: border-box;
-  box-shadow: 0 0 5px 0 #d0d3e2;
-  border-radius: 4px;
-  margin-top: 34px;
-  @include phone {
-    margin: 0px 20px 20px 20px;
-    width: auto;
-    padding: 18px 15px 15px 15px;
-    text-align: justify;
-  }
-  .metrics-message {
+  @include themify($themes) {
     width: 100%;
-    font-size: 13px;
-    font-family: lato;
-  }
-
-  .content-is-open {
-    display: flex;
-  }
-
-  .content-is-collapsed {
-    display: none;
-  }
-  a {
-    text-decoration: none;
-  }
-  .chart-details-content {
-    width: 100%;
-    margin-top: 21px;
-    // display: flex;
-    justify-content: space-between;
-    transition: 0.4s;
-    clear: both;
+    padding: 18px 30px 25px 13px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px 0 themed("boxShadow");
+    border-radius: 4px;
+    margin-top: 34px;
     @include phone {
-      flex-wrap: wrap;
+      margin: 0px 20px 20px 20px;
+      width: auto;
+      padding: 18px 15px 15px 15px;
+      text-align: justify;
+    }
+    .metrics-message {
+      width: 100%;
+      font-size: 13px;
+      font-family: lato;
     }
 
-    .chart-install-button-phone {
+    .content-is-open {
+      display: flex;
+    }
+
+    .content-is-collapsed {
       display: none;
-      @include phone {
-        display: block;
-        height: 32px;
-        width: 100%;
-        margin-bottom: 10px;
-        border-radius: 4px;
-        background-color: #004ed6;
-        border: 3px solid #004ed6;
-        color: white;
-        font-size: 14px;
-        cursor: pointer;
-      }
     }
-
-    .chart-details-text-container {
-      .chart-details-text {
-        width: auto;
-        @include phone {
-          width: auto;
-        }
+    a {
+      text-decoration: none;
+    }
+    .chart-details-content {
+      width: 100%;
+      margin-top: 21px;
+      // display: flex;
+      justify-content: space-between;
+      transition: 0.4s;
+      clear: both;
+      @include phone {
+        flex-wrap: wrap;
       }
-      .tutorial-video-container {
-        color: #004ed6;
-        .tutorial-title {
-          font-weight: 500;
-          font-size: 15px;
-          color: #004ed6;
-        }
-        .tutorial-img {
-          height: 89px;
-          width: 139px;
-          padding-top: 4px;
-        }
-        .tutorial-button {
-          height: 101px;
-          width: 139px;
+
+      .chart-install-button-phone {
+        display: none;
+        @include phone {
+          display: block;
+          height: 32px;
+          width: 100%;
+          margin-bottom: 10px;
           border-radius: 4px;
-          background-color: white;
-          border: 3px solid white;
-          color: black;
+          background-color: themed("accentBlue");
+          border: 3px solid themed("accentBlue");
+          color: themed("commonWhite");
           font-size: 14px;
           cursor: pointer;
-          transition: 0.5s;
+        }
+      }
+
+      .chart-details-text-container {
+        .chart-details-text {
+          width: auto;
+          @include phone {
+            width: auto;
+          }
+        }
+        .tutorial-video-container {
+          color: themed("accentBlue");
+          .tutorial-title {
+            font-weight: 500;
+            font-size: 15px;
+            color: themed("accentBlue");
+          }
+          .tutorial-img {
+            height: 89px;
+            width: 139px;
+            padding-top: 4px;
+          }
+          .tutorial-button {
+            height: 101px;
+            width: 139px;
+            border-radius: 4px;
+            background-color: themed("textPrimary");
+            border: 3px solid themed("textPrimary");
+            color: themed("textSecondary");
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.5s;
+          }
+        }
+      }
+
+      .chart-details-uses-explanation {
+        width: 325px;
+        min-height: 300px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        background-color: themed("hover");
+        padding: 8px 10px;
+        display: flex;
+        flex-direction: column;
+        @include phone {
+          width: 100%;
+        }
+        .item-block {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          border-bottom: 1px solid themed("border");
+          .items {
+            margin-left: 10px;
+            width: 90%;
+          }
+          span,
+          a {
+            margin-bottom: 5px;
+            word-wrap: break-word;
+          }
+        }
+        .item-block:last-child {
+          border: none;
+        }
+        .uses-explanation-title {
+          color: themed("textGray");
+          font-size: 16px;
+          margin-top: 21px;
+        }
+
+        .uses-explanation-title:first-child {
+          margin-top: 0;
+        }
+
+        .uses-explanation {
+          color: themed("textGray");
+          margin-top: 1px;
+          font-size: 16px;
         }
       }
     }
 
-    .chart-details-uses-explanation {
-      width: 325px;
-      min-height: 300px;
-      box-sizing: border-box;
-      border-radius: 4px;
-      background-color: #efefef;
-      padding: 8px 10px;
-      display: flex;
-      flex-direction: column;
-      @include phone {
-        width: 100%;
-      }
-      .item-block {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #d5cece;
-        .items {
-          margin-left: 10px;
-          width: 90%;
-        }
-        span,
-        a {
-          margin-bottom: 5px;
-          word-wrap: break-word;
-        }
-      }
-      .item-block:last-child {
-        border: none;
-      }
-      .uses-explanation-title {
-        color: #999aa7;
-        font-size: 16px;
-        margin-top: 21px;
-      }
-
-      .uses-explanation-title:first-child {
-        margin-top: 0;
-      }
-
-      .uses-explanation {
-        color: #383842;
-        margin-top: 1px;
-        font-size: 16px;
-      }
-    }
-  }
-
-  .chart-details-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .chart-details-title-container {
+    .chart-details-header {
+      width: 100%;
       display: flex;
       align-items: center;
-      cursor: pointer;
+      justify-content: space-between;
 
-      .chart-details-title {
-        font-weight: bold;
-        color: #23232a;
-        font-size: 18px;
-        margin-right: 5px;
-      }
-    }
+      .chart-details-title-container {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
 
-    .chart-install-button {
-      height: 32px;
-      width: 325px;
-      border-radius: 4px;
-      background-color: #004ed6;
-      border: 3px solid #004ed6;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.5s;
-      @include phone {
-        width: auto;
-        display: none;
+        .chart-details-title {
+          font-weight: bold;
+          color: themed("secondaryColor");
+          font-size: 18px;
+          margin-right: 5px;
+        }
       }
 
-      &:hover {
-        color: #004ed6;
-        background-color: white;
+      .chart-install-button {
+        height: 32px;
+        width: 325px;
+        border-radius: 4px;
+        background-color: themed("accentBlue");
+        border: 3px solid themed("accentBlue");
+        color: themed("commonWhite");
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.5s;
+        @include phone {
+          width: auto;
+          display: none;
+        }
+
+        &:hover {
+          color: themed("accentBlue");
+          background-color: themed("commonWhite");
+        }
       }
     }
   }
-}
 
-.dark-gray {
-  color: #46474b;
-}
-.modal-close-button {
-  border: none;
-  background-color: transparent;
-  margin-right: -8px;
-  cursor: pointer;
-
-  .modal-close {
-    position: relative;
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    overflow: hidden;
-    transition: 0.5s;
-
-    &:hover {
-      &::after,
-      &::before {
-        background: gray;
-      }
+  .dark-gray {
+    @include themify($themes) {
+      color: themed("textGray");
     }
+  }
+  .modal-close-button {
+    @include themify($themes) {
+      border: none;
+      background-color: transparent;
+      margin-right: -8px;
+      cursor: pointer;
 
-    &::after,
-    &::before {
-      content: '';
-      position: absolute;
-      height: 2px;
-      width: 100%;
-      top: 50%;
-      left: 0;
-      margin-top: -1px;
-      background: #000;
-    }
+      .modal-close {
+        position: relative;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        overflow: hidden;
+        transition: 0.5s;
 
-    &::before {
-      transform: rotate(45deg);
-    }
+        &:hover {
+          &::after,
+          &::before {
+            background: themed("textGray");
+          }
+        }
 
-    &::after {
-      transform: rotate(-45deg);
-    }
+        &::after,
+        &::before {
+          content: "";
+          position: absolute;
+          height: 2px;
+          width: 100%;
+          top: 50%;
+          left: 0;
+          margin-top: -1px;
+          background: themed("secondaryColor");
+        }
 
-    &.thick {
-      &::after,
-      &::before {
-        height: 4px;
-        margin-top: -2px;
-      }
-    }
+        &::before {
+          transform: rotate(45deg);
+        }
 
-    &.rounded {
-      &::after,
-      &::before {
-        border-radius: 5px;
+        &::after {
+          transform: rotate(-45deg);
+        }
+
+        &.thick {
+          &::after,
+          &::before {
+            height: 4px;
+            margin-top: -2px;
+          }
+        }
+
+        &.rounded {
+          &::after,
+          &::before {
+            border-radius: 5px;
+          }
+        }
       }
     }
   }
