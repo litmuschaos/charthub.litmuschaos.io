@@ -30,23 +30,12 @@ npm start
 # Usage
 Open your browser and go to `http://localhost:3000/` to access the frontend
 
-# Run server in docker
-
-Install docker compose [Instructions here!](https://docs.docker.com/compose/install/)
-
-Run the containers using docker-compose
-
-```docker-compose up```
-
-Go to your browser and open: `http://localhost`
-
-You can also run server and client seperately using the commands
-
-```docker-compose up server```
-
-and
-
-```docker-compose up client```
+# Troubleshoot Guide
+If the changes in the sass file are not reflected in the browser until the frontend server is restarted again using npm start, Run the following commands:
+```
+npm install node-sass
+npm start
+```
 
 # License
 
