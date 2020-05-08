@@ -66,9 +66,11 @@ class Experiments extends React.Component {
         }
         return null
       });
-      if (experiment[0].spec.links[2]) {
-        videoLink = experiment[0].spec.links[2].url
-      }
+      let links = experiment[0].spec.links?experiment[0].spec.links:[]
+      links.forEach(link=>{
+        if(link.name.toLowerCase()==="video")
+          videoLink=link.url;
+      })
       let showexperiment = experiment.map(chart => (
         <ChartDetails
           key={i++}
