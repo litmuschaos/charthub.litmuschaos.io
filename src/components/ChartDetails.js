@@ -1,27 +1,37 @@
-import React from 'react';
-import Modal from 'react-modal';
-import classNames from 'classnames';
-import { InstallModalContent } from '../components/InstallModalContent';
-import { ChartCard } from '../components/ChartCard';
-import { GoChevronDown } from 'react-icons/go';
-import { IconContext } from 'react-icons';
-import { Link } from 'react-router-dom';
-import { VideoModalContent } from './VideoModalContent';
-import { getVersion } from "../common/helpers"
+import React from "react";
+import Modal from "react-modal";
+import classNames from "classnames";
+import { connect } from "react-redux";
+import InstallModalContent from "../components/InstallModalContent";
+import { ChartCard } from "../components/ChartCard";
+import { GoChevronDown } from "react-icons/go";
+import { IconContext } from "react-icons";
+import { Link } from "react-router-dom";
+import { VideoModalContent } from "./VideoModalContent";
+import { getVersion } from "../common/helpers";
 
-const ReactMarkdown = require('react-markdown');
-const customStyles = {
+const ReactMarkdown = require("react-markdown");
+
+const customStyles = (isDarkTheme) => ({
+  overlay: {
+    backgroundColor: isDarkTheme
+      ? "rgba(0,0,0,0.75)"
+      : "rgba(255,255,255,0.75)",
+  },
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    boxShadow: '0 2px 16px 0 rgba(0,0,0,0.2)',
-    border: 'none'
-  }
-};
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    boxShadow: "0 2px 16px 0 rgba(0,0,0,0.2)",
+    border: "none",
+    color: isDarkTheme ? "#ffffff" : "#383842",
+    backgroundColor: isDarkTheme ? "#2D2D2D" : "#fafafa",
+    borderColor: "#b0b0b0",
+  },
+});
 
 class UsesExplanation extends React.Component {
   constructor(props) {
@@ -29,15 +39,15 @@ class UsesExplanation extends React.Component {
   }
   render() {
     return (
-      <div className='d-flex item-block'>
+      <div className="d-flex item-block">
         <i className={this.props.classCSS}></i>
-        <div className='d-flex flex-column items'>
-          {this.props.displaylabel !== '' ? (
-            <span className='uses-explanation-title'>
+        <div className="d-flex flex-column items">
+          {this.props.displaylabel !== "" ? (
+            <span className="uses-explanation-title">
               {this.props.displaylabel}
             </span>
           ) : (
-            ''
+            ""
           )}
           {this.props.displaytext}
         </div>
@@ -46,14 +56,14 @@ class UsesExplanation extends React.Component {
   }
 }
 
-export class ChartDetails extends React.Component {
+class ChartDetails extends React.Component {
   constructor(props) {
     super();
     this.state = {
       showModal: false,
       showVideoModal: false,
       isCollapsed: props.isCollapsed,
-      charts: props.charts
+      charts: props.charts,
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -70,7 +80,7 @@ export class ChartDetails extends React.Component {
       this.setState({ isCollapsed: true });
     }
   };
-  createLink = listOfLink => {
+  createLink = (listOfLink) => {
     try {
       let div = [];
       if (listOfLink) {
@@ -84,11 +94,11 @@ export class ChartDetails extends React.Component {
         return div;
       }
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   };
 
-  getMaintainerList = listofMaintainers => {
+  getMaintainerList = (listofMaintainers) => {
     try {
       if (listofMaintainers) {
         let div = [];
@@ -106,15 +116,15 @@ export class ChartDetails extends React.Component {
         return div;
       }
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   };
-  getPlatformList = listofPlatforms => {
+  getPlatformList = (listofPlatforms) => {
     try {
       if (listofPlatforms) {
         let div = [];
         if (listofPlatforms != null && listofPlatforms.length > 0) {
-          div.push(<span className='uses-explanation-title'> Platforms</span>);
+          div.push(<span className="uses-explanation-title"> Platforms</span>);
           for (let i = 0; i < listofPlatforms.length; i++) {
             div.push(<span key={i}>{listofPlatforms[i]}</span>);
           }
@@ -122,20 +132,20 @@ export class ChartDetails extends React.Component {
         return div;
       }
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   };
 
-  getMaturityOfExperiment = maturityOfExperiment => {
+  getMaturityOfExperiment = (maturityOfExperiment) => {
     try {
-      if (maturityOfExperiment !== '') {
+      if (maturityOfExperiment !== "") {
         let div = [];
-        div.push(<span className='uses-explanation-title'> Maturity</span>);
+        div.push(<span className="uses-explanation-title"> Maturity</span>);
         div.push(<span>{maturityOfExperiment}</span>);
         return div;
       }
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   };
 
@@ -150,61 +160,61 @@ export class ChartDetails extends React.Component {
   }
 
   handleNavHome = () => {
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
   handleNavToExperiment = (chartName, experiments) => {
     this.props.history.push(`/charts/${chartName}/experiments/${experiments}`);
   };
 
-  renderExperiments = function() {
+  renderExperiments = function () {
     try {
       let logo =
-        'https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/' +
+        "https://raw.githubusercontent.com/litmuschaos/chaos-charts/master/charts/" +
         this.props.charts.metadata.name +
-        '/icons/';
+        "/icons/";
       let displayName = this.props.charts.metadata.name;
-      const experiments = this.props.charts.experiments.map(chart => (
+      const experiments = this.props.charts.experiments.map((chart) => (
         <Link to={`/charts/${displayName}/experiments/${chart.metadata.name}`}>
           <ChartCard
-            isCard='true'
+            isCard="true"
             key={chart.metadata.name}
             title={chart.spec.displayName}
             analytics={this.props.analytics.filter(
-              exp => exp.Label === chart.metadata.name
+              (exp) => exp.Label === chart.metadata.name
             )}
             chaosType={chart.spec.chaosType}
             chartType={this.props.charts.metadata.name}
             provider={chart.spec.provider.name}
             text={chart.metadata.annotations.chartDescription}
-            icon={logo + chart.metadata.name + '.png'}
+            icon={logo + chart.metadata.name + ".png"}
             id={chart.metadata.name}
           />
         </Link>
       ));
       return [...experiments];
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   };
 
   displayLinkCreator = () => {
     try {
-      const chartVersion = getVersion(this.props.versions)
+      const chartVersion = getVersion(this.props.versions);
       this.host = window.location.host;
       this.hostname = window.location.hostname;
       var path = this.props.charts.spec.chaosExpCRDLink;
-      path = path.split('/charts/')[1];
-      var prefixPath = 'https://';
-      var suffixPath = '/api/chaos/'+ chartVersion +'?file=charts/';
-      if (this.hostname === 'localhost') {
-        prefixPath = 'http://';
-        this.host = 'localhost:8080';
-        suffixPath = '/chaos/'+ chartVersion +'?file=charts/';
+      path = path.split("/charts/")[1];
+      var prefixPath = "https://";
+      var suffixPath = "/api/chaos/" + chartVersion + "?file=charts/";
+      if (this.hostname === "localhost") {
+        prefixPath = "http://";
+        this.host = "localhost:8080";
+        suffixPath = "/chaos/" + chartVersion + "?file=charts/";
       }
       var displayRepoPath = prefixPath + this.host + suffixPath + path;
       return displayRepoPath;
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   };
 
@@ -213,7 +223,7 @@ export class ChartDetails extends React.Component {
       return (
         <div>
           <h3>Chaos Experiments</h3>
-          <div className='d-flex'>{this.renderExperiments()}</div>
+          <div className="d-flex">{this.renderExperiments()}</div>
         </div>
       );
     }
@@ -224,95 +234,96 @@ export class ChartDetails extends React.Component {
   }
 
   render() {
+    console.log(this.props.isDarkTheme);
     try {
       const isCollapsed = classNames({
-        'chart-details-content': true,
-        'content-is-collapsed': this.state.isCollapsed,
-        'content-is-open': !this.state.isCollapsed
+        "chart-details-content": true,
+        "content-is-collapsed": this.state.isCollapsed,
+        "content-is-open": !this.state.isCollapsed,
       });
 
       return (
-        <div className='chart-details-container'>
-          <div className='chart-details-header'>
+        <div className="chart-details-container">
+          <div className="chart-details-header">
             <div
-              className='chart-details-title-container'
+              className="chart-details-title-container"
               onClick={this.handleCollapseContent}
             >
-              <span className='chart-details-title'>{this.props.name}</span>
-              <IconContext.Provider value={{ size: '1.5em' }}>
+              <span className="chart-details-title">{this.props.name}</span>
+              <IconContext.Provider value={{ size: "1.5em" }}>
                 <GoChevronDown />
               </IconContext.Provider>
             </div>
             <button
-              className='chart-install-button'
+              className="chart-install-button"
               onClick={this.handleOpenModal}
             >
               {this.props.install_button_text}
             </button>
           </div>
-          <div className='metrics-message'>
+          <div className="metrics-message">
             {this.props.CountMessage} : {this.props.ChartCount}
           </div>
           <div className={isCollapsed}>
-            <div className='chart-details-text-container'>
-              <div className='chart-details-text'>
+            <div className="chart-details-text-container">
+              <div className="chart-details-text">
                 <ReactMarkdown
                   source={this.props.charts.spec.categoryDescription}
                 />
               </div>
-              <div className='tutorial-video-container'>
-                {this.props.video !== '' &&
+              <div className="tutorial-video-container">
+                {this.props.video !== "" &&
                 this.props.charts.experiments === null ? (
                   <button
-                    className='tutorial-button'
+                    className="tutorial-button"
                     onClick={this.handleVideoOpenModal}
                   >
-                    <span className='tutorial-title'>Experiment Demo</span>
+                    <span className="tutorial-title">Experiment Demo</span>
                     <div>
                       <img
-                        alt='play-square'
-                        className='tutorial-img'
-                        src={process.env.PUBLIC_URL + '/icons/play-square.png'}
+                        alt="play-square"
+                        className="tutorial-img"
+                        src={process.env.PUBLIC_URL + "/icons/play-square.png"}
                       />
                     </div>
                   </button>
                 ) : (
-                  ''
+                  ""
                 )}
               </div>
             </div>
             <button
-              className='chart-install-button-phone'
+              className="chart-install-button-phone"
               onClick={this.handleOpenModal}
             >
               {this.props.install_button_text}
             </button>
-            <div className='chart-details-uses-explanation'>
+            <div className="chart-details-uses-explanation">
               <UsesExplanation
-                classCSS='mi-link dark-gray'
-                displaylabel='Useful Links'
+                classCSS="mi-link dark-gray"
+                displaylabel="Useful Links"
                 displaytext={this.createLink(this.props.charts.spec.links)}
               />
               <UsesExplanation
-                classCSS='mi-link dark-gray'
-                displaylabel='Maintainers'
+                classCSS="mi-link dark-gray"
+                displaylabel="Maintainers"
                 displaytext={this.getMaintainerList(
                   this.props.charts.spec.maintainers
                 )}
               />
               {this.props.charts.spec.platforms != null && (
                 <UsesExplanation
-                  classCSS='mi-container dark-gray'
-                  displaylabel=''
+                  classCSS="mi-container dark-gray"
+                  displaylabel=""
                   displaytext={this.getPlatformList(
                     this.props.charts.spec.platforms
                   )}
                 />
               )}
-              {this.props.charts.spec.maturity !== '' && (
+              {this.props.charts.spec.maturity !== "" && (
                 <UsesExplanation
-                  classCSS='mi-chart-bar-up dark-gray'
-                  displaylabel=''
+                  classCSS="mi-chart-bar-up dark-gray"
+                  displaylabel=""
                   displaytext={this.getMaturityOfExperiment(
                     this.props.charts.spec.maturity
                   )}
@@ -322,8 +333,9 @@ export class ChartDetails extends React.Component {
           </div>
           <Modal
             isOpen={this.state.showModal}
-            contentLabel='Minimal Modal Example'
-            style={customStyles}
+            contentLabel="Minimal Modal Example"
+            appElement={document.getElementById("root")}
+            style={customStyles(this.props.isDarkTheme)}
           >
             <InstallModalContent
               expcrdurl={this.displayLinkCreator()}
@@ -333,33 +345,40 @@ export class ChartDetails extends React.Component {
               displayName={this.props.charts.spec.displayName}
             />
             <button
-              className='modal-close-button'
+              className="modal-close-button"
               onClick={this.handleCloseModal}
             >
-              <span className='modal-close rounded'></span>
+              <span className="modal-close rounded"></span>
             </button>
           </Modal>
           <Modal
             isOpen={this.state.showVideoModal}
-            contentLabel='Video Modal Example'
-            style={customStyles}
+            contentLabel="Video Modal Example"
+            appElement={document.getElementById("root")}
+            style={customStyles(this.props.isDarkTheme)}
           >
             <VideoModalContent video={this.props.video}></VideoModalContent>
             <button
-              className='modal-close-button'
+              className="modal-close-button"
               onClick={this.handleVideoCloseModal}
             >
-              <span className='modal-close rounded'></span>
+              <span className="modal-close rounded"></span>
             </button>
           </Modal>
 
           <div>
-            {this.props.charts.experiments === null ? '' : this.showCards(true)}
+            {this.props.charts.experiments === null ? "" : this.showCards(true)}
           </div>
         </div>
       );
     } catch (e) {
-      console.log('Catch error:', e);
+      console.log("Catch error:", e);
     }
   }
 }
+
+const mapStateToProps = (state) => ({
+  isDarkTheme: state.theme.isDarkTheme,
+});
+
+export default connect(mapStateToProps)(ChartDetails);

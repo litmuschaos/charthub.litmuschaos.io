@@ -1,91 +1,85 @@
 .install-modal-content {
-  @include themify($themes) {
-    width: 894px;
-    padding: 18px 27px 20px 27px;
+  width: 894px;
+  padding: 18px 27px 20px 27px;
+  display: flex;
+  flex-direction: column;
+  @include phone {
+    width: auto;
+    padding: 0;
+  }
+  .modal-header {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    @include phone {
-      width: auto;
-      padding: 0;
-    }
-    .modal-header {
-      width: 100%;
-      display: flex;
-      .modal-img-placeholder {
-        width: 38px;
-        height: 38px;
-        padding-bottom: 2px;
-        padding-top: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
+    .modal-img-placeholder {
+      width: 38px;
+      height: 38px;
+      padding-bottom: 2px;
+      padding-top: 2px;
+      padding-left: 2px;
+      padding-right: 2px;
 
-        border: 3px solid themed("border");
-        border-radius: 10px;
-        img {
-          height: 100%;
-          width: 100%;
-        }
-      }
-      .modal-header-title-container {
-        margin-left: 10px;
-        .modal-title {
-          margin: 0;
-          font-size: 20px;
-        }
+      border: 3px solid #b0b0b0;
+      border-radius: 10px;
+      img {
+        height: 100%;
+        width: 100%;
       }
     }
-    .install-title {
-      margin-top: 30px;
-      font-size: 18px;
-    }
-    .modal-install-instruction {
-      width: 100%;
-      font-size: 18px;
-      display: flex;
-      .modal-install-instruction-number {
-        color: themed("textGray");
+    .modal-header-title-container {
+      margin-left: 10px;
+      .modal-title {
+        margin: 0;
+        font-size: 20px;
       }
     }
-    .modal-install-code-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .modal-code {
-        font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-          "Courier New", monospace;
-        background-color: themed("hover");
-        width: 95%;
-        align-self: flex-end;
-        box-sizing: border-box;
-        margin: 15px 20px 20px 0px;
-        padding: 8px 17px 8px 17px;
-        font-size: 15px;
-        @include phone {
-          margin: 10px 10px 10px 0px;
-        }
+  }
+  .install-title {
+    margin-top: 30px;
+    font-size: 18px;
+  }
+  .modal-install-instruction {
+    width: 100%;
+    font-size: 18px;
+    display: flex;
+    
+  }
+  .modal-install-code-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .modal-code {
+      font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      background-color: #e6edff;
+      color: #000000;
+      width: 95%;
+      align-self: flex-end;
+      box-sizing: border-box;
+      margin: 15px 20px 20px 0px;
+      padding: 8px 17px 8px 17px;
+      font-size: 15px;
+      @include phone {
+        margin: 10px 10px 10px 0px;
       }
-      .modal-footer-notes {
-        font-size: 14px;
-        color: themed("textGray");
-        margin-top: 20px;
-      }
+    }
+    .modal-footer-notes {
+      font-size: 14px;
+      margin-top: 20px;
+    }
 
-      .modal-install-clipboard {
-        margin-left: 45px;
-        background: none;
-        border: none;
-      }
+    .modal-install-clipboard {
+      // margin-left: 45px;
+      background: none;
+      border: none;
     }
   }
 }
 .react-tiny-popover-container {
-  @include themify($themes) {
-    .modal-install-popover-content {
-      border-style: solid;
-      border-width: 1px;
-      border-color: themed("border");
-      font-size: 0.9em;
-      padding: 8px 12px 8px 12px;
-    }
+  .modal-install-popover-content {
+    border-style: solid;
+    border-width: 1px;
+    border-color: inherit;
+    font-size: 0.9em;
+    padding: 8px 12px 8px 12px;
   }
 }
