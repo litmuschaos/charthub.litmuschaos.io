@@ -50,7 +50,8 @@
     margin-right: 37px;
     margin-bottom: 37px;
     background-color: themed("cardColor");
-    box-shadow: 0 4px 10px 0 themed("boxShadow");
+    box-shadow: 0 1px 3px themed("cardBoxShadow"), 0 1px 2px themed("cardBoxShadow");
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     transition: 0.5s;
     cursor: pointer;
     box-sizing: border-box;
@@ -135,9 +136,9 @@
         position: absolute;
         top: 0;
         left: 0;
-        box-shadow: inset 10px 24px 40px 0px themed("boxShadow"),
-          inset -10px -24px 40px 0px themed("boxShadow"), inset 20px -10px 40px 0px themed("boxShadow"),
-          inset -20px 10px 40px 0px themed("boxShadow");
+        box-shadow: inset 10px 24px 40px 0px themed("cardBoxShadow"),
+          inset -10px -24px 40px 0px themed("cardBoxShadow"), inset 20px -10px 40px 0px themed("cardBoxShadow"),
+          inset -20px 10px 40px 0px themed("cardBoxShadow");
       }
     }
 
@@ -219,6 +220,6 @@
 
 .chart-card-container:hover {
   @include themify($themes) {
-    box-shadow: 0 4px 15px 0 themed("boxShadow");
+    box-shadow: 0 14px 28px themed("cardBoxShadow"), 0 10px 10px themed("cardBoxShadow");
   }
 }

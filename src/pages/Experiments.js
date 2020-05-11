@@ -40,6 +40,7 @@ class Experiments extends React.Component {
       console.log('Catch error:', e);
     }
   };
+
   func = chart => {
     try {
       let count = this.props.analytics.filter(
@@ -52,23 +53,33 @@ class Experiments extends React.Component {
       console.log('Catch error:', e);
     }
   };
+  
+  filterExperiment = experimentName => {
+    let exp = this.props.chart.experiments.filter(experiment => {
+      if (experiment.metadata.name === experimentName) {
+        return experiment;
+      }
+      return null;
+    });
+    return exp[0];
+  }
+  
   renderCharts = () => {
     try {
       let i = 0;
       let videoLink = ""
       let displayName = this.props.chart.spec.displayName;
       let experimentName = this.props.match.params.experimentID;
-      let experiment = this.props.chart.experiments.filter(function (
-        experiment
-      ) {
-        if (experiment.metadata.name === experimentName) {
-          return experiment;
-        }
-        return null
-      });
-      if (experiment[0].spec.links[2]) {
-        videoLink = experiment[0].spec.links[2].url
-      }
+
+      // Returns only the specific matching experiment json object or undefined
+      let experiment = this.filterExperiment(experimentName);
+      
+      let links = experiment.spec.links?experiment.spec.links:[]
+      links.forEach(link=>{
+        if(link.name.toLowerCase()==="video")
+          videoLink=link.url;
+      })
+
       let showexperiment = experiment.map(chart => (
         <ChartDetails
           key={i++}
@@ -111,14 +122,7 @@ class Experiments extends React.Component {
         return <div></div>;
       }
       let experimentName = this.props.match.params.experimentID;
-      let experiment = this.props.chart.experiments.filter(function (
-        experiment
-      ) {
-        if (experiment.metadata.name === experimentName) {
-          return experiment;
-        }
-        return null
-      });
+      let experiment = this.filterExperiment(experimentName);
 
       return (
         <div className='chart-page-container'>
@@ -142,7 +146,7 @@ class Experiments extends React.Component {
                 </div>
                 <div className='chart-page-title-container'>
                   <h3 className='chart-page-title'>
-                    {experiment[0].spec.displayName}
+                    {experiment.spec.displayName}
                   </h3>
                 </div>
               </div>
@@ -156,7 +160,7 @@ class Experiments extends React.Component {
                   </Link>{' '}
                   >{' '}
                   <span className='breadcrumb-text'>
-                    {experiment[0].spec.displayName}
+                    {experiment.spec.displayName}
                   </span>
                 </div>
                 <div className='chart-header-filters-container'></div>

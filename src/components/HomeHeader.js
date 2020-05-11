@@ -121,7 +121,7 @@ class HomeHeader extends React.Component {
                 </div>
               </a>
               <Link to={process.env.PUBLIC_URL} className="home">
-                <h3 className="top-header-home">{<FaHome />}</h3>
+                <h3 className="top-header-home">{<FaHome size={25} />}</h3>
               </Link>
               <input
                 className="top-header-input"
@@ -161,6 +161,7 @@ class HomeHeader extends React.Component {
                 onClick={() => this.props.toggleTheme()}
               >
                 {this.props.isDarkTheme ? <FaMoon size={25} color='#FFFFFF' /> : <FaSun size={25} color='#FFD600' />}
+                <span className="tooltiptext">{this.props.isDarkTheme ? "Dark Mode" : "Light Mode"}</span>
               </div>
             </div>
 

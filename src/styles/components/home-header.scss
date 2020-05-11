@@ -1,6 +1,10 @@
 .hero-bg {
   @include themify($themes) {
-    background: linear-gradient(180deg, themed("gradStart") 0%, themed("gradEnd") 100%);
+    background: linear-gradient(
+      180deg,
+      themed("gradStart") 0%,
+      themed("gradEnd") 100%
+    );
   }
 }
 .home-header-container {
@@ -128,8 +132,30 @@
         }
       }
       .top-header-theme-changer {
+        position: relative;
         margin-left: 16px;
         cursor: pointer;
+
+        .tooltiptext {
+          visibility: hidden;
+          width: 120px;
+          background-color: themed("commonBlack");
+          color: themed("commonWhite");
+          text-align: center;
+          border-radius: 8px;
+          padding: 5px 0;
+
+          /* Position the tooltip */
+          position: absolute;
+          z-index: 100;
+          bottom: 100%;
+          left: 50%;
+          margin-left: -73px;
+        }
+
+        &:hover .tooltiptext {
+          visibility: visible;
+        }
       }
     }
 

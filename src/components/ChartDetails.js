@@ -14,9 +14,7 @@ const ReactMarkdown = require("react-markdown");
 
 const customStyles = (isDarkTheme) => ({
   overlay: {
-    backgroundColor: isDarkTheme
-      ? "rgba(0,0,0,0.75)"
-      : "rgba(255,255,255,0.75)",
+    backgroundColor: "#000000bf",
   },
   content: {
     top: "50%",
@@ -25,7 +23,7 @@ const customStyles = (isDarkTheme) => ({
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    boxShadow: "0 2px 16px 0 rgba(0,0,0,0.2)",
+    boxShadow: "0 2px 16px 0 #00000005",
     border: "none",
     color: isDarkTheme ? "#ffffff" : "#383842",
     backgroundColor: isDarkTheme ? "#2D2D2D" : "#fafafa",
