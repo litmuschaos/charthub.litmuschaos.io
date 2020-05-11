@@ -2,6 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { FaHome } from "react-icons/fa";
+import { FaSun } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
 import { withRouter } from "react-router-dom";
 import { analyticsData, loadVersion } from "../redux/actions";
 import {
@@ -158,7 +160,7 @@ class HomeHeader extends React.Component {
                 className="top-header-theme-changer"
                 onClick={() => this.props.toggleTheme()}
               >
-                Light
+                {this.props.isDarkTheme ? <FaMoon size={25} color='#FFFFFF' /> : <FaSun size={25} color='#FFD600' />}
               </div>
             </div>
 

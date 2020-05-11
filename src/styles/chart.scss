@@ -28,6 +28,7 @@
           .breadcrumbs {
             font-size: 12px;
             .breadcrumb-text {
+              color: themed("textSecondary");
               margin-left: 2px;
               margin-right: 2px;
             }
@@ -58,6 +59,7 @@
           height: 30px;
           .nav-back-icon-container {
             border: 2px solid themed("accentBlue");
+            color: themed("accentBlue");
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -73,13 +75,13 @@
             }
           }
           .chart-page-title-container {
-            border-left: 2px solid themed("secondaryColor");
+            border-left: 2px solid themed("textSecondary");
             height: 100%;
             margin-left: 16px;
             display: flex;
             align-items: center;
             .chart-page-title {
-              color: themed("secondaryColor");
+              color: themed("textSecondary");
               font-size: 18px;
               padding-left: 10px;
               box-sizing: border-box;

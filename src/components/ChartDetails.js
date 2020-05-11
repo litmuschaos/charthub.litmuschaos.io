@@ -239,7 +239,7 @@ export class ChartDetails extends React.Component {
               onClick={this.handleCollapseContent}
             >
               <span className='chart-details-title'>{this.props.name}</span>
-              <IconContext.Provider value={{ color: '#004ED6', size: '1.5em' }}>
+              <IconContext.Provider value={{ size: '1.5em' }}>
                 <GoChevronDown />
               </IconContext.Provider>
             </div>

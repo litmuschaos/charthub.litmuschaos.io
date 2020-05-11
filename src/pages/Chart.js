@@ -112,7 +112,7 @@ class Chart extends React.Component {
                   onClick={this.handleNavHome}
                 >
                   <IconContext.Provider
-                    value={{ color: '#004ED6', size: '0.7em' }}
+                    value={{ size: '0.7em' }}
                   >
                     <FaArrowLeft />
                   </IconContext.Provider>

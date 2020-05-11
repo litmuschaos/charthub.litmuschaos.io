@@ -49,7 +49,7 @@
     border-radius: 4px;
     margin-right: 37px;
     margin-bottom: 37px;
-    background-color: themed("primaryColor");
+    background-color: themed("cardColor");
     box-shadow: 0 4px 10px 0 themed("boxShadow");
     transition: 0.5s;
     cursor: pointer;
@@ -69,6 +69,7 @@
       margin-top: 12.03px;
       position: relative;
       z-index: 5;
+      color: themed("accentBlue");
     }
     a {
       text-decoration: none;
@@ -92,7 +93,7 @@
       height: 54px;
       @include flexCenter;
       margin-top: 13px; ///13 px
-      background-color: themed("primaryColor");
+      background-color: themed("cardColor");
       z-index: 1;
       position: relative;
       .icon-background {
@@ -101,7 +102,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: themed("primaryColor");
+        background-color: themed("cardColor");
         .icon {
           height: 50px;
         }

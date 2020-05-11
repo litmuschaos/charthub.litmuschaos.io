@@ -40,7 +40,7 @@
       }
 
       .chart-header-title {
-        color: themed("textPrimary");
+        color: themed("commonWhite");
         font-size: 18px;
         font-weight: bold;
       }
@@ -92,7 +92,7 @@
 
       .top-header-contribute {
         margin-left: 15px;
-        color: themed("primaryColor");
+        color: themed("commonWhite");
         font-size: 14px;
         display: flex;
         align-items: center;
@@ -110,7 +110,7 @@
 
       .top-header-home {
         font-size: 14px;
-        color: themed("textPrimary");
+        color: themed("commonWhite");
       }
 
       .top-header-input {
@@ -120,7 +120,7 @@
         border: none;
         padding-left: 5px;
         box-sizing: border-box;
-        background-color: themed("primaryColor");
+        background-color: themed("commonWhite");
         @include phone {
           order: 2;
           width: 100%;
@@ -130,13 +130,12 @@
       .top-header-theme-changer {
         margin-left: 16px;
         cursor: pointer;
-        color: themed("textPrimary");
       }
     }
 
     .home-header-title-1 {
       margin-top: 50px;
-      color: themed("textPrimary");
+      color: themed("commonWhite");
       font-size: 37px;
       font-weight: bold;
       text-align: center;
@@ -148,7 +147,7 @@
     }
 
     .home-header-title-2 {
-      color: themed("textPrimary");
+      color: themed("commonWhite");
       font-family: Lato;
       font-size: 20px;
       text-align: center;
@@ -159,7 +158,7 @@
     }
 
     .home-header-title-3 {
-      color: themed("textPrimary");
+      color: themed("commonWhite");
       font-family: Lato;
       font-size: 17px;
       text-align: center;

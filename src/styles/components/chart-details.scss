@@ -104,6 +104,7 @@
           margin-top: 10px;
           margin-bottom: 10px;
           border-bottom: 1px solid themed("border");
+          color: themed("commonBlack");
           .items {
             margin-left: 10px;
             width: 90%;
@@ -118,7 +119,6 @@
           border: none;
         }
         .uses-explanation-title {
-          color: themed("textGray");
           font-size: 16px;
           margin-top: 21px;
         }
@@ -128,7 +128,6 @@
         }
 
         .uses-explanation {
-          color: themed("textGray");
           margin-top: 1px;
           font-size: 16px;
         }
@@ -145,10 +144,11 @@
         display: flex;
         align-items: center;
         cursor: pointer;
+        color: themed("accentBlue");
 
         .chart-details-title {
           font-weight: bold;
-          color: themed("secondaryColor");
+          color: themed("textSecondary");
           font-size: 18px;
           margin-right: 5px;
         }
@@ -177,11 +177,6 @@
     }
   }
 
-  .dark-gray {
-    @include themify($themes) {
-      color: themed("textGray");
-    }
-  }
   .modal-close-button {
     @include themify($themes) {
       border: none;
@@ -213,7 +208,7 @@
           top: 50%;
           left: 0;
           margin-top: -1px;
-          background: themed("secondaryColor");
+          background: themed("textSecondary");
         }
 
         &::before {
