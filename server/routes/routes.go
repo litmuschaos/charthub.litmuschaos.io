@@ -62,4 +62,10 @@ var routes = Routes{
 		"/version",
 		handler.GetChartVersion,
 	},
+	Route{
+		"Webhook",
+		"POST",
+		"/webhook",
+		handler.Webhook,
+	},
 }

@@ -22,17 +22,13 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
-	"time"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
-
-	"github.com/litmuschaos/charthub.litmuschaos.io/server/controller/handler"
 )
 
 const (
-	timeInterval  = 1 * time.Hour
 	defaultBranch = "master"
 )
 
@@ -55,20 +51,18 @@ var (
 
 // Trigger is reposible for setting off the go routine for git-op
 func Trigger() {
+	// TODO: Define a single place where the repository name is defined
 	gitConfig := GitConfig{
-		RepositoryName: handler.ChaosChartPath,
+		RepositoryName: os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/public/chaos-charts/",
 		RepositoryURL:  "https://github.com/litmuschaos/chaos-charts",
 		LocalCommit:    "", RemoteCommit: "", RemoteName: "origin",
 	}
-	for {
-		versions, _ := gitConfig.getChaosChartVersion()
-		for _, version := range versions {
-			if err := gitConfig.chaosChartSyncHandler(version); err != nil {
-				log.Error(err)
-			}
-			log.Infof("********* Repository syncing completed for version: '%s' *********", version)
+	versions, _ := gitConfig.getChaosChartVersion()
+	for _, version := range versions {
+		if err := gitConfig.chaosChartSyncHandler(version); err != nil {
+			log.Error(err)
 		}
-		time.Sleep(timeInterval)
+		log.Infof("********* Repository syncing completed for version: '%s' *********", version)
 	}
 }
 

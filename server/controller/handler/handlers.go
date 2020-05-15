@@ -30,6 +30,7 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/litmuschaos/charthub.litmuschaos.io/server/pkg/analytics"
+	"github.com/litmuschaos/charthub.litmuschaos.io/server/pkg/gitops"
 )
 
 // ChaosChartPath refers the location of the freshly updated repository
@@ -184,6 +185,13 @@ func GetChartVersion(w http.ResponseWriter, r *http.Request) {
 	writeHeaders(&w, 200)
 	(w).Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprint(w, string(version))
+}
+
+// Sync the chaos-chart a/c to the webhook event
+func Webhook(w http.ResponseWriter, r *http.Request) {
+	// Trigger the chaos-chart sync method in go routine without blocking the webhook response
+	go gitops.Trigger()
+	writeHeaders(&w, 200)
 }
 
 func writeHeaders(w *http.ResponseWriter, statusCode int) {
