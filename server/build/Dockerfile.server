@@ -8,7 +8,6 @@ RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
 RUN go build -o ./build/_output/bin/charthub-server -v
 
-
 FROM golang:1.10.4 
 
 COPY --from=builder $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/server/build/_output/bin/charthub-server /
