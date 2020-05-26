@@ -53,7 +53,7 @@ class Experiments extends React.Component {
       console.log('Catch error:', e);
     }
   };
-  
+
   filterExperiment = experimentName => {
     let exp = this.props.chart.experiments.filter(experiment => {
       if (experiment.metadata.name === experimentName) {
@@ -63,7 +63,7 @@ class Experiments extends React.Component {
     });
     return exp[0];
   }
-  
+
   renderCharts = () => {
     try {
       let i = 0;
@@ -73,35 +73,34 @@ class Experiments extends React.Component {
 
       // Returns only the specific matching experiment json object or undefined
       let experiment = this.filterExperiment(experimentName);
-      
+
       let links = experiment.spec.links?experiment.spec.links:[]
       links.forEach(link=>{
         if(link.name.toLowerCase()==="video")
           videoLink=link.url;
       })
 
-      let showexperiment = experiment.map(chart => (
+      let showexperiment = experiment?
         <ChartDetails
           key={i++}
           install_button_text='INSTALL EXPERIMENT'
-          charts={chart}
+          charts={experiment}
           analytics={this.props.analytics}
           CountMessage='Total runs'
-          ChartCount={this.func(chart)}
+          ChartCount={this.func(experiment)}
           displayName={displayName}
-          name={chart.spec.displayName}
+          name={experiment.spec.displayName}
           isCollapsed={false}
           video={videoLink}
           logo={
             this.state.logo +
             this.props.chart.metadata.name +
             '/icons/' +
-            chart.metadata.name +
+            experiment.metadata.name +
             '.png'
           }
-        />
-      ));
-      return [...showexperiment];
+        />:"";
+      return [showexperiment];
     } catch (e) {
       console.log('Catch error:', e);
     }
