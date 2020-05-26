@@ -1,0 +1,22 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/app/client/node_modules
+
+# testing
+/app/client/coverage
+
+# production
+/app/client/build
+
+# misc
+*/**/*.DS_Store
+*/**/*.env.local
+*/**/*.env.development.local
+*/**/*.env.test.local
+*/**/*.env.production.local
+*/**/*.log*
+
+/app/client/npm-debug.log*
+/app/client/yarn-debug.log*
+/app/client/yarn-error.log*
