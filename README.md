@@ -9,31 +9,31 @@ This is a Boilerplate/Template for a react project with React Hooks, Material-UI
 
 Inspired by:
 
--   [Create React App example with Material-UI, TypeScript, Redux and Routing](https://github.com/innFactory/create-react-app-material-typescript-redux)
--   [Material-UI](https://github.com/mui-org/material-ui)
--   [react-redux-typescript-boilerplate](https://github.com/rokoroku/react-redux-typescript-boilerplate)
+- [Create React App example with Material-UI, TypeScript, Redux and Routing](https://github.com/innFactory/create-react-app-material-typescript-redux)
+- [Material-UI](https://github.com/mui-org/material-ui)
+- [react-redux-typescript-boilerplate](https://github.com/rokoroku/react-redux-typescript-boilerplate)
 
 ## Contains
 
--   [x] [Material-UI](https://github.com/mui-org/material-ui)
--   [x] [Typescript](https://www.typescriptlang.org/)
--   [x] [React](https://facebook.github.io/react/)
--   [x] [Redux](https://github.com/reactjs/redux)
--   [x] [Redux-Thunk](https://github.com/gaearon/redux-thunk)
--   [x] [Redux-Persist](https://github.com/rt2zz/redux-persist)
--   [x] [React Router](https://github.com/ReactTraining/react-router)
--   [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
--   [x] [TodoMVC example](http://todomvc.com)
--   [x] PWA Support
--   [x] [Husky](https://www.npmjs.com/package/husky)
+- [x] [Material-UI](https://github.com/mui-org/material-ui)
+- [x] [Typescript](https://www.typescriptlang.org/)
+- [x] [React](https://facebook.github.io/react/)
+- [x] [Redux](https://github.com/reactjs/redux)
+- [x] [Redux-Thunk](https://github.com/gaearon/redux-thunk)
+- [x] [Redux-Persist](https://github.com/rt2zz/redux-persist)
+- [x] [React Router](https://github.com/ReactTraining/react-router)
+- [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
+- [x] [TodoMVC example](http://todomvc.com)
+- [x] PWA Support
+- [x] [Husky](https://www.npmjs.com/package/husky)
 
 ## Roadmap
 
--   [x] Make function based components and use hooks for state etc.
--   [x] Implement [Material-UIs new styling solution](https://material-ui.com/css-in-js/basics/) based on hooks
--   [x] use react-redux hooks
--   [x] Setup Material UI custom styling soluton with TypeScript, with setup for dynamic theme switching with Redux
--   [ ] Hot Reloading -> Waiting for official support of react-scripts
+- [x] Make function based components and use hooks for state etc.
+- [x] Implement [Material-UIs new styling solution](https://material-ui.com/css-in-js/basics/) based on hooks
+- [x] use react-redux hooks
+- [x] Setup Material UI custom styling soluton with TypeScript, with setup for dynamic theme switching with Redux
+- [ ] Hot Reloading -> Waiting for official support of react-scripts
 
 ## How to use
 
@@ -50,6 +50,7 @@ More information from Github, [here](https://help.github.com/en/github/creating-
 Install it and run:
 
 ```bash
+cd app/client
 npm i
 npm start
 ```
@@ -57,6 +58,7 @@ npm start
 Build it and serve:
 
 ```bash
+cd app/client
 npm run build
 npm install -g serve
 serve -s build
@@ -94,6 +96,6 @@ This example demonstrate how you can use [Create React App](https://github.com/f
 
 ## Contributors
 
--   [Arkajyoti Mukherjee](https://github.com/arkajyotiMukherjee)
+- [Arkajyoti Mukherjee](https://github.com/arkajyotiMukherjee)
 
 Big thanks to [innFactory](https://innfactory.de/)
