@@ -29,11 +29,11 @@ import (
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 
-	"github.com/litmuschaos/charthub.litmuschaos.io/server/pkg/analytics"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/analytics"
 )
 
 // ChaosChartPath refers the location of the freshly updated repository
-var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/public/chaos-charts/"
+var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/app/client/public/chaos-charts/"
 
 /*	pathParser reads the path in the csv file <path> forms the system-path <fileLookedPath>
 	and returns the file

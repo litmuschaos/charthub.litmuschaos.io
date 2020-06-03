@@ -21,7 +21,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/litmuschaos/charthub.litmuschaos.io/server/controller/logger"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/controller/logger"
 )
 
 // NewRouter creates a mux-router for all the respective routes
