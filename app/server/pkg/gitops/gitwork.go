@@ -28,7 +28,7 @@ import (
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 
-	"github.com/litmuschaos/charthub.litmuschaos.io/server/controller/handler"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/controller/handler"
 )
 
 const (

@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/litmuschaos/charthub.litmuschaos.io/server/pkg/analytics"
-	"github.com/litmuschaos/charthub.litmuschaos.io/server/pkg/gitops"
-	"github.com/litmuschaos/charthub.litmuschaos.io/server/routes"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/analytics"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/gitops"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/routes"
 )
 
 func main() {
