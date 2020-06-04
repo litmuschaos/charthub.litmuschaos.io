@@ -1,5 +1,4 @@
 import {
-	Divider,
 	Drawer as DrawerMui,
 	FormControl,
 	Hidden,
@@ -12,16 +11,35 @@ import {
 	Select,
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeTwoTone";
+import ContributeIcon from "@material-ui/icons/ReceiptTwoTone";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
-import { RootState } from "../../redux/reducers";
-import { TodoIcon } from "../TodoIcon";
 import { useStyles } from "./styles";
+
+interface ListItemProps {
+	handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+	children: JSX.Element;
+	label: string;
+}
+
+const CustomisedListItem = (props: ListItemProps) => {
+	const classes = useStyles();
+	const { children, handleClick, label } = props;
+	return (
+		<ListItem
+			button
+			onClick={handleClick}
+			alignItems="center"
+			className={classes.drawerListItem}
+		>
+			<ListItemIcon>{children}</ListItemIcon>
+			<ListItemText primary={label} />
+		</ListItem>
+	);
+};
 
 function Drawer() {
 	const classes = useStyles();
-	const todoList = useSelector((state: RootState) => state.todoList);
 	const [docsVersion, setDocsVersion] = useState("1.4.1");
 
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -46,22 +64,22 @@ function Drawer() {
 
 			<div>LOGO</div>
 
-			<List>
-				<ListItem button onClick={() => history.push("/")}>
-					<ListItemIcon>
-						<HomeIcon fontSize="large" className={classes.button} />
-					</ListItemIcon>
-					<ListItemText primary="Home" />
-				</ListItem>
-			</List>
-			<Divider />
-			<List>
-				<ListItem button onClick={() => history.push("/todo")}>
-					<ListItemIcon>
-						<TodoIcon todoList={todoList} />
-					</ListItemIcon>
-					<ListItemText primary="Todo" />
-				</ListItem>
+			<List className={classes.drawerList}>
+				<CustomisedListItem
+					handleClick={() => history.push("/")}
+					label="Home"
+				>
+					<HomeIcon fontSize="large" className={classes.button} />
+				</CustomisedListItem>
+				<CustomisedListItem
+					handleClick={() => history.push("/")}
+					label="Contribute"
+				>
+					<ContributeIcon
+						fontSize="large"
+						className={classes.button}
+					/>
+				</CustomisedListItem>
 			</List>
 		</div>
 	);
