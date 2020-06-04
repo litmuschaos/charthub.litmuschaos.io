@@ -8,17 +8,4 @@ export const useStyles = makeStyles((theme) => ({
 		paddingLeft: 15,
 		paddingRight: 15,
 	},
-
-	centerContainer: {
-		flex: 1,
-		height: "90%",
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		flexDirection: "column",
-	},
-
-	button: {
-		marginTop: 20,
-	},
 }));

@@ -6,8 +6,6 @@ import { history } from "./redux/configureStore";
 import { withTheme } from "./withTheme";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
-const LandingPage = lazy(() => import("./pages/LandingPage"));
-const TodoPage = lazy(() => import("./pages/TodoPage"));
 
 function Routes() {
 	const classes = useStyles();
@@ -16,8 +14,7 @@ function Routes() {
 		<div className={classes.content}>
 			<Switch>
 				<Route exact={true} path="/" component={HomePage} />
-				<Route exact={true} path="/home" component={LandingPage} />
-				<Route exact={true} path="/todo" component={TodoPage} />
+				<Route exact={true} path="/home" component={HomePage} />
 			</Switch>
 		</div>
 	);
@@ -36,7 +33,6 @@ function App() {
 			<Router history={history}>
 				<div className={classes.root}>
 					<div className={classes.appFrame}>
-						{/* <Header handleDrawerToggle={handleDrawerToggle} /> */}
 						<AppDrawer
 							handleDrawerToggle={handleDrawerToggle}
 							mobileOpen={mobileOpen}

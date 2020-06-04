@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	drawerPaper: {
 		width: drawerWidth,
 		color: theme.palette.primary.contrastText,
-		backgroundColor: theme.palette.background.default,
+		backgroundColor: theme.palette.background.paper,
 		[theme.breakpoints.up("md")]: {
 			width: drawerWidth,
 			position: "relative",
@@ -18,6 +18,18 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		minWidth: 80,
 	},
 	button: {
-		color: theme.palette.text.primary,
+		color: theme.palette.primary.contrastText,
+		margin: "0 auto",
+	},
+	drawerList: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		margin: "auto",
+		width: "80%",
+	},
+	drawerListItem: {
+		display: "flex",
+		flexDirection: "column",
 	},
 }));
