@@ -84,7 +84,7 @@ function Community(props: { data: Community }) {
 				<HelpTwoToneIcon className={classes.commIcon} />
 			)}
 			{createList(
-				"Contact",
+				"Cotnact",
 				props.data["contributors"],
 				<PermContactCalendarRoundedIcon className={classes.commIcon} />
 			)}
