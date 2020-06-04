@@ -1,11 +1,10 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { FormHelperText } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-		border: "solid black",
-		backgroundColor: "black",
-		color: "white",
+		backgroundColor: theme.palette.secondary.dark,
+		color: theme.palette.primary.main,
+		width: "100%",
 	},
 	paper: {
 		padding: theme.spacing(2),
@@ -29,7 +28,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		display: "inline-block",
 		fontWeight: 700,
 		marginLeft: 8,
-		color: "white",
+		color: theme.palette.primary.main,
 	},
 	commList: {
 		display: "flex",
@@ -68,6 +67,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		display: "inline-block",
 		marginLeft: 32,
 		fontWeight: 700,
-		color: "white",
+		color: theme.palette.primary.main,
+	},
+	commIcon: {
+		color: theme.palette.secondary.main,
 	},
 }));

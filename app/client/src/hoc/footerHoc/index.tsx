@@ -1,10 +1,10 @@
-import * as React from "react";
-import { useStyles } from "./styles";
 import { Typography } from "@material-ui/core";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import ForumTwoToneIcon from "@material-ui/icons/ForumTwoTone";
 import HelpTwoToneIcon from "@material-ui/icons/HelpTwoTone";
 import PermContactCalendarRoundedIcon from "@material-ui/icons/PermContactCalendarRounded";
+import * as React from "react";
+import { useStyles } from "./styles";
 interface StatItem {
 	value: string;
 	desc: string;
@@ -71,22 +71,22 @@ function Community(props: { data: Community }) {
 			{createList(
 				"Top Contributors",
 				props.data["contributors"],
-				<FavoriteTwoToneIcon />
+				<FavoriteTwoToneIcon className={classes.commIcon} />
 			)}
 			{createList(
 				"Community",
 				props.data["community"],
-				<ForumTwoToneIcon />
+				<ForumTwoToneIcon className={classes.commIcon} />
 			)}
 			{createList(
 				"Resources",
 				props.data["contributors"],
-				<HelpTwoToneIcon />
+				<HelpTwoToneIcon className={classes.commIcon} />
 			)}
 			{createList(
 				"Cotnact",
 				props.data["contributors"],
-				<PermContactCalendarRoundedIcon />
+				<PermContactCalendarRoundedIcon className={classes.commIcon} />
 			)}
 		</div>
 	);
@@ -119,7 +119,7 @@ function Branding(props: { data: Branding }) {
 	);
 }
 
-export function Footer() {
+function Footer() {
 	const classes = useStyles();
 	const stat: StatItem[] = [
 		{ value: "7.7k+", desc: "chaos operator installed" },
@@ -158,7 +158,7 @@ export function Footer() {
 		],
 	};
 	const branding = {
-		logo: "maya_data_logo.svg",
+		logo: "./icons/maya_data_logo.svg",
 		copyright: "Copyright © 2020 MayaData Inc.",
 	};
 	return (
@@ -170,4 +170,17 @@ export function Footer() {
 			</div>
 		</div>
 	);
+}
+
+export default function withFooter(Component: any) {
+	function WithFooter(props: object) {
+		return (
+			<div>
+				<Component />
+				<Footer />
+			</div>
+		);
+	}
+
+	return WithFooter;
 }

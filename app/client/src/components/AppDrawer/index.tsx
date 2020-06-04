@@ -22,6 +22,11 @@ interface ListItemProps {
 	label: string;
 }
 
+interface ToggleProps {
+	handleDrawerToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	mobileOpen: boolean;
+}
+
 const CustomisedListItem = (props: ListItemProps) => {
 	const classes = useStyles();
 	const { children, handleClick, label } = props;
@@ -83,11 +88,6 @@ function Drawer() {
 			</List>
 		</div>
 	);
-}
-
-interface ToggleProps {
-	handleDrawerToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
-	mobileOpen: boolean;
 }
 
 export function AppDrawer(props: ToggleProps) {
