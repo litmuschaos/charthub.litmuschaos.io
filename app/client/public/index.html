@@ -7,7 +7,7 @@
 			content="user-scalable=0, initial-scale=1, minimum-scale=1, width=device-width, height=device-height"
 		/>
 		<!-- PWA primary color -->
-		<meta name="theme-color" content="#000000" />
+		<meta name="theme-color" content="#ffffff" />
 		<!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -21,7 +21,7 @@
 		<!-- End of: Add to home screen for Safari on iOS -->
 		<!-- Start of: Add to home screen on Windows -->
 		<meta name="msapplication-TileImage" content="./favicon.ico" />
-		<meta name="msapplication-TileColor" content="#2F3BA2" />
+		<meta name="msapplication-TileColor" content="#ffc40d" />
 		<!-- End of: Add to home screen on Windows -->
 		<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
 		<link rel="stylesheet" href="index.css" />
@@ -33,12 +33,32 @@
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+		-->
+		<link
+			rel="apple-touch-icon"
+			sizes="152x152"
+			href="./apple-touch-icon.png"
+		/>
+		<!-- <link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="./favicon-16x16.png"
+		/> -->
+		<link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
+		<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5" />
+
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
 		/>
-		<title>React Template</title>
+		<title>ChaosHub</title>
 	</head>
 
 	<body>

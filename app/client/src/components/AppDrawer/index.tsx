@@ -1,52 +1,93 @@
 import {
-	Divider,
 	Drawer as DrawerMui,
+	FormControl,
 	Hidden,
+	InputLabel,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
+	MenuItem,
+	Select,
 } from "@material-ui/core";
-import HomeIcon from "@material-ui/icons/Home";
-import React from "react";
-import { useSelector } from "react-redux";
+import HomeIcon from "@material-ui/icons/HomeTwoTone";
+import ContributeIcon from "@material-ui/icons/ReceiptTwoTone";
+import React, { useState } from "react";
 import { history } from "../../redux/configureStore";
-import { RootState } from "../../redux/reducers";
-import { TodoIcon } from "../TodoIcon";
 import { useStyles } from "./styles";
 
-function Drawer() {
-	const classes = useStyles();
-	const todoList = useSelector((state: RootState) => state.todoList);
-
-	return (
-		<div>
-			<div className={classes.drawerHeader} />
-			<Divider />
-			<List>
-				<ListItem button onClick={() => history.push("/")}>
-					<ListItemIcon>
-						<HomeIcon className={classes.button} />
-					</ListItemIcon>
-					<ListItemText primary="Home" />
-				</ListItem>
-			</List>
-			<Divider />
-			<List>
-				<ListItem button onClick={() => history.push("/todo")}>
-					<ListItemIcon>
-						<TodoIcon todoList={todoList} />
-					</ListItemIcon>
-					<ListItemText primary="Todo" />
-				</ListItem>
-			</List>
-		</div>
-	);
+interface ListItemProps {
+	handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+	children: JSX.Element;
+	label: string;
 }
 
 interface ToggleProps {
 	handleDrawerToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
 	mobileOpen: boolean;
+}
+
+const CustomisedListItem = (props: ListItemProps) => {
+	const classes = useStyles();
+	const { children, handleClick, label } = props;
+	return (
+		<ListItem
+			button
+			onClick={handleClick}
+			alignItems="center"
+			className={classes.drawerListItem}
+		>
+			<ListItemIcon>{children}</ListItemIcon>
+			<ListItemText primary={label} />
+		</ListItem>
+	);
+};
+
+function Drawer() {
+	const classes = useStyles();
+	const [docsVersion, setDocsVersion] = useState("1.4.1");
+
+	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+		setDocsVersion(event.target.value as string);
+	};
+
+	return (
+		<div>
+			<FormControl className={classes.formControl}>
+				<InputLabel>Docs</InputLabel>
+				<Select
+					labelId="change-cocs-version"
+					value={docsVersion}
+					onChange={handleChange}
+				>
+					<MenuItem value={"1.4.1"}>1.4.1</MenuItem>
+					<MenuItem value={"1.4.0"}>1.4.0</MenuItem>
+					<MenuItem value={"1.3.0"}>1.3.0</MenuItem>
+					<MenuItem value={"master"}>master</MenuItem>
+				</Select>
+			</FormControl>
+
+			<img src="./icons/litmus.svg" />
+
+			<List className={classes.drawerList}>
+				<CustomisedListItem
+					handleClick={() => history.push("/")}
+					label="Home"
+				>
+					<HomeIcon fontSize="large" className={classes.button} />
+				</CustomisedListItem>
+				<CustomisedListItem
+					handleClick={() => history.push("/")}
+					label="Contribute"
+				>
+					<ContributeIcon
+						fontSize="large"
+						className={classes.button}
+					/>
+				</CustomisedListItem>
+			</List>
+		</div>
+	);
 }
 
 export function AppDrawer(props: ToggleProps) {

@@ -1,12 +1,12 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import { useStyles } from "./App-styles";
-import { AppDrawer, Header, Loader } from "./components";
+import { AppDrawer, Loader } from "./components";
+import withFooter from "./hoc/footerHoc";
+import withTheme from "./hoc/themeHoc";
 import { history } from "./redux/configureStore";
-import { withTheme } from "./withTheme";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
-const TodoPage = lazy(() => import("./pages/TodoPage"));
 
 function Routes() {
 	const classes = useStyles();
@@ -14,9 +14,12 @@ function Routes() {
 	return (
 		<div className={classes.content}>
 			<Switch>
-				<Route exact={true} path="/" component={HomePage} />
-				<Route exact={true} path="/home" component={HomePage} />
-				<Route exact={true} path="/todo" component={TodoPage} />
+				<Route exact={true} path="/" component={withFooter(HomePage)} />
+				<Route
+					exact={true}
+					path="/home"
+					component={withFooter(HomePage)}
+				/>
 			</Switch>
 		</div>
 	);
@@ -35,7 +38,6 @@ function App() {
 			<Router history={history}>
 				<div className={classes.root}>
 					<div className={classes.appFrame}>
-						<Header handleDrawerToggle={handleDrawerToggle} />
 						<AppDrawer
 							handleDrawerToggle={handleDrawerToggle}
 							mobileOpen={mobileOpen}
