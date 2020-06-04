@@ -1,14 +1,18 @@
 import {
 	Divider,
 	Drawer as DrawerMui,
+	FormControl,
 	Hidden,
+	InputLabel,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
+	MenuItem,
+	Select,
 } from "@material-ui/core";
-import HomeIcon from "@material-ui/icons/Home";
-import React from "react";
+import HomeIcon from "@material-ui/icons/HomeTwoTone";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { RootState } from "../../redux/reducers";
@@ -18,15 +22,34 @@ import { useStyles } from "./styles";
 function Drawer() {
 	const classes = useStyles();
 	const todoList = useSelector((state: RootState) => state.todoList);
+	const [docsVersion, setDocsVersion] = useState("1.4.1");
+
+	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+		setDocsVersion(event.target.value as string);
+	};
 
 	return (
 		<div>
-			<div className={classes.drawerHeader} />
-			<Divider />
+			<FormControl className={classes.formControl}>
+				<InputLabel>Docs</InputLabel>
+				<Select
+					labelId="change-cocs-version"
+					value={docsVersion}
+					onChange={handleChange}
+				>
+					<MenuItem value={"1.4.1"}>1.4.1</MenuItem>
+					<MenuItem value={"1.4.0"}>1.4.0</MenuItem>
+					<MenuItem value={"1.3.0"}>1.3.0</MenuItem>
+					<MenuItem value={"master"}>master</MenuItem>
+				</Select>
+			</FormControl>
+
+			<div>LOGO</div>
+
 			<List>
 				<ListItem button onClick={() => history.push("/")}>
 					<ListItemIcon>
-						<HomeIcon className={classes.button} />
+						<HomeIcon fontSize="large" className={classes.button} />
 					</ListItemIcon>
 					<ListItemText primary="Home" />
 				</ListItem>
