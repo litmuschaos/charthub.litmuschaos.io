@@ -17,7 +17,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	content: {
 		backgroundColor: theme.palette.background.default,
 		width: "100%",
-		height: "calc(100% - 56px)",
 		marginTop: 56,
 		[theme.breakpoints.up("sm")]: {
 			height: "calc(100% - 64px)",
