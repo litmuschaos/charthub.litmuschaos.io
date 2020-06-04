@@ -2,8 +2,9 @@ import React, { lazy, Suspense } from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import { useStyles } from "./App-styles";
 import { AppDrawer, Loader } from "./components";
+import withFooter from "./hoc/footerHoc";
+import withTheme from "./hoc/themeHoc";
 import { history } from "./redux/configureStore";
-import { withTheme } from "./withTheme";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 
@@ -13,8 +14,12 @@ function Routes() {
 	return (
 		<div className={classes.content}>
 			<Switch>
-				<Route exact={true} path="/" component={HomePage} />
-				<Route exact={true} path="/home" component={HomePage} />
+				<Route exact={true} path="/" component={withFooter(HomePage)} />
+				<Route
+					exact={true}
+					path="/home"
+					component={withFooter(HomePage)}
+				/>
 			</Switch>
 		</div>
 	);

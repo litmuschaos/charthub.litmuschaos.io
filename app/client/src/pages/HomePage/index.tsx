@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import * as React from "react";
 import { useStyles } from "./styles";
 
-export default function LandingPage() {
+function HomePage() {
 	const classes = useStyles();
 
 	return (
@@ -13,3 +13,5 @@ export default function LandingPage() {
 		</div>
 	);
 }
+
+export default HomePage;

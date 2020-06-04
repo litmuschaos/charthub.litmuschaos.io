@@ -64,14 +64,10 @@ function customTheme(options: ThemeOptions) {
 
 const theme = customTheme({});
 
-export function withTheme(Component: any) {
+export default function withTheme(Component: any) {
 	function WithTheme(props: object) {
-		// MuiThemeProvider makes the theme available down the React tree
-		// thanks to React context.
-
 		return (
 			<ThemeProvider theme={theme}>
-				{/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
 				<CssBaseline />
 				<Component {...props} />
 			</ThemeProvider>
