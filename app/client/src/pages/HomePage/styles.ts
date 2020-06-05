@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { brotliDecompress } from "zlib";
 
 export const useStyles = makeStyles((theme) => ({
 	root: {

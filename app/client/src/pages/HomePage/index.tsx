@@ -19,6 +19,7 @@ function HomePage() {
 	const classes = useStyles();
 	const [selectChaos, setSelectChaos] = useState("All");
 	const [selectContributors, setSelectContributors] = useState("All");
+
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
@@ -32,7 +33,6 @@ function HomePage() {
 	const handleSort = () => {
 		console.log("Sort button active!");
 	};
-	const [search, setSearch] = useState();
 	return (
 		<div className={classes.root}>
 			<Typography variant="h4" style={{ fontSize: "40px" }} gutterBottom>
