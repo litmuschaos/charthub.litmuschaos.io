@@ -1,19 +1,19 @@
-import * as React from "react";
-import { useStyles } from "./styles";
-import { useState } from "react";
+import {
+	Button,
+	Container,
+	FormControl,
+	Icon,
+	Select,
+	Typography,
+} from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Search from "@material-ui/icons/SearchRounded";
 import Sort from "@material-ui/icons/Sort";
-import {
-	FormControl,
-	Icon,
-	Select,
-	Typography,
-	Container,
-	Button,
-} from "@material-ui/core";
+import * as React from "react";
+import { useState } from "react";
+import { useStyles } from "./styles";
 
 function HomePage() {
 	const classes = useStyles();
@@ -32,7 +32,6 @@ function HomePage() {
 	const handleSort = () => {
 		console.log("Sort button active!");
 	};
-	const [search, setSearch] = useState();
 	return (
 		<div className={classes.root}>
 			<Typography variant="h4" style={{ fontSize: "40px" }} gutterBottom>

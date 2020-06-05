@@ -67,7 +67,7 @@ function Drawer() {
 				</Select>
 			</FormControl>
 
-			<img src="./icons/litmus.svg" />
+			<img src="./icons/litmus.svg" alt="litmus logo" />
 
 			<List className={classes.drawerList}>
 				<CustomisedListItem
