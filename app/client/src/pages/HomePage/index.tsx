@@ -19,7 +19,6 @@ function HomePage() {
 	const classes = useStyles();
 	const [selectChaos, setSelectChaos] = useState("All");
 	const [selectContributors, setSelectContributors] = useState("All");
-
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
