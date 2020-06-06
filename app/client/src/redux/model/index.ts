@@ -1,6 +1,6 @@
 import { AnalyticsAction } from "./analytics";
 import { ChartAction } from "./charts";
-import { GithubContributorAction } from "./githubContributors";
+import { GithubAction } from "./github";
 import { ThemeAction } from "./theme";
 import { TodoAction } from "./todo";
 import { VersionAction } from "./versions";
@@ -14,4 +14,4 @@ export type Action =
 	| ChartAction
 	| AnalyticsAction
 	| VersionAction
-	| GithubContributorAction;
+	| GithubAction;
