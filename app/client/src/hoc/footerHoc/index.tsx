@@ -5,6 +5,10 @@ import HelpTwoToneIcon from "@material-ui/icons/HelpTwoTone";
 import PermContactCalendarRoundedIcon from "@material-ui/icons/PermContactCalendarRounded";
 import * as React from "react";
 import { useStyles } from "./styles";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/reducers";
+import { GithubContributor } from "../../redux/model";
+
 interface StatItem {
 	value: string;
 	desc: string;
@@ -47,7 +51,6 @@ function Stat(props: { stat: StatItem[] }) {
 function Community(props: { data: Community }) {
 	const classes = useStyles();
 	const createList = (header: string, data: CommunityIntem[], icon: any) => {
-		console.log(data);
 		return (
 			<div>
 				<Typography variant="body1" style={{ fontWeight: 700 }}>
@@ -80,12 +83,12 @@ function Community(props: { data: Community }) {
 			)}
 			{createList(
 				"Resources",
-				props.data["contributors"],
+				props.data["resources"],
 				<HelpTwoToneIcon className={classes.commIcon} />
 			)}
 			{createList(
 				"Contact",
-				props.data["contributors"],
+				props.data["contact"],
 				<PermContactCalendarRoundedIcon className={classes.commIcon} />
 			)}
 		</div>
@@ -118,23 +121,40 @@ function Branding(props: { data: Branding }) {
 		</div>
 	);
 }
-
+function formatCount(count: number): string {
+	return count >= 1000 ? (count / 1000).toFixed(1) + "k+" : count + "";
+}
 function Footer() {
 	const classes = useStyles();
+	const { githubData, analyticsData } = useSelector(
+		(state: RootState) => state
+	);
+	let contributors = githubData.contributorList.map(
+		(d: GithubContributor) => ({
+			value: d.githubName,
+			link: d.githubProfileUrl,
+		})
+	);
+	contributors =
+		contributors.length >= 5 ? contributors.slice(0, 5) : contributors;
+	const opInstalls = formatCount(analyticsData.chaosOperatorCount);
+	const githubStars = formatCount(githubData.star_count);
+	const expRuns = formatCount(analyticsData.totalExpRuns);
+	//const opInstalls = formatCount(analyticsData.chaosOperatorCount)
 	const stat: StatItem[] = [
-		{ value: "7.7k+", desc: "chaos operator installed" },
-		{ value: "7.7k+", desc: "chaos operator installed" },
-		{ value: "7.7k+", desc: "chaos operator installed" },
-		{ value: "7.7k+", desc: "chaos operator installed" },
+		{
+			value: opInstalls,
+			desc: "chaos operator installed",
+		},
+		{ value: "7.7k+", desc: "total experiments" },
+		{
+			value: expRuns,
+			desc: "total experiment runs",
+		},
+		{ value: githubStars, desc: "github stars" },
 	];
 	const community: Community = {
-		contributors: [
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-		],
+		contributors,
 		community: [
 			{ value: "Jotaro Kujo", link: "https://github.com" },
 			{ value: "Jotaro Kujo", link: "https://github.com" },

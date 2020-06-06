@@ -4,6 +4,11 @@ export interface GithubContributor {
 	contributions: number;
 }
 
+export interface GithubData {
+	contributorList: GithubContributor[];
+	star_count: number;
+}
+
 export enum GithubActions {
 	LOAD_CONTRIBUTORS = "LOAD_CONTRIBUTORS",
 	LOAD_STAR_COUNT = "LOAD_STAR_COUNT",
