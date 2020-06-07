@@ -20,6 +20,15 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	button: {
 		color: theme.palette.primary.contrastText,
 		margin: "0 auto",
+		[theme.breakpoints.down("sm")]: {
+			fontSize: "30px",
+		},
+		[theme.breakpoints.up("md")]: {
+			fontSize: "30px",
+		},
+		[theme.breakpoints.up("lg")]: {
+			fontSize: "50px",
+		},
 	},
 	drawerList: {
 		display: "flex",
@@ -27,9 +36,15 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		justifyContent: "center",
 		margin: "auto",
 		width: "80%",
+		height: "100%",
 	},
 	drawerListItem: {
 		display: "flex",
 		flexDirection: "column",
+		margin: "auto",
+		borderRadius: "10px",
+		"&:hover": {
+			background: "#CCD0EF",
+		},
 	},
 }));
