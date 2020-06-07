@@ -1,9 +1,15 @@
 import { AnalyticsActions } from "../model";
 
-const baseURL = "http://localhost:8080/";
+let baseURL: string = "";
+if (
+	process.env.NODE_ENV.trim() === "development" ||
+	process.env.NODE_ENV.trim() === "test"
+) {
+	baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
+} else baseURL = "/api";
 
 export const loadAnalytics = () => (dispatch: Function, getState: Function) => {
-	fetch(baseURL + "analytics")
+	fetch(baseURL + "/analytics")
 		.then((response) => response.json())
 		.then((data) => {
 			let mapped_data = new Map<string, number>();

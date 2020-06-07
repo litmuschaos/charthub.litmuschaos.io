@@ -3,6 +3,9 @@
 # chaos-charts
 /app/client/public/chaos-charts
 
+# github repo data
+/app/client/public/githubData
+
 # dependencies
 /app/client/node_modules
 

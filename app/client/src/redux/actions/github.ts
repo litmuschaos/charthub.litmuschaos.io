@@ -1,7 +1,14 @@
 import { GithubActions, GithubContributor } from "../model";
+let baseURL: string = "";
+if (
+	process.env.NODE_ENV.trim() === "development" ||
+	process.env.NODE_ENV.trim() === "test"
+) {
+	baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
+} else baseURL = "/api";
 
 export const loadStarCount = () => (dispatch: Function, getState: Function) => {
-	fetch("https://api.github.com/repos/litmuschaos/litmus")
+	fetch(`${baseURL}/github/repo`)
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
@@ -16,7 +23,7 @@ export const loadContributors = () => (
 	dispatch: Function,
 	getState: Function
 ) => {
-	fetch("https://api.github.com/repos/litmuschaos/litmus/contributors")
+	fetch(`${baseURL}/github/contributors`)
 		.then((response) => response.json())
 		.then((data) => {
 			data = data.map((d: any) => ({
@@ -34,26 +41,3 @@ export const loadContributors = () => (
 			});
 		});
 };
-
-// // Async Function expample with redux-thunk
-// export function completeTodo(todoId: number) {
-// 	// here you could do API eg
-
-// 	return (dispatch: Function, getState: Function) => {
-// 		dispatch({ type: TodoActions.COMPLETE_TODO, payload: todoId });
-// 	};
-// }
-
-// export function uncompleteTodo(todoId: number): TodoAction {
-// 	return {
-// 		type: TodoActions.UNCOMPLETE_TODO,
-// 		payload: todoId,
-// 	};
-// }
-
-// export function deleteTodo(todoId: number): TodoAction {
-// 	return {
-// 		type: TodoActions.DELETE_TODO,
-// 		payload: todoId,
-// 	};
-// }
