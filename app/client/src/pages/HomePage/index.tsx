@@ -14,6 +14,8 @@ import Sort from "@material-ui/icons/Sort";
 import * as React from "react";
 import { useState } from "react";
 import { useStyles } from "./styles";
+import { CustomButton } from "../../components";
+import HomeIcon from "@material-ui/icons/NotesTwoTone";
 
 function HomePage() {
 	const classes = useStyles();
@@ -34,6 +36,25 @@ function HomePage() {
 	};
 	return (
 		<div className={classes.root}>
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					justifyContent: "flex-end",
+					marginRight: 91,
+					marginTop: 0,
+				}}
+			>
+				<CustomButton
+					handleClick={() =>
+						window.open(
+							"https://docs.litmuschaos.io/docs/getstarted/"
+						)
+					}
+					label="Visit Docs"
+					handleIcon={<HomeIcon />}
+				/>
+			</div>
 			<Typography variant="h4" style={{ fontSize: "40px" }} gutterBottom>
 				<b>Chaos Chart for Kubernetes</b>
 			</Typography>
