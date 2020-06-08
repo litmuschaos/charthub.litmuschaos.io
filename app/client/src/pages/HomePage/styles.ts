@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
 		color: theme.palette.primary.contrastText,
 	},
 	textField: {
-		width: 260,
+		width: "100%",
 		fontSize: 18,
 		marginLeft: theme.spacing(1),
 	},
