@@ -157,25 +157,28 @@ function Footer() {
 	const community: Community = {
 		contributors,
 		community: [
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
+			{
+				value: "Slack",
+				link: "https://kubernetes.slack.com/archives/CNXNB0ZTN",
+			},
+			{ value: "Twitter", link: "https://twitter.com/LitmusChaos" },
+			{ value: "Forum", link: "https://github.com" },
+			{ value: "Blog", link: "https://blog.mayadata.io/tag/litmus" },
 		],
 		resources: [
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
+			{ value: "FAQ", link: "https://help.mayadata.io/hc/en-us" },
+			{
+				value: "Documentation",
+				link: "https://docs.litmuschaos.io/docs/getstarted/",
+			},
+			{
+				value: "Bugs",
+				link: "https://github.com/litmuschaos/litmus/issues",
+			},
 		],
 		contact: [
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
+			{ value: "tiger.king@mayadata.io", link: "https://github.com" },
+			{ value: "star.platinum@mayadata.io", link: "https://github.com" },
 		],
 	};
 	const branding = {
