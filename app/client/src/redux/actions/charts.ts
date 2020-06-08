@@ -19,5 +19,12 @@ export const loadAllCharts = (version: string) => (
 				type: ChartActions.LOAD_ALL_CHARTS,
 				payload: data,
 			});
+		})
+		.catch((err) => {
+			console.log(err);
+			dispatch({
+				type: ChartActions.LOAD_ALL_CHARTS,
+				payload: [],
+			});
 		});
 };

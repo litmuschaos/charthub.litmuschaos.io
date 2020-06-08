@@ -18,6 +18,13 @@ export const loadVersions = () => (dispatch: Function, getState: Function) => {
 				type: VersionActions.LOAD_VERSIONS,
 				payload: data,
 			});
+		})
+		.catch((err) => {
+			console.log(err);
+			dispatch({
+				type: VersionActions.LOAD_VERSIONS,
+				payload: ["1.4.1"],
+			});
 		});
 };
 

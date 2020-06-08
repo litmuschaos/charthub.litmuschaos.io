@@ -16,6 +16,13 @@ export const loadStarCount = () => (dispatch: Function, getState: Function) => {
 				type: GithubActions.LOAD_STAR_COUNT,
 				payload: data["stargazers_count"],
 			});
+		})
+		.catch((err) => {
+			console.log(err);
+			dispatch({
+				type: GithubActions.LOAD_STAR_COUNT,
+				payload: 0,
+			});
 		});
 };
 
@@ -38,6 +45,13 @@ export const loadContributors = () => (
 			dispatch({
 				type: GithubActions.LOAD_CONTRIBUTORS,
 				payload: data,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			dispatch({
+				type: GithubActions.LOAD_CONTRIBUTORS,
+				payload: [],
 			});
 		});
 };
