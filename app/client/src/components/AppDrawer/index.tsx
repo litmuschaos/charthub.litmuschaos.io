@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeTwoTone";
 import ContributeIcon from "@material-ui/icons/ReceiptTwoTone";
+import AnalyticsIcon from "@material-ui/icons/AssessmentTwoTone";
 import React, { useState } from "react";
 import { history } from "../../redux/configureStore";
 import { useStyles } from "./styles";
@@ -81,6 +82,15 @@ function Drawer() {
 					label="Contribute"
 				>
 					<ContributeIcon
+						fontSize="large"
+						className={classes.button}
+					/>
+				</CustomisedListItem>
+				<CustomisedListItem
+					handleClick={() => history.push("/")}
+					label="Analytics"
+				>
+					<AnalyticsIcon
 						fontSize="large"
 						className={classes.button}
 					/>
