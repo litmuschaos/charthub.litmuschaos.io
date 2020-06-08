@@ -21,13 +21,13 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.primary.contrastText,
 		margin: "0 auto",
 		[theme.breakpoints.down("sm")]: {
-			fontSize: "30px",
+			fontSize: 25,
 		},
 		[theme.breakpoints.up("md")]: {
-			fontSize: "30px",
+			fontSize: 35,
 		},
 		[theme.breakpoints.up("lg")]: {
-			fontSize: "50px",
+			fontSize: 50,
 		},
 	},
 	drawerList: {
@@ -42,9 +42,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		margin: "auto",
-		borderRadius: "10px",
+		borderRadius: 10,
 		"&:hover": {
-			background: "#CCD0EF",
+			backgroundColor: theme.palette.primary.dark,
 		},
 	},
 }));
