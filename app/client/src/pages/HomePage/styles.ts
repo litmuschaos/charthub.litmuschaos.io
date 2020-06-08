@@ -59,4 +59,11 @@ export const useStyles = makeStyles((theme) => ({
 		marginLeft: theme.spacing(1),
 		color: theme.palette.primary.contrastText,
 	},
+	customButton: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		marginRight: 91,
+		marginTop: 0,
+	},
 }));

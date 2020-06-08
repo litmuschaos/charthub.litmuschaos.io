@@ -36,15 +36,7 @@ function HomePage() {
 	};
 	return (
 		<div className={classes.root}>
-			<div
-				style={{
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: "flex-end",
-					marginRight: 91,
-					marginTop: 0,
-				}}
-			>
+			<div className={classes.customButton}>
 				<CustomButton
 					handleClick={() =>
 						window.open(
