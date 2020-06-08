@@ -36,7 +36,7 @@ function HomePage() {
 	};
 	return (
 		<div className={classes.root}>
-			<div className={classes.customButton}>
+			<div className={classes.headerButton}>
 				<CustomButton
 					handleClick={() =>
 						window.open(
@@ -77,13 +77,15 @@ function HomePage() {
 					}}
 				/>
 			</Paper>
-			<Container maxWidth="lg">
+
+			<Container>
 				<div
 					style={{
 						display: "flex",
-						flexDirection: "row",
-						marginTop: 50,
-						marginBottom: 20,
+						//flexDirection: "row",
+						marginTop: 64,
+						marginBottom: 24,
+						width: "100%",
 					}}
 				>
 					<FormControl className={classes.formControl}>

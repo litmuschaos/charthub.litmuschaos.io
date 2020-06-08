@@ -72,14 +72,18 @@ function Drawer() {
 				</Select>
 			</FormControl>
 
-			<img src="./icons/litmus.svg" alt="litmus logo" />
+			<img
+				src="./icons/litmus.svg"
+				alt="litmus logo"
+				className={classes.logo}
+			/>
 
 			<List className={classes.drawerList}>
 				<CustomisedListItem
 					handleClick={() => history.push("/")}
 					label="Home"
 				>
-					<HomeIcon fontSize="large" className={classes.button} />
+					<HomeIcon className={classes.button} />
 				</CustomisedListItem>
 				<CustomisedListItem
 					handleClick={() => history.push("/")}
