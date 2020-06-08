@@ -86,7 +86,11 @@ function Drawer() {
 					<HomeIcon className={classes.button} />
 				</CustomisedListItem>
 				<CustomisedListItem
-					handleClick={() => history.push("/")}
+					handleClick={() =>
+						window.open(
+							"https://github.com/litmuschaos/chaos-charts/blob/master/CONTRIBUTING.md"
+						)
+					}
 					label="Contribute"
 				>
 					<ContributeIcon
