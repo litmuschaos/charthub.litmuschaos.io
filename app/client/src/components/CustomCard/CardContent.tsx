@@ -17,8 +17,10 @@ function CardContent(props: CardProps) {
 
 	return (
 		<div className={classes.cardContent} onClick={handleClick}>
-			<div className={classes.totalRuns}>{totalRuns}</div>
-			<div className={classes.expCount}>{experimentCount}</div>
+			{/* <div className={classes.totalRuns}>{totalRuns}</div> */}
+			<div className={classes.expCount}>
+				{experimentCount} Experiments
+			</div>
 			{urlToIcon ? (
 				<img
 					className={classes.cardMedia}
@@ -26,10 +28,10 @@ function CardContent(props: CardProps) {
 					alt="chart provider logo"
 				/>
 			) : (
-				<div className={classes.noImage} />
+				<div className={classes.noImage}>Image</div>
 			)}
 			<div className={classes.title}>{title}</div>
-			<div className={classes.provider}>{provider}</div>
+			<div className={classes.provider}>Contributed by {provider}</div>
 			<div className={classes.description}>{description}</div>
 		</div>
 	);

@@ -8,5 +8,5 @@ export interface CardProps {
 	experimentCount?: number;
 	provider: string;
 	description?: string;
-	totalRuns: number;
+	totalRuns?: number;
 }
