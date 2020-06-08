@@ -26,8 +26,8 @@ export const toggleVersion = (version: string) => (
 	getState: Function
 ) => {
 	dispatch(ChartActions.loadAllCharts(version));
-	return {
+	dispatch({
 		type: VersionActions.TOGGLE_VERSION,
 		payload: version,
-	};
+	});
 };
