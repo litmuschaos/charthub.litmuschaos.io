@@ -8,6 +8,7 @@ interface Link {
 }
 export interface Experiment {
 	name: string;
+	metadataName: string;
 	version: string;
 	vendor?: string;
 	createdAt?: string;

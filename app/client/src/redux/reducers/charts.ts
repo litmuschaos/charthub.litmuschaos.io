@@ -1,9 +1,9 @@
 import {
-	ExperimentGroup,
-	ChartActions,
 	ChartAction,
+	ChartActions,
 	ChartData,
 	Experiment,
+	ExperimentGroup,
 } from "../model";
 import createReducer from "./createReducer";
 
@@ -16,7 +16,7 @@ export const chartData = createReducer<ChartData>(initialState, {
 	[ChartActions.LOAD_ALL_CHARTS](state: ChartData, action: ChartAction) {
 		let totalExpCount: number = 0;
 		let experimentGroups: ExperimentGroup[] = [];
-		console.log(action.payload);
+
 		action.payload.forEach((g: any) => {
 			let exp: Experiment[] = [];
 			if (g.Experiments)
@@ -25,6 +25,7 @@ export const chartData = createReducer<ChartData>(initialState, {
 					totalExpCount++;
 					exp.push({
 						name: spec.DisplayName,
+						metadataName: e.Metadata.Name,
 						version: e.Metadata.Version,
 						vendor: e.Metadata.Annotations.Vendor,
 						createdAt: e.Metadata.Annotations.CreatedAt,

@@ -11,16 +11,20 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Search from "@material-ui/icons/SearchRounded";
 import Sort from "@material-ui/icons/Sort";
+import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Charts, CustomButton } from "../../components";
+import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
-import { CustomButton } from "../../components";
-import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 
 function HomePage() {
 	const classes = useStyles();
 	const [selectChaos, setSelectChaos] = useState("All");
 	const [selectContributors, setSelectContributors] = useState("All");
+	const chartData = useSelector((state: RootState) => state.chartData);
+
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
@@ -32,8 +36,9 @@ function HomePage() {
 		setSelectContributors(event.target.value as string);
 	};
 	const handleSort = () => {
-		console.log("Sort button active!");
+		// console.log("Sort button active!");
 	};
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.headerButton}>
@@ -146,6 +151,9 @@ function HomePage() {
 					</Button>
 				</div>
 			</Container>
+
+			{/* Card component */}
+			<Charts experimentGroups={chartData.experimentGroups} />
 		</div>
 	);
 }

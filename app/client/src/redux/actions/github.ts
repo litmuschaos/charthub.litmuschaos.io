@@ -11,14 +11,13 @@ export const loadStarCount = () => (dispatch: Function, getState: Function) => {
 	fetch(`${baseURL}/github/repo`)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
 			dispatch({
 				type: GithubActions.LOAD_STAR_COUNT,
 				payload: data["stargazers_count"],
 			});
 		})
 		.catch((err) => {
-			console.log(err);
+			console.error("Can't load data", err);
 			dispatch({
 				type: GithubActions.LOAD_STAR_COUNT,
 				payload: 0,
@@ -48,7 +47,7 @@ export const loadContributors = () => (
 			});
 		})
 		.catch((err) => {
-			console.log(err);
+			console.error("Can't load data", err);
 			dispatch({
 				type: GithubActions.LOAD_CONTRIBUTORS,
 				payload: [],

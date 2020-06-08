@@ -21,7 +21,7 @@ export const loadAllCharts = (version: string) => (
 			});
 		})
 		.catch((err) => {
-			console.log(err);
+			console.error("Can't load data", err);
 			dispatch({
 				type: ChartActions.LOAD_ALL_CHARTS,
 				payload: [],

@@ -1,4 +1,4 @@
-import { VersionActions, VersionAction } from "../model";
+import { VersionActions } from "../model";
 import * as ChartActions from "./charts";
 
 let baseURL: string = "";
@@ -20,7 +20,7 @@ export const loadVersions = () => (dispatch: Function, getState: Function) => {
 			});
 		})
 		.catch((err) => {
-			console.log(err);
+			console.error("Can't load data", err);
 			dispatch({
 				type: VersionActions.LOAD_VERSIONS,
 				payload: ["1.4.1"],

@@ -1,4 +1,4 @@
-import { VersionActions, VersionAction, VersionData } from "../model";
+import { VersionAction, VersionActions, VersionData } from "../model";
 import createReducer from "./createReducer";
 
 const initialState: VersionData = {
@@ -15,7 +15,9 @@ export const versionData = createReducer<VersionData>(initialState, {
 		};
 	},
 	[VersionActions.TOGGLE_VERSION](state: VersionData, action: VersionAction) {
-		const match = state.versions.filter((i: string) => i == action.payload);
+		const match = state.versions.filter(
+			(i: string) => i === action.payload
+		);
 		if (match !== [])
 			return {
 				...state,

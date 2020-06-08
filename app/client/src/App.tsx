@@ -4,11 +4,11 @@ import { useStyles } from "./App-styles";
 import { AppDrawer, Loader } from "./components";
 import withFooter from "./hoc/footerHoc";
 import withTheme from "./hoc/themeHoc";
-import { history } from "./redux/configureStore";
 import { useActions } from "./redux/actions";
-import * as GithubActions from "./redux/actions/github";
 import * as AnalyticsActions from "./redux/actions/analytics";
+import * as GithubActions from "./redux/actions/github";
 import * as VersionActions from "./redux/actions/versions";
+import { history } from "./redux/configureStore";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 
@@ -35,6 +35,7 @@ function App() {
 	const versionActions = useActions(VersionActions);
 	const classes = useStyles();
 	const [mobileOpen, setMobileOpen] = React.useState(true);
+
 	useEffect(() => {
 		versionActions.loadVersions();
 		githubActions.loadStarCount();
