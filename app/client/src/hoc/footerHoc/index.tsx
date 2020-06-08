@@ -8,7 +8,6 @@ import { useStyles } from "./styles";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { GithubContributor } from "../../redux/model";
-import { chartData } from "../../redux/reducers/charts";
 
 interface StatItem {
 	value: string;

@@ -12,6 +12,7 @@ import (
 
 const (
 	timeInterval = 5 * time.Minute
+	repoName     = "litmus"
 )
 
 var basePath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/app/client/public/githubData/"
@@ -34,7 +35,7 @@ func UpdateGithubData() error {
 	if _, err := os.Stat(basePath); os.IsNotExist(err) {
 		os.Mkdir(basePath, 0700)
 	}
-	response, err := http.Get("https://api.github.com/repos/litmuschaos/litmus")
+	response, err := http.Get("https://api.github.com/repos/litmuschaos/" + repoName)
 	if err != nil {
 		return fmt.Errorf("Error while getting github repo data, err :%s", err)
 	}
@@ -46,7 +47,7 @@ func UpdateGithubData() error {
 	file.WriteString(string(data))
 	defer file.Close()
 
-	response, err = http.Get("https://api.github.com/repos/litmuschaos/litmus/contributors")
+	response, err = http.Get("https://api.github.com/repos/litmuschaos/" + repoName + "/contributors")
 	if err != nil {
 		return fmt.Errorf("Error while getting github contributor data, err :%s", err)
 	}
