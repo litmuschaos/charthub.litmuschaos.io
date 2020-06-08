@@ -36,7 +36,6 @@ function App() {
 	const classes = useStyles();
 	const [mobileOpen, setMobileOpen] = React.useState(true);
 	useEffect(() => {
-		console.log("HERERE");
 		versionActions.loadVersions();
 		githubActions.loadStarCount();
 		githubActions.loadContributors();

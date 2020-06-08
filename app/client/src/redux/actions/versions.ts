@@ -13,7 +13,7 @@ export const loadVersions = () => (dispatch: Function, getState: Function) => {
 	fetch(baseURL + "/version")
 		.then((response) => response.json())
 		.then((data) => {
-			dispatch(ChartActions.loadALlCharts(data[0]));
+			dispatch(ChartActions.loadAllCharts(data[0]));
 			dispatch({
 				type: VersionActions.LOAD_VERSIONS,
 				payload: data,
@@ -25,7 +25,7 @@ export const toggleVersion = (version: string) => (
 	dispatch: Function,
 	getState: Function
 ) => {
-	dispatch(ChartActions.loadALlCharts(version));
+	dispatch(ChartActions.loadAllCharts(version));
 	return {
 		type: VersionActions.TOGGLE_VERSION,
 		payload: version,

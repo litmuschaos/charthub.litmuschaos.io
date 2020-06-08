@@ -8,7 +8,7 @@ if (
 	baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
 } else baseURL = "/api";
 
-export const loadALlCharts = (version: string) => (
+export const loadAllCharts = (version: string) => (
 	dispatch: Function,
 	getState: Function
 ) => {
