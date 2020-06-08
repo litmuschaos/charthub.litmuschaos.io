@@ -15,6 +15,7 @@ export const analyticsData = createReducer<AnalyticsData>(initialState, {
 		const chaosOperatorCount = action.payload.get("Chaos-Operator");
 		const totalExpRuns = action.payload.get("Total-Count");
 		return {
+			...state,
 			expAnalytics: action.payload,
 			chaosOperatorCount,
 			totalExpRuns,

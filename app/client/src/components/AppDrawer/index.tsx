@@ -16,7 +16,10 @@ import AnalyticsIcon from "@material-ui/icons/AssessmentTwoTone";
 import React, { useState } from "react";
 import { history } from "../../redux/configureStore";
 import { useStyles } from "./styles";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/reducers";
+import { useActions } from "../../redux/actions";
+import * as VersionActions from "../../redux/actions/versions";
 interface ListItemProps {
 	handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 	children: JSX.Element;
@@ -46,10 +49,12 @@ const CustomisedListItem = (props: ListItemProps) => {
 
 function Drawer() {
 	const classes = useStyles();
-	const [docsVersion, setDocsVersion] = useState("1.4.1");
-
+	const { versionData } = useSelector((state: RootState) => state);
+	const [docsVersion, setDocsVersion] = useState(versionData.currentVersion);
+	const versionActions = useActions(VersionActions);
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
 		setDocsVersion(event.target.value as string);
+		versionActions.toggleVersion(event.target.value as string);
 	};
 
 	return (
@@ -61,10 +66,9 @@ function Drawer() {
 					value={docsVersion}
 					onChange={handleChange}
 				>
-					<MenuItem value={"1.4.1"}>1.4.1</MenuItem>
-					<MenuItem value={"1.4.0"}>1.4.0</MenuItem>
-					<MenuItem value={"1.3.0"}>1.3.0</MenuItem>
-					<MenuItem value={"master"}>master</MenuItem>
+					{versionData.versions.map((d: string) => (
+						<MenuItem value={d}>{d}</MenuItem>
+					))}
 				</Select>
 			</FormControl>
 

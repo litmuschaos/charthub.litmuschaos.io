@@ -8,6 +8,7 @@ import { history } from "./redux/configureStore";
 import { useActions } from "./redux/actions";
 import * as GithubActions from "./redux/actions/github";
 import * as AnalyticsActions from "./redux/actions/analytics";
+import * as VersionActions from "./redux/actions/versions";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 
@@ -31,10 +32,12 @@ function Routes() {
 function App() {
 	const githubActions = useActions(GithubActions);
 	const analyticsActions = useActions(AnalyticsActions);
+	const versionActions = useActions(VersionActions);
 	const classes = useStyles();
 	const [mobileOpen, setMobileOpen] = React.useState(true);
 	useEffect(() => {
 		console.log("HERERE");
+		versionActions.loadVersions();
 		githubActions.loadStarCount();
 		githubActions.loadContributors();
 		analyticsActions.loadAnalytics();

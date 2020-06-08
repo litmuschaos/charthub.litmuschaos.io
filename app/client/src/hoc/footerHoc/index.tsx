@@ -8,20 +8,21 @@ import { useStyles } from "./styles";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { GithubContributor } from "../../redux/model";
+import { chartData } from "../../redux/reducers/charts";
 
 interface StatItem {
 	value: string;
 	desc: string;
 }
-interface CommunityIntem {
+interface CommunityItem {
 	value: string;
 	link: string;
 }
 interface Community {
-	contributors: CommunityIntem[];
-	community: CommunityIntem[];
-	resources: CommunityIntem[];
-	contact: CommunityIntem[];
+	contributors: CommunityItem[];
+	community: CommunityItem[];
+	resources: CommunityItem[];
+	contact: CommunityItem[];
 }
 interface Branding {
 	logo: string;
@@ -50,7 +51,7 @@ function Stat(props: { stat: StatItem[] }) {
 
 function Community(props: { data: Community }) {
 	const classes = useStyles();
-	const createList = (header: string, data: CommunityIntem[], icon: any) => {
+	const createList = (header: string, data: CommunityItem[], icon: any) => {
 		return (
 			<div>
 				<Typography variant="body1" style={{ fontWeight: 700 }}>
@@ -126,7 +127,7 @@ function formatCount(count: number): string {
 }
 function Footer() {
 	const classes = useStyles();
-	const { githubData, analyticsData } = useSelector(
+	const { githubData, analyticsData, chartData } = useSelector(
 		(state: RootState) => state
 	);
 	let contributors = githubData.contributorList.map(
@@ -140,13 +141,14 @@ function Footer() {
 	const opInstalls = formatCount(analyticsData.chaosOperatorCount);
 	const githubStars = formatCount(githubData.star_count);
 	const expRuns = formatCount(analyticsData.totalExpRuns);
+	const expCount = formatCount(chartData.totalExpCount);
 	//const opInstalls = formatCount(analyticsData.chaosOperatorCount)
 	const stat: StatItem[] = [
 		{
 			value: opInstalls,
 			desc: "chaos operator installed",
 		},
-		{ value: "7.7k+", desc: "total experiments" },
+		{ value: expCount, desc: "total experiments" },
 		{
 			value: expRuns,
 			desc: "total experiment runs",

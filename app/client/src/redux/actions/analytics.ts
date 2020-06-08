@@ -27,6 +27,7 @@ export const loadAnalytics = () => (dispatch: Function, getState: Function) => {
 			});
 		})
 		.catch((err) => {
+			console.error(err);
 			const data = [
 				{
 					Label: "(not set)",

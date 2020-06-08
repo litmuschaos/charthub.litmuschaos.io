@@ -8,10 +8,9 @@ interface Link {
 }
 export interface Experiment {
 	name: string;
-	metadataName: string;
 	version: string;
 	vendor?: string;
-	createdAt?: Date;
+	createdAt?: string;
 	supportLink?: string;
 	description: string;
 	maturity: string;
@@ -26,13 +25,22 @@ export interface ExperimentGroup {
 	name: string;
 	metadataName: string;
 	version: string;
+	vendor?: string;
+	createdAt?: string;
+	supportLink?: string;
 	description: string;
+	categoryDescription: string;
 	maintainers: Maintainer[];
 	miniKubeVersion?: string;
 	provider: string;
 	links: Link[];
 	experiments: Experiment[];
 	chaosAllExpsCRDLink: string;
+}
+
+export interface ChartData {
+	experimentGroups: ExperimentGroup[];
+	totalExpCount: number;
 }
 
 export enum ChartActions {
@@ -48,8 +56,8 @@ interface ChartActionType<T, P> {
 }
 
 export type ChartAction =
-	| ChartActionType<typeof ChartActions.LOAD_ALL_CHARTS, ExperimentGroup>
-	| ChartActionType<typeof ChartActions.LOAD_CHART, Experiment>
+	| ChartActionType<typeof ChartActions.LOAD_ALL_CHARTS, ExperimentGroup[]>
+	// | ChartActionType<typeof ChartActions.LOAD_CHART, Experiment>
 	| ChartActionType<
 			typeof ChartActions.FILTER_CHARTS_ON_SEARCH,
 			ExperimentGroup[]
