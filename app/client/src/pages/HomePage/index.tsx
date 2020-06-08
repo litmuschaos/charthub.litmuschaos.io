@@ -15,7 +15,7 @@ import * as React from "react";
 import { useState } from "react";
 import { useStyles } from "./styles";
 import { CustomButton } from "../../components";
-import HomeIcon from "@material-ui/icons/NotesTwoTone";
+import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 
 function HomePage() {
 	const classes = useStyles();
@@ -44,7 +44,7 @@ function HomePage() {
 						)
 					}
 					label="Visit Docs"
-					handleIcon={<HomeIcon />}
+					handleIcon={<SubjectTwoToneIcon />}
 				/>
 			</div>
 			<Typography variant="h4" style={{ fontSize: "40px" }} gutterBottom>
