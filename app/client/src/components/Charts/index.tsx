@@ -46,10 +46,10 @@ export function Charts(props: ChartProps) {
 						experimentCount={g.experiments.length}
 						provider={g.provider}
 						description={g.description}
-						// totalRuns={getTotalRuns(
-						// 	g.experiments,
-						// 	analyticsData.expAnalytics
-						// )}
+						totalRuns={getTotalRuns(
+							g.experiments,
+							analyticsData.expAnalytics
+						)}
 					/>
 				))}
 		</div>

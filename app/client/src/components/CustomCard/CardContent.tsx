@@ -2,6 +2,12 @@ import React from "react";
 import { CardProps } from "./model";
 import { useStyles } from "./styles";
 
+const formatCount = (count: number | undefined): string => {
+	if (count)
+		return count >= 1000 ? (count / 1000).toFixed(1) + "k+" : count + "";
+	return "";
+};
+
 function CardContent(props: CardProps) {
 	const {
 		title,
@@ -17,7 +23,7 @@ function CardContent(props: CardProps) {
 
 	return (
 		<div className={classes.cardContent} onClick={handleClick}>
-			{/* <div className={classes.totalRuns}>{totalRuns}</div> */}
+			<div className={classes.totalRuns}>{formatCount(totalRuns)}</div>
 			<div className={classes.expCount}>
 				{experimentCount} Experiments
 			</div>
