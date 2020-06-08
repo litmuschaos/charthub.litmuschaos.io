@@ -9,11 +9,10 @@ if (
 } else baseURL = "/api";
 
 function convertToMap(data: any) {
-	console.log(data);
 	let mapped_data = new Map<string, number>();
 	if (data) {
 		data.forEach((d: { Label: string; Count: number }) => {
-			mapped_data.set(d.Label, d.Count);
+			mapped_data.set(d.Label, Number(d.Count));
 		});
 	}
 	return mapped_data;
@@ -23,7 +22,6 @@ export const loadAnalytics = () => (dispatch: Function, getState: Function) => {
 	fetch(baseURL + "/analytics")
 		.then((response) => response.json())
 		.then((data) => {
-			// console.log(data);
 			let mapped_data = convertToMap(data);
 			dispatch({
 				type: AnalyticsActions.LOAD_ANALYTICS,

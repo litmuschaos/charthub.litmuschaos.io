@@ -15,15 +15,18 @@ const getTotalRuns = (
 	experiments: Experiment[],
 	analyticsMap: Map<string, number>
 ): number => {
-	console.log(analyticsMap);
 	return experiments.reduce((total, exp) => {
-		let expRun: number = analyticsMap.get(exp.metadataName) ?? 0;
-		return total + expRun;
+		try {
+			let expRun: number = analyticsMap.get(exp.metadataName) ?? 0;
+			return total + expRun;
+		} catch {
+			return total;
+		}
 	}, 0);
 };
 
 export function Charts(props: ChartProps) {
-	const { experimentGroups, experiments } = props;
+	const { experimentGroups } = props;
 	const classes = useStyles();
 	const analyticsData = useSelector(
 		(state: RootState) => state.analyticsData

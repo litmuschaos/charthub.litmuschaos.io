@@ -37,10 +37,10 @@ function App() {
 	const [mobileOpen, setMobileOpen] = React.useState(true);
 
 	useEffect(() => {
+		analyticsActions.loadAnalytics();
 		versionActions.loadVersions();
 		githubActions.loadStarCount();
 		githubActions.loadContributors();
-		analyticsActions.loadAnalytics();
 	}, []);
 
 	const handleDrawerToggle = () => {
