@@ -154,7 +154,7 @@ function ExperimentsPage(props: any) {
 			</Container>
 
 			{/* Card component */}
-			<Charts experiments={chartGroup[0].experiments} match={match} />
+			<Charts experiments={displayExps} match={match} />
 		</div>
 	);
 }
