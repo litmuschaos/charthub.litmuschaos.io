@@ -14,6 +14,7 @@ import Sort from "@material-ui/icons/Sort";
 import * as React from "react";
 import { useState } from "react";
 import { useStyles } from "./styles";
+import SearchBar from "../../components/SearchBar/index";
 import { CustomButton } from "../../components";
 import HomeIcon from "@material-ui/icons/NotesTwoTone";
 
@@ -58,25 +59,7 @@ function HomePage() {
 			<Typography variant="h6" className={classes.description1}>
 				Browse . Run . Contribute
 			</Typography>
-
-			<Paper
-				component="form"
-				className={classes.searchField}
-				onSubmit={(e) => {
-					e.preventDefault();
-				}}
-			>
-				<Icon className={classes.searchIcon} aria-label="menu">
-					<Search />
-				</Icon>
-				<InputBase
-					className={classes.textField}
-					placeholder="Search for Chaos Experiments"
-					inputProps={{
-						"aria-label": "search for chaos experiments",
-					}}
-				/>
-			</Paper>
+			<SearchBar />
 			<Container maxWidth="lg">
 				<div
 					style={{
