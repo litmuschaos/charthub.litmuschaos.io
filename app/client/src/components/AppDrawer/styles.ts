@@ -28,10 +28,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			fontSize: 25,
 		},
 		[theme.breakpoints.up("md")]: {
-			fontSize: 35,
+			fontSize: 30,
 		},
 		[theme.breakpoints.up("lg")]: {
-			fontSize: 50,
+			fontSize: 35,
 		},
 	},
 	drawerList: {

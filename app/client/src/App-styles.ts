@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: "100%",
 		height: "100%",
 		zIndex: 1,
-		overflowX: "hidden",
+		overflow: "hidden",
 		color: theme.palette.primary.contrastText,
 	},
 	appFrame: {
@@ -18,5 +18,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		backgroundColor: theme.palette.background.default,
 		width: "100%",
 		marginTop: 40,
+		overflowY: "scroll",
 	},
 }));

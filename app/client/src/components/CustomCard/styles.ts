@@ -19,7 +19,15 @@ export const useStyles = makeStyles((theme) => ({
 	// CARD MEDIA
 	cardMedia: {
 		width: "100%",
+		height: 100,
 		backgroundColor: theme.palette.primary.dark,
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		"& img": {
+			height: 80,
+		},
 	},
 	// CARD CONTENT
 	cardContent: {

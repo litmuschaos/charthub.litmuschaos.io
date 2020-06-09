@@ -33,11 +33,9 @@ function CardContent(props: CardProps) {
 			</div>
 			<div className={classes.cardBody}>
 				{urlToIcon ? (
-					<img
-						className={classes.cardMedia}
-						src={urlToIcon}
-						alt="chart provider logo"
-					/>
+					<div className={classes.cardMedia}>
+						<img src={urlToIcon} alt="chart provider logo" />
+					</div>
 				) : (
 					<div className={classes.noImage}>Image</div>
 				)}
