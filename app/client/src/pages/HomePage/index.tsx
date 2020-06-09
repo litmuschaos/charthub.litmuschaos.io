@@ -153,7 +153,7 @@ function HomePage() {
 			</Container>
 
 			{/* Card component */}
-			<Charts experimentGroups={chartData.experimentGroups} />
+			<Charts experimentGroups={chartData.displayExperimentGroups} />
 		</div>
 	);
 }

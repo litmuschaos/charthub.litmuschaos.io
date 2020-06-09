@@ -8,7 +8,8 @@ import {
 import createReducer from "./createReducer";
 
 const initialState: ChartData = {
-	experimentGroups: [],
+	allExperimentGroups: [],
+	displayExperimentGroups: [],
 	totalExpCount: 0,
 };
 
@@ -28,6 +29,7 @@ export const chartData = createReducer<ChartData>(initialState, {
 						metadataName: e.Metadata.Name,
 						version: e.Metadata.Version,
 						vendor: e.Metadata.Annotations.Vendor,
+						category: e.Metadata.Annotations.Categories,
 						createdAt: e.Metadata.Annotations.CreatedAt,
 						supportLink: e.Metadata.Annotations.Support,
 						description: spec.CategoryDescription,
@@ -80,7 +82,8 @@ export const chartData = createReducer<ChartData>(initialState, {
 		});
 		return {
 			...state,
-			experimentGroups: experimentGroups,
+			allExperimentGroups: experimentGroups,
+			displayExperimentGroups: experimentGroups,
 			totalExpCount: totalExpCount,
 		};
 	},

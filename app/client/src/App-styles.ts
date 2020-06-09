@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: "100%",
 		height: "100%",
 		zIndex: 1,
-		overflow: "hidden",
+		overflowX: "hidden",
 		color: theme.palette.primary.contrastText,
 	},
 	appFrame: {

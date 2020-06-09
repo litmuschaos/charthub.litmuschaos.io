@@ -14,11 +14,11 @@ export const useStyles = makeStyles((theme) => ({
 		flexWrap: "wrap",
 		alignItems: "center",
 		// Above tablet size
-		[theme.breakpoints.up("md")]: {
-			width: 380,
-			height: 230,
-			padding: "4px 8px 8px 8px",
-		},
+		// [theme.breakpoints.up("md")]: {
+		// 	width: 380,
+		// 	height: 230,
+		// 	padding: "4px 8px 8px 8px",
+		// },
 	},
 	// CARD MEDIA
 	cardMedia: {

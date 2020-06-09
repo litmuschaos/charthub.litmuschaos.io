@@ -60,7 +60,7 @@ function Drawer() {
 	return (
 		<div>
 			<FormControl className={classes.formControl}>
-				<InputLabel>Docs</InputLabel>
+				<InputLabel>Version</InputLabel>
 				<Select
 					labelId="change-cocs-version"
 					value={docsVersion}

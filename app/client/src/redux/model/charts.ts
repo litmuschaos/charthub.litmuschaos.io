@@ -11,6 +11,7 @@ export interface Experiment {
 	metadataName: string;
 	version: string;
 	vendor?: string;
+	category?: string;
 	createdAt?: string;
 	supportLink?: string;
 	description: string;
@@ -40,7 +41,8 @@ export interface ExperimentGroup {
 }
 
 export interface ChartData {
-	experimentGroups: ExperimentGroup[];
+	allExperimentGroups: ExperimentGroup[];
+	displayExperimentGroups: ExperimentGroup[];
 	totalExpCount: number;
 }
 
