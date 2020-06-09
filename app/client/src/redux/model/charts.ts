@@ -44,6 +44,8 @@ export interface ChartData {
 	allExperimentGroups: ExperimentGroup[];
 	displayExperimentGroups: ExperimentGroup[];
 	totalExpCount: number;
+	chaosFilter: string[];
+	contributorFilter: string[];
 }
 
 export enum ChartActions {
@@ -51,6 +53,7 @@ export enum ChartActions {
 	// LOAD_CHART = "LOAD_CHART",
 	FILTER_CHARTS_ON_SEARCH = "FILTER_CHARTS_ON_SEARCH",
 	FILTER_CHARTS_BY_FILTERS = "FILTER_CHARTS_BY_FILTERS",
+	SORT_CHARTS = "SORT_CHARTS",
 }
 
 interface ChartActionType<T, P> {
@@ -68,4 +71,5 @@ export type ChartAction =
 	| ChartActionType<
 			typeof ChartActions.FILTER_CHARTS_BY_FILTERS,
 			ExperimentGroup[]
-	  >;
+	  >
+	| ChartActionType<typeof ChartActions.SORT_CHARTS, ExperimentGroup[]>;

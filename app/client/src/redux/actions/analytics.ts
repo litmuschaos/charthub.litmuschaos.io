@@ -10,11 +10,9 @@ if (
 
 function convertToMap(data: any) {
 	let mapped_data = new Map<string, number>();
-	if (data) {
-		data.forEach((d: { Label: string; Count: number }) => {
-			mapped_data.set(d.Label, Number(d.Count));
-		});
-	}
+	data.forEach((d: { Label: string; Count: number }) => {
+		mapped_data.set(d.Label, Number(d.Count));
+	});
 	return mapped_data;
 }
 

@@ -11,19 +11,23 @@ const initialState: ChartData = {
 	allExperimentGroups: [],
 	displayExperimentGroups: [],
 	totalExpCount: 0,
+	chaosFilter: [],
+	contributorFilter: [],
 };
 
 export const chartData = createReducer<ChartData>(initialState, {
 	[ChartActions.LOAD_ALL_CHARTS](state: ChartData, action: ChartAction) {
 		let totalExpCount: number = 0;
 		let experimentGroups: ExperimentGroup[] = [];
-
+		let chaosFilter: Set<string> = new Set<string>();
+		let contributorFilter: Set<string> = new Set<string>();
 		action.payload.forEach((g: any) => {
 			let exp: Experiment[] = [];
 			if (g.Experiments)
 				g.Experiments.forEach((e: any) => {
 					let spec = e.Spec;
 					totalExpCount++;
+					chaosFilter.add(e.Metadata.Annotations.Categories);
 					exp.push({
 						name: spec.DisplayName,
 						metadataName: e.Metadata.Name,
@@ -53,6 +57,7 @@ export const chartData = createReducer<ChartData>(initialState, {
 					});
 				});
 			let spec = g.Spec;
+			contributorFilter.add(spec.Provider.Name);
 			experimentGroups.push({
 				name: spec.DisplayName,
 				metadataName: g.Metadata.Name,
@@ -85,6 +90,32 @@ export const chartData = createReducer<ChartData>(initialState, {
 			allExperimentGroups: experimentGroups,
 			displayExperimentGroups: experimentGroups,
 			totalExpCount: totalExpCount,
+			chaosFilter: Array.from(chaosFilter),
+			contributorFilter: Array.from(contributorFilter),
+		};
+	},
+	[ChartActions.FILTER_CHARTS_BY_FILTERS](
+		state: ChartData,
+		action: ChartAction
+	) {
+		return {
+			...state,
+			displayExperimentGroups: action.payload,
+		};
+	},
+	[ChartActions.SORT_CHARTS](state: ChartData, action: ChartAction) {
+		return {
+			...state,
+			displayExperimentGroups: action.payload,
+		};
+	},
+	[ChartActions.FILTER_CHARTS_ON_SEARCH](
+		state: ChartData,
+		action: ChartAction
+	) {
+		return {
+			...state,
+			displayExperimentGroups: action.payload,
 		};
 	},
 });
