@@ -1,38 +1,32 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
-import { Experiment, ExperimentGroup } from "../../redux/model";
+import { Experiment } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import CustomCard from "../CustomCard";
 import { useStyles } from "./styles";
 
 interface ChartProps {
-	experimentGroups: ExperimentGroup[];
+	experiments: Experiment[];
+	match: any;
 }
 
 const getTotalRuns = (
-	experiments: Experiment[],
+	expName: string,
 	analyticsMap: Map<string, number>
 ): number => {
-	return experiments.reduce((total, exp) => {
-		try {
-			let expRun: number = analyticsMap.get(exp.metadataName) ?? 0;
-			return total + expRun;
-		} catch {
-			return total;
-		}
-	}, 0);
+	return analyticsMap.get(expName) ?? 0;
 };
 
-const getIconUrl = (chartMetadataName: string) =>
+const getIconUrl = (chartMetadataName: string, chartGroup: string) =>
 	"https://raw.githubusercontent.com/litmuschaos/chaos-charts/staging/charts/" +
-	chartMetadataName +
+	chartGroup +
 	"/icons/" +
 	chartMetadataName +
 	".png";
 
 export function Charts(props: ChartProps) {
-	const { experimentGroups } = props;
+	const { experiments, match } = props;
 	const classes = useStyles();
 	const analyticsData = useSelector(
 		(state: RootState) => state.analyticsData
@@ -40,21 +34,22 @@ export function Charts(props: ChartProps) {
 
 	return (
 		<div className={classes.root}>
-			{experimentGroups &&
-				experimentGroups.map((g: ExperimentGroup) => (
+			{experiments &&
+				experiments.map((e: Experiment) => (
 					<CustomCard
-						key={g.metadataName}
-						id={g.metadataName}
-						title={g.name}
-						urlToIcon={getIconUrl(g.metadataName)}
+						key={e.metadataName}
+						id={e.metadataName}
+						title={e.name}
+						urlToIcon={getIconUrl(
+							e.metadataName,
+							match.params.chartGroupId
+						)}
 						handleClick={() =>
-							history.push(`/charts/${g.metadataName}`)
+							history.push(`${match.path}/${e.metadataName}`)
 						}
-						experimentCount={g.experiments.length}
-						provider={g.provider}
-						description={g.description}
+						provider={e.provider}
 						totalRuns={getTotalRuns(
-							g.experiments,
+							e.metadataName,
 							analyticsData.expAnalytics
 						)}
 					/>

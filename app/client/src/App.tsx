@@ -29,7 +29,7 @@ function Routes() {
 				<Route
 					exact={true}
 					path="/charts/:chartGroupId/:chartId"
-					component={ExperimentsPage}
+					component={() => <h1>Experiment</h1>}
 				/>
 			</Switch>
 		</div>

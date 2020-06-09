@@ -24,11 +24,15 @@ function CardContent(props: CardProps) {
 	return (
 		<div className={classes.cardContent} onClick={handleClick}>
 			<div className={classes.cardAnalytics}>
+				{experimentCount ? (
+					<span className={classes.expCount}>
+						{experimentCount} Experiments
+					</span>
+				) : (
+					<span></span>
+				)}
 				<span className={classes.totalRuns}>
-					{formatCount(totalRuns)}
-				</span>
-				<span className={classes.expCount}>
-					{experimentCount} Experiments
+					{formatCount(totalRuns)} runs
 				</span>
 			</div>
 			<div className={classes.cardBody}>
@@ -45,7 +49,11 @@ function CardContent(props: CardProps) {
 						Contributed by {provider}
 					</div>
 				</div>
-				<div className={classes.description}>{description}</div>
+				{description ? (
+					<div className={classes.description}>{description}</div>
+				) : (
+					<span></span>
+				)}
 			</div>
 		</div>
 	);

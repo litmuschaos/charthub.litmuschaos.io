@@ -83,11 +83,12 @@ export const useStyles = makeStyles((theme) => ({
 		justifyContent: "space-between",
 		margin: "8px 8px 12px 8px",
 	},
-	totalRuns: {
+	expCount: {
 		color: theme.palette.secondary.contrastText,
 		fontWeight: 600,
+		marginTop: 3,
 	},
-	expCount: {
+	totalRuns: {
 		backgroundColor: theme.palette.secondary.main,
 		color: theme.palette.secondary.contrastText,
 		borderRadius: 9,

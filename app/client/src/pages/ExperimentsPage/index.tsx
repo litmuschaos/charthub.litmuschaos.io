@@ -6,15 +6,15 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Sort from "@material-ui/icons/Sort";
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { CustomButton, SearchBar, UsefulLinks } from "../../components";
+import { Charts, CustomButton, SearchBar, UsefulLinks } from "../../components";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
 
 function ExperimentsPage(props: any) {
 	console.log(props);
 	const classes = useStyles();
-
-	const chartGroudId: string = props.match.params.chartGroupId;
+	const match = props.match;
+	const chartGroudId: string = match.params.chartGroupId;
 	const chartData = useSelector((state: RootState) => state.chartData);
 	const chartGroup = chartData.allExperimentGroups.filter(
 		(g) => g.metadataName === chartGroudId
@@ -124,7 +124,7 @@ function ExperimentsPage(props: any) {
 			</Container>
 
 			{/* Card component */}
-			{/* <Charts experiments={chartGroup[0].experiments} /> */}
+			<Charts experiments={chartGroup[0].experiments} match={match} />
 		</div>
 	);
 }

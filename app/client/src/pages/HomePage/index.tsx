@@ -12,7 +12,7 @@ import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Charts, CustomButton, SearchBar } from "../../components";
+import { ChartGroups, CustomButton, SearchBar } from "../../components";
 import { useActions } from "../../redux/actions";
 import * as ChartActions from "../../redux/actions/charts";
 import { RootState } from "../../redux/reducers";
@@ -149,7 +149,7 @@ function HomePage() {
 			</Container>
 
 			{/* Card component */}
-			<Charts experimentGroups={chartData.displayExperimentGroups} />
+			<ChartGroups experimentGroups={chartData.displayExperimentGroups} />
 		</div>
 	);
 }
