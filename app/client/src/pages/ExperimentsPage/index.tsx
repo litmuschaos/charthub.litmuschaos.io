@@ -18,8 +18,8 @@ function ExperimentsPage(props: any) {
 	const chartData = useSelector((state: RootState) => state.chartData);
 	const chartGroup = chartData.allExperimentGroups.filter(
 		(g) => g.metadataName === chartGroudId
-	);
-	const experiments = chartGroup.length > 0 ? chartGroup[0].experiments : [];
+	)[0];
+	const experiments = chartGroup ? chartGroup.experiments : [];
 	const [displayExps, setDisplayExps] = React.useState(experiments);
 	const [searchToken, setsearchToken] = React.useState("");
 
@@ -70,7 +70,7 @@ function ExperimentsPage(props: any) {
 							color="textPrimary"
 							style={{ fontWeight: "bold" }}
 						>
-							Kafka
+							{chartGroup.name}
 						</Typography>
 					</Breadcrumbs>
 				</Grid>
@@ -92,7 +92,7 @@ function ExperimentsPage(props: any) {
 							style={{ fontSize: "40px" }}
 							gutterBottom
 						>
-							<b>Kafka</b>
+							<b>{chartGroup.name}</b>
 						</Typography>
 						<Typography
 							variant="h6"
@@ -105,10 +105,7 @@ function ExperimentsPage(props: any) {
 						variant="subtitle1"
 						className={classes.description}
 					>
-						Kafka is used for building real-time data pipelines and
-						streaming apps. It is horizontally scalable,
-						fault-tolerant, fast, and runs in production in
-						thousands of companies.
+						{chartGroup.categoryDescription}
 					</Typography>
 				</Grid>
 				<Grid item xs>

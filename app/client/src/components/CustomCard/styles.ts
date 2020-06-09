@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
 		boxShadow: theme.shadows[4],
 		borderRadius: 8,
 		overflow: "hidden",
-		margin: 8,
+		margin: 16,
 		display: "flex",
 		flexDirection: "column",
 		flexWrap: "wrap",
