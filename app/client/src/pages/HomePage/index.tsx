@@ -25,12 +25,14 @@ function HomePage() {
 	const classes = useStyles();
 	const [selectChaos, setSelectChaos] = useState("All");
 	const [selectContributors, setSelectContributors] = useState("All");
+	const [searchToken, setsearchToken] = useState("");
 	const chartData = useSelector((state: RootState) => state.chartData);
 	const chartActions = useActions(ChartActions);
 
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
+		setsearchToken("");
 		setSelectChaos(event.target.value as string);
 		chartActions.filterCharts(
 			event.target.value as string,
@@ -40,6 +42,7 @@ function HomePage() {
 	const handleContributorChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
+		setsearchToken("");
 		setSelectContributors(event.target.value as string);
 		chartActions.filterCharts(selectChaos, event.target.value as string);
 	};
@@ -47,6 +50,9 @@ function HomePage() {
 		chartActions.sortCharts();
 	};
 	const handleSearch = (event: React.ChangeEvent<{ value: unknown }>) => {
+		setsearchToken(event.target.value as string);
+		setSelectChaos("All");
+		setSelectContributors("All");
 		chartActions.searchCharts(event.target.value as string);
 	};
 	return (
@@ -91,6 +97,7 @@ function HomePage() {
 						"aria-label": "search for chaos experiments",
 					}}
 					onChange={handleSearch}
+					value={searchToken}
 				/>
 			</Paper>
 
