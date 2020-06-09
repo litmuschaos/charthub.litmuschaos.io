@@ -16,7 +16,8 @@ const getTotalRuns = (
 	analyticsMap: Map<string, number>
 ): number => {
 	try {
-		return analyticsMap.get(expName) ?? 0;
+		console.log(analyticsMap.get(expName) ?? 0);
+		return analyticsMap.get(expName) || 0;
 	} catch {
 		return 0;
 	}
