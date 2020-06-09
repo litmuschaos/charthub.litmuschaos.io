@@ -15,7 +15,11 @@ const getTotalRuns = (
 	expName: string,
 	analyticsMap: Map<string, number>
 ): number => {
-	return analyticsMap.get(expName) ?? 0;
+	try {
+		return analyticsMap.get(expName) ?? 0;
+	} catch {
+		return 0;
+	}
 };
 
 const getIconUrl = (chartMetadataName: string, chartGroup: string) =>
