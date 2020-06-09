@@ -11,6 +11,7 @@ import * as VersionActions from "./redux/actions/versions";
 import { history } from "./redux/configureStore";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
+const ExperimentsPage = lazy(() => import("./pages/ExperimentsPage"));
 
 function Routes() {
 	const classes = useStyles();
@@ -23,6 +24,11 @@ function Routes() {
 					exact={true}
 					path="/home"
 					component={withFooter(HomePage)}
+				/>
+				<Route
+					exact={true}
+					path="/experiments"
+					component={withFooter(ExperimentsPage)}
 				/>
 			</Switch>
 		</div>

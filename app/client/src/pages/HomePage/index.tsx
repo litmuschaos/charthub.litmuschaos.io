@@ -6,10 +6,8 @@ import {
 	Select,
 	Typography,
 } from "@material-ui/core";
-import InputBase from "@material-ui/core/InputBase";
+
 import MenuItem from "@material-ui/core/MenuItem";
-import Paper from "@material-ui/core/Paper";
-import Search from "@material-ui/icons/SearchRounded";
 import Sort from "@material-ui/icons/Sort";
 import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
@@ -20,6 +18,7 @@ import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
 import { useActions } from "../../redux/actions";
 import * as ChartActions from "../../redux/actions/charts";
+import SearchBar from "../../components/SearchBar/index";
 
 function HomePage() {
 	const classes = useStyles();
@@ -80,28 +79,8 @@ function HomePage() {
 				Browse . Run . Contribute
 			</Typography>
 
-			<Paper
-				component="form"
-				className={classes.searchField}
-				onSubmit={(e) => {
-					e.preventDefault();
-				}}
-			>
-				<Icon className={classes.searchIcon} aria-label="menu">
-					<Search />
-				</Icon>
-				<InputBase
-					className={classes.textField}
-					placeholder="Search for Chaos Experiments"
-					inputProps={{
-						"aria-label": "search for chaos experiments",
-					}}
-					onChange={handleSearch}
-					value={searchToken}
-				/>
-			</Paper>
-
-			<Container>
+			<SearchBar searchToken={searchToken} handleSearch={handleSearch} />
+			<Container maxWidth="lg">
 				<div
 					style={{
 						display: "flex",
