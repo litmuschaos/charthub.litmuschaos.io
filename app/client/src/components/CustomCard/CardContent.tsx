@@ -29,7 +29,7 @@ function CardContent(props: CardProps) {
 						{experimentCount} Experiments
 					</span>
 				) : (
-					<></>
+					<span></span>
 				)}
 				<span className={classes.totalRuns}>
 					{formatCount(totalRuns)} runs
@@ -52,7 +52,7 @@ function CardContent(props: CardProps) {
 				{description ? (
 					<div className={classes.description}>{description}</div>
 				) : (
-					<></>
+					<span></span>
 				)}
 			</div>
 		</div>
