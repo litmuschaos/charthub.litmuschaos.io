@@ -23,22 +23,32 @@ function CardContent(props: CardProps) {
 
 	return (
 		<div className={classes.cardContent} onClick={handleClick}>
-			<div className={classes.totalRuns}>{formatCount(totalRuns)}</div>
-			<div className={classes.expCount}>
-				{experimentCount} Experiments
+			<div className={classes.cardAnalytics}>
+				<span className={classes.totalRuns}>
+					{formatCount(totalRuns)}
+				</span>
+				<span className={classes.expCount}>
+					{experimentCount} Experiments
+				</span>
 			</div>
-			{urlToIcon ? (
-				<img
-					className={classes.cardMedia}
-					src={urlToIcon}
-					alt="chart provider logo"
-				/>
-			) : (
-				<div className={classes.noImage}>Image</div>
-			)}
-			<div className={classes.title}>{title}</div>
-			<div className={classes.provider}>Contributed by {provider}</div>
-			<div className={classes.description}>{description}</div>
+			<div className={classes.cardBody}>
+				{urlToIcon ? (
+					<img
+						className={classes.cardMedia}
+						src={urlToIcon}
+						alt="chart provider logo"
+					/>
+				) : (
+					<div className={classes.noImage}>Image</div>
+				)}
+				<div className={classes.cardInfo}>
+					<div className={classes.title}>{title}</div>
+					<div className={classes.provider}>
+						Contributed by {provider}
+					</div>
+				</div>
+				<div className={classes.description}>{description}</div>
+			</div>
 		</div>
 	);
 }

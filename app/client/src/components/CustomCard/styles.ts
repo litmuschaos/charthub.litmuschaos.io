@@ -2,62 +2,88 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
 	card: {
-		width: "100%",
+		width: "95%",
 		background: theme.palette.background.paper,
 		boxShadow: theme.shadows[4],
 		borderRadius: 8,
 		overflow: "hidden",
 		margin: 8,
-		padding: 8,
 		display: "flex",
 		flexDirection: "column",
 		flexWrap: "wrap",
-		alignItems: "center",
 		// Above tablet size
-		// [theme.breakpoints.up("md")]: {
-		// 	width: 380,
-		// 	height: 230,
-		// 	padding: "4px 8px 8px 8px",
-		// },
+		[theme.breakpoints.up("md")]: {
+			width: 250,
+		},
 	},
 	// CARD MEDIA
 	cardMedia: {
-		maxWidth: 120,
-		float: "left",
-		marginTop: 47,
-		shapeOutside: "border-box",
-		padding: "4px 10px 2px 10px",
+		width: "100%",
+		backgroundColor: theme.palette.primary.dark,
 	},
 	// CARD CONTENT
 	cardContent: {
-		position: "relative",
-		padding: 8,
 		color: theme.palette.text.primary,
+	},
+	cardBody: {
+		// Below mobile size
+		[theme.breakpoints.down("sm")]: {
+			display: "flex",
+			flexDirection: "row",
+			justifyContent: "start",
+			padding: 8,
+		},
+	},
+	cardInfo: {
+		[theme.breakpoints.down("sm")]: {
+			padding: "0 12px",
+		},
 	},
 	title: {
 		fontWeight: 600,
 		fontSize: 14,
 		color: theme.palette.primary.contrastText,
-		marginBottom: 12,
+		margin: "12px 0",
+		[theme.breakpoints.down("sm")]: {
+			margin: 0,
+		},
 	},
 	description: {
 		fontSize: 12,
-		textAlign: "justify",
+		textAlign: "center",
 		marginBottom: 12,
+		[theme.breakpoints.down("sm")]: {
+			width: "100%",
+		},
 	},
 	noImage: {
 		width: "100%",
-		height: 100,
+		height: 80,
+		backgroundColor: theme.palette.primary.dark,
+		// Below mobile size
+		[theme.breakpoints.down("sm")]: {
+			width: 250,
+		},
 	},
 	provider: {
 		color: theme.palette.text.primary,
 		fontWeight: 500,
+		marginBottom: 8,
 	},
-	totalRuns: {},
+	cardAnalytics: {
+		display: "flex",
+		justifyContent: "space-between",
+		margin: "8px 8px 12px 8px",
+	},
+	totalRuns: {
+		color: theme.palette.secondary.contrastText,
+		fontWeight: 600,
+	},
 	expCount: {
 		backgroundColor: theme.palette.secondary.main,
 		color: theme.palette.secondary.contrastText,
-		borderRadius: 10,
-		width: 150,
+		borderRadius: 9,
+		padding: "3px 6px",
+		fontWeight: 500,
 	},
 }));
