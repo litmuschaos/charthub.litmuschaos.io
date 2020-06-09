@@ -7,11 +7,11 @@ import Sort from "@material-ui/icons/Sort";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { Charts, CustomButton, SearchBar, UsefulLinks } from "../../components";
+import { Experiment } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
 
 function ExperimentsPage(props: any) {
-	console.log(props);
 	const classes = useStyles();
 	const match = props.match;
 	const chartGroudId: string = match.params.chartGroupId;
@@ -19,9 +19,36 @@ function ExperimentsPage(props: any) {
 	const chartGroup = chartData.allExperimentGroups.filter(
 		(g) => g.metadataName === chartGroudId
 	);
+	const experiments = chartGroup.length > 0 ? chartGroup[0].experiments : [];
+	const [displayExps, setDisplayExps] = React.useState(experiments);
+	const [searchToken, setsearchToken] = React.useState("");
 
 	const handleSort = () => {
-		console.log("Sort button active!");
+		let payload: Experiment[] = [
+			...displayExps,
+		].sort((c1: Experiment, c2: Experiment) =>
+			c1.name.localeCompare(c2.name)
+		);
+		try {
+			if (JSON.stringify(payload) === JSON.stringify(displayExps))
+				payload = [
+					...displayExps,
+				].sort((c1: Experiment, c2: Experiment) =>
+					c2.name.localeCompare(c1.name)
+				);
+		} catch {
+			console.error("Error Sorting Charts");
+		}
+		setDisplayExps(payload);
+	};
+
+	const handleSearch = (event: React.ChangeEvent<{ value: unknown }>) => {
+		const search: string = event.target.value as string;
+		setsearchToken(search);
+		const payload: Experiment[] = experiments.filter((exp: Experiment) => {
+			return exp.name.toLowerCase().includes(search.toLowerCase());
+		});
+		setDisplayExps(payload);
 	};
 
 	return (
@@ -48,7 +75,10 @@ function ExperimentsPage(props: any) {
 					</Breadcrumbs>
 				</Grid>
 				<Grid item xs={6}>
-					<SearchBar />
+					<SearchBar
+						searchToken={searchToken}
+						handleSearch={handleSearch}
+					/>
 				</Grid>
 			</Grid>
 			<Grid container spacing={3}>
