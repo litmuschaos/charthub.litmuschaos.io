@@ -25,6 +25,13 @@ const getTotalRuns = (
 	}, 0);
 };
 
+const getIconUrl = (chartMetadataName: string) =>
+	"https://raw.githubusercontent.com/litmuschaos/chaos-charts/staging/charts/" +
+	chartMetadataName +
+	"/icons/" +
+	chartMetadataName +
+	".png";
+
 export function Charts(props: ChartProps) {
 	const { experimentGroups } = props;
 	const classes = useStyles();
@@ -40,6 +47,7 @@ export function Charts(props: ChartProps) {
 						key={g.metadataName}
 						id={g.metadataName}
 						title={g.name}
+						urlToIcon={getIconUrl(g.metadataName)}
 						handleClick={() =>
 							history.push(`/charts/${g.metadataName}`)
 						}

@@ -10,16 +10,16 @@ import {
 	MenuItem,
 	Select,
 } from "@material-ui/core";
+import AnalyticsIcon from "@material-ui/icons/AssessmentTwoTone";
 import HomeIcon from "@material-ui/icons/HomeTwoTone";
 import ContributeIcon from "@material-ui/icons/ReceiptTwoTone";
-import AnalyticsIcon from "@material-ui/icons/AssessmentTwoTone";
 import React, { useState } from "react";
-import { history } from "../../redux/configureStore";
-import { useStyles } from "./styles";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers";
 import { useActions } from "../../redux/actions";
 import * as VersionActions from "../../redux/actions/versions";
+import { history } from "../../redux/configureStore";
+import { RootState } from "../../redux/reducers";
+import { useStyles } from "./styles";
 interface ListItemProps {
 	handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 	children: JSX.Element;
@@ -93,19 +93,13 @@ function Drawer() {
 					}
 					label="Contribute"
 				>
-					<ContributeIcon
-						fontSize="large"
-						className={classes.button}
-					/>
+					<ContributeIcon className={classes.button} />
 				</CustomisedListItem>
 				<CustomisedListItem
 					handleClick={() => history.push("/")}
 					label="Analytics"
 				>
-					<AnalyticsIcon
-						fontSize="large"
-						className={classes.button}
-					/>
+					<AnalyticsIcon className={classes.button} />
 				</CustomisedListItem>
 			</List>
 		</div>
