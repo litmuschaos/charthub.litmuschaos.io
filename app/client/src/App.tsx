@@ -19,21 +19,24 @@ function Routes() {
 	return (
 		<div className={classes.content}>
 			<Switch>
-				<Route exact={true} path="/" component={withFooter(HomePage)} />
+				<Route exact={true} path="/" component={HomePage} />
+				<Route exact={true} path="/home" component={HomePage} />
 				<Route
 					exact={true}
-					path="/home"
-					component={withFooter(HomePage)}
+					path="/charts/:chartGroupId"
+					component={ExperimentsPage}
 				/>
 				<Route
 					exact={true}
-					path="/experiments"
-					component={withFooter(ExperimentsPage)}
+					path="/charts/:chartGroupId/:chartId"
+					component={ExperimentsPage}
 				/>
 			</Switch>
 		</div>
 	);
 }
+
+const AppBody = withFooter(Routes);
 
 function App() {
 	const githubActions = useActions(GithubActions);
@@ -62,7 +65,10 @@ function App() {
 							handleDrawerToggle={handleDrawerToggle}
 							mobileOpen={mobileOpen}
 						/>
-						<Routes />
+						{/* <Routes /> */}
+						<div className={classes.routeBody}>
+							<AppBody />
+						</div>
 					</div>
 				</div>
 			</Router>

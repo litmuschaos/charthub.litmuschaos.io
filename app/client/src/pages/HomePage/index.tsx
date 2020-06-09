@@ -6,7 +6,6 @@ import {
 	Select,
 	Typography,
 } from "@material-ui/core";
-
 import MenuItem from "@material-ui/core/MenuItem";
 import Sort from "@material-ui/icons/Sort";
 import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
@@ -14,10 +13,10 @@ import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Charts, CustomButton, SearchBar } from "../../components";
-import { RootState } from "../../redux/reducers";
-import { useStyles } from "./styles";
 import { useActions } from "../../redux/actions";
 import * as ChartActions from "../../redux/actions/charts";
+import { RootState } from "../../redux/reducers";
+import { useStyles } from "./styles";
 
 function HomePage() {
 	const classes = useStyles();
@@ -53,6 +52,7 @@ function HomePage() {
 		setSelectContributors("All");
 		chartActions.searchCharts(event.target.value as string);
 	};
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.headerButton}>

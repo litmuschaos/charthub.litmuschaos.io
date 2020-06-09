@@ -7,8 +7,7 @@ import CustomCard from "../CustomCard";
 import { useStyles } from "./styles";
 
 interface ChartProps {
-	experimentGroups?: ExperimentGroup[];
-	experiments?: Experiment[];
+	experimentGroups: ExperimentGroup[];
 }
 
 const getTotalRuns = (

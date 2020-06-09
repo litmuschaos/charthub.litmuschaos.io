@@ -1,21 +1,29 @@
 import { Button, Container, Icon, Typography } from "@material-ui/core";
-import InputBase from "@material-ui/core/InputBase";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Sort from "@material-ui/icons/Sort";
-import * as React from "react";
-import { useState } from "react";
-import { useStyles } from "./styles";
-import { SearchBar, UsefulLinks, CustomButton } from "../../components";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import Sort from "@material-ui/icons/Sort";
+import * as React from "react";
+import { useSelector } from "react-redux";
+import { CustomButton, SearchBar, UsefulLinks } from "../../components";
+import { RootState } from "../../redux/reducers";
+import { useStyles } from "./styles";
 
-function ExperimentsPage() {
+function ExperimentsPage(props: any) {
+	console.log(props);
 	const classes = useStyles();
+
+	const chartGroudId: string = props.match.params.chartGroupId;
+	const chartData = useSelector((state: RootState) => state.chartData);
+	const chartGroup = chartData.allExperimentGroups.filter(
+		(g) => g.metadataName === chartGroudId
+	);
+
 	const handleSort = () => {
 		console.log("Sort button active!");
 	};
+
 	return (
 		<div className={classes.root}>
 			<Grid container spacing={3}>
@@ -27,13 +35,13 @@ function ExperimentsPage() {
 						<Link
 							color="inherit"
 							href="/"
-							style={{ fontWeight: "bold", fontSize: 20 }}
+							style={{ fontWeight: "bold" }}
 						>
 							Home
 						</Link>
 						<Typography
 							color="textPrimary"
-							style={{ fontWeight: "bold", fontSize: 20 }}
+							style={{ fontWeight: "bold" }}
 						>
 							Kafka
 						</Typography>
@@ -114,6 +122,9 @@ function ExperimentsPage() {
 					</Button>
 				</div>
 			</Container>
+
+			{/* Card component */}
+			{/* <Charts experiments={chartGroup[0].experiments} /> */}
 		</div>
 	);
 }
