@@ -13,12 +13,11 @@ import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Charts, CustomButton } from "../../components";
+import { Charts, CustomButton, SearchBar } from "../../components";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
 import { useActions } from "../../redux/actions";
 import * as ChartActions from "../../redux/actions/charts";
-import SearchBar from "../../components/SearchBar/index";
 
 function HomePage() {
 	const classes = useStyles();
