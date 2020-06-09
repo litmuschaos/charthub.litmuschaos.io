@@ -6,9 +6,7 @@ import Sort from "@material-ui/icons/Sort";
 import * as React from "react";
 import { useState } from "react";
 import { useStyles } from "./styles";
-import { CustomButton } from "../../components";
-import SearchBar from "../../components/SearchBar/index";
-import Links from "../../components/UsefulLinks/index";
+import { SearchBar, UsefulLinks, CustomButton } from "../../components";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
@@ -88,7 +86,7 @@ function ExperimentsPage() {
 						/>
 					</div>
 					<div style={{ marginTop: 45, marginLeft: 40 }}>
-						<Links />
+						<UsefulLinks />
 					</div>
 				</Grid>
 			</Grid>

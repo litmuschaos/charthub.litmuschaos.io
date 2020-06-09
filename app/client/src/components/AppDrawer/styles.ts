@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-const drawerWidth = 100;
+const drawerWidth = 120;
 export const useStyles = makeStyles((theme: Theme) => ({
 	drawerHeader: { ...theme.mixins.toolbar },
 	drawerPaper: {
@@ -14,8 +14,12 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		},
 	},
 	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 80,
+		marginTop: theme.spacing(3),
+		marginLeft: "auto",
+		marginRight: "auto",
+		display: "block",
+		width: "fit-content",
+		fontWeight: 700,
 	},
 	button: {
 		color: theme.palette.primary.contrastText,
@@ -24,10 +28,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			fontSize: 25,
 		},
 		[theme.breakpoints.up("md")]: {
-			fontSize: 35,
+			fontSize: 30,
 		},
 		[theme.breakpoints.up("lg")]: {
-			fontSize: 50,
+			fontSize: 35,
 		},
 	},
 	drawerList: {
@@ -37,6 +41,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		margin: "auto",
 		width: "80%",
 		height: "100%",
+		fontWeight: 700,
 	},
 	drawerListItem: {
 		display: "flex",
@@ -46,5 +51,12 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		"&:hover": {
 			backgroundColor: theme.palette.primary.dark,
 		},
+	},
+	logo: {
+		display: "block",
+		marginTop: theme.spacing(4),
+		marginLeft: "auto",
+		marginRight: "auto",
+		width: "85%",
 	},
 }));

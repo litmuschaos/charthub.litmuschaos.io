@@ -56,7 +56,7 @@ function MaintainersLinks(props: { data: Maintainers[] }) {
 	);
 }
 
-function UsefulLinks(props: { data: Links }) {
+function Links(props: { data: Links }) {
 	const classes = useStyles();
 	const createLinks = (header: string, data: UsefulLinks[]) => {
 		return (
@@ -89,7 +89,7 @@ function UsefulLinks(props: { data: Links }) {
 	return <div>{createLinks("Useful Links", props.data["links"])}</div>;
 }
 
-export default function Links() {
+export function UsefulLinks() {
 	const classes = useStyles();
 	const maintainers: Maintainers[] = [
 		{ name: "ksatchit", email: "karthik.s@mayadata.io" },
@@ -112,7 +112,7 @@ export default function Links() {
 
 	return (
 		<div className={classes.mainDiv}>
-			<UsefulLinks data={links} />
+			<Links data={links} />
 			<MaintainersLinks data={maintainers} />
 		</div>
 	);

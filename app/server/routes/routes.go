@@ -62,4 +62,16 @@ var routes = Routes{
 		"/version",
 		handler.GetChartVersion,
 	},
+	Route{
+		"GithubRepoData",
+		"GET",
+		"/github/repo",
+		handler.GetGithubRepoData,
+	},
+	Route{
+		"GithubContributorData",
+		"GET",
+		"/github/contributors",
+		handler.GetGithubContributorData,
+	},
 }

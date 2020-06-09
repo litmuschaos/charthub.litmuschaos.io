@@ -11,7 +11,8 @@ export interface Experiment {
 	metadataName: string;
 	version: string;
 	vendor?: string;
-	createdAt?: Date;
+	category?: string;
+	createdAt?: string;
 	supportLink?: string;
 	description: string;
 	maturity: string;
@@ -26,7 +27,11 @@ export interface ExperimentGroup {
 	name: string;
 	metadataName: string;
 	version: string;
+	vendor?: string;
+	createdAt?: string;
+	supportLink?: string;
 	description: string;
+	categoryDescription: string;
 	maintainers: Maintainer[];
 	miniKubeVersion?: string;
 	provider: string;
@@ -35,11 +40,20 @@ export interface ExperimentGroup {
 	chaosAllExpsCRDLink: string;
 }
 
+export interface ChartData {
+	allExperimentGroups: ExperimentGroup[];
+	displayExperimentGroups: ExperimentGroup[];
+	totalExpCount: number;
+	chaosFilter: string[];
+	contributorFilter: string[];
+}
+
 export enum ChartActions {
 	LOAD_ALL_CHARTS = "LOAD_ALL_CHARTS",
-	LOAD_CHART = "LOAD_CHART",
+	// LOAD_CHART = "LOAD_CHART",
 	FILTER_CHARTS_ON_SEARCH = "FILTER_CHARTS_ON_SEARCH",
 	FILTER_CHARTS_BY_FILTERS = "FILTER_CHARTS_BY_FILTERS",
+	SORT_CHARTS = "SORT_CHARTS",
 }
 
 interface ChartActionType<T, P> {
@@ -48,8 +62,8 @@ interface ChartActionType<T, P> {
 }
 
 export type ChartAction =
-	| ChartActionType<typeof ChartActions.LOAD_ALL_CHARTS, ExperimentGroup>
-	| ChartActionType<typeof ChartActions.LOAD_CHART, Experiment>
+	| ChartActionType<typeof ChartActions.LOAD_ALL_CHARTS, ExperimentGroup[]>
+	// | ChartActionType<typeof ChartActions.LOAD_CHART, Experiment>
 	| ChartActionType<
 			typeof ChartActions.FILTER_CHARTS_ON_SEARCH,
 			ExperimentGroup[]
@@ -57,4 +71,5 @@ export type ChartAction =
 	| ChartActionType<
 			typeof ChartActions.FILTER_CHARTS_BY_FILTERS,
 			ExperimentGroup[]
-	  >;
+	  >
+	| ChartActionType<typeof ChartActions.SORT_CHARTS, ExperimentGroup[]>;

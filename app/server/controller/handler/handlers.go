@@ -34,6 +34,7 @@ import (
 
 // ChaosChartPath refers the location of the freshly updated repository
 var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/app/client/public/chaos-charts/"
+var githubData = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/app/client/public/githubData/"
 
 /*	pathParser reads the path in the csv file <path> forms the system-path <fileLookedPath>
 	and returns the file
@@ -192,4 +193,28 @@ func writeHeaders(w *http.ResponseWriter, statusCode int) {
 	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 	(*w).WriteHeader(statusCode)
+}
+
+// GetGithubRepoData will return the github repo data for litmus
+func GetGithubRepoData(w http.ResponseWriter, r *http.Request) {
+	response, err := ioutil.ReadFile(githubData + "githubRepoData.json")
+	responseStatusCode := 200
+	if err != nil {
+		fmt.Errorf("unable to read file, error: %v", err)
+		responseStatusCode = 500
+	}
+	writeHeaders(&w, responseStatusCode)
+	fmt.Fprint(w, string(response))
+}
+
+// GetGithubRepoData will return the github contributors data for litmus
+func GetGithubContributorData(w http.ResponseWriter, r *http.Request) {
+	response, err := ioutil.ReadFile(githubData + "githubContributorData.json")
+	responseStatusCode := 200
+	if err != nil {
+		fmt.Errorf("unable to read file, error: %v", err)
+		responseStatusCode = 500
+	}
+	writeHeaders(&w, responseStatusCode)
+	fmt.Fprint(w, string(response))
 }

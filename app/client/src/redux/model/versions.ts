@@ -1,4 +1,4 @@
-export interface Versions {
+export interface VersionData {
 	versions: string[];
 	currentVersion: string;
 }

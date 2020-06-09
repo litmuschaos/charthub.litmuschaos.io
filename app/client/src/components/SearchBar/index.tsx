@@ -1,10 +1,9 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import { useStyles } from "./styles";
 import { Paper, Icon, InputBase } from "@material-ui/core";
 import Search from "@material-ui/icons/SearchRounded";
 
-export default function SearchBar() {
+export function SearchBar(props: any) {
 	const classes = useStyles();
 	return (
 		<Paper
@@ -23,6 +22,8 @@ export default function SearchBar() {
 				inputProps={{
 					"aria-label": "search for chaos experiments",
 				}}
+				onChange={props.handleSearch}
+				value={props.searchToken}
 			/>
 		</Paper>
 	);

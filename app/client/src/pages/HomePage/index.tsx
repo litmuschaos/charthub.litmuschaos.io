@@ -6,38 +6,56 @@ import {
 	Select,
 	Typography,
 } from "@material-ui/core";
-import InputBase from "@material-ui/core/InputBase";
+
 import MenuItem from "@material-ui/core/MenuItem";
-import Paper from "@material-ui/core/Paper";
-import Search from "@material-ui/icons/SearchRounded";
 import Sort from "@material-ui/icons/Sort";
+import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Charts, CustomButton, SearchBar } from "../../components";
+import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
-import SearchBar from "../../components/SearchBar/index";
-import { CustomButton } from "../../components";
-import HomeIcon from "@material-ui/icons/NotesTwoTone";
+import { useActions } from "../../redux/actions";
+import * as ChartActions from "../../redux/actions/charts";
 
 function HomePage() {
 	const classes = useStyles();
 	const [selectChaos, setSelectChaos] = useState("All");
 	const [selectContributors, setSelectContributors] = useState("All");
+	const [searchToken, setsearchToken] = useState("");
+	const chartData = useSelector((state: RootState) => state.chartData);
+	const chartActions = useActions(ChartActions);
+
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
+		setsearchToken("");
 		setSelectChaos(event.target.value as string);
+		chartActions.filterCharts(
+			event.target.value as string,
+			selectContributors
+		);
 	};
 	const handleContributorChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
+		setsearchToken("");
 		setSelectContributors(event.target.value as string);
+		chartActions.filterCharts(selectChaos, event.target.value as string);
 	};
 	const handleSort = () => {
-		console.log("Sort button active!");
+		chartActions.sortCharts();
+	};
+	const handleSearch = (event: React.ChangeEvent<{ value: unknown }>) => {
+		setsearchToken(event.target.value as string);
+		setSelectChaos("All");
+		setSelectContributors("All");
+		chartActions.searchCharts(event.target.value as string);
 	};
 	return (
 		<div className={classes.root}>
-			<div className={classes.customButton}>
+			<div className={classes.headerButton}>
 				<CustomButton
 					handleClick={() =>
 						window.open(
@@ -45,7 +63,7 @@ function HomePage() {
 						)
 					}
 					label="Visit Docs"
-					handleIcon={<HomeIcon />}
+					handleIcon={<SubjectTwoToneIcon />}
 				/>
 			</div>
 			<Typography variant="h4" style={{ fontSize: "40px" }} gutterBottom>
@@ -59,14 +77,16 @@ function HomePage() {
 			<Typography variant="h6" className={classes.description1}>
 				Browse . Run . Contribute
 			</Typography>
-			<SearchBar />
+
+			<SearchBar searchToken={searchToken} handleSearch={handleSearch} />
 			<Container maxWidth="lg">
 				<div
 					style={{
 						display: "flex",
-						flexDirection: "row",
-						marginTop: 50,
-						marginBottom: 20,
+						//flexDirection: "row",
+						marginTop: 64,
+						marginBottom: 24,
+						width: "100%",
 					}}
 				>
 					<FormControl className={classes.formControl}>
@@ -81,10 +101,9 @@ function HomePage() {
 							onChange={handleChaosChange}
 						>
 							<MenuItem value={"All"}>All</MenuItem>
-							<MenuItem value={"Cassandra"}>Cassandra</MenuItem>
-							<MenuItem value={"Kubernetes"}>Kubernetes</MenuItem>
-							<MenuItem value={"Kafka"}>Kafka</MenuItem>
-							<MenuItem value={"OpenEBS"}>OpenEBS</MenuItem>
+							{chartData.chaosFilter.map((f) => (
+								<MenuItem value={f}>{f}</MenuItem>
+							))}
 						</Select>
 					</FormControl>
 
@@ -106,8 +125,9 @@ function HomePage() {
 							onChange={handleContributorChange}
 						>
 							<MenuItem value={"All"}>All</MenuItem>
-							<MenuItem value={"MayaData"}>MayaData</MenuItem>
-							<MenuItem value={"Intuit"}>Intuit</MenuItem>
+							{chartData.contributorFilter.map((f) => (
+								<MenuItem value={f}>{f}</MenuItem>
+							))}
 						</Select>
 					</FormControl>
 
@@ -127,6 +147,9 @@ function HomePage() {
 					</Button>
 				</div>
 			</Container>
+
+			{/* Card component */}
+			<Charts experimentGroups={chartData.displayExperimentGroups} />
 		</div>
 	);
 }

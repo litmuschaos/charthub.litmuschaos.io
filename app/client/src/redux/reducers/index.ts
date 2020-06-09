@@ -1,16 +1,31 @@
 import { History } from "history";
 import { combineReducers } from "redux";
-import { Todo, Theme } from "../model";
-import * as todoReducer from "./todo";
+import {
+	AnalyticsData,
+	ChartData,
+	GithubData,
+	Theme,
+	VersionData,
+} from "../model";
+import * as analyticsReducer from "./analytics";
+import * as chartReducer from "./charts";
+import * as githubReducer from "./github";
 import * as themeReducer from "./theme";
+import * as versionsReducer from "./versions";
 
 export interface RootState {
-	todoList: Todo[];
 	theme: Theme;
+	githubData: GithubData;
+	analyticsData: AnalyticsData;
+	versionData: VersionData;
+	chartData: ChartData;
 }
 
 export default (history: History) =>
 	combineReducers({
-		...todoReducer,
 		...themeReducer,
+		...githubReducer,
+		...analyticsReducer,
+		...versionsReducer,
+		...chartReducer,
 	});
