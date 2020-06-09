@@ -10,6 +10,7 @@ import { RootState } from "../../redux/reducers";
 import { GithubContributor } from "../../redux/model";
 
 interface StatItem {
+	key: string;
 	value: string;
 	desc: string;
 }
@@ -29,21 +30,21 @@ interface Branding {
 }
 function Stat(props: { stat: StatItem[] }) {
 	const classes = useStyles();
-	const createStatItem = (value: string, desc: string) => {
+	const createStatItem = (s: StatItem) => {
 		return (
-			<div className={classes.statItem}>
+			<div key={s.key} className={classes.statItem}>
 				<Typography variant="h5" className={classes.statValue}>
-					{value}
+					{s.value}
 				</Typography>
 				<Typography variant="caption" style={{ fontWeight: 700 }}>
-					{desc}
+					{s.desc}
 				</Typography>
 			</div>
 		);
 	};
 	return (
 		<div className={classes.stat}>
-			{props.stat.map((s: StatItem) => createStatItem(s.value, s.desc))}
+			{props.stat.map((s: StatItem) => createStatItem(s))}
 		</div>
 	);
 }
@@ -53,11 +54,15 @@ function Community(props: { data: Community }) {
 	const createList = (header: string, data: CommunityItem[], icon: any) => {
 		return (
 			<div>
-				<Typography variant="body1" style={{ fontWeight: 700 }}>
+				<Typography
+					key={header}
+					variant="body1"
+					style={{ fontWeight: 700 }}
+				>
 					{header}
 				</Typography>
-				{data.map((d) => (
-					<div className={classes.commList}>
+				{data.map((d, i) => (
+					<div key={i} className={classes.commList}>
 						{icon}
 						<a href={d.link}>
 							<Typography className={classes.commData}>
@@ -144,15 +149,17 @@ function Footer() {
 	//const opInstalls = formatCount(analyticsData.chaosOperatorCount)
 	const stat: StatItem[] = [
 		{
+			key: "opInstalls",
 			value: opInstalls,
 			desc: "chaos operator installed",
 		},
-		{ value: expCount, desc: "total experiments" },
+		{ key: "expCount", value: expCount, desc: "total experiments" },
 		{
+			key: "expRuns",
 			value: expRuns,
 			desc: "total experiment runs",
 		},
-		{ value: githubStars, desc: "github stars" },
+		{ key: "githubStars", value: githubStars, desc: "github stars" },
 	];
 	const community: Community = {
 		contributors,
