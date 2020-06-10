@@ -54,6 +54,7 @@ export const chartData = createReducer<ChartData>(initialState, {
 							: [],
 						chaosExpCRDLink: spec.ChaosExpCRDLink,
 						platforms: spec.Platforms,
+						chaosType: spec.ChaosType,
 					});
 				});
 			let spec = g.Spec;

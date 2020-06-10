@@ -65,7 +65,7 @@ function Community(props: { data: Community }) {
 				{data.map((d, i) => (
 					<div key={i} className={classes.commList}>
 						{icon}
-						<a href={d.link}>
+						<a href={d.link} target="#">
 							<Typography className={classes.commData}>
 								{d.value}
 							</Typography>
@@ -113,12 +113,12 @@ function Branding(props: { data: Branding }) {
 				</Typography>
 			</div>
 			<div className={classes.brandLinks}>
-				<a href="https://litmuschaos.io/">
+				<a href="https://litmuschaos.io/" target="#">
 					<Typography className={classes.brandLData}>
 						Litmuschaos.io
 					</Typography>
 				</a>
-				<a href="https://mayadata.io/aboutus">
+				<a href="https://mayadata.io/aboutus" target="#">
 					<Typography className={classes.brandLData}>
 						About Us
 					</Typography>

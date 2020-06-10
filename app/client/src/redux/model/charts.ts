@@ -22,6 +22,7 @@ export interface Experiment {
 	links: Link[];
 	chaosExpCRDLink: string;
 	platforms: string[];
+	chaosType?: string;
 }
 export interface ExperimentGroup {
 	name: string;
