@@ -1,5 +1,3 @@
-import { IconButton } from "@material-ui/core";
-import Sort from "@material-ui/icons/SortTwoTone";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import {
@@ -65,6 +63,7 @@ function ExperimentsGroupPage(props: any) {
 		});
 		setDisplayExps(payload);
 	};
+	console.log(match);
 	if (!chartGroup) {
 		history.push("/");
 		return <></>;
@@ -109,8 +108,8 @@ function ExperimentsGroupPage(props: any) {
 						<div className={classes.installCTA}>
 							<CustomButton
 								handleClick={() =>
-									window.open(
-										"https://docs.litmuschaos.io/docs/getstarted/"
+									history.push(
+										`${match.url}/install-all-experiments`
 									)
 								}
 								label="Install All Experiments"

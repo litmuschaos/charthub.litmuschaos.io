@@ -1,13 +1,5 @@
-import {
-	Button,
-	Container,
-	FormControl,
-	Icon,
-	Select,
-	Typography,
-} from "@material-ui/core";
+import { FormControl, Select, Typography } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import Sort from "@material-ui/icons/SortTwoTone";
 import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
 import { useState } from "react";
@@ -31,6 +23,7 @@ function HomePage() {
 	const chartData = useSelector((state: RootState) => state.chartData);
 	const chartActions = useActions(ChartActions);
 	console.log(chartData);
+
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {

@@ -8,7 +8,7 @@ import {
 	UsefulLinks,
 } from "../../components";
 import { history } from "../../redux/configureStore";
-import { Experiment, ExperimentGroup } from "../../redux/model";
+import { ExperimentGroup } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { getExpRunCount } from "../../utils";
 import { useStyles } from "./styles";
@@ -24,9 +24,13 @@ function ExperimentPage(props: any) {
 	const chartGroup: ExperimentGroup = chartData.allExperimentGroups.filter(
 		(g) => g.metadataName === chartGroupId
 	)[0];
-	const chart: Experiment =
-		chartGroup &&
-		chartGroup.experiments.filter((e) => e.metadataName === chartId)[0];
+	const chart: any =
+		chartId === "install-all-experiments"
+			? chartGroup
+			: chartGroup &&
+			  chartGroup.experiments.filter(
+					(e) => e.metadataName === chartId
+			  )[0];
 
 	if (!chartGroup || !chart) {
 		history.push("/");
@@ -35,11 +39,15 @@ function ExperimentPage(props: any) {
 		const hubUrl: string = `https://hub.litmuschaos.io/api/chaos/${
 			versionData.currentVersion
 		}?file=${chart.chaosExpCRDLink.split("/chaos-charts/master/")[1]}`;
-		const url: string[] = hubUrl.split("/");
-		url[url.length - 1] = "rbac.yaml";
-		const rbacUrl: string = url.join("/");
-		url[url.length - 1] = "engine.yaml";
-		const engineUrl: string = url.join("/");
+		let rbacUrl: string = "";
+		let engineUrl: string = "";
+		if (JSON.stringify(chartGroup) !== JSON.stringify(chart)) {
+			const url: string[] = hubUrl.split("/");
+			url[url.length - 1] = "rbac.yaml";
+			rbacUrl = url.join("/");
+			url[url.length - 1] = "engine.yaml";
+			engineUrl = url.join("/");
+		}
 		return (
 			<div className={classes.root}>
 				{/* BreadCrumbs */}
@@ -82,16 +90,20 @@ function ExperimentPage(props: any) {
 								description="You can install the Chaos Experiment using the following command"
 								yamlLink={hubUrl}
 							/>
-							<InstallChaos
-								title="Setup Service Account (RBAC)"
-								description="Create a service account using the following command"
-								yamlLink={rbacUrl}
-							/>
-							<InstallChaos
-								title="Run Chaos Engine"
-								description="You can run the chaos engine using the following command"
-								yamlLink={engineUrl}
-							/>
+							{rbacUrl && (
+								<InstallChaos
+									title="Setup Service Account (RBAC)"
+									description="Create a service account using the following command"
+									yamlLink={rbacUrl}
+								/>
+							)}
+							{engineUrl && (
+								<InstallChaos
+									title="Run Chaos Engine"
+									description="You can run the chaos engine using the following command"
+									yamlLink={engineUrl}
+								/>
+							)}
 						</div>
 					</div>
 					{/* Install Experiments CTA + Usefull Links */}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
-import { Experiment, ExperimentGroup } from "../../redux/model";
+import { ExperimentGroup } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import CustomCard from "../CustomCard";
 import { useStyles } from "./styles";

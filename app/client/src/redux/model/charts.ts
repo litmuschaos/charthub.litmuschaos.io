@@ -38,7 +38,7 @@ export interface ExperimentGroup {
 	provider: string;
 	links: Link[];
 	experiments: Experiment[];
-	chaosAllExpsCRDLink: string;
+	chaosExpCRDLink: string;
 }
 
 export interface ChartData {

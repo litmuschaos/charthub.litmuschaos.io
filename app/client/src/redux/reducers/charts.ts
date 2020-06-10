@@ -82,7 +82,7 @@ export const chartData = createReducer<ChartData>(initialState, {
 							url: l.Url,
 					  }))
 					: [],
-				chaosAllExpsCRDLink: spec.ChaosExpCRDLink,
+				chaosExpCRDLink: spec.ChaosExpCRDLink,
 				experiments: exp,
 			});
 		});
