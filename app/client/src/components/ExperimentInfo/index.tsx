@@ -5,7 +5,7 @@ interface ExpInfoProps {
 	title: string;
 	runCount: number;
 	contributer?: string;
-	description: string;
+	description?: string;
 	videoURL?: string;
 }
 export function ExperimentInfo(props: ExpInfoProps) {

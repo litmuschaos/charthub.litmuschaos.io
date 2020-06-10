@@ -5,12 +5,13 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	drawerHeader: { ...theme.mixins.toolbar },
 	drawerPaper: {
 		width: drawerWidth,
+		height: "100vh",
 		color: theme.palette.primary.contrastText,
 		backgroundColor: theme.palette.background.paper,
 		[theme.breakpoints.up("md")]: {
 			width: drawerWidth,
 			position: "relative",
-			height: "100%",
+			height: "100vh",
 		},
 	},
 	formControl: {

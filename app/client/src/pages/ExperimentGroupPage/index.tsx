@@ -12,22 +12,22 @@ import {
 	UsefulLinks,
 } from "../../components";
 import { history } from "../../redux/configureStore";
-import { Experiment } from "../../redux/model";
+import { Experiment, ExperimentGroup } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
-import { useStyles } from "./styles";
 import { getExpRunCount } from "../../utils";
+import { useStyles } from "./styles";
 
-function ExperimentsPage(props: any) {
+function ExperimentsGroupPage(props: any) {
 	const classes = useStyles();
 	const match = props.match;
 	const chartGroudId: string = match.params.chartGroupId;
 	const { chartData, analyticsData } = useSelector(
 		(state: RootState) => state
 	);
-	const chartGroup = chartData.allExperimentGroups.filter(
+	const chartGroup: ExperimentGroup = chartData.allExperimentGroups.filter(
 		(g) => g.metadataName === chartGroudId
 	)[0];
-	const experiments = chartGroup ? chartGroup.experiments : [];
+	const experiments: Experiment[] = chartGroup ? chartGroup.experiments : [];
 	const [displayExps, setDisplayExps] = React.useState(experiments);
 	const [searchToken, setsearchToken] = React.useState("");
 
@@ -130,4 +130,4 @@ function ExperimentsPage(props: any) {
 		);
 }
 
-export default ExperimentsPage;
+export default ExperimentsGroupPage;
