@@ -1,6 +1,8 @@
 import React from "react";
 import { useStyles } from "./styles";
 
+const ReactMarkdown = require("react-markdown");
+
 interface ExpInfoProps {
 	title: string;
 	runCount: number;
@@ -24,7 +26,9 @@ export function ExperimentInfo(props: ExpInfoProps) {
 				)}
 			</div>
 
-			<div className={classes.expDesc}>{description}</div>
+			<div className={classes.expDesc}>
+				<ReactMarkdown source={description} />
+			</div>
 		</div>
 	);
 }
