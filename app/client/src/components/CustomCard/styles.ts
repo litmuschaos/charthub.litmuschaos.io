@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
 		boxShadow: theme.shadows[4],
 		borderRadius: 8,
 		overflow: "hidden",
+		fontSize: 14,
 		margin: 16,
 		display: "flex",
 		flexDirection: "column",
@@ -51,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		fontWeight: 600,
-		fontSize: 14,
+		fontSize: 18,
 		color: theme.palette.primary.contrastText,
 		margin: "12px 0",
 		[theme.breakpoints.down("sm")]: {
@@ -59,7 +60,6 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	description: {
-		fontSize: 14,
 		textAlign: "center",
 		marginBottom: 12,
 		[theme.breakpoints.down("sm")]: {
