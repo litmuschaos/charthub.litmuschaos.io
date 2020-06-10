@@ -19,7 +19,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginBottom: 32,
 	},
 	expDesc: {
-		maxWidth: "75%",
 		marginBottom: 8,
 	},
 }));

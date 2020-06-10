@@ -75,7 +75,7 @@ function ExperimentPage(props: any) {
 								runCount={expCount}
 							/>
 						</div>
-						{/* TODO: add body */}
+						{/* page body */}
 						<div>
 							<div className={classes.note}>Note:</div>
 							<div>
