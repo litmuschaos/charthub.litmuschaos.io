@@ -1,7 +1,7 @@
+import { Icon, InputBase, Paper } from "@material-ui/core";
+import Search from "@material-ui/icons/SearchTwoTone";
 import React from "react";
 import { useStyles } from "./styles";
-import { Paper, Icon, InputBase } from "@material-ui/core";
-import Search from "@material-ui/icons/SearchRounded";
 
 export function SearchBar(props: any) {
 	const classes = useStyles();

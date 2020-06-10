@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
 	root: {
 		height: "100%",
 		textAlign: "center",
+		paddingTop: 16,
 	},
 	description: {
 		width: 796,

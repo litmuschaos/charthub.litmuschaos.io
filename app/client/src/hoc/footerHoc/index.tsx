@@ -2,12 +2,12 @@ import { Typography } from "@material-ui/core";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import ForumTwoToneIcon from "@material-ui/icons/ForumTwoTone";
 import HelpTwoToneIcon from "@material-ui/icons/HelpTwoTone";
-import PermContactCalendarRoundedIcon from "@material-ui/icons/PermContactCalendarRounded";
+import PermContactCalendarRoundedIcon from "@material-ui/icons/PermContactCalendarTwoTone";
 import * as React from "react";
-import { useStyles } from "./styles";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers";
 import { GithubContributor } from "../../redux/model";
+import { RootState } from "../../redux/reducers";
+import { useStyles } from "./styles";
 
 interface StatItem {
 	key: string;

@@ -1,7 +1,7 @@
+import { Icon, Typography } from "@material-ui/core";
+import LinkIcon from "@material-ui/icons/LinkTwoTone";
 import React from "react";
 import { useStyles } from "./styles";
-import { Typography, Icon } from "@material-ui/core";
-import LinkIcon from "@material-ui/icons/Link";
 
 interface Maintainers {
 	name: string;

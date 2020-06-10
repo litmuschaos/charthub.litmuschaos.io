@@ -7,7 +7,7 @@ import {
 	Typography,
 } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import Sort from "@material-ui/icons/Sort";
+import Sort from "@material-ui/icons/SortTwoTone";
 import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
 import { useState } from "react";

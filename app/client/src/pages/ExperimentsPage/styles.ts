@@ -2,35 +2,52 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
 	root: {
-		height: "100%",
-		textAlign: "center",
+		padding: 16,
 	},
-	expHeader: {
-		textAlign: "left",
-		alignItems: "left",
+	header: {
+		display: "flex",
+		flexDirection: "column",
+		position: "relative",
+		[theme.breakpoints.up("md")]: {
+			flexDirection: "row",
+		},
 	},
-	description: {
-		width: 720,
-		height: 115,
-		fontSize: 20,
-		marginBottom: 20,
-		textAlign: "left",
-		color: theme.palette.text.secondary,
+	breadCrumbs: {
+		marginTop: 16,
+		marginLeft: 0,
+		position: "relative",
+		marginBottom: 32,
+		[theme.breakpoints.up("md")]: {
+			position: "absolute",
+			marginLeft: 64,
+			marginBottom: 0,
+		},
 	},
-	description1: {
-		fontSize: 20,
-		marginBottom: 20,
-		fontWeight: "bold",
-		color: theme.palette.text.secondary,
+	body: {
+		display: "flex",
+		flexDirection: "row",
+		[theme.breakpoints.down("md")]: {
+			flexDirection: "column",
+		},
+	},
+	content: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "start",
+		marginLeft: 64,
+	},
+	contentHead: {
+		display: "flex",
+		flexDirection: "row",
 	},
 	sort: {
 		marginLeft: theme.spacing(1),
 		color: theme.palette.primary.contrastText,
 	},
-	customButton: {
-		display: "flex",
-		flexDirection: "row",
-		marginLeft: 75,
-		marginTop: 0,
+	info: {
+		margin: "0 auto",
+	},
+	installCTA: {
+		marginBottom: 32,
 	},
 }));
