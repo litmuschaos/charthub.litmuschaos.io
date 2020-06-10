@@ -52,7 +52,7 @@ function Drawer() {
 	};
 
 	return (
-		<div>
+		<>
 			<FormControl className={classes.formControl}>
 				<InputLabel>Version</InputLabel>
 				<Select
@@ -92,7 +92,7 @@ function Drawer() {
 					<ContributeIcon className={classes.button} />
 				</CustomisedListItem>
 			</List>
-		</div>
+		</>
 	);
 }
 
