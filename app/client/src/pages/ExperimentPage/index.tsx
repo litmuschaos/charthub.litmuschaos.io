@@ -41,12 +41,19 @@ function ExperimentPage(props: any) {
 		}?file=${chart.chaosExpCRDLink.split("/chaos-charts/master/")[1]}`;
 		let rbacUrl: string = "";
 		let engineUrl: string = "";
+		let expCount: number = 0;
 		if (JSON.stringify(chartGroup) !== JSON.stringify(chart)) {
 			const url: string[] = hubUrl.split("/");
 			url[url.length - 1] = "rbac.yaml";
 			rbacUrl = url.join("/");
 			url[url.length - 1] = "engine.yaml";
 			engineUrl = url.join("/");
+			expCount = getExpRunCount(chart, analyticsData.expAnalytics);
+		} else {
+			expCount = getExpRunCount(
+				chart.experiments,
+				analyticsData.expAnalytics
+			);
 		}
 		return (
 			<div className={classes.root}>
@@ -65,10 +72,7 @@ function ExperimentPage(props: any) {
 							<ExperimentInfo
 								title={chart.name}
 								description={chart.description}
-								runCount={getExpRunCount(
-									chart,
-									analyticsData.expAnalytics
-								)}
+								runCount={expCount}
 							/>
 						</div>
 						{/* TODO: add body */}
