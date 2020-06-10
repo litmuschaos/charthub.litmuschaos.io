@@ -86,10 +86,21 @@ export const searchCharts = (searchToken: string) => (
 	getState: Function
 ) => {
 	const { chartData } = getState();
+	searchToken = searchToken.toLowerCase().replace(/[ -]/g, "");
 	const payload: ExperimentGroup[] = chartData.allExperimentGroups.filter(
 		(expg: ExperimentGroup) => {
-			console.log(expg.name);
-			return expg.name.toLowerCase().includes(searchToken.toLowerCase());
+			return (
+				expg.name
+					.toLowerCase()
+					.replace(/[\b-]/g, "")
+					.includes(searchToken) ||
+				expg.experiments.some((exp: Experiment) =>
+					exp.name
+						.toLowerCase()
+						.replace(/[ -]/g, "")
+						.includes(searchToken)
+				)
+			);
 		}
 	);
 	dispatch({
