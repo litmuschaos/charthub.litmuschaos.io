@@ -86,23 +86,23 @@ export const searchCharts = (searchToken: string) => (
 	getState: Function
 ) => {
 	const { chartData } = getState();
-	searchToken = searchToken.toLowerCase().replace(/[ -]/g, "");
-	const payload: ExperimentGroup[] = chartData.allExperimentGroups.filter(
-		(expg: ExperimentGroup) => {
-			return (
-				expg.name
-					.toLowerCase()
-					.replace(/[\b-]/g, "")
-					.includes(searchToken) ||
-				expg.experiments.some((exp: Experiment) =>
-					exp.name
-						.toLowerCase()
-						.replace(/[ -]/g, "")
-						.includes(searchToken)
-				)
-			);
-		}
-	);
+	const tokens = searchToken
+		.toLowerCase()
+		.split(" ")
+		.filter((s) => s != "");
+	const payload: ExperimentGroup[] = searchToken
+		? chartData.allExperimentGroups.filter(
+				(expg: ExperimentGroup) =>
+					tokens.every((s: string) =>
+						expg.name.toLowerCase().includes(s)
+					) ||
+					expg.experiments.some((exp: Experiment) =>
+						tokens.every((s: string) =>
+							exp.name.toLowerCase().includes(s)
+						)
+					)
+		  )
+		: chartData.allExperimentGroups;
 	dispatch({
 		type: ChartActions.FILTER_CHARTS_ON_SEARCH,
 		payload: payload,

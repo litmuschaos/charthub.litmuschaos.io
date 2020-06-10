@@ -48,9 +48,14 @@ function ExperimentsPage(props: any) {
 	const handleSearch = (event: React.ChangeEvent<{ value: unknown }>) => {
 		let search: string = event.target.value as string;
 		setsearchToken(search);
-		search = search.toLowerCase().replace(/[ -]/g, "");
+		const tokens: string[] = search
+			.toLowerCase()
+			.split(" ")
+			.filter((s) => s != "");
 		const payload: Experiment[] = experiments.filter((exp: Experiment) => {
-			return exp.name.toLowerCase().replace(/[ -]/g, "").includes(search);
+			return tokens.every((s: string) =>
+				exp.name.toLowerCase().includes(s)
+			);
 		});
 		setDisplayExps(payload);
 	};
