@@ -16,7 +16,7 @@ export function CustomBreadCrumbs(props: { location: string }) {
 			</Link>
 			{path.map((p: string) => {
 				intermediatRoutes += p;
-				if (p)
+				if (p && p.toLowerCase() !== "charts")
 					return (
 						<Link
 							color="inherit"
