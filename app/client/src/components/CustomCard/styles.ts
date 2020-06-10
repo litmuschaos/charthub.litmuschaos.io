@@ -95,5 +95,6 @@ export const useStyles = makeStyles((theme) => ({
 		borderRadius: 9,
 		padding: "3px 6px",
 		fontWeight: 500,
+		fontSize: 14,
 	},
 }));

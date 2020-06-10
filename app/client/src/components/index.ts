@@ -6,6 +6,7 @@ export * from "./CustomBreadCrumbs";
 export * from "./CustomButton";
 export * from "./CustomCard";
 export * from "./ExperimentInfo";
+export * from "./InstallChaos";
 export * from "./Loader";
 export * from "./SearchBar";
 export * from "./UsefulLinks";

@@ -4,6 +4,7 @@ import {
 	BackButton,
 	CustomBreadCrumbs,
 	ExperimentInfo,
+	InstallChaos,
 	UsefulLinks,
 } from "../../components";
 import { history } from "../../redux/configureStore";
@@ -54,13 +55,34 @@ function ExperimentPage(props: any) {
 								)}
 							/>
 						</div>
-						{/* TODOD: add body */}
+						{/* TODO: add body */}
+						<div>
+							<div className={classes.note}>Note:</div>
+							<div>
+								<a
+									href="https://github.com/litmuschaos/chaos-operator/blob/master/README.md"
+									target="_"
+								>
+									Install Litmus Operator
+								</a>
+								: a tool for injecting Chaos Experiments
+							</div>
+						</div>
+						<div className={classes.installLinks}>
+							<InstallChaos
+								title="Install the Choas Expermiment"
+								description="You can install the Chaos Experiment by following command"
+								yamlLink={chart.chaosExpCRDLink}
+							/>
+						</div>
 					</div>
 					{/* Install Experiments CTA + Usefull Links */}
 					<div className={classes.info}>
 						<UsefulLinks
-							links={chartGroup.links}
-							maintainers={chartGroup.maintainers}
+							links={chart.links}
+							maintainers={chart.maintainers}
+							platforms={chart.platforms}
+							maturity={chart.maturity}
 						/>
 					</div>
 				</div>

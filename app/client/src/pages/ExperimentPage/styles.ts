@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: 16,
+		fontSize: 18,
 	},
 	breadCrumbs: {
 		marginTop: 16,
@@ -32,5 +33,13 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	info: {
 		margin: "0 auto",
+	},
+	note: {
+		fontWeight: "bold",
+		color: theme.palette.text.secondary,
+		margin: 0,
+	},
+	installLinks: {
+		marginTop: 16,
 	},
 }));
