@@ -2,6 +2,17 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const drawerWidth = 120;
 export const useStyles = makeStyles((theme: Theme) => ({
+	root: {
+		width: "100%",
+		height: "100vh",
+		display: "flex",
+		flexDirection: "row",
+		overflow: "hidden",
+	},
+	route: {
+		width: "100%",
+		overflowY: "scroll",
+	},
 	drawerHeader: { ...theme.mixins.toolbar },
 	drawerPaper: {
 		width: drawerWidth,

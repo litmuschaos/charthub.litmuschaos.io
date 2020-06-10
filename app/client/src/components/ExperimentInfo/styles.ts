@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 	expInfo: {
 		fontWeight: "bold",
-		marginBottom: 16,
+		marginBottom: 32,
 	},
 	expDesc: {
 		maxWidth: "75%",

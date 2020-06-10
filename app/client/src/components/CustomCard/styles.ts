@@ -12,6 +12,7 @@ export const useStyles = makeStyles((theme) => ({
 		flexDirection: "column",
 		flexWrap: "wrap",
 		textAlign: "center",
+		cursor: "pointer",
 		// Above tablet size
 		[theme.breakpoints.up("md")]: {
 			width: 250,
@@ -58,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	description: {
-		fontSize: 12,
+		fontSize: 14,
 		textAlign: "center",
 		marginBottom: 12,
 		[theme.breakpoints.down("sm")]: {
