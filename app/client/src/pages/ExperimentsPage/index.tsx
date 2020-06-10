@@ -15,12 +15,15 @@ import { history } from "../../redux/configureStore";
 import { Experiment } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
+import { getExpRunCount } from "../../utils";
 
 function ExperimentsPage(props: any) {
 	const classes = useStyles();
 	const match = props.match;
 	const chartGroudId: string = match.params.chartGroupId;
-	const chartData = useSelector((state: RootState) => state.chartData);
+	const { chartData, analyticsData } = useSelector(
+		(state: RootState) => state
+	);
 	const chartGroup = chartData.allExperimentGroups.filter(
 		(g) => g.metadataName === chartGroudId
 	)[0];
@@ -89,7 +92,10 @@ function ExperimentsPage(props: any) {
 							<ExperimentInfo
 								title={chartGroup.name}
 								description={chartGroup.categoryDescription}
-								runCount={47}
+								runCount={getExpRunCount(
+									chartGroup.experiments,
+									analyticsData.expAnalytics
+								)}
 							/>
 						</div>
 						{/* Sort Button */}

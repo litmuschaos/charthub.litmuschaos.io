@@ -5,22 +5,22 @@ import { Experiment } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import CustomCard from "../CustomCard";
 import { useStyles } from "./styles";
-
+import { getExpRunCount } from "../../utils";
 interface ChartProps {
 	experiments: Experiment[];
 	match: any;
 }
 
-const getTotalRuns = (
-	expName: string,
-	analyticsMap: Map<string, number>
-): number => {
-	try {
-		return analyticsMap.get(expName) ?? 0;
-	} catch {
-		return 0;
-	}
-};
+// const getTotalRuns = (
+// 	expName: string,
+// 	analyticsMap: Map<string, number>
+// ): number => {
+// 	try {
+// 		return analyticsMap.get(expName) ?? 0;
+// 	} catch {
+// 		return 0;
+// 	}
+// };
 
 const getIconUrl = (chartMetadataName: string, chartGroup: string) =>
 	"https://raw.githubusercontent.com/litmuschaos/chaos-charts/staging/charts/" +
@@ -52,8 +52,8 @@ export function Charts(props: ChartProps) {
 							history.push(`${match.url}/${e.metadataName}`)
 						}
 						provider={e.provider}
-						totalRuns={getTotalRuns(
-							e.metadataName,
+						totalRuns={getExpRunCount(
+							e,
 							analyticsData.expAnalytics
 						)}
 					/>

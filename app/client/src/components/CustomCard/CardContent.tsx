@@ -1,12 +1,7 @@
 import React from "react";
 import { CardProps } from "./model";
 import { useStyles } from "./styles";
-
-const formatCount = (count: number | undefined): string => {
-	if (count)
-		return count >= 1000 ? (count / 1000).toFixed(1) + "k+" : count + "";
-	return "0";
-};
+import { formatCount } from "../../utils";
 
 function CardContent(props: CardProps) {
 	const {

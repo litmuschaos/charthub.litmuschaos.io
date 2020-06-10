@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { GithubContributor } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
+import { formatCount } from "../../utils";
 
 interface StatItem {
 	key: string;
@@ -126,11 +127,7 @@ function Branding(props: { data: Branding }) {
 		</div>
 	);
 }
-const formatCount = (count: number | undefined): string => {
-	if (count)
-		return count >= 1000 ? (count / 1000).toFixed(1) + "k+" : count + "";
-	return "0";
-};
+
 function Footer() {
 	const classes = useStyles();
 	const { githubData, analyticsData, chartData } = useSelector(
