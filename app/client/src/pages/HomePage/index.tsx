@@ -1,4 +1,4 @@
-import { FormControl, Select, Typography } from "@material-ui/core";
+import { FormControl, Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
@@ -53,6 +53,20 @@ function HomePage() {
 
 	return (
 		<div className={classes.root}>
+			<div className={classes.title}>
+				<b>Chaos Chart for Kubernetes</b>
+			</div>
+			<div className={classes.description}>
+				Charts are pre-defined chaos experiments. Use these charts to
+				inject chaos into cloud native applications and Kubernetes
+				infrastructure.
+			</div>
+			<div className={classes.description1}>
+				Browse . Run . Contribute
+			</div>
+
+			<SearchBar searchToken={searchToken} handleSearch={handleSearch} />
+
 			<div className={classes.headerButton}>
 				<CustomButton
 					handleClick={() =>
@@ -64,24 +78,10 @@ function HomePage() {
 					handleIcon={<SubjectTwoToneIcon />}
 				/>
 			</div>
-			<Typography variant="h4" style={{ fontSize: "40px" }} gutterBottom>
-				<b>Chaos Chart for Kubernetes</b>
-			</Typography>
-			<Typography variant="subtitle1" className={classes.description}>
-				Charts are pre-defined chaos experiments. Use these charts to
-				inject chaos into cloud native applications and Kubernetes
-				infrastructure.
-			</Typography>
-			<Typography variant="h6" className={classes.description1}>
-				Browse . Run . Contribute
-			</Typography>
 
-			<SearchBar searchToken={searchToken} handleSearch={handleSearch} />
 			<div className={classes.filter}>
 				<FormControl className={classes.formControl}>
-					<Typography style={{ float: "left", marginTop: 2 }}>
-						Chaos for :
-					</Typography>
+					<span>Chaos for :</span>
 					<Select
 						className={classes.selectOption}
 						disableUnderline={true}
@@ -97,15 +97,7 @@ function HomePage() {
 				</FormControl>
 
 				<FormControl className={classes.formControl}>
-					<Typography
-						style={{
-							float: "left",
-							marginTop: 2,
-							marginLeft: 80,
-						}}
-					>
-						Contributors :
-					</Typography>
+					<span>Contributors :</span>
 					<Select
 						className={classes.selectOption}
 						disableUnderline={true}
