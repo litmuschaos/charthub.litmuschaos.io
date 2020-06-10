@@ -16,13 +16,13 @@ import { useStyles } from "./styles";
 function ExperimentPage(props: any) {
 	const classes = useStyles();
 	const match = props.match;
-	const chartGroudId: string = match.params.chartGroupId;
+	const chartGroupId: string = match.params.chartGroupId;
 	const chartId: string = match.params.chartId;
 	const { chartData, analyticsData } = useSelector(
 		(state: RootState) => state
 	);
 	const chartGroup: ExperimentGroup = chartData.allExperimentGroups.filter(
-		(g) => g.metadataName === chartGroudId
+		(g) => g.metadataName === chartGroupId
 	)[0];
 	const chart: Experiment =
 		chartGroup &&
@@ -31,7 +31,12 @@ function ExperimentPage(props: any) {
 	if (!chartGroup || !chart) {
 		history.push("/");
 		return <></>;
-	} else
+	} else {
+		const url: string[] = chart.chaosExpCRDLink.split("/");
+		url[url.length - 1] = "rbac.yaml";
+		const rbacUrl: string = url.join("/");
+		url[url.length - 1] = "engine.yaml";
+		const engineUrl: string = url.join("/");
 		return (
 			<div className={classes.root}>
 				{/* BreadCrumbs */}
@@ -70,9 +75,19 @@ function ExperimentPage(props: any) {
 						</div>
 						<div className={classes.installLinks}>
 							<InstallChaos
-								title="Install the Choas Expermiment"
-								description="You can install the Chaos Experiment by following command"
+								title="Install this Choas Expermiment"
+								description="You can install the Chaos Experiment using the following command"
 								yamlLink={chart.chaosExpCRDLink}
+							/>
+							<InstallChaos
+								title="Setup Service Account (RBAC)"
+								description="Create a service account using the following command"
+								yamlLink={rbacUrl}
+							/>
+							<InstallChaos
+								title="Run Chaos Engine"
+								description="You can run the chaos engine using the following command"
+								yamlLink={engineUrl}
 							/>
 						</div>
 					</div>
@@ -88,6 +103,7 @@ function ExperimentPage(props: any) {
 				</div>
 			</div>
 		);
+	}
 }
 
 export default ExperimentPage;
