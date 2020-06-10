@@ -84,62 +84,52 @@ function HomePage() {
 			</Typography>
 
 			<SearchBar searchToken={searchToken} handleSearch={handleSearch} />
-			<Container maxWidth="lg">
-				<div
-					style={{
-						display: "flex",
-						//flexDirection: "row",
-						marginTop: 64,
-						marginBottom: 24,
-						width: "100%",
-					}}
-				>
-					<FormControl className={classes.formControl}>
-						<Typography style={{ float: "left", marginTop: 2 }}>
-							Chaos for :
-						</Typography>
-						<Select
-							className={classes.selectOption}
-							disableUnderline={true}
-							labelId="change-chaos"
-							value={selectChaos}
-							onChange={handleChaosChange}
-						>
-							<MenuItem value={"All"}>All</MenuItem>
-							{chartData.chaosFilter.map((f) => (
-								<MenuItem value={f}>{f}</MenuItem>
-							))}
-						</Select>
-					</FormControl>
+			<div className={classes.filter}>
+				<FormControl className={classes.formControl}>
+					<Typography style={{ float: "left", marginTop: 2 }}>
+						Chaos for :
+					</Typography>
+					<Select
+						className={classes.selectOption}
+						disableUnderline={true}
+						labelId="change-chaos"
+						value={selectChaos}
+						onChange={handleChaosChange}
+					>
+						<MenuItem value={"All"}>All</MenuItem>
+						{chartData.chaosFilter.map((f) => (
+							<MenuItem value={f}>{f}</MenuItem>
+						))}
+					</Select>
+				</FormControl>
 
-					<FormControl className={classes.formControl}>
-						<Typography
-							style={{
-								float: "left",
-								marginTop: 2,
-								marginLeft: 80,
-							}}
-						>
-							Contributors :
-						</Typography>
-						<Select
-							className={classes.selectOption}
-							disableUnderline={true}
-							labelId="change-contributors"
-							value={selectContributors}
-							onChange={handleContributorChange}
-						>
-							<MenuItem value={"All"}>All</MenuItem>
-							{chartData.contributorFilter.map((f) => (
-								<MenuItem value={f}>{f}</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-					<div className={classes.sort}>
-						<SortButton handleClick={handleSort} />
-					</div>
+				<FormControl className={classes.formControl}>
+					<Typography
+						style={{
+							float: "left",
+							marginTop: 2,
+							marginLeft: 80,
+						}}
+					>
+						Contributors :
+					</Typography>
+					<Select
+						className={classes.selectOption}
+						disableUnderline={true}
+						labelId="change-contributors"
+						value={selectContributors}
+						onChange={handleContributorChange}
+					>
+						<MenuItem value={"All"}>All</MenuItem>
+						{chartData.contributorFilter.map((f) => (
+							<MenuItem value={f}>{f}</MenuItem>
+						))}
+					</Select>
+				</FormControl>
+				<div className={classes.sort}>
+					<SortButton handleClick={handleSort} />
 				</div>
-			</Container>
+			</div>
 
 			{/* Card component */}
 			<ChartGroups experimentGroups={chartData.displayExperimentGroups} />

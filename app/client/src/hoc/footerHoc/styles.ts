@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.primary.main,
 		width: "100%",
 		padding: 8,
+		marginTop: 40,
 	},
 	paper: {
 		padding: theme.spacing(2),

@@ -21,12 +21,12 @@ import { useStyles } from "./styles";
 function ExperimentsGroupPage(props: any) {
 	const classes = useStyles();
 	const match = props.match;
-	const chartGroudId: string = match.params.chartGroupId;
+	const chartGroupId: string = match.params.chartGroupId;
 	const { chartData, analyticsData } = useSelector(
 		(state: RootState) => state
 	);
 	const chartGroup: ExperimentGroup = chartData.allExperimentGroups.filter(
-		(g) => g.metadataName === chartGroudId
+		(g) => g.metadataName === chartGroupId
 	)[0];
 	const experiments: Experiment[] = chartGroup ? chartGroup.experiments : [];
 	const [displayExps, setDisplayExps] = React.useState(experiments);

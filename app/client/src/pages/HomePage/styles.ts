@@ -43,4 +43,12 @@ export const useStyles = makeStyles((theme) => ({
 		position: "absolute",
 		right: 88,
 	},
+	filter: {
+		display: "flex",
+		marginTop: 64,
+		marginBottom: 40,
+		marginLeft: "auto",
+		marginRight: "auto",
+		width: "90%",
+	},
 }));
