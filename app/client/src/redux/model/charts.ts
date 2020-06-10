@@ -1,8 +1,8 @@
-interface Maintainer {
+export interface Maintainer {
 	name: string;
 	email: string;
 }
-interface Link {
+export interface Link {
 	name: string;
 	url: string;
 }

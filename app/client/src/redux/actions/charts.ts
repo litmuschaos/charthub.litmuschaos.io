@@ -89,7 +89,7 @@ export const searchCharts = (searchToken: string) => (
 	const tokens = searchToken
 		.toLowerCase()
 		.split(" ")
-		.filter((s) => s != "");
+		.filter((s) => s !== "");
 	const payload: ExperimentGroup[] = searchToken
 		? chartData.allExperimentGroups.filter(
 				(expg: ExperimentGroup) =>

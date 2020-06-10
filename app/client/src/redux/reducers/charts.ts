@@ -48,8 +48,8 @@ export const chartData = createReducer<ChartData>(initialState, {
 						provider: spec.Provider.Name,
 						links: spec.Links
 							? spec.Links.map((l: any) => ({
-									name: l.name,
-									url: l.url,
+									name: l.Name,
+									url: l.Url,
 							  }))
 							: [],
 						chaosExpCRDLink: spec.ChaosExpCRDLink,
@@ -77,8 +77,8 @@ export const chartData = createReducer<ChartData>(initialState, {
 				provider: spec.Provider.Name,
 				links: spec.Links
 					? spec.Links.map((l: any) => ({
-							name: l.name,
-							url: l.url,
+							name: l.Name,
+							url: l.Url,
 					  }))
 					: [],
 				chaosAllExpsCRDLink: spec.ChaosExpCRDLink,
