@@ -22,6 +22,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		display: "flex",
 		margin: "0 auto",
 		justifyContent: "center",
+		[theme.breakpoints.down("md")]: {
+			flexDirection: "row",
+		},
 	},
 	statValue: {
 		fontWeight: 700,
@@ -44,6 +47,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginTop: 16,
 		marginLeft: "auto",
 		marginRight: "auto",
+		[theme.breakpoints.down("md")]: {
+			flexDirection: "row",
+		},
 	},
 	brand: {
 		display: "flex",
@@ -57,6 +63,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		display: "flex",
 		alignItems: "center",
 		flexGrow: 1,
+		[theme.breakpoints.down("md")]: {
+			flexDirection: "row",
+		},
 	},
 	brandLinks: {},
 	brandLogo: {

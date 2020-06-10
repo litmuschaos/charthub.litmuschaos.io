@@ -30,7 +30,7 @@ function HomePage() {
 	const [searchToken, setsearchToken] = useState("");
 	const chartData = useSelector((state: RootState) => state.chartData);
 	const chartActions = useActions(ChartActions);
-
+	console.log(chartData);
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
