@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme) => ({
 	textField: {
 		width: "100%",
 		fontSize: 18,
-		marginLeft: theme.spacing(1),
+		marginLeft: 8,
+		marginRight: 32,
 	},
 }));
