@@ -1,12 +1,15 @@
 import { Button, Container, Icon, Typography } from "@material-ui/core";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Sort from "@material-ui/icons/Sort";
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { Charts, CustomButton, SearchBar, UsefulLinks } from "../../components";
+import {
+	Charts,
+	CustomButton,
+	SearchBar,
+	UsefulLinks,
+	CustomBreadCrumbs,
+} from "../../components";
 import { Experiment } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
@@ -55,24 +58,7 @@ function ExperimentsPage(props: any) {
 		<div className={classes.root}>
 			<Grid container spacing={3}>
 				<Grid item xs={3} style={{ paddingLeft: 150 }}>
-					<Breadcrumbs
-						separator={<NavigateNextIcon fontSize="small" />}
-						aria-label="breadcrumb"
-					>
-						<Link
-							color="inherit"
-							href="/"
-							style={{ fontWeight: "bold" }}
-						>
-							Home
-						</Link>
-						<Typography
-							color="textPrimary"
-							style={{ fontWeight: "bold" }}
-						>
-							{chartGroup.name}
-						</Typography>
-					</Breadcrumbs>
+					<CustomBreadCrumbs location={props.location.pathname} />
 				</Grid>
 				<Grid item xs={6}>
 					<SearchBar

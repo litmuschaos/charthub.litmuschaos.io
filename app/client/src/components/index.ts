@@ -6,3 +6,4 @@ export * from "./CustomCard";
 export * from "./Loader";
 export * from "./SearchBar";
 export * from "./UsefulLinks";
+export * from "./CustomBreadCrumbs";
