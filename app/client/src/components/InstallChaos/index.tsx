@@ -1,3 +1,5 @@
+import { IconButton } from "@material-ui/core";
+import Copy from "@material-ui/icons/FileCopyTwoTone";
 import React from "react";
 import { useStyles } from "./styles";
 
@@ -15,7 +17,14 @@ export function InstallChaos(props: InstallProps) {
 			<div className={classes.title}>{title}</div>
 			<div className={classes.description}>{description}</div>
 			<div className={classes.linkBox}>
-				<div className={classes.yamlLink}>{yamlLink}</div>
+				<div
+					className={classes.yamlLink}
+				>{`kubectl apply -f ${yamlLink}`}</div>
+				<div>
+					<IconButton onClick={() => console.log("copied")}>
+						<Copy />
+					</IconButton>
+				</div>
 			</div>
 		</div>
 	);

@@ -5,16 +5,23 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: "100%",
 		fontSize: 18,
 		color: theme.palette.text.secondary,
+		margin: "16px 0",
 	},
 	title: {
 		fontSize: 20,
 		fontWeight: "bold",
+		margin: "8px 0",
 	},
-	description: {},
+	description: {
+		margin: "8px 0",
+	},
 	linkBox: {
 		backgroundColor: theme.palette.primary.main,
 		padding: 8,
 		borderRadius: 8,
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
 	},
 	yamlLink: {
 		width: "90%",
