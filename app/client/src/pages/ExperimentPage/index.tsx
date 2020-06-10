@@ -18,7 +18,7 @@ function ExperimentPage(props: any) {
 	const match = props.match;
 	const chartGroupId: string = match.params.chartGroupId;
 	const chartId: string = match.params.chartId;
-	const { chartData, analyticsData } = useSelector(
+	const { chartData, analyticsData, versionData } = useSelector(
 		(state: RootState) => state
 	);
 	const chartGroup: ExperimentGroup = chartData.allExperimentGroups.filter(
@@ -32,7 +32,10 @@ function ExperimentPage(props: any) {
 		history.push("/");
 		return <></>;
 	} else {
-		const url: string[] = chart.chaosExpCRDLink.split("/");
+		const hubUrl: string = `https://hub.litmuschaos.io/api/chaos/${
+			versionData.currentVersion
+		}?file=${chart.chaosExpCRDLink.split("/chaos-charts/master/")[1]}`;
+		const url: string[] = hubUrl.split("/");
 		url[url.length - 1] = "rbac.yaml";
 		const rbacUrl: string = url.join("/");
 		url[url.length - 1] = "engine.yaml";
@@ -77,7 +80,7 @@ function ExperimentPage(props: any) {
 							<InstallChaos
 								title="Install this Choas Expermiment"
 								description="You can install the Chaos Experiment using the following command"
-								yamlLink={chart.chaosExpCRDLink}
+								yamlLink={hubUrl}
 							/>
 							<InstallChaos
 								title="Setup Service Account (RBAC)"
