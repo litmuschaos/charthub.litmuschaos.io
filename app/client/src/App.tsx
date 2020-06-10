@@ -23,12 +23,12 @@ function Routes() {
 				<Route exact={true} path="/home" component={HomePage} />
 				<Route
 					exact={true}
-					path="/charts/:chartGroupId"
+					path="/:chartGroupId"
 					component={ExperimentsPage}
 				/>
 				<Route
 					exact={true}
-					path="/charts/:chartGroupId/:chartId"
+					path="/:chartGroupId/:chartId"
 					component={() => <h1>Experiment</h1>}
 				/>
 			</Switch>

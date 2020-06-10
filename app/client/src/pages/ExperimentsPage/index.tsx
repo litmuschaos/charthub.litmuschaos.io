@@ -5,11 +5,12 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import {
 	Charts,
+	CustomBreadCrumbs,
 	CustomButton,
 	SearchBar,
 	UsefulLinks,
-	CustomBreadCrumbs,
 } from "../../components";
+import { history } from "../../redux/configureStore";
 import { Experiment } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
@@ -69,7 +70,10 @@ function ExperimentsPage(props: any) {
 			</Grid>
 			<Grid container spacing={3}>
 				<Grid item xs={2}>
-					<p>Add back Button here </p>
+					<CustomButton
+						label="Back"
+						handleClick={() => history.goBack()}
+					/>
 				</Grid>
 				<Grid item xs={6}>
 					<div className={classes.expHeader}>
@@ -103,7 +107,6 @@ function ExperimentsPage(props: any) {
 								)
 							}
 							label="Install All Experiments"
-							handleIcon={<></>}
 						/>
 					</div>
 					<div style={{ marginTop: 45, marginLeft: 40 }}>

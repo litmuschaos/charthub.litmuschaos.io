@@ -47,9 +47,7 @@ export function ChartGroups(props: ChartGroupProps) {
 						id={g.metadataName}
 						title={g.name}
 						urlToIcon={getIconUrl(g.metadataName)}
-						handleClick={() =>
-							history.push(`/charts/${g.metadataName}`)
-						}
+						handleClick={() => history.push(`/${g.metadataName}`)}
 						experimentCount={g.experiments.length}
 						provider={g.provider}
 						description={g.description}

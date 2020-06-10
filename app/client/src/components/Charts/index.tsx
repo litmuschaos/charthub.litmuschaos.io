@@ -49,7 +49,7 @@ export function Charts(props: ChartProps) {
 							match.params.chartGroupId
 						)}
 						handleClick={() =>
-							history.push(`${match.path}/${e.metadataName}`)
+							history.push(`${match.url}/${e.metadataName}`)
 						}
 						provider={e.provider}
 						totalRuns={getTotalRuns(
