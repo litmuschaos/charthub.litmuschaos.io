@@ -1,26 +1,19 @@
 import { Icon, Typography } from "@material-ui/core";
 import LinkIcon from "@material-ui/icons/LinkTwoTone";
 import React from "react";
+import { Link, Maintainer } from "../../redux/model";
 import { useStyles } from "./styles";
 
-interface Maintainers {
-	name: string;
-	email: string;
-}
-
 interface UsefulLinks {
-	value: string;
-	link: string;
-}
-interface Links {
-	links: UsefulLinks[];
-	platform: UsefulLinks[];
-	maturity: UsefulLinks[];
+	links: Link[];
+	maintainers: Maintainer[];
+	platforms?: string[];
+	maturity?: string;
 }
 
-function MaintainersLinks(props: { data: Maintainers[] }) {
+export function UsefulLinks(props: UsefulLinks) {
 	const classes = useStyles();
-	const createMaintainers = (name: String, email: String) => {
+	const createMaintainers = (maintainers: Maintainer[]) => {
 		return (
 			<div className={classes.usefulLinks}>
 				<div
@@ -36,29 +29,21 @@ function MaintainersLinks(props: { data: Maintainers[] }) {
 						Maintainers
 					</Typography>
 				</div>
-				<div className={classes.maintainerField}>
-					<Typography className={classes.maintainerlinkName}>
-						{name}
-					</Typography>
-					<Typography className={classes.maintainerlinkEmail}>
-						{email}
-					</Typography>
-				</div>
+				{maintainers.map((m: Maintainer) => (
+					<div className={classes.maintainerField}>
+						<Typography className={classes.maintainerlinkName}>
+							{m.name}
+						</Typography>
+						<Typography className={classes.maintainerlinkEmail}>
+							{m.email}
+						</Typography>
+					</div>
+				))}
 			</div>
 		);
 	};
-	return (
-		<div>
-			{props.data.map((m: Maintainers) =>
-				createMaintainers(m.name, m.email)
-			)}
-		</div>
-	);
-}
 
-function Links(props: { data: Links }) {
-	const classes = useStyles();
-	const createLinks = (header: string, data: UsefulLinks[]) => {
+	const createLinks = (header: string, data: Link[]) => {
 		return (
 			<div className={classes.usefulLinks}>
 				<div
@@ -76,9 +61,9 @@ function Links(props: { data: Links }) {
 				</div>
 				{data.map((d) => (
 					<div>
-						<a href={d.link} style={{ textDecoration: "none" }}>
+						<a href={d.url} style={{ textDecoration: "none" }}>
 							<Typography className={classes.linkType}>
-								{d.value}
+								{d.name}
 							</Typography>
 						</a>
 					</div>
@@ -86,34 +71,40 @@ function Links(props: { data: Links }) {
 			</div>
 		);
 	};
-	return <div>{createLinks("Useful Links", props.data["links"])}</div>;
-}
-
-export function UsefulLinks() {
-	const classes = useStyles();
-	const maintainers: Maintainers[] = [
-		{ name: "ksatchit", email: "karthik.s@mayadata.io" },
-	];
-	const links: Links = {
-		links: [
-			{ value: "Kafka Website", link: "#" },
-			{ value: "Source Code", link: "#" },
-			{ value: "Community Slack", link: "#" },
-		],
-		platform: [
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-		],
-		maturity: [
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-			{ value: "Jotaro Kujo", link: "https://github.com" },
-		],
-	};
-
+	function createStaticData(header: string, data: string[]) {
+		return (
+			<div className={classes.usefulLinks}>
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "row",
+					}}
+				>
+					<Icon style={{ marginTop: 25, marginRight: 10 }}>
+						<LinkIcon />
+					</Icon>
+					<Typography variant="body1" className={classes.heading}>
+						{header}
+					</Typography>
+				</div>
+				{data.map((d) => (
+					<div>
+						<Typography className={classes.staticType}>
+							{d}
+						</Typography>
+					</div>
+				))}
+			</div>
+		);
+	}
 	return (
 		<div className={classes.mainDiv}>
-			<Links data={links} />
-			<MaintainersLinks data={maintainers} />
+			{createLinks("Useful Links", props.links)}
+			{createMaintainers(props.maintainers)}
+			{props.platforms !== undefined &&
+				createStaticData("Platforms", props.platforms)}
+			{props.maturity !== undefined &&
+				createStaticData("Maturity", [props.maturity])}
 		</div>
 	);
 }

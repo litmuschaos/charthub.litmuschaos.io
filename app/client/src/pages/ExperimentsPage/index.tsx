@@ -11,6 +11,7 @@ import {
 	SearchBar,
 	UsefulLinks,
 } from "../../components";
+import { history } from "../../redux/configureStore";
 import { Experiment } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
@@ -47,65 +48,80 @@ function ExperimentsPage(props: any) {
 	};
 
 	const handleSearch = (event: React.ChangeEvent<{ value: unknown }>) => {
-		const search: string = event.target.value as string;
+		let search: string = event.target.value as string;
 		setsearchToken(search);
+		const tokens: string[] = search
+			.toLowerCase()
+			.split(" ")
+			.filter((s) => s !== "");
 		const payload: Experiment[] = experiments.filter((exp: Experiment) => {
-			return exp.name.toLowerCase().includes(search.toLowerCase());
+			return tokens.every((s: string) =>
+				exp.name.toLowerCase().includes(s)
+			);
 		});
 		setDisplayExps(payload);
 	};
+	if (!chartGroup) {
+		history.push("/");
+		return <></>;
+	} else
+		return (
+			<div className={classes.root}>
+				{/* BreadCrumbs + SearchBar */}
+				<div className={classes.header}>
+					<div className={classes.breadCrumbs}>
+						<CustomBreadCrumbs location={props.location.pathname} />
+					</div>
 
-	return (
-		<div className={classes.root}>
-			{/* BreadCrumbs + SearchBar */}
-			<div className={classes.header}>
-				<div className={classes.breadCrumbs}>
-					<CustomBreadCrumbs location={props.location.pathname} />
+					<SearchBar
+						searchToken={searchToken}
+						handleSearch={handleSearch}
+					/>
 				</div>
 
-				<SearchBar
-					searchToken={searchToken}
-					handleSearch={handleSearch}
-				/>
-			</div>
-
-			<div className={classes.body}>
-				<div className={classes.content}>
-					{/* Back Butoon + Experiment info */}
-					<div className={classes.contentHead}>
-						{/* Back Button */}
-						<BackButton />
-						{/* Exp title + Exp run counts + description*/}
-						<ExperimentInfo
-							title={chartGroup.name}
-							description={chartGroup.categoryDescription}
-							runCount={47}
+				<div className={classes.body}>
+					<div className={classes.content}>
+						{/* Back Butoon + Experiment info */}
+						<div className={classes.contentHead}>
+							{/* Back Button */}
+							<BackButton />
+							{/* Exp title + Exp run counts + description*/}
+							<ExperimentInfo
+								title={chartGroup.name}
+								description={chartGroup.categoryDescription}
+								runCount={47}
+							/>
+						</div>
+						{/* Sort Button */}
+						<IconButton
+							className={classes.sort}
+							onClick={handleSort}
+						>
+							<Sort />
+						</IconButton>
+						{/* Card component */}
+						<Charts experiments={displayExps} match={match} />
+					</div>
+					{/* Install Experiments CTA + Usefull Links */}
+					<div className={classes.info}>
+						<div className={classes.installCTA}>
+							<CustomButton
+								handleClick={() =>
+									window.open(
+										"https://docs.litmuschaos.io/docs/getstarted/"
+									)
+								}
+								label="Install All Experiments"
+							/>
+						</div>
+						<UsefulLinks
+							links={chartGroup.links}
+							maintainers={chartGroup.maintainers}
 						/>
 					</div>
-					{/* Sort Button */}
-					<IconButton className={classes.sort} onClick={handleSort}>
-						<Sort />
-					</IconButton>
-					{/* Card component */}
-					<Charts experiments={displayExps} match={match} />
-				</div>
-				{/* Install Experiments CTA + Usefull Links */}
-				<div className={classes.info}>
-					<div className={classes.installCTA}>
-						<CustomButton
-							handleClick={() =>
-								window.open(
-									"https://docs.litmuschaos.io/docs/getstarted/"
-								)
-							}
-							label="Install All Experiments"
-						/>
-					</div>
-					<UsefulLinks />
 				</div>
 			</div>
-		</div>
-	);
+		);
 }
 
 export default ExperimentsPage;
