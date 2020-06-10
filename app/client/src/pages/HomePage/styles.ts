@@ -6,10 +6,13 @@ export const useStyles = makeStyles((theme) => ({
 		textAlign: "center",
 		paddingTop: 16,
 	},
+	title: {
+		fontSize: 40,
+		color: theme.palette.primary.contrastText,
+	},
 	description: {
-		width: 796,
 		fontSize: 20,
-		display: "flex",
+		maxWidth: 800,
 		margin: "auto",
 		marginBottom: 10,
 		color: theme.palette.text.primary,
@@ -24,6 +27,7 @@ export const useStyles = makeStyles((theme) => ({
 		minWidth: 200,
 		display: "flex",
 		flexDirection: "row",
+		marginLeft: 30,
 	},
 	selectOption: {
 		float: "right",
@@ -36,19 +40,34 @@ export const useStyles = makeStyles((theme) => ({
 		borderRadius: 4,
 	},
 	sort: {
-		marginLeft: "auto",
-		marginTop: -16,
+		marginRight: "auto",
+		[theme.breakpoints.up("md")]: {
+			marginRight: "0",
+			marginLeft: "auto",
+			marginTop: -16,
+		},
 	},
 	headerButton: {
-		position: "absolute",
-		right: 88,
+		position: "relative",
+		[theme.breakpoints.up("lg")]: {
+			position: "absolute",
+			top: 30,
+			right: 90,
+		},
 	},
 	filter: {
 		display: "flex",
+		flexDirection: "row",
 		marginTop: 64,
 		marginBottom: 40,
 		marginLeft: "auto",
 		marginRight: "auto",
-		width: "90%",
+		width: "95%",
+		[theme.breakpoints.down("md")]: {
+			flexDirection: "column",
+			"& > *": {
+				marginBottom: 16,
+			},
+		},
 	},
 }));

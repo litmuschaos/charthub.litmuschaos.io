@@ -1,7 +1,7 @@
 import React from "react";
+import { formatCount } from "../../utils";
 import { CardProps } from "./model";
 import { useStyles } from "./styles";
-import { formatCount } from "../../utils";
 
 function CardContent(props: CardProps) {
 	const {
