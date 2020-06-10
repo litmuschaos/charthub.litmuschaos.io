@@ -54,7 +54,7 @@ function Community(props: { data: Community }) {
 	const classes = useStyles();
 	const createList = (header: string, data: CommunityItem[], icon: any) => {
 		return (
-			<div>
+			<div className={classes.commMobile}>
 				<Typography
 					key={header}
 					variant="body1"

@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		margin: "0 auto",
 		justifyContent: "center",
 		[theme.breakpoints.down("md")]: {
-			flexDirection: "row",
+			flexDirection: "column",
 		},
 	},
 	statValue: {
@@ -48,7 +48,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginLeft: "auto",
 		marginRight: "auto",
 		[theme.breakpoints.down("md")]: {
-			flexDirection: "row",
+			flexDirection: "column",
+			alignItems: "center",
 		},
 	},
 	brand: {
@@ -64,7 +65,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		alignItems: "center",
 		flexGrow: 1,
 		[theme.breakpoints.down("md")]: {
-			flexDirection: "row",
+			flexDirection: "column",
 		},
 	},
 	brandLinks: {},
@@ -82,5 +83,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 	commIcon: {
 		color: theme.palette.secondary.main,
+	},
+	commMobile: {
+		[theme.breakpoints.down("md")]: {
+			margin: 24,
+		},
 	},
 }));
