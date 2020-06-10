@@ -10,6 +10,7 @@ import {
 	ExperimentInfo,
 	SearchBar,
 	UsefulLinks,
+	SortButton,
 } from "../../components";
 import { history } from "../../redux/configureStore";
 import { Experiment, ExperimentGroup } from "../../redux/model";
@@ -99,12 +100,7 @@ function ExperimentsGroupPage(props: any) {
 							/>
 						</div>
 						{/* Sort Button */}
-						<IconButton
-							className={classes.sort}
-							onClick={handleSort}
-						>
-							<Sort />
-						</IconButton>
+						<SortButton handleClick={handleSort} />
 						{/* Card component */}
 						<Charts experiments={displayExps} match={match} />
 					</div>

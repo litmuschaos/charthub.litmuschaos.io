@@ -12,7 +12,12 @@ import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
 import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { ChartGroups, CustomButton, SearchBar } from "../../components";
+import {
+	ChartGroups,
+	CustomButton,
+	SearchBar,
+	SortButton,
+} from "../../components";
 import { useActions } from "../../redux/actions";
 import * as ChartActions from "../../redux/actions/charts";
 import { RootState } from "../../redux/reducers";
@@ -130,21 +135,9 @@ function HomePage() {
 							))}
 						</Select>
 					</FormControl>
-
-					<Button
-						style={{
-							display: "flex",
-							flexDirection: "row",
-							marginLeft: "auto",
-							borderRadius: 4,
-						}}
-						onClick={handleSort}
-					>
-						<Icon style={{ marginBottom: 10 }}>
-							<Sort />
-						</Icon>
-						<Typography className={classes.sort}>Sort</Typography>
-					</Button>
+					<div className={classes.sort}>
+						<SortButton handleClick={handleSort} />
+					</div>
 				</div>
 			</Container>
 

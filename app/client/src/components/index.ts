@@ -9,3 +9,4 @@ export * from "./ExperimentInfo";
 export * from "./Loader";
 export * from "./SearchBar";
 export * from "./UsefulLinks";
+export * from "./SortButton";

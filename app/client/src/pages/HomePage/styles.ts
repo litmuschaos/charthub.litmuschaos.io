@@ -36,8 +36,8 @@ export const useStyles = makeStyles((theme) => ({
 		borderRadius: 4,
 	},
 	sort: {
-		marginLeft: theme.spacing(1),
-		color: theme.palette.primary.contrastText,
+		marginLeft: "auto",
+		marginTop: -16,
 	},
 	headerButton: {
 		position: "absolute",
