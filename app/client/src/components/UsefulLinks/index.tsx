@@ -22,7 +22,7 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginTop: 25, marginRight: 10 }}>
+					<Icon style={{ marginRight: 10 }}>
 						<LinkIcon />
 					</Icon>
 					<Typography variant="body1" className={classes.heading}>
@@ -52,7 +52,7 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginTop: 25, marginRight: 10 }}>
+					<Icon style={{ marginRight: 10 }}>
 						<LinkIcon />
 					</Icon>
 					<Typography variant="body1" className={classes.heading}>
@@ -80,7 +80,7 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginTop: 25, marginRight: 10 }}>
+					<Icon style={{ marginRight: 10 }}>
 						<LinkIcon />
 					</Icon>
 					<Typography variant="body1" className={classes.heading}>

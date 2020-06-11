@@ -7,12 +7,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		backgroundColor: theme.palette.primary.light,
 	},
 	usefulLinks: {
-		marginLeft: 30,
 		textAlign: "left",
 	},
 	heading: {
 		fontSize: 18,
-		paddingTop: 25,
 		marginBottom: 9,
 		fontWeight: "bold",
 		color: theme.palette.primary.contrastText,
@@ -32,17 +30,15 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.primary.contrastText,
 	},
 	mainDiv: {
-		width: 320,
+		padding: 30,
 		justifyContent: "space-around",
 		borderRadius: 10,
 		backgroundColor: theme.palette.primary.light,
 		paddingBottom: 20,
 	},
 	maintainerField: {
-		width: 190,
 		marginLeft: 40,
-		paddingTop: 7,
-		paddingBottom: 7,
+		padding: 8,
 		borderRadius: 10,
 		backgroundColor: theme.palette.primary.dark,
 	},

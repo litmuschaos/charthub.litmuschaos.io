@@ -19,6 +19,7 @@ import { useStyles } from "./styles";
 function ExperimentsGroupPage(props: any) {
 	const classes = useStyles();
 	const match = props.match;
+	const path = match.url.split("/");
 	const chartGroupId: string = match.params.chartGroupId;
 	const { chartData, analyticsData } = useSelector(
 		(state: RootState) => state
@@ -29,7 +30,7 @@ function ExperimentsGroupPage(props: any) {
 	const experiments: Experiment[] = chartGroup ? chartGroup.experiments : [];
 	const [displayExps, setDisplayExps] = React.useState(experiments);
 	const [searchToken, setsearchToken] = React.useState("");
-
+	console.log(match, "egege");
 	const handleSort = () => {
 		let payload: Experiment[] = [
 			...displayExps,
@@ -63,7 +64,6 @@ function ExperimentsGroupPage(props: any) {
 		});
 		setDisplayExps(payload);
 	};
-	console.log(match);
 	if (!chartGroup) {
 		history.push("/404");
 		return <></>;
@@ -87,7 +87,9 @@ function ExperimentsGroupPage(props: any) {
 						{/* Back Butoon + Experiment info */}
 						<div className={classes.contentHead}>
 							{/* Back Button */}
-							<BackButton />
+							<BackButton
+								path={path.slice(0, path.length - 1).join("/")}
+							/>
 							{/* Exp title + Exp run counts + description*/}
 							<ExperimentInfo
 								title={chartGroup.name}
