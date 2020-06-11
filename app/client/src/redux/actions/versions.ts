@@ -24,7 +24,7 @@ export const loadVersions = () => (dispatch: Function, getState: Function) => {
 			console.error("Can't load data", err);
 			dispatch({
 				type: VersionActions.LOAD_VERSIONS,
-				payload: ["1.4.1"],
+				payload: ["master"],
 			});
 		});
 };
