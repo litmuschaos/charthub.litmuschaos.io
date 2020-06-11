@@ -14,6 +14,7 @@ import { history } from "./redux/configureStore";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ExperimentGroupPage = lazy(() => import("./pages/ExperimentGroupPage"));
 const ExperimentPage = lazy(() => import("./pages/ExperimentPage"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
 function Routes() {
 	const classes = useStyles();
@@ -21,7 +22,9 @@ function Routes() {
 	return (
 		<div className={classes.content}>
 			<Switch>
-				<Route exact={true} path="/" component={HomePage} />
+				{/*	<Route exact={true} path="/" component={HomePage} />            uncommenting will break the error page routing */}
+
+				<Route exact={true} path="/home" component={HomePage} />
 				<Route
 					exact={true}
 					path="/:chartGroupId"
@@ -32,6 +35,7 @@ function Routes() {
 					path="/:chartGroupId/:chartId"
 					component={ExperimentPage}
 				/>
+				<Route path="" component={ErrorPage} />
 			</Switch>
 		</div>
 	);
