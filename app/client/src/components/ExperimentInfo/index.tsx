@@ -38,7 +38,6 @@ export function ExperimentInfo(props: ExpInfoProps) {
 					src={videoEmbed}
 				/>
 			)}
-			{videoURL && <div>{videoEmbed}</div>}
 		</div>
 	);
 }
