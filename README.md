@@ -75,6 +75,20 @@ registerServiceWorker();
 
 Open your browser and go to `http://localhost:3000/` to access the frontend
 
+# Resources
+
+### Our Standup open community meeting link:
+
+Feel free to drop by and participate in our discussion of new open source projects [here](https://us02web.zoom.us/j/89804064103?pwd=cjJnWkVUeE56SUo2ZWxVcjR2QWpCQT09)
+
+### Figma Design document for the Front-end website:
+
+View, review, give feedbacks and add comments, suggests upgrades, just about anything related to design right [here](https://www.figma.com/file/cCkF2KTCd7Yx3Gn4KWp9sC/Listmus-Chathub?node-id=0%3A1)
+
+### Visit our main Litmus repo:
+
+Were are more than welcoming to a new contributor, pay a visit and star it for updates right [here](https://github.com/litmuschaos/litmus)
+
 # License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io?ref=badge_large)
