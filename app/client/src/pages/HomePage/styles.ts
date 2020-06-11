@@ -51,6 +51,7 @@ export const useStyles = makeStyles((theme) => ({
 		position: "relative",
 		[theme.breakpoints.up("lg")]: {
 			position: "absolute",
+			zIndex: 10,
 			top: 30,
 			right: 90,
 		},
@@ -63,7 +64,7 @@ export const useStyles = makeStyles((theme) => ({
 		marginLeft: "auto",
 		marginRight: "auto",
 		width: "95%",
-		[theme.breakpoints.down("md")]: {
+		[theme.breakpoints.down("sm")]: {
 			flexDirection: "column",
 			"& > *": {
 				marginBottom: 16,
