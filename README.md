@@ -1,13 +1,17 @@
-# Front-end for litmus community charts.
+# Litmus Chaos Community Chart Hub
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io?ref=badge_shield)
 
-# Development Setup:
+# Development Setup
 
 ## Prerequisite
 
 - Golang is installed and configured, If not follow the instructions [here](https://golang.org/doc/install).
 - Install Node.js and npm. Follow the instructions [here](https://nodejs.org/en/download/current/).
+- Repo should be cloned to your go path, repo path should be 
+```
+$GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io
+```
 
 ## Tech Stack from Frontend
 
@@ -23,8 +27,13 @@
 - [x] PWA Support
 
 ## Tech Stack from Backend
+- [x] [Go](https://golang.org/dl/)
+- [x] [Gorilla/Mux](https://github.com/gorilla/mux)
+- [x] [Logrus](https://github.com/sirupsen/logrus)
+- [x] [gopkg.in/yaml.v3](https://gopkg.in/yaml.v3)
+- [x] [gopkg.in/src-d/go-git.v4](https://gopkg.in/src-d/go-git.v4)
 
-## Install steps for Frontend:
+## Start Frontend
 
 Install it and run:
 
@@ -57,10 +66,15 @@ to
 registerServiceWorker();
 ```
 
-## Install steps for Backend:
+## Start Backend Server
+
+```bash
+cd app/server
+go run main.go
+```
+The backend go server will be up and running on port 8080
 
 ## Dev setup: Enable Prettier [OPTIONAL]
-
 1.  Step: Install the Prettier plugin (e.g. the one of Esben Petersen)
 2.  Add the following snippet to your settings in VSCode:
 
@@ -71,9 +85,15 @@ registerServiceWorker();
    },
 ```
 
-# Usage
-
+## Usage
 Open your browser and go to `http://localhost:3000/` to access the frontend
+
+# Docker Setup
+This project has been configured to run with docker, you can initialize the system by running 
+```bash
+ docker-compose up
+```
+This will setup the nginx and go server for you. To access the frontend use `http://localhost/`. You need to have docker and docker-compose installed to use this method.
 
 # Resources
 
