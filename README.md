@@ -1,19 +1,15 @@
-# Create React App example with Material-UI, TypeScript, Redux and Routing
+# Front-end for litmus community charts.
 
-This is a Boilerplate/Template for a react project with React Hooks, Material-UI 4 and React-Redux 7 (with hooks!).
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io?ref=badge_shield)
 
-[Preview Deployed website](https://silly-engelbart-cadbeb.netlify.app/)
+# Development Setup:
 
-<img width="100%" src="Screenshot-light.png" alt="example"/>
-<img width="100%" src="Screenshot-dark.png" alt="example"/>
+## Prerequisite
 
-Inspired by:
+- Golang is installed and configured, If not follow the instructions [here](https://golang.org/doc/install).
+- Install Node.js and npm. Follow the instructions [here](https://nodejs.org/en/download/current/).
 
-- [Create React App example with Material-UI, TypeScript, Redux and Routing](https://github.com/innFactory/create-react-app-material-typescript-redux)
-- [Material-UI](https://github.com/mui-org/material-ui)
-- [react-redux-typescript-boilerplate](https://github.com/rokoroku/react-redux-typescript-boilerplate)
-
-## Contains
+## Tech Stack from Frontend
 
 - [x] [Material-UI](https://github.com/mui-org/material-ui)
 - [x] [Typescript](https://www.typescriptlang.org/)
@@ -25,27 +21,10 @@ Inspired by:
 - [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
 - [x] [TodoMVC example](http://todomvc.com)
 - [x] PWA Support
-- [x] [Husky](https://www.npmjs.com/package/husky)
 
-## Roadmap
+## Tech Stack from Backend
 
-- [x] Make function based components and use hooks for state etc.
-- [x] Implement [Material-UIs new styling solution](https://material-ui.com/css-in-js/basics/) based on hooks
-- [x] use react-redux hooks
-- [x] Setup Material UI custom styling soluton with TypeScript, with setup for dynamic theme switching with Redux
-- [ ] Hot Reloading -> Waiting for official support of react-scripts
-
-## How to use
-
-Download or clone this repo
-
-```bash
-git clone https://github.com/arkajyotiMukherjee/-template-Create-React-App-with-Material-UI-TypeScript-Redux-and-Routing.git
-```
-
-or use this as a template:
-
-More information from Github, [here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
+## Install steps for Frontend:
 
 Install it and run:
 
@@ -78,7 +57,9 @@ to
 registerServiceWorker();
 ```
 
-## Enable Prettier [OPTIONAL]
+## Install steps for Backend:
+
+## Dev setup: Enable Prettier [OPTIONAL]
 
 1.  Step: Install the Prettier plugin (e.g. the one of Esben Petersen)
 2.  Add the following snippet to your settings in VSCode:
@@ -90,12 +71,10 @@ registerServiceWorker();
    },
 ```
 
-## The idea behind the example
+# Usage
 
-This example demonstrate how you can use [Create React App](https://github.com/facebookincubator/create-react-app) with [TypeScript](https://github.com/Microsoft/TypeScript) and add easy theme customonization with [Material UI](https://github.com/mui-org/material-ui).
+Open your browser and go to `http://localhost:3000/` to access the frontend
 
-## Contributors
+# License
 
-- [Arkajyoti Mukherjee](https://github.com/arkajyotiMukherjee)
-
-Big thanks to [innFactory](https://innfactory.de/)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Fcharthub.litmuschaos.io?ref=badge_large)
