@@ -90,6 +90,11 @@ export const useStyles = makeStyles((theme) => ({
 		fontWeight: 600,
 		marginTop: 3,
 	},
+	button: {
+		padding: 0,
+		margin: 0,
+		color: theme.palette.warning.dark,
+	},
 	totalRuns: {
 		backgroundColor: theme.palette.secondary.main,
 		color: theme.palette.secondary.contrastText,

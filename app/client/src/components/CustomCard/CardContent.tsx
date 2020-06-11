@@ -1,3 +1,5 @@
+import { IconButton, Tooltip, Zoom } from "@material-ui/core";
+import InfraIcon from "@material-ui/icons/NewReleasesTwoTone";
 import React from "react";
 import { formatCount } from "../../utils";
 import { CardProps } from "./model";
@@ -12,6 +14,8 @@ function CardContent(props: CardProps) {
 		provider,
 		description,
 		totalRuns,
+		chaosType,
+		chartType,
 	} = props;
 
 	const classes = useStyles();
@@ -23,8 +27,22 @@ function CardContent(props: CardProps) {
 					<span className={classes.expCount}>
 						{experimentCount} Experiments
 					</span>
+				) : chaosType ? (
+					<Tooltip
+						TransitionComponent={Zoom}
+						TransitionProps={{ timeout: 400 }}
+						title={
+							chartType === "generic"
+								? "Infra-Chaos :- Multiple applications might be impacted"
+								: "Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted"
+						}
+					>
+						<IconButton className={classes.button}>
+							<InfraIcon fontSize="small" />
+						</IconButton>
+					</Tooltip>
 				) : (
-					<span></span>
+					<span />
 				)}
 				<span className={classes.totalRuns}>
 					{formatCount(totalRuns)} runs
