@@ -67,7 +67,7 @@ function Drawer() {
 			</FormControl>
 
 			<img
-				src="./icons/litmus.svg"
+				src="/icons/litmus.svg"
 				alt="litmus logo"
 				className={classes.logo}
 			/>
