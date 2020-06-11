@@ -28,5 +28,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		whiteSpace: "pre-wrap",
 		padding: "16px 8px",
 	},
-	button: {},
+	done: {
+		color: theme.palette.success.dark,
+	},
 }));

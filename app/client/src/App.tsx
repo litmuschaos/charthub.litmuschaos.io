@@ -22,7 +22,6 @@ function Routes() {
 		<div className={classes.content}>
 			<Switch>
 				<Route exact={true} path="/" component={HomePage} />
-				<Route exact={true} path="/home" component={HomePage} />
 				<Route
 					exact={true}
 					path="/:chartGroupId"

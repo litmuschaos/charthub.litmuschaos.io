@@ -18,7 +18,7 @@ export function SearchBar(props: any) {
 			</Icon>
 			<InputBase
 				className={classes.textField}
-				placeholder="Search for Chaos Experiments"
+				placeholder="Search Chaos Experiments"
 				inputProps={{
 					"aria-label": "search for chaos experiments",
 				}}
