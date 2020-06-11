@@ -24,7 +24,12 @@
 
 ## Tech Stack from Backend
 
-## Install steps for Frontend:
+## Development Setup
+Clone repo to your go path, repo path should be 
+```
+$GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io
+```
+### Start Frontend:
 
 Install it and run:
 
@@ -43,7 +48,7 @@ npm install -g serve
 serve -s build
 ```
 
-## Enable PWA ServiceWorker [OPTIONAL]
+### Enable PWA ServiceWorker [OPTIONAL]
 
 Just comment in the following line in the `index.tsx`:
 
@@ -57,10 +62,15 @@ to
 registerServiceWorker();
 ```
 
-## Install steps for Backend:
+### Start Backend Server:
 
-## Dev setup: Enable Prettier [OPTIONAL]
+```bash
+cd app/server
+go run main.go
+```
+The backend go server will be up and running on port 8080
 
+### Dev setup: Enable Prettier [OPTIONAL]
 1.  Step: Install the Prettier plugin (e.g. the one of Esben Petersen)
 2.  Add the following snippet to your settings in VSCode:
 
@@ -71,9 +81,15 @@ registerServiceWorker();
    },
 ```
 
-# Usage
-
+### Usage
 Open your browser and go to `http://localhost:3000/` to access the frontend
+
+## Docker Setup
+This project has been configured to run with docker, you can initialize the system by running 
+```bash
+ docker-compose up
+```
+This will setup the nginx and go server for you. To access the frontend use `http://localhost/`. You need to have docker and docker-compose installed to use this method.
 
 # Resources
 
