@@ -150,7 +150,7 @@ function Footer() {
 		{
 			key: "opInstalls",
 			value: opInstalls,
-			desc: "chaos operator installed",
+			desc: "chaos operators installed",
 		},
 		{ key: "expCount", value: expCount, desc: "total experiments" },
 		{

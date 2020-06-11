@@ -39,9 +39,10 @@ function ExperimentPage(props: any) {
 		const hubUrl: string = `https://hub.litmuschaos.io/api/chaos/${
 			versionData.currentVersion
 		}?file=${chart.chaosExpCRDLink.split("/chaos-charts/master/")[1]}`;
-		let rbacUrl: string = "";
-		let engineUrl: string = "";
-		let expCount: number = 0;
+		let rbacUrl: string = "",
+			engineUrl: string = "",
+			expCount: number = 0,
+			videoURL: string = "";
 		if (JSON.stringify(chartGroup) !== JSON.stringify(chart)) {
 			const url: string[] = hubUrl.split("/");
 			url[url.length - 1] = "rbac.yaml";
@@ -49,6 +50,8 @@ function ExperimentPage(props: any) {
 			url[url.length - 1] = "engine.yaml";
 			engineUrl = url.join("/");
 			expCount = getExpRunCount(chart, analyticsData.expAnalytics);
+			videoURL = chart.links.filter((l: Link) => l.name === "Video")[0]
+				.url;
 		} else {
 			expCount = getExpRunCount(
 				chart.experiments,
@@ -73,11 +76,7 @@ function ExperimentPage(props: any) {
 								title={chart.name}
 								description={chart.description}
 								runCount={expCount}
-								videoURL={
-									chart.links.filter(
-										(l: Link) => l.name === "Video"
-									)[0].url
-								}
+								videoURL={videoURL}
 							/>
 						</div>
 						{/* page body */}
