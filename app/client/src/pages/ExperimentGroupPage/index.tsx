@@ -7,8 +7,8 @@ import {
 	CustomButton,
 	ExperimentInfo,
 	SearchBar,
-	UsefulLinks,
 	SortButton,
+	UsefulLinks,
 } from "../../components";
 import { history } from "../../redux/configureStore";
 import { Experiment, ExperimentGroup } from "../../redux/model";
@@ -65,7 +65,7 @@ function ExperimentsGroupPage(props: any) {
 	};
 	console.log(match);
 	if (!chartGroup) {
-		history.push("/");
+		history.push("/404");
 		return <></>;
 	} else
 		return (

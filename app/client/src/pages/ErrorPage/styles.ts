@@ -1,27 +1,22 @@
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 // Component styles
 export const useStyles = makeStyles((theme) => ({
 	root: {
-		padding: theme.spacing(4),
 		height: "100%",
 		textAlign: "center",
-		overflow: "auto",
-		scrollBehavior: "smooth",
-	},
-	contentWrapper: {
+		padding: theme.spacing(4),
 		marginTop: "50px",
-		textAlign: "center",
 		color: theme.palette.text.secondary,
+		fontSize: 18,
+	},
+	error: {
+		fontWeight: 500,
+		color: theme.palette.primary.contrastText,
 	},
 	image: {
-		display: "inline-block",
 		marginTop: "50px",
-		maxWidth: "100%",
-		width: "150px",
+		width: 150,
 		color: theme.palette.secondary.main,
-	},
-	goHome: {
-		color: theme.palette.text.secondary,
 	},
 }));

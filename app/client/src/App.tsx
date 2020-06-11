@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { Route, Router, Switch } from "react-router-dom";
+import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { useStyles } from "./App-styles";
 import { Loader } from "./components";
 import withFooter from "./hoc/footerHoc";
@@ -22,9 +22,8 @@ function Routes() {
 	return (
 		<div className={classes.content}>
 			<Switch>
-				{/*	<Route exact={true} path="/" component={HomePage} />            uncommenting will break the error page routing */}
-
-				<Route exact={true} path="/home" component={HomePage} />
+				<Route exact={true} path="/" component={HomePage} />
+				<Route exact={true} path="/404" component={ErrorPage} />
 				<Route
 					exact={true}
 					path="/:chartGroupId"
@@ -35,7 +34,7 @@ function Routes() {
 					path="/:chartGroupId/:chartId"
 					component={ExperimentPage}
 				/>
-				<Route path="" component={ErrorPage} />
+				<Redirect to="/404" />
 			</Switch>
 		</div>
 	);

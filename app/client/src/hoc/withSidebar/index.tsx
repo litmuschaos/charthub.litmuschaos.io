@@ -6,7 +6,6 @@ import {
 	List,
 	ListItem,
 	ListItemIcon,
-	ListItemText,
 	MenuItem,
 	Select,
 } from "@material-ui/core";
@@ -36,7 +35,8 @@ const CustomisedListItem = (props: ListItemProps) => {
 			className={classes.drawerListItem}
 		>
 			<ListItemIcon>{children}</ListItemIcon>
-			<ListItemText primary={label} />
+			<div className={classes.listLabel}>{label}</div>
+			{/* <ListItemText style={{ fontWeight: "bold" }} primary={label} /> */}
 		</ListItem>
 	);
 };
