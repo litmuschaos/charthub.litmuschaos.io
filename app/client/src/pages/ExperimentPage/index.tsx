@@ -33,7 +33,7 @@ function ExperimentPage(props: any) {
 			  )[0];
 
 	if (!chartGroup || !chart) {
-		history.push("/");
+		history.push("/404");
 		return <></>;
 	} else {
 		const hubUrl: string = `https://hub.litmuschaos.io/api/chaos/${

@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { Route, Router, Switch } from "react-router-dom";
+import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { useStyles } from "./App-styles";
 import { Loader } from "./components";
 import withFooter from "./hoc/footerHoc";
@@ -14,6 +14,7 @@ import { history } from "./redux/configureStore";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ExperimentGroupPage = lazy(() => import("./pages/ExperimentGroupPage"));
 const ExperimentPage = lazy(() => import("./pages/ExperimentPage"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
 function Routes() {
 	const classes = useStyles();
@@ -22,6 +23,7 @@ function Routes() {
 		<div className={classes.content}>
 			<Switch>
 				<Route exact={true} path="/" component={HomePage} />
+				<Route exact={true} path="/404" component={ErrorPage} />
 				<Route
 					exact={true}
 					path="/:chartGroupId"
@@ -32,6 +34,7 @@ function Routes() {
 					path="/:chartGroupId/:chartId"
 					component={ExperimentPage}
 				/>
+				<Redirect to="/404" />
 			</Switch>
 		</div>
 	);

@@ -65,6 +65,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			margin: "24px auto",
 		},
 	},
+	listLabel: {
+		fontSize: 16,
+		fontWeight: 500,
+		color: theme.palette.text.primary,
+	},
 	logo: {
 		display: "block",
 		marginTop: theme.spacing(4),
