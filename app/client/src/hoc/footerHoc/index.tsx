@@ -7,8 +7,8 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { GithubContributor } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
-import { useStyles } from "./styles";
 import { formatCount } from "../../utils";
+import { useStyles } from "./styles";
 
 interface StatItem {
 	key: string;
@@ -183,8 +183,10 @@ function Footer() {
 			},
 		],
 		contact: [
-			{ value: "tiger.king@mayadata.io", link: "https://github.com" },
-			{ value: "star.platinum@mayadata.io", link: "https://github.com" },
+			{
+				value: "support@mayadata.io",
+				link: "mailto:support@mayadata.io",
+			},
 		],
 	};
 	const branding = {
