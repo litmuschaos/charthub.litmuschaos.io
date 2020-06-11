@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
 	searchField: {
-		width: 400,
+		maxWidth: 400,
 		height: 50,
 		display: "flex",
 		margin: "auto",
@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme) => ({
 	textField: {
 		width: "100%",
 		fontSize: 18,
-		marginLeft: theme.spacing(1),
+		marginLeft: 8,
+		marginRight: 32,
 	},
 }));

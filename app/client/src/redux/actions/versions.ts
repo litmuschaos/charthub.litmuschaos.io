@@ -1,5 +1,6 @@
 import { VersionActions } from "../model";
 import * as ChartActions from "./charts";
+import { history } from "../configureStore";
 
 let baseURL: string = "";
 if (
@@ -37,4 +38,5 @@ export const toggleVersion = (version: string) => (
 		type: VersionActions.TOGGLE_VERSION,
 		payload: version,
 	});
+	history.push("/");
 };

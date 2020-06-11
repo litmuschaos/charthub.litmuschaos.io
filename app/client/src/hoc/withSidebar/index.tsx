@@ -10,7 +10,6 @@ import {
 	MenuItem,
 	Select,
 } from "@material-ui/core";
-import AnalyticsIcon from "@material-ui/icons/AssessmentTwoTone";
 import HomeIcon from "@material-ui/icons/HomeTwoTone";
 import ContributeIcon from "@material-ui/icons/ReceiptTwoTone";
 import React, { useState } from "react";
@@ -24,11 +23,6 @@ interface ListItemProps {
 	handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 	children: JSX.Element;
 	label: string;
-}
-
-interface ToggleProps {
-	handleDrawerToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
-	mobileOpen: boolean;
 }
 
 const CustomisedListItem = (props: ListItemProps) => {
@@ -58,7 +52,7 @@ function Drawer() {
 	};
 
 	return (
-		<div>
+		<>
 			<FormControl className={classes.formControl}>
 				<InputLabel>Version</InputLabel>
 				<Select
@@ -80,12 +74,14 @@ function Drawer() {
 
 			<List className={classes.drawerList}>
 				<CustomisedListItem
+					key="home"
 					handleClick={() => history.push("/")}
 					label="Home"
 				>
 					<HomeIcon className={classes.button} />
 				</CustomisedListItem>
 				<CustomisedListItem
+					key="contribute"
 					handleClick={() =>
 						window.open(
 							"https://github.com/litmuschaos/chaos-charts/blob/master/CONTRIBUTING.md"
@@ -95,31 +91,29 @@ function Drawer() {
 				>
 					<ContributeIcon className={classes.button} />
 				</CustomisedListItem>
-				<CustomisedListItem
-					handleClick={() => history.push("/")}
-					label="Analytics"
-				>
-					<AnalyticsIcon className={classes.button} />
-				</CustomisedListItem>
 			</List>
-		</div>
+		</>
 	);
 }
 
-export function AppDrawer(props: ToggleProps) {
+function AppDrawer() {
 	const classes = useStyles();
+	const [mobileOpen, setMobileOpen] = React.useState(true);
 
+	const handleDrawerToggle = () => {
+		setMobileOpen(!mobileOpen);
+	};
 	return (
 		<>
 			<Hidden mdUp>
 				<DrawerMui
 					variant="temporary"
 					anchor={"left"}
-					open={props.mobileOpen}
+					open={mobileOpen}
 					classes={{
 						paper: classes.drawerPaper,
 					}}
-					onClose={props.handleDrawerToggle}
+					onClose={handleDrawerToggle}
 					ModalProps={{
 						keepMounted: true, // Better open performance on mobile.
 					}}
@@ -140,4 +134,20 @@ export function AppDrawer(props: ToggleProps) {
 			</Hidden>
 		</>
 	);
+}
+
+export default function withSidebar(Component: any) {
+	function WithSidebar(props: object) {
+		const classes = useStyles();
+		return (
+			<div className={classes.root}>
+				<AppDrawer />
+				<div className={classes.route}>
+					<Component />
+				</div>
+			</div>
+		);
+	}
+
+	return WithSidebar;
 }

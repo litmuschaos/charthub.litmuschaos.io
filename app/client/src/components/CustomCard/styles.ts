@@ -7,10 +7,13 @@ export const useStyles = makeStyles((theme) => ({
 		boxShadow: theme.shadows[4],
 		borderRadius: 8,
 		overflow: "hidden",
-		margin: 8,
+		fontSize: 14,
+		margin: 16,
 		display: "flex",
 		flexDirection: "column",
 		flexWrap: "wrap",
+		textAlign: "center",
+		cursor: "pointer",
 		// Above tablet size
 		[theme.breakpoints.up("md")]: {
 			width: 250,
@@ -49,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		fontWeight: 600,
-		fontSize: 14,
+		fontSize: 18,
 		color: theme.palette.primary.contrastText,
 		margin: "12px 0",
 		[theme.breakpoints.down("sm")]: {
@@ -57,7 +60,6 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	description: {
-		fontSize: 12,
 		textAlign: "center",
 		marginBottom: 12,
 		[theme.breakpoints.down("sm")]: {
@@ -83,15 +85,22 @@ export const useStyles = makeStyles((theme) => ({
 		justifyContent: "space-between",
 		margin: "8px 8px 12px 8px",
 	},
-	totalRuns: {
+	expCount: {
 		color: theme.palette.secondary.contrastText,
 		fontWeight: 600,
+		marginTop: 3,
 	},
-	expCount: {
+	button: {
+		padding: 0,
+		margin: 0,
+		color: theme.palette.warning.dark,
+	},
+	totalRuns: {
 		backgroundColor: theme.palette.secondary.main,
 		color: theme.palette.secondary.contrastText,
 		borderRadius: 9,
 		padding: "3px 6px",
 		fontWeight: 500,
+		fontSize: 14,
 	},
 }));

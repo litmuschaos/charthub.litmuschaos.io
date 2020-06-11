@@ -1,12 +1,12 @@
-import React from "react";
 import Button from "@material-ui/core/Button";
+import React from "react";
 import { useStyles } from "./styles";
 
 interface CustomButtonProps {
 	handleClick: (
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => void;
-	handleIcon: JSX.Element;
+	handleIcon?: JSX.Element;
 	label: string;
 }
 export function CustomButton(props: CustomButtonProps) {
@@ -19,7 +19,7 @@ export function CustomButton(props: CustomButtonProps) {
 			size="large"
 			className={classes.button}
 			onClick={handleClick}
-			endIcon={handleIcon}
+			endIcon={handleIcon ?? <></>}
 		>
 			{label}
 		</Button>

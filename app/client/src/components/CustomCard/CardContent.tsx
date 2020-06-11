@@ -1,12 +1,9 @@
+import { IconButton, Tooltip, Zoom } from "@material-ui/core";
+import InfraIcon from "@material-ui/icons/NewReleasesTwoTone";
 import React from "react";
+import { formatCount } from "../../utils";
 import { CardProps } from "./model";
 import { useStyles } from "./styles";
-
-const formatCount = (count: number | undefined): string => {
-	if (count)
-		return count >= 1000 ? (count / 1000).toFixed(1) + "k+" : count + "";
-	return "";
-};
 
 function CardContent(props: CardProps) {
 	const {
@@ -17,6 +14,8 @@ function CardContent(props: CardProps) {
 		provider,
 		description,
 		totalRuns,
+		chaosType,
+		chartType,
 	} = props;
 
 	const classes = useStyles();
@@ -24,11 +23,29 @@ function CardContent(props: CardProps) {
 	return (
 		<div className={classes.cardContent} onClick={handleClick}>
 			<div className={classes.cardAnalytics}>
+				{experimentCount ? (
+					<span className={classes.expCount}>
+						{experimentCount} Experiments
+					</span>
+				) : chaosType ? (
+					<Tooltip
+						TransitionComponent={Zoom}
+						TransitionProps={{ timeout: 400 }}
+						title={
+							chartType === "generic"
+								? "Infra-Chaos :- Multiple applications might be impacted"
+								: "Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted"
+						}
+					>
+						<IconButton className={classes.button}>
+							<InfraIcon fontSize="small" />
+						</IconButton>
+					</Tooltip>
+				) : (
+					<span />
+				)}
 				<span className={classes.totalRuns}>
-					{formatCount(totalRuns)}
-				</span>
-				<span className={classes.expCount}>
-					{experimentCount} Experiments
+					{formatCount(totalRuns)} runs
 				</span>
 			</div>
 			<div className={classes.cardBody}>
@@ -45,7 +62,11 @@ function CardContent(props: CardProps) {
 						Contributed by {provider}
 					</div>
 				</div>
-				<div className={classes.description}>{description}</div>
+				{description ? (
+					<div className={classes.description}>{description}</div>
+				) : (
+					<span></span>
+				)}
 			</div>
 		</div>
 	);

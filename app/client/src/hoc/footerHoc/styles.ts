@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.primary.main,
 		width: "100%",
 		padding: 8,
+		marginTop: 40,
 	},
 	paper: {
 		padding: theme.spacing(2),
@@ -21,6 +22,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		display: "flex",
 		margin: "0 auto",
 		justifyContent: "center",
+		[theme.breakpoints.down("md")]: {
+			flexDirection: "column",
+		},
 	},
 	statValue: {
 		fontWeight: 700,
@@ -43,6 +47,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginTop: 16,
 		marginLeft: "auto",
 		marginRight: "auto",
+		[theme.breakpoints.down("md")]: {
+			flexDirection: "column",
+			alignItems: "center",
+		},
 	},
 	brand: {
 		display: "flex",
@@ -56,6 +64,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		display: "flex",
 		alignItems: "center",
 		flexGrow: 1,
+		[theme.breakpoints.down("md")]: {
+			flexDirection: "column",
+		},
 	},
 	brandLinks: {},
 	brandLogo: {
@@ -72,5 +83,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 	commIcon: {
 		color: theme.palette.secondary.main,
+	},
+	commMobile: {
+		[theme.breakpoints.down("md")]: {
+			margin: 24,
+		},
 	},
 }));

@@ -9,4 +9,6 @@ export interface CardProps {
 	provider: string;
 	description?: string;
 	totalRuns?: number;
+	chaosType?: string;
+	chartType?: string;
 }

@@ -1,8 +1,8 @@
-interface Maintainer {
+export interface Maintainer {
 	name: string;
 	email: string;
 }
-interface Link {
+export interface Link {
 	name: string;
 	url: string;
 }
@@ -22,6 +22,7 @@ export interface Experiment {
 	links: Link[];
 	chaosExpCRDLink: string;
 	platforms: string[];
+	chaosType?: string;
 }
 export interface ExperimentGroup {
 	name: string;
@@ -37,7 +38,7 @@ export interface ExperimentGroup {
 	provider: string;
 	links: Link[];
 	experiments: Experiment[];
-	chaosAllExpsCRDLink: string;
+	chaosExpCRDLink: string;
 }
 
 export interface ChartData {

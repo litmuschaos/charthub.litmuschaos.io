@@ -1,25 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
-import { Experiment } from "../../redux/model";
+import { ExperimentGroup } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { getExpRunCount } from "../../utils";
 import CustomCard from "../CustomCard";
 import { useStyles } from "./styles";
-interface ChartProps {
-	experiments: Experiment[];
-	match: any;
+
+interface ChartGroupProps {
+	experimentGroups: ExperimentGroup[];
 }
 
-const getIconUrl = (chartMetadataName: string, chartGroup: string) =>
+const getIconUrl = (chartMetadataName: string) =>
 	"https://raw.githubusercontent.com/litmuschaos/chaos-charts/staging/charts/" +
-	chartGroup +
+	chartMetadataName +
 	"/icons/" +
 	chartMetadataName +
 	".png";
 
-export function Charts(props: ChartProps) {
-	const { experiments, match } = props;
+export function ChartGroups(props: ChartGroupProps) {
+	const { experimentGroups } = props;
 	const classes = useStyles();
 	const analyticsData = useSelector(
 		(state: RootState) => state.analyticsData
@@ -27,26 +27,21 @@ export function Charts(props: ChartProps) {
 
 	return (
 		<div className={classes.root}>
-			{experiments &&
-				experiments.map((e: Experiment) => (
+			{experimentGroups &&
+				experimentGroups.map((g: ExperimentGroup) => (
 					<CustomCard
-						key={e.metadataName}
-						id={e.metadataName}
-						title={e.name}
-						urlToIcon={getIconUrl(
-							e.metadataName,
-							match.params.chartGroupId
-						)}
-						handleClick={() =>
-							history.push(`${match.url}/${e.metadataName}`)
-						}
-						provider={e.provider}
+						key={g.metadataName}
+						id={g.metadataName}
+						title={g.name}
+						urlToIcon={getIconUrl(g.metadataName)}
+						handleClick={() => history.push(`/${g.metadataName}`)}
+						experimentCount={g.experiments.length}
+						provider={g.provider}
+						description={g.description}
 						totalRuns={getExpRunCount(
-							e,
+							g.experiments,
 							analyticsData.expAnalytics
 						)}
-						chaosType={e.chaosType}
-						chartType={match.params.chartGroupId}
 					/>
 				))}
 		</div>

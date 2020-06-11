@@ -2,21 +2,32 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const drawerWidth = 120;
 export const useStyles = makeStyles((theme: Theme) => ({
+	root: {
+		width: "100%",
+		height: "100vh",
+		display: "flex",
+		flexDirection: "row",
+		overflow: "hidden",
+	},
+	route: {
+		width: "100%",
+		overflowY: "scroll",
+	},
 	drawerHeader: { ...theme.mixins.toolbar },
 	drawerPaper: {
 		width: drawerWidth,
+		height: "100vh",
 		color: theme.palette.primary.contrastText,
 		backgroundColor: theme.palette.background.paper,
 		[theme.breakpoints.up("md")]: {
 			width: drawerWidth,
 			position: "relative",
-			height: "100%",
+			height: "100vh",
 		},
 	},
 	formControl: {
 		marginTop: theme.spacing(3),
-		marginLeft: "auto",
-		marginRight: "auto",
+		margin: "0 auto",
 		display: "block",
 		width: "fit-content",
 		fontWeight: 700,
@@ -24,21 +35,17 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	button: {
 		color: theme.palette.primary.contrastText,
 		margin: "0 auto",
-		[theme.breakpoints.down("sm")]: {
-			fontSize: 25,
-		},
+		fontSize: 35,
 		[theme.breakpoints.up("md")]: {
-			fontSize: 30,
-		},
-		[theme.breakpoints.up("lg")]: {
-			fontSize: 35,
+			fontSize: 40,
 		},
 	},
 	drawerList: {
 		display: "flex",
 		flexDirection: "column",
 		justifyContent: "center",
-		margin: "auto",
+		margin: "0px auto",
+		marginBottom: 180,
 		width: "80%",
 		height: "100%",
 		fontWeight: 700,
@@ -46,10 +53,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	drawerListItem: {
 		display: "flex",
 		flexDirection: "column",
-		margin: "auto",
+		margin: "8px auto",
 		borderRadius: 10,
 		"&:hover": {
 			backgroundColor: theme.palette.primary.dark,
+		},
+		[theme.breakpoints.up("md")]: {
+			margin: "24px auto",
+		},
+		[theme.breakpoints.up("lg")]: {
+			margin: "24px auto",
 		},
 	},
 	logo: {

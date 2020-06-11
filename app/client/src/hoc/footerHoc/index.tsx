@@ -2,12 +2,13 @@ import { Typography } from "@material-ui/core";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import ForumTwoToneIcon from "@material-ui/icons/ForumTwoTone";
 import HelpTwoToneIcon from "@material-ui/icons/HelpTwoTone";
-import PermContactCalendarRoundedIcon from "@material-ui/icons/PermContactCalendarRounded";
+import PermContactCalendarRoundedIcon from "@material-ui/icons/PermContactCalendarTwoTone";
 import * as React from "react";
-import { useStyles } from "./styles";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers";
 import { GithubContributor } from "../../redux/model";
+import { RootState } from "../../redux/reducers";
+import { useStyles } from "./styles";
+import { formatCount } from "../../utils";
 
 interface StatItem {
 	key: string;
@@ -53,7 +54,7 @@ function Community(props: { data: Community }) {
 	const classes = useStyles();
 	const createList = (header: string, data: CommunityItem[], icon: any) => {
 		return (
-			<div>
+			<div className={classes.commMobile}>
 				<Typography
 					key={header}
 					variant="body1"
@@ -64,7 +65,7 @@ function Community(props: { data: Community }) {
 				{data.map((d, i) => (
 					<div key={i} className={classes.commList}>
 						{icon}
-						<a href={d.link}>
+						<a href={d.link} target="#">
 							<Typography className={classes.commData}>
 								{d.value}
 							</Typography>
@@ -112,12 +113,12 @@ function Branding(props: { data: Branding }) {
 				</Typography>
 			</div>
 			<div className={classes.brandLinks}>
-				<a href="https://litmuschaos.io/">
+				<a href="https://litmuschaos.io/" target="#">
 					<Typography className={classes.brandLData}>
 						Litmuschaos.io
 					</Typography>
 				</a>
-				<a href="https://mayadata.io/aboutus">
+				<a href="https://mayadata.io/aboutus" target="#">
 					<Typography className={classes.brandLData}>
 						About Us
 					</Typography>
@@ -126,9 +127,7 @@ function Branding(props: { data: Branding }) {
 		</div>
 	);
 }
-function formatCount(count: number): string {
-	return count >= 1000 ? (count / 1000).toFixed(1) + "k+" : count + "";
-}
+
 function Footer() {
 	const classes = useStyles();
 	const { githubData, analyticsData, chartData } = useSelector(
@@ -151,7 +150,7 @@ function Footer() {
 		{
 			key: "opInstalls",
 			value: opInstalls,
-			desc: "chaos operator installed",
+			desc: "chaos operators installed",
 		},
 		{ key: "expCount", value: expCount, desc: "total experiments" },
 		{
