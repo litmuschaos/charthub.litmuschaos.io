@@ -50,8 +50,10 @@ function ExperimentPage(props: any) {
 			url[url.length - 1] = "engine.yaml";
 			engineUrl = url.join("/");
 			expCount = getExpRunCount(chart, analyticsData.expAnalytics);
-			videoURL = chart.links.filter((l: Link) => l.name === "Video")[0]
-				.url;
+			const video: any = chart.links.filter(
+				(l: Link) => l.name === "Video"
+			)[0];
+			videoURL = video ? video.url : "";
 		} else {
 			expCount = getExpRunCount(
 				chart.experiments,
