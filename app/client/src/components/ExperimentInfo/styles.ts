@@ -21,4 +21,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	expDesc: {
 		marginBottom: 8,
 	},
+	video: {
+		width: "80%",
+		height: 400,
+		[theme.breakpoints.down("md")]: {
+			width: "100%",
+		},
+	},
 }));

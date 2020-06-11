@@ -12,6 +12,7 @@ interface ExpInfoProps {
 }
 export function ExperimentInfo(props: ExpInfoProps) {
 	const { title, runCount, contributer, description, videoURL } = props;
+	const videoEmbed = videoURL?.replace(/watch\?v=/g, "embed/");
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
@@ -29,6 +30,15 @@ export function ExperimentInfo(props: ExpInfoProps) {
 			<div className={classes.expDesc}>
 				<ReactMarkdown source={description} />
 			</div>
+			{videoURL && (
+				<iframe
+					className={classes.video}
+					allowFullScreen
+					frameBorder="0"
+					src={videoEmbed}
+				/>
+			)}
+			{videoURL && <div>{videoEmbed}</div>}
 		</div>
 	);
 }

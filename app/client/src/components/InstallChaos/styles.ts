@@ -2,7 +2,7 @@ import { makeStyles, Theme } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-		width: "100%",
+		width: "95%",
 		fontSize: 18,
 		color: theme.palette.text.secondary,
 		margin: "16px 0",

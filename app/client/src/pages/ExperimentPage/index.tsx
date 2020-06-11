@@ -8,7 +8,7 @@ import {
 	UsefulLinks,
 } from "../../components";
 import { history } from "../../redux/configureStore";
-import { ExperimentGroup } from "../../redux/model";
+import { ExperimentGroup, Link } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { getExpRunCount } from "../../utils";
 import { useStyles } from "./styles";
@@ -73,6 +73,11 @@ function ExperimentPage(props: any) {
 								title={chart.name}
 								description={chart.description}
 								runCount={expCount}
+								videoURL={
+									chart.links.filter(
+										(l: Link) => l.name === "Video"
+									)[0].url
+								}
 							/>
 						</div>
 						{/* page body */}

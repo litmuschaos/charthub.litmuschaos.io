@@ -26,6 +26,9 @@ export const useStyles = makeStyles((theme) => ({
 		flexDirection: "column",
 		alignItems: "start",
 		marginLeft: 64,
+		[theme.breakpoints.down("md")]: {
+			width: "95%",
+		},
 	},
 	contentHead: {
 		display: "flex",
