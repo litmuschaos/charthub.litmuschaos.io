@@ -16,6 +16,7 @@ import { useStyles } from "./styles";
 function ExperimentPage(props: any) {
 	const classes = useStyles();
 	const match = props.match;
+	const path = match.url.split("/");
 	const chartGroupId: string = match.params.chartGroupId;
 	const chartId: string = match.params.chartId;
 	const { chartData, analyticsData, versionData } = useSelector(
@@ -72,7 +73,9 @@ function ExperimentPage(props: any) {
 						{/* Back Butoon + Experiment info */}
 						<div className={classes.contentHead}>
 							{/* Back Button */}
-							<BackButton />
+							<BackButton
+								path={path.slice(0, path.length - 1).join("/")}
+							/>
 							{/* Exp title + Exp run counts + description*/}
 							<ExperimentInfo
 								title={chart.name}
