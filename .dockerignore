@@ -2,4 +2,4 @@ app/client/node_modules
 app/client/package-lock.json
 app/client/public/chaos-charts
 app/client/public/githubData
-app/server
+app/client/build
