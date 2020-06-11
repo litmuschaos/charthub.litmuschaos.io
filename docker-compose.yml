@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    charthub_nginx:
+        container_name: charthub_nginx
+        image : charthub_nginx
+        ports:
+            - 80:80
+        depends_on :
+            - charthub_go
+    charthub_go:
+        container_name: charthub_go
+        image : charthub_go
