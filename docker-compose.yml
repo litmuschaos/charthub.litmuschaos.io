@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    charthub_nginx:
+        container_name: charthub_nginx
+        ports:
+            - 80:80
+        build:
+            context: .
+            dockerfile: Dockerfile.client
+
+    charthub_go:
+        container_name: charthub_go
+        build:
+            context: .
+            dockerfile: Dockerfile.server
