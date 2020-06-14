@@ -44,10 +44,8 @@ const CustomisedListItem = (props: ListItemProps) => {
 function Drawer() {
 	const classes = useStyles();
 	const { versionData } = useSelector((state: RootState) => state);
-	const [docsVersion, setDocsVersion] = useState(versionData.currentVersion);
 	const versionActions = useActions(VersionActions);
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-		setDocsVersion(event.target.value as string);
 		versionActions.toggleVersion(event.target.value as string);
 	};
 
@@ -61,7 +59,7 @@ function Drawer() {
 				</InputLabel>
 				<Select
 					labelId="change-cocs-version"
-					value={docsVersion}
+					value={versionData.currentVersion}
 					onChange={handleChange}
 				>
 					{versionData.versions.map((d: string) => (
