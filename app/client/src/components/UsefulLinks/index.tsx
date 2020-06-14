@@ -1,5 +1,8 @@
 import { Icon, Typography } from "@material-ui/core";
+import PlatformIcon from "@material-ui/icons/CodeTwoTone";
 import LinkIcon from "@material-ui/icons/LinkTwoTone";
+import MaturityIcon from "@material-ui/icons/SpaTwoTone";
+import MaintainerIcon from "@material-ui/icons/SupervisorAccountTwoTone";
 import React from "react";
 import { Link, Maintainer } from "../../redux/model";
 import { useStyles } from "./styles";
@@ -23,7 +26,7 @@ export function UsefulLinks(props: UsefulLinks) {
 					}}
 				>
 					<Icon style={{ marginRight: 10 }}>
-						<LinkIcon />
+						<MaintainerIcon />
 					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						Maintainers
@@ -59,18 +62,49 @@ export function UsefulLinks(props: UsefulLinks) {
 						{header}
 					</Typography>
 				</div>
-				{data.map((d) => (
-					<div>
-						<a href={d.url} style={{ textDecoration: "none" }}>
-							<Typography className={classes.linkType}>
-								{d.name}
-							</Typography>
-						</a>
-					</div>
-				))}
+				{data.map(
+					(d) =>
+						d.url && (
+							<div>
+								<a
+									href={d.url}
+									style={{ textDecoration: "none" }}
+								>
+									<Typography className={classes.linkType}>
+										{d.name}
+									</Typography>
+								</a>
+							</div>
+						)
+				)}
 			</div>
 		);
 	};
+	function createPlatformData(header: string, data: string[]) {
+		return (
+			<div className={classes.usefulLinks}>
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "row",
+					}}
+				>
+					<Icon style={{ marginRight: 10 }}>
+						<MaturityIcon />
+					</Icon>
+					<Typography variant="body1" className={classes.heading}>
+						{header}
+					</Typography>
+				</div>
+				<div className={classes.linkListBox}>
+					{data.map((d) => (
+						<span className={classes.staticType}>{d},</span>
+					))}
+				</div>
+			</div>
+		);
+	}
+
 	function createStaticData(header: string, data: string[]) {
 		return (
 			<div className={classes.usefulLinks}>
@@ -81,19 +115,17 @@ export function UsefulLinks(props: UsefulLinks) {
 					}}
 				>
 					<Icon style={{ marginRight: 10 }}>
-						<LinkIcon />
+						<PlatformIcon />
 					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						{header}
 					</Typography>
 				</div>
-				{data.map((d) => (
-					<div>
-						<Typography className={classes.staticType}>
-							{d}
-						</Typography>
-					</div>
-				))}
+				<div className={classes.linkListBox}>
+					{data.map((d) => (
+						<div className={classes.staticType}>{d}</div>
+					))}
+				</div>
 			</div>
 		);
 	}
@@ -101,10 +133,9 @@ export function UsefulLinks(props: UsefulLinks) {
 		<div className={classes.mainDiv}>
 			{createLinks("Useful Links", props.links)}
 			{createMaintainers(props.maintainers)}
-			{props.platforms !== undefined &&
-				createStaticData("Platforms", props.platforms)}
-			{props.maturity !== undefined &&
-				createStaticData("Maturity", [props.maturity])}
+			{props.platforms &&
+				createPlatformData("Platforms", props.platforms)}
+			{props.maturity && createStaticData("Maturity", [props.maturity])}
 		</div>
 	);
 }

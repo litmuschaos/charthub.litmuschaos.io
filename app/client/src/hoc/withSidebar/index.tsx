@@ -44,20 +44,22 @@ const CustomisedListItem = (props: ListItemProps) => {
 function Drawer() {
 	const classes = useStyles();
 	const { versionData } = useSelector((state: RootState) => state);
-	const [docsVersion, setDocsVersion] = useState(versionData.currentVersion);
 	const versionActions = useActions(VersionActions);
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-		setDocsVersion(event.target.value as string);
 		versionActions.toggleVersion(event.target.value as string);
 	};
 
 	return (
 		<>
 			<FormControl className={classes.formControl}>
-				<InputLabel>Version</InputLabel>
+				<InputLabel
+					classes={{ root: classes.label, focused: classes.focused }}
+				>
+					Version
+				</InputLabel>
 				<Select
 					labelId="change-cocs-version"
-					value={docsVersion}
+					value={versionData.currentVersion}
 					onChange={handleChange}
 				>
 					{versionData.versions.map((d: string) => (
@@ -70,6 +72,7 @@ function Drawer() {
 				src="/icons/litmus.svg"
 				alt="litmus logo"
 				className={classes.logo}
+				onClick={() => history.push("/")}
 			/>
 
 			<List className={classes.drawerList}>

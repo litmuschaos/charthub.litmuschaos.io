@@ -7,7 +7,7 @@ services:
             - 80:80
         build:
             context: .
-            dockerfile: Dockerfile.client
+            dockerfile: Dockerfile.client-local
 
     charthub_go:
         container_name: charthub_go

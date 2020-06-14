@@ -168,17 +168,19 @@ function Footer() {
 				link: "https://kubernetes.slack.com/archives/CNXNB0ZTN",
 			},
 			{ value: "Twitter", link: "https://twitter.com/LitmusChaos" },
-			{ value: "Forum", link: "https://github.com" },
 			{ value: "Blog", link: "https://blog.mayadata.io/tag/litmus" },
 		],
 		resources: [
-			{ value: "FAQ", link: "https://help.mayadata.io/hc/en-us" },
+			{
+				value: "FAQ",
+				link: "https://docs.litmuschaos.io/docs/faq-general/",
+			},
 			{
 				value: "Documentation",
 				link: "https://docs.litmuschaos.io/docs/getstarted/",
 			},
 			{
-				value: "Bugs",
+				value: "Issues",
 				link: "https://github.com/litmuschaos/litmus/issues",
 			},
 		],
