@@ -25,12 +25,21 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			height: "100vh",
 		},
 	},
+	label: {
+		"&$focused": {
+			color: theme.palette.text.primary,
+		},
+	},
+	focused: {},
 	formControl: {
 		marginTop: theme.spacing(3),
 		margin: "0 auto",
 		display: "block",
-		width: "fit-content",
+		width: "80%",
 		fontWeight: 700,
+		"& > *": {
+			width: "100%",
+		},
 	},
 	button: {
 		color: theme.palette.primary.contrastText,
@@ -76,5 +85,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginLeft: "auto",
 		marginRight: "auto",
 		width: "85%",
+		cursor: "pointer",
 	},
 }));

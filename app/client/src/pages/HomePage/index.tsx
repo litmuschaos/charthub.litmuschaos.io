@@ -1,6 +1,6 @@
 import { FormControl, Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import SubjectTwoToneIcon from "@material-ui/icons/SubjectTwoTone";
+import DocsIcon from "@material-ui/icons/ChromeReaderModeTwoTone";
 import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -75,7 +75,7 @@ function HomePage() {
 						)
 					}
 					label="Visit Docs"
-					handleIcon={<SubjectTwoToneIcon />}
+					handleIcon={<DocsIcon />}
 				/>
 			</div>
 

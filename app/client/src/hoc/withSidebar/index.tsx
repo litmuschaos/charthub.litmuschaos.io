@@ -54,7 +54,11 @@ function Drawer() {
 	return (
 		<>
 			<FormControl className={classes.formControl}>
-				<InputLabel>Version</InputLabel>
+				<InputLabel
+					classes={{ root: classes.label, focused: classes.focused }}
+				>
+					Version
+				</InputLabel>
 				<Select
 					labelId="change-cocs-version"
 					value={docsVersion}
@@ -70,6 +74,7 @@ function Drawer() {
 				src="/icons/litmus.svg"
 				alt="litmus logo"
 				className={classes.logo}
+				onClick={() => history.push("/")}
 			/>
 
 			<List className={classes.drawerList}>

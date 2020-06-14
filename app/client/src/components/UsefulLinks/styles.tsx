@@ -22,10 +22,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		fontWeight: "bold",
 		color: theme.palette.secondary.light,
 	},
+	linkListBox: {
+		display: "flex",
+		flexDirection: "row",
+		flexWrap: "wrap",
+		paddingLeft: 32,
+	},
 	staticType: {
 		fontSize: 16,
-		marginLeft: 40,
-		marginBottom: 7,
+		marginLeft: 8,
+		marginBottom: 8,
 		fontWeight: "bold",
 		color: theme.palette.primary.contrastText,
 	},

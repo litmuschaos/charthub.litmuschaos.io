@@ -86,10 +86,10 @@ function ExperimentPage(props: any) {
 						</div>
 						{/* page body */}
 						<div>
-							<div className={classes.note}>Note:</div>
+							<div className={classes.note}>Pre-requisite:</div>
 							<div>
 								<a
-									href="https://github.com/litmuschaos/chaos-operator/blob/master/README.md"
+									href="https://docs.litmuschaos.io/docs/getstarted/"
 									target="_"
 								>
 									Install Litmus Operator
@@ -99,7 +99,7 @@ function ExperimentPage(props: any) {
 						</div>
 						<div className={classes.installLinks}>
 							<InstallChaos
-								title="Install this Choas Expermiment"
+								title="Install this Chaos Expermiment"
 								description="You can install the Chaos Experiment using the following command"
 								yamlLink={hubUrl}
 							/>
