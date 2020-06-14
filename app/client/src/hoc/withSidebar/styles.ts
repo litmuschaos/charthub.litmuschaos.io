@@ -76,5 +76,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginLeft: "auto",
 		marginRight: "auto",
 		width: "85%",
+		cursor: "pointer",
 	},
 }));

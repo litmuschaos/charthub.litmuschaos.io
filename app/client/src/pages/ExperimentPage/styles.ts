@@ -38,8 +38,9 @@ export const useStyles = makeStyles((theme) => ({
 		margin: "0 auto",
 	},
 	note: {
+		marginTop: 32,
 		fontWeight: "bold",
-		color: theme.palette.text.secondary,
+		color: theme.palette.warning.dark,
 		margin: 0,
 	},
 	installLinks: {

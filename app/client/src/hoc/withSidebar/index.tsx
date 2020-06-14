@@ -44,7 +44,9 @@ const CustomisedListItem = (props: ListItemProps) => {
 function Drawer() {
 	const classes = useStyles();
 	const { versionData } = useSelector((state: RootState) => state);
-	const [docsVersion, setDocsVersion] = useState(versionData.currentVersion);
+	const [docsVersion, setDocsVersion] = useState(
+		versionData.currentVersion ?? "master"
+	);
 	const versionActions = useActions(VersionActions);
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
 		setDocsVersion(event.target.value as string);
@@ -70,6 +72,7 @@ function Drawer() {
 				src="/icons/litmus.svg"
 				alt="litmus logo"
 				className={classes.logo}
+				onClick={() => history.push("/")}
 			/>
 
 			<List className={classes.drawerList}>
