@@ -19,6 +19,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		height: "100vh",
 		color: theme.palette.primary.contrastText,
 		backgroundColor: theme.palette.background.paper,
+		overflow: "hidden",
 		[theme.breakpoints.up("md")]: {
 			width: drawerWidth,
 			position: "relative",
