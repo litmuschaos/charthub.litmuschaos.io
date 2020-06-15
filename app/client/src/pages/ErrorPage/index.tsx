@@ -8,7 +8,7 @@ function ErrorPage() {
 	const classes = useStyles();
 
 	return (
-		<>
+		<div className={classes.rootContainer}>
 			<div className={classes.root}>
 				<Typography variant="h1" className={classes.error}>
 					404
@@ -29,7 +29,7 @@ function ErrorPage() {
 			</div>
 			{/* Footer */}
 			<Footer showStat={true} />
-		</>
+		</div>
 	);
 }
 

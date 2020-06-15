@@ -1,6 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
+	rootContainer: {
+		height: "100vh",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-between",
+	},
 	root: {
 		padding: 16,
 		fontSize: 18,
@@ -52,7 +58,7 @@ export const useStyles = makeStyles((theme) => ({
 	installCTA: {
 		marginBottom: 32,
 	},
-	commingSoon: {
+	comingSoon: {
 		fontSize: 32,
 		width: "100%",
 		textAlign: "center",

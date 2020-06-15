@@ -37,9 +37,6 @@ export function InstallChaos(props: InstallProps) {
 		setCopying(true);
 		navigator.clipboard
 			.writeText(text)
-			.then(() =>
-				console.log("Async: Copying to clipboard was successful!")
-			)
 			.catch((err) => console.error("Async: Could not copy text: ", err));
 
 		setTimeout(() => setCopying(false), 3000);

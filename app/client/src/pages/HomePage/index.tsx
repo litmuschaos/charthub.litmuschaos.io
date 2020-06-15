@@ -23,7 +23,6 @@ function HomePage() {
 	const [searchToken, setsearchToken] = useState("");
 	const chartData = useSelector((state: RootState) => state.chartData);
 	const chartActions = useActions(ChartActions);
-	console.log(chartData);
 
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
@@ -53,7 +52,7 @@ function HomePage() {
 	};
 
 	return (
-		<>
+		<div className={classes.rootContainer}>
 			<div className={classes.root}>
 				<div className={classes.title}>
 					<b>Chaos Chart for Kubernetes</b>
@@ -128,7 +127,7 @@ function HomePage() {
 			</div>
 			{/* Footer */}
 			<Footer showStat={true} />
-		</>
+		</div>
 	);
 }
 
