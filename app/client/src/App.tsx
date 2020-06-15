@@ -2,7 +2,6 @@ import React, { lazy, Suspense, useEffect } from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { useStyles } from "./App-styles";
 import { Loader } from "./components";
-import withFooter from "./hoc/footerHoc";
 import withTheme from "./hoc/themeHoc";
 import withSidebar from "./hoc/withSidebar";
 import { useActions } from "./redux/actions";
@@ -40,7 +39,7 @@ function Routes() {
 	);
 }
 
-const AppBody = withSidebar(withFooter(Routes));
+const AppBody = withSidebar(Routes);
 
 function App() {
 	const githubActions = useActions(GithubActions);

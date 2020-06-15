@@ -10,6 +10,7 @@ import {
 	SortButton,
 	UsefulLinks,
 } from "../../components";
+import Footer from "../../components/Footer";
 import { history } from "../../redux/configureStore";
 import { Experiment, ExperimentGroup } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
@@ -65,65 +66,84 @@ function ExperimentsGroupPage(props: any) {
 		setDisplayExps(payload);
 	};
 	if (!chartGroup) {
-		history.push("/404");
+		history.push("/");
 		return <></>;
 	} else
 		return (
-			<div className={classes.root}>
-				{/* BreadCrumbs + SearchBar */}
-				<div className={classes.header}>
-					<div className={classes.breadCrumbs}>
-						<CustomBreadCrumbs location={props.location.pathname} />
-					</div>
-
-					<SearchBar
-						searchToken={searchToken}
-						handleSearch={handleSearch}
-					/>
-				</div>
-
-				<div className={classes.body}>
-					<div className={classes.content}>
-						{/* Back Butoon + Experiment info */}
-						<div className={classes.contentHead}>
-							{/* Back Button */}
-							<BackButton
-								path={path.slice(0, path.length - 1).join("/")}
-							/>
-							{/* Exp title + Exp run counts + description*/}
-							<ExperimentInfo
-								title={chartGroup.name}
-								description={chartGroup.categoryDescription}
-								runCount={getExpRunCount(
-									chartGroup.experiments,
-									analyticsData.expAnalytics
-								)}
+			<>
+				<div className={classes.root}>
+					{/* BreadCrumbs + SearchBar */}
+					<div className={classes.header}>
+						<div className={classes.breadCrumbs}>
+							<CustomBreadCrumbs
+								location={props.location.pathname}
 							/>
 						</div>
-						{/* Sort Button */}
-						<SortButton handleClick={handleSort} />
-						{/* Card component */}
-						<Charts experiments={displayExps} match={match} />
-					</div>
-					{/* Install Experiments CTA + Usefull Links */}
-					<div className={classes.info}>
-						<div className={classes.installCTA}>
-							<CustomButton
-								handleClick={() =>
-									history.push(
-										`${match.url}/install-all-experiments`
-									)
-								}
-								label="Install All Experiments"
-							/>
-						</div>
-						<UsefulLinks
-							links={chartGroup.links}
-							maintainers={chartGroup.maintainers}
+
+						<SearchBar
+							searchToken={searchToken}
+							handleSearch={handleSearch}
 						/>
 					</div>
+
+					<div className={classes.body}>
+						<div className={classes.content}>
+							{/* Back Butoon + Experiment info */}
+							<div className={classes.contentHead}>
+								{/* Back Button */}
+								<BackButton
+									path={path
+										.slice(0, path.length - 1)
+										.join("/")}
+								/>
+								{/* Exp title + Exp run counts + description*/}
+								<ExperimentInfo
+									title={chartGroup.name}
+									description={chartGroup.categoryDescription}
+									runCount={getExpRunCount(
+										chartGroup.experiments,
+										analyticsData.expAnalytics
+									)}
+								/>
+							</div>
+							{chartGroup.experiments.length !== 0 ? (
+								<>
+									{/* Sort Button */}
+									<SortButton handleClick={handleSort} />
+									{/* Card component */}
+									<Charts
+										experiments={displayExps}
+										match={match}
+									/>
+								</>
+							) : (
+								<div className={classes.commingSoon}>
+									Comming Soon
+								</div>
+							)}
+						</div>
+						{/* Install Experiments CTA + Usefull Links */}
+						<div className={classes.info}>
+							<div className={classes.installCTA}>
+								<CustomButton
+									handleClick={() =>
+										history.push(
+											`${match.url}/install-all-experiments`
+										)
+									}
+									label="Install All Experiments"
+								/>
+							</div>
+							<UsefulLinks
+								links={chartGroup.links}
+								maintainers={chartGroup.maintainers}
+							/>
+						</div>
+					</div>
 				</div>
-			</div>
+				{/* Footer */}
+				<Footer showStat={false} />
+			</>
 		);
 }
 
