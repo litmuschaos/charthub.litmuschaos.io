@@ -128,7 +128,7 @@ function Branding(props: { data: Branding }) {
 	);
 }
 
-function Footer() {
+export default function Footer(props: { showStat: boolean }) {
 	const classes = useStyles();
 	const { githubData, analyticsData, chartData } = useSelector(
 		(state: RootState) => state
@@ -198,23 +198,10 @@ function Footer() {
 	return (
 		<div className={classes.root}>
 			<div>
-				<Stat stat={stat} />
+				{props.showStat ? <Stat stat={stat} /> : <></>}
 				<Community data={community} />
 				<Branding data={branding} />
 			</div>
 		</div>
 	);
-}
-
-export default function withFooter(Component: any) {
-	function WithFooter(props: object) {
-		return (
-			<div>
-				<Component />
-				<Footer />
-			</div>
-		);
-	}
-
-	return WithFooter;
 }

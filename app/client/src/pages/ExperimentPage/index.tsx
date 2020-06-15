@@ -7,6 +7,7 @@ import {
 	InstallChaos,
 	UsefulLinks,
 } from "../../components";
+import Footer from "../../components/Footer";
 import { history } from "../../redux/configureStore";
 import { ExperimentGroup, Link } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
@@ -34,7 +35,7 @@ function ExperimentPage(props: any) {
 			  )[0];
 
 	if (!chartGroup || !chart) {
-		history.push("/404");
+		history.push("/");
 		return <></>;
 	} else {
 		const hubUrl: string = `https://hub.litmuschaos.io/api/chaos/${
@@ -62,74 +63,85 @@ function ExperimentPage(props: any) {
 			);
 		}
 		return (
-			<div className={classes.root}>
-				{/* BreadCrumbs */}
-				<div className={classes.breadCrumbs}>
-					<CustomBreadCrumbs location={props.location.pathname} />
-				</div>
+			<>
+				<div className={classes.root}>
+					{/* BreadCrumbs */}
+					<div className={classes.breadCrumbs}>
+						<CustomBreadCrumbs location={props.location.pathname} />
+					</div>
 
-				<div className={classes.body}>
-					<div className={classes.content}>
-						{/* Back Butoon + Experiment info */}
-						<div className={classes.contentHead}>
-							{/* Back Button */}
-							<BackButton
-								path={path.slice(0, path.length - 1).join("/")}
-							/>
-							{/* Exp title + Exp run counts + description*/}
-							<ExperimentInfo
-								title={chart.name}
-								description={chart.description}
-								runCount={expCount}
-								videoURL={videoURL}
-							/>
-						</div>
-						{/* page body */}
-						<div>
-							<div className={classes.note}>Pre-requisite:</div>
+					<div className={classes.body}>
+						<div className={classes.content}>
+							{/* Back Butoon + Experiment info */}
+							<div className={classes.contentHead}>
+								{/* Back Button */}
+								<BackButton
+									path={path
+										.slice(0, path.length - 1)
+										.join("/")}
+								/>
+								{/* Exp title + Exp run counts + description*/}
+								<ExperimentInfo
+									title={chart.name}
+									description={chart.description}
+									runCount={expCount}
+									videoURL={videoURL}
+								/>
+							</div>
+							{/* page body */}
 							<div>
-								<a
-									href="https://docs.litmuschaos.io/docs/getstarted/"
-									target="_"
-								>
-									Install Litmus Operator
-								</a>
-								: a tool for injecting Chaos Experiments
+								<div className={classes.note}>
+									Pre-requisite:
+								</div>
+								<div>
+									<a
+										href="https://docs.litmuschaos.io/docs/getstarted/"
+										target="_"
+									>
+										Install Litmus Operator
+									</a>
+									: a tool for injecting Chaos Experiments
+								</div>
+							</div>
+							<div className={classes.installLinks}>
+								<InstallChaos
+									title="Install this Chaos Expermiment"
+									description="You can install the Chaos Experiment using the following command"
+									yamlLink={hubUrl}
+									engine={false}
+								/>
+								{rbacUrl && (
+									<InstallChaos
+										title="Setup Service Account (RBAC)"
+										description="Create a service account using the following command"
+										yamlLink={rbacUrl}
+										engine={false}
+									/>
+								)}
+								{engineUrl && (
+									<InstallChaos
+										title="Sample Chaos Engine"
+										description="Copy and edit this sample Chaos Engine yaml according to your application needs"
+										yamlLink={engineUrl}
+										engine={true}
+									/>
+								)}
 							</div>
 						</div>
-						<div className={classes.installLinks}>
-							<InstallChaos
-								title="Install this Chaos Expermiment"
-								description="You can install the Chaos Experiment using the following command"
-								yamlLink={hubUrl}
+						{/* Install Experiments CTA + Usefull Links */}
+						<div className={classes.info}>
+							<UsefulLinks
+								links={chart.links}
+								maintainers={chart.maintainers}
+								platforms={chart.platforms}
+								maturity={chart.maturity}
 							/>
-							{rbacUrl && (
-								<InstallChaos
-									title="Setup Service Account (RBAC)"
-									description="Create a service account using the following command"
-									yamlLink={rbacUrl}
-								/>
-							)}
-							{engineUrl && (
-								<InstallChaos
-									title="Run Chaos Engine"
-									description="You can run the chaos engine using the following command"
-									yamlLink={engineUrl}
-								/>
-							)}
 						</div>
 					</div>
-					{/* Install Experiments CTA + Usefull Links */}
-					<div className={classes.info}>
-						<UsefulLinks
-							links={chart.links}
-							maintainers={chart.maintainers}
-							platforms={chart.platforms}
-							maturity={chart.maturity}
-						/>
-					</div>
 				</div>
-			</div>
+				{/* Footer */}
+				<Footer showStat={false} />
+			</>
 		);
 	}
 }

@@ -52,4 +52,9 @@ export const useStyles = makeStyles((theme) => ({
 	installCTA: {
 		marginBottom: 32,
 	},
+	commingSoon: {
+		fontSize: 32,
+		width: "100%",
+		textAlign: "center",
+	},
 }));
