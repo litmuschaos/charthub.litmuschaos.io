@@ -8,7 +8,6 @@ export const useStyles = makeStyles((theme) => ({
 		justifyContent: "space-between",
 	},
 	root: {
-		height: "100%",
 		textAlign: "center",
 		paddingTop: 16,
 	},

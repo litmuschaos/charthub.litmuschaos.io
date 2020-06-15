@@ -62,5 +62,6 @@ export const useStyles = makeStyles((theme) => ({
 		fontSize: 32,
 		width: "100%",
 		textAlign: "center",
+		marginTop: 64,
 	},
 }));
