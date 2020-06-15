@@ -1,24 +1,32 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# chaos-charts
+/app/client/public/chaos-charts
+
+# github repo data
+/app/client/public/githubData
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
-.idea
+/app/client/node_modules
 
 # testing
-/coverage
+/app/client/coverage
 
 # production
-/build
+/app/client/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*/**/*.DS_Store
+*/**/*.env.local
+*/**/*.env.development.local
+*/**/*.env.test.local
+*/**/*.env.production.local
+*/**/*.log*
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/app/client/npm-debug.log*
+/app/client/yarn-debug.log*
+/app/client/yarn-error.log*
+
+#IDE
+.vscode
+.idea
