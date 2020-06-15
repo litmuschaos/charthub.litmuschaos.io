@@ -11,12 +11,16 @@ interface ChartProps {
 	match: any;
 }
 
-const getIconUrl = (chartMetadataName: string, chartGroup: string) =>
-	"https://raw.githubusercontent.com/litmuschaos/chaos-charts/staging/charts/" +
-	chartGroup +
-	"/icons/" +
-	chartMetadataName +
-	".png";
+const getIconUrl = (chartMetadataName: string, chartGroup: string) => {
+	let baseURL: string = "";
+	if (
+		process.env.NODE_ENV.trim() === "development" ||
+		process.env.NODE_ENV.trim() === "test"
+	) {
+		baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
+	} else baseURL = "/api";
+	return baseURL + "/icon/" + chartGroup + "/" + chartMetadataName + ".png";
+};
 
 export function Charts(props: ChartProps) {
 	const { experiments, match } = props;
