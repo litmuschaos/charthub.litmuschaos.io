@@ -102,19 +102,22 @@ function ExperimentPage(props: any) {
 								title="Install this Chaos Expermiment"
 								description="You can install the Chaos Experiment using the following command"
 								yamlLink={hubUrl}
+								engine={false}
 							/>
 							{rbacUrl && (
 								<InstallChaos
 									title="Setup Service Account (RBAC)"
 									description="Create a service account using the following command"
 									yamlLink={rbacUrl}
+									engine={false}
 								/>
 							)}
 							{engineUrl && (
 								<InstallChaos
-									title="Run Chaos Engine"
-									description="You can run the chaos engine using the following command"
+									title="Sample Chaos Engine"
+									description="Copy and edit this sample Chaos Engine yaml"
 									yamlLink={engineUrl}
+									engine={true}
 								/>
 							)}
 						</div>
