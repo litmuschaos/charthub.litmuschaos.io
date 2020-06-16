@@ -63,7 +63,7 @@ function ExperimentPage(props: any) {
 			);
 		}
 		return (
-			<>
+			<div className={classes.rootContainer}>
 				<div className={classes.root}>
 					{/* BreadCrumbs */}
 					<div className={classes.breadCrumbs}>
@@ -141,7 +141,7 @@ function ExperimentPage(props: any) {
 				</div>
 				{/* Footer */}
 				<Footer showStat={false} />
-			</>
+			</div>
 		);
 	}
 }

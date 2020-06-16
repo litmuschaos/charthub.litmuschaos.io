@@ -31,7 +31,7 @@ function ExperimentsGroupPage(props: any) {
 	const experiments: Experiment[] = chartGroup ? chartGroup.experiments : [];
 	const [displayExps, setDisplayExps] = React.useState(experiments);
 	const [searchToken, setsearchToken] = React.useState("");
-	console.log(match, "egege");
+
 	const handleSort = () => {
 		let payload: Experiment[] = [
 			...displayExps,
@@ -70,7 +70,7 @@ function ExperimentsGroupPage(props: any) {
 		return <></>;
 	} else
 		return (
-			<>
+			<div className={classes.rootContainer}>
 				<div className={classes.root}>
 					{/* BreadCrumbs + SearchBar */}
 					<div className={classes.header}>
@@ -117,8 +117,8 @@ function ExperimentsGroupPage(props: any) {
 									/>
 								</>
 							) : (
-								<div className={classes.commingSoon}>
-									Comming Soon
+								<div className={classes.comingSoon}>
+									Coming Soon
 								</div>
 							)}
 						</div>
@@ -143,7 +143,7 @@ function ExperimentsGroupPage(props: any) {
 				</div>
 				{/* Footer */}
 				<Footer showStat={false} />
-			</>
+			</div>
 		);
 }
 
