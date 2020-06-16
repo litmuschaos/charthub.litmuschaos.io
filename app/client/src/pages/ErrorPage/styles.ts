@@ -2,6 +2,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // Component styles
 export const useStyles = makeStyles((theme) => ({
+	rootContainer: {
+		height: "100vh",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-between",
+	},
 	root: {
 		height: "100%",
 		textAlign: "center",

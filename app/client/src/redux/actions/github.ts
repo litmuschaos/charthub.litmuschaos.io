@@ -37,10 +37,10 @@ export const loadContributors = () => (
 				githubProfileUrl: "https://github.com/" + d["login"],
 				contributions: d["contributions"],
 			}));
-			data.sort(
-				(a: GithubContributor, b: GithubContributor) =>
-					a.contributions > b.contributions
-			);
+			// data.sort(
+			// 	(a: GithubContributor, b: GithubContributor) =>
+			// 		a.contributions > b.contributions
+			// );
 			dispatch({
 				type: GithubActions.LOAD_CONTRIBUTORS,
 				payload: data,
