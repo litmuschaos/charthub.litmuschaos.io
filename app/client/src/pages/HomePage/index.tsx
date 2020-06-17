@@ -2,7 +2,7 @@ import { FormControl, Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import DocsIcon from "@material-ui/icons/ChromeReaderModeTwoTone";
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
 	ChartGroups,
@@ -23,6 +23,10 @@ function HomePage() {
 	const [searchToken, setsearchToken] = useState("");
 	const chartData = useSelector((state: RootState) => state.chartData);
 	const chartActions = useActions(ChartActions);
+
+	useEffect(() => {
+		chartActions.searchCharts("");
+	}, []);
 
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
