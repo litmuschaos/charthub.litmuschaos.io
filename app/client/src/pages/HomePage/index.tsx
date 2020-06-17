@@ -24,6 +24,10 @@ function HomePage() {
 	const chartData = useSelector((state: RootState) => state.chartData);
 	const chartActions = useActions(ChartActions);
 
+	useEffect(() => {
+		chartActions.searchCharts("");
+	}, []);
+
 	const handleChaosChange = (
 		event: React.ChangeEvent<{ value: unknown }>
 	) => {
