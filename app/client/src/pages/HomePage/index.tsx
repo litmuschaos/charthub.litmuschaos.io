@@ -2,7 +2,7 @@ import { FormControl, Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import DocsIcon from "@material-ui/icons/ChromeReaderModeTwoTone";
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
 	ChartGroups,
@@ -59,7 +59,7 @@ function HomePage() {
 		<div className={classes.rootContainer}>
 			<div className={classes.root}>
 				<div className={classes.title}>
-					<b>Chaos Chart for Kubernetes</b>
+					<b>Chaos Charts for Kubernetes</b>
 				</div>
 				<div className={classes.description}>
 					Charts are pre-defined chaos experiments. Use these charts
