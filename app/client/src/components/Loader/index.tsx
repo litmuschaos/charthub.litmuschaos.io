@@ -6,7 +6,7 @@ export function Loader() {
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
-			<CircularProgress className={classes.spinner} />;
+			<CircularProgress className={classes.spinner} />
 		</div>
 	);
 }
