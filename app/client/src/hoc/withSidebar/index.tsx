@@ -1,4 +1,5 @@
 import {
+	Button,
 	Drawer as DrawerMui,
 	FormControl,
 	Hidden,
@@ -10,8 +11,9 @@ import {
 	Select,
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/HomeTwoTone";
+import Menu from "@material-ui/icons/MenuTwoTone";
 import ContributeIcon from "@material-ui/icons/ReceiptTwoTone";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../redux/actions";
 import * as VersionActions from "../../redux/actions/versions";
@@ -101,7 +103,7 @@ function Drawer() {
 
 function AppDrawer() {
 	const classes = useStyles();
-	const [mobileOpen, setMobileOpen] = React.useState(true);
+	const [mobileOpen, setMobileOpen] = React.useState(false);
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
@@ -109,6 +111,14 @@ function AppDrawer() {
 	return (
 		<>
 			<Hidden mdUp>
+				<Button
+					className={classes.drawerToggle}
+					variant="contained"
+					color="secondary"
+					onClick={handleDrawerToggle}
+				>
+					<Menu />
+				</Button>
 				<DrawerMui
 					variant="temporary"
 					anchor={"left"}

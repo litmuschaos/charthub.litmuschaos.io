@@ -42,7 +42,11 @@ export const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "start",
-		marginLeft: 64,
+		marginLeft: theme.spacing(8),
+		[theme.breakpoints.down("md")]: {
+			width: "100%",
+			marginLeft: 0,
+		},
 	},
 	contentHead: {
 		display: "flex",
@@ -56,7 +60,10 @@ export const useStyles = makeStyles((theme) => ({
 		margin: "0 auto",
 	},
 	installCTA: {
-		marginBottom: 32,
+		marginBottom: theme.spacing(4),
+		[theme.breakpoints.down("md")]: {
+			marginTop: theme.spacing(4),
+		},
 	},
 	comingSoon: {
 		fontSize: 32,

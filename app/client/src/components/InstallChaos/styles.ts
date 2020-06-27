@@ -27,6 +27,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: "90%",
 		whiteSpace: "pre-wrap",
 		padding: "16px 8px",
+		[theme.breakpoints.down("md")]: {
+			fontSize: 14,
+		},
 	},
 	done: {
 		color: theme.palette.success.dark,

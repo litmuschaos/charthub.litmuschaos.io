@@ -8,7 +8,8 @@ export const useStyles = makeStyles((theme) => ({
 		borderRadius: 8,
 		overflow: "hidden",
 		fontSize: 14,
-		margin: 16,
+		marginTop: theme.spacing(2),
+		marginBottom: theme.spacing(2),
 		display: "flex",
 		flexDirection: "column",
 		flexWrap: "wrap",
@@ -17,6 +18,7 @@ export const useStyles = makeStyles((theme) => ({
 		// Above tablet size
 		[theme.breakpoints.up("md")]: {
 			width: 250,
+			margin: theme.spacing(2),
 		},
 	},
 	// CARD MEDIA
