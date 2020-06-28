@@ -26,6 +26,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			height: "100vh",
 		},
 	},
+	drawerToggle: {
+		position: "absolute",
+		zIndex: theme.zIndex.appBar,
+	},
 	label: {
 		"&$focused": {
 			color: theme.palette.text.primary,

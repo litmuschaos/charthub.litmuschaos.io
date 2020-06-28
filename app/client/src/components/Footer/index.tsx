@@ -1,11 +1,6 @@
 import { Typography } from "@material-ui/core";
-import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
-import ForumTwoToneIcon from "@material-ui/icons/ForumTwoTone";
-import HelpTwoToneIcon from "@material-ui/icons/HelpTwoTone";
-import PermContactCalendarRoundedIcon from "@material-ui/icons/PermContactCalendarTwoTone";
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { GithubContributor } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { formatCount } from "../../utils";
 import { useStyles } from "./styles";
@@ -19,16 +14,7 @@ interface CommunityItem {
 	value: string;
 	link: string;
 }
-interface Community {
-	contributors: CommunityItem[];
-	community: CommunityItem[];
-	resources: CommunityItem[];
-	contact: CommunityItem[];
-}
-interface Branding {
-	logo: string;
-	copyright: string;
-}
+
 function Stat(props: { stat: StatItem[] }) {
 	const classes = useStyles();
 	const createStatItem = (s: StatItem) => {
@@ -50,157 +36,149 @@ function Stat(props: { stat: StatItem[] }) {
 	);
 }
 
-function Community(props: { data: Community }) {
+function Community(props: { header: string; data: CommunityItem[] }) {
 	const classes = useStyles();
-	const createList = (header: string, data: CommunityItem[], icon: any) => {
-		return (
-			<div className={classes.commMobile}>
-				<Typography
-					key={header}
-					variant="body1"
-					style={{ fontWeight: 700 }}
-				>
-					{header}
-				</Typography>
-				{data.map((d, i) => (
-					<div key={i} className={classes.commList}>
-						{icon}
-						<a href={d.link} target="#">
-							<Typography className={classes.commData}>
-								{d.value}
-							</Typography>
-						</a>
-					</div>
-				))}
-			</div>
-		);
-	};
 	return (
-		<div className={classes.comm}>
-			{createList(
-				"Top Contributors",
-				props.data["contributors"],
-				<FavoriteTwoToneIcon className={classes.commIcon} />
-			)}
-			{createList(
-				"Community",
-				props.data["community"],
-				<ForumTwoToneIcon className={classes.commIcon} />
-			)}
-			{createList(
-				"Resources",
-				props.data["resources"],
-				<HelpTwoToneIcon className={classes.commIcon} />
-			)}
-			{createList(
-				"Contact",
-				props.data["contact"],
-				<PermContactCalendarRoundedIcon className={classes.commIcon} />
-			)}
+		<div>
+			<Typography variant="h6" className={classes.footHeading}>
+				{props.header}
+			</Typography>
+
+			{props.data.map((d, i) => (
+				<div key={i} className={classes.commList}>
+					<a href={d.link} target="#">
+						<Typography className={classes.commData}>
+							{d.value}
+						</Typography>
+					</a>
+				</div>
+			))}
 		</div>
 	);
 }
 
-function Branding(props: { data: Branding }) {
+function Copyright() {
 	const classes = useStyles();
-	const url = "/" + props.data.logo;
 	return (
-		<div className={classes.brand}>
-			<div className={classes.brandData}>
-				<img src={url} alt="logo" className={classes.brandLogo} />
-				<Typography className={classes.brandCRight}>
-					{props.data.copyright}
-				</Typography>
-			</div>
-			<div className={classes.brandLinks}>
-				<a href="https://litmuschaos.io/" target="#">
-					<Typography className={classes.brandLData}>
-						Litmuschaos.io
-					</Typography>
-				</a>
-				<a href="https://mayadata.io/aboutus" target="#">
-					<Typography className={classes.brandLData}>
-						About Us
-					</Typography>
-				</a>
-			</div>
+		<div className={classes.copyright}>
+			<img
+				className={classes.logo}
+				src="/icons/litmus-white.png"
+				alt="litmus logo"
+			/>
+			<Typography className={classes.copyrightText}>
+				Copyright © 2020 LitmusChaos Authors. All rights reserved.
+			</Typography>
+			<Typography className={classes.copyrightText}>
+				Copyright © 2020 The Linux Foundation. All rights reserved. The
+				Linux Foundation has registered trademarks and uses trademarks.
+				For a list of trademarks of The Linux Foundation, please see our{" "}
+				<a
+					href="https://www.linuxfoundation.org/trademark-usage/"
+					target="_"
+				>
+					Trademark Usage
+				</a>{" "}
+				page.
+			</Typography>
 		</div>
 	);
 }
+
+function AboutUs() {
+	const classes = useStyles();
+	return (
+		<div className={classes.copyright}>
+			<Typography variant="h6" className={classes.footHeading}>
+				About Us
+			</Typography>
+			<Typography className={classes.copyrightText}>
+				Litmus is an OSS licensed project as Apache License 2.0
+			</Typography>
+			<Typography className={classes.copyrightText}>
+				Founded by MayaData ❤️
+			</Typography>
+		</div>
+	);
+}
+
+const community: CommunityItem[] = [
+	{
+		value: "Slack",
+		link: "https://app.slack.com/client/T09NY5SBT/CNXNB0ZTN",
+	},
+	{ value: "GitHub", link: "https://github.com/litmuschaos" },
+	{ value: "Twitter", link: "https://twitter.com/LitmusChaos" },
+	{ value: "Blog", link: "https://dev.to/t/litmuschaos/latest" },
+	{
+		value: "YouTube",
+		link: "https://www.youtube.com/channel/UCa57PMqmz_j0wnteRa9nCaw",
+	},
+];
+
+const resources: CommunityItem[] = [
+	{
+		value: "FAQ",
+		link: "https://docs.litmuschaos.io/docs/faq-general/",
+	},
+	{
+		value: "Documentation",
+		link: "https://docs.litmuschaos.io/docs/getstarted/",
+	},
+	{
+		value: "Issues",
+		link: "https://github.com/litmuschaos/litmus/issues",
+	},
+];
 
 export default function Footer(props: { showStat: boolean }) {
 	const classes = useStyles();
 	const { githubData, analyticsData, chartData } = useSelector(
 		(state: RootState) => state
 	);
-	let contributors = githubData.contributorList.map(
-		(d: GithubContributor) => ({
-			value: d.githubName,
-			link: d.githubProfileUrl,
-		})
-	);
-	contributors =
-		contributors.length >= 5 ? contributors.slice(0, 5) : contributors;
+
+	//Logic for Contributors
+
+	// let contributors = githubData.contributorList.map(
+	// 	(d: GithubContributor) => ({
+	// 		value: d.githubName,
+	// 		link: d.githubProfileUrl,
+	// 	})
+	// );
+	// contributors =
+	// 	contributors.length >= 5 ? contributors.slice(0, 5) : contributors;
+
 	const opInstalls = formatCount(analyticsData.chaosOperatorCount);
 	const githubStars = formatCount(githubData.star_count);
 	const expRuns = formatCount(analyticsData.totalExpRuns);
 	const expCount = formatCount(chartData.totalExpCount);
 	//const opInstalls = formatCount(analyticsData.chaosOperatorCount)
+
 	const stat: StatItem[] = [
 		{
 			key: "opInstalls",
 			value: opInstalls,
-			desc: "chaos operators installed",
+			desc: "Chaos Operators Installed",
 		},
-		{ key: "expCount", value: expCount, desc: "total experiments" },
+		{ key: "expCount", value: expCount, desc: "Total Experiments" },
 		{
 			key: "expRuns",
 			value: expRuns,
-			desc: "total experiment runs",
+			desc: "Total Experiment Runs",
 		},
-		{ key: "githubStars", value: githubStars, desc: "github stars" },
+		{ key: "githubStars", value: githubStars, desc: "Github Stars" },
 	];
-	const community: Community = {
-		contributors,
-		community: [
-			{
-				value: "Slack",
-				link: "https://kubernetes.slack.com/archives/CNXNB0ZTN",
-			},
-			{ value: "Twitter", link: "https://twitter.com/LitmusChaos" },
-			{ value: "Blog", link: "https://blog.mayadata.io/tag/litmus" },
-		],
-		resources: [
-			{
-				value: "FAQ",
-				link: "https://docs.litmuschaos.io/docs/faq-general/",
-			},
-			{
-				value: "Documentation",
-				link: "https://docs.litmuschaos.io/docs/getstarted/",
-			},
-			{
-				value: "Issues",
-				link: "https://github.com/litmuschaos/litmus/issues",
-			},
-		],
-		contact: [
-			{
-				value: "support@mayadata.io",
-				link: "mailto:support@mayadata.io",
-			},
-		],
-	};
-	const branding = {
-		logo: "./icons/maya_data_logo.svg",
-		copyright: "Copyright © 2020 MayaData Inc.",
-	};
+
 	return (
 		<div className={classes.root}>
 			<div>
 				{props.showStat ? <Stat stat={stat} /> : <></>}
-				<Community data={community} />
-				<Branding data={branding} />
+				<div className={classes.footerContainer}>
+					<Copyright />
+					<Community header="Community" data={community} />
+					<Community header="Resources" data={resources} />
+					<AboutUs />
+				</div>
 			</div>
 		</div>
 	);

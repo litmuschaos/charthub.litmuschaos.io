@@ -1,4 +1,4 @@
-import { IconButton } from "@material-ui/core";
+import { IconButton, Typography } from "@material-ui/core";
 import Done from "@material-ui/icons/DoneAllTwoTone";
 import Copy from "@material-ui/icons/FileCopyTwoTone";
 import React, { useEffect, useState } from "react";
@@ -51,7 +51,9 @@ export function InstallChaos(props: InstallProps) {
 			<div className={classes.title}>{title}</div>
 			<div className={classes.description}>{description}</div>
 			<div className={classes.linkBox}>
-				<div className={classes.yamlLink}>{yaml}</div>
+				<Typography variant="subtitle1" className={classes.yamlLink}>
+					{yaml}
+				</Typography>
 				<div>
 					<IconButton onClick={() => copyTextToClipboard(yaml)}>
 						{!copying ? (
