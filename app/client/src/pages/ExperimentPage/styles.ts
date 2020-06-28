@@ -33,7 +33,8 @@ export const useStyles = makeStyles((theme) => ({
 		alignItems: "start",
 		marginLeft: 64,
 		[theme.breakpoints.down("md")]: {
-			width: "95%",
+			width: "100%",
+			marginLeft: 0,
 		},
 	},
 	contentHead: {
@@ -51,5 +52,8 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	installLinks: {
 		marginTop: 16,
+		[theme.breakpoints.down("md")]: {
+			width: "100%",
+		},
 	},
 }));

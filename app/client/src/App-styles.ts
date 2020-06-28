@@ -16,6 +16,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	content: {
 		backgroundColor: theme.palette.background.default,
 		width: "100%",
+		[theme.breakpoints.down("md")]: {
+			marginTop: theme.spacing(4),
+		},
 	},
 	routeBody: {
 		width: "100%",

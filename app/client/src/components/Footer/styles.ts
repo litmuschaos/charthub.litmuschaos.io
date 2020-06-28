@@ -13,22 +13,59 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		textAlign: "center",
 		color: theme.palette.text.secondary,
 	},
+
+	// Stats
 	statItem: {
 		display: "block",
-		margin: 24,
+		margin: theme.spacing(3),
+		marginBottom: 0,
 		textAlign: "center",
 	},
 	stat: {
 		display: "flex",
 		margin: "0 auto",
 		justifyContent: "center",
-		[theme.breakpoints.down("md")]: {
-			flexDirection: "column",
-		},
+		flexWrap: "wrap",
 	},
 	statValue: {
 		fontWeight: 700,
 	},
+
+	footerContainer: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-around",
+		marginTop: theme.spacing(4),
+		[theme.breakpoints.down("xs")]: {
+			flexDirection: "column",
+			margin: theme.spacing(2),
+		},
+	},
+
+	footHeading: {
+		fontWeight: "bold",
+		color: theme.palette.secondary.main,
+	},
+
+	copyright: {
+		width: "20rem",
+	},
+	copyrightText: {
+		lineHeight: "1.5",
+		marginBottom: theme.spacing(1),
+
+		"& a": {
+			textDecoration: "none",
+			color: "inherit",
+			fontWeight: "bold",
+		},
+	},
+
+	logo: {
+		width: "10rem",
+	},
+
+	// Community
 	commData: {
 		display: "inline-block",
 		fontWeight: 700,
@@ -52,41 +89,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			alignItems: "center",
 		},
 	},
-	brand: {
-		display: "flex",
-		width: "80%",
-		marginTop: 32,
-		marginBottom: 32,
-		marginLeft: "auto",
-		marginRight: "auto",
-	},
-	brandData: {
-		display: "flex",
-		alignItems: "center",
-		flexGrow: 1,
-		[theme.breakpoints.down("md")]: {
-			flexDirection: "column",
-		},
-	},
-	brandLinks: {},
-	brandLogo: {
-		width: 150,
-		float: "left",
-		marginRight: 16,
-	},
-	brandCRight: {},
-	brandLData: {
-		display: "inline-block",
-		marginLeft: 32,
-		fontWeight: 700,
-		color: theme.palette.primary.main,
-	},
+
 	commIcon: {
 		color: theme.palette.secondary.main,
-	},
-	commMobile: {
-		[theme.breakpoints.down("md")]: {
-			margin: 24,
-		},
 	},
 }));
