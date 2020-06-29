@@ -96,7 +96,11 @@ function AboutUs() {
 				Litmus is an OSS licensed project as Apache License 2.0
 			</Typography>
 			<Typography className={classes.copyrightText}>
-				Founded by MayaData ❤️
+				Founded by{" "}
+				<a href="https://mayadata.io/" target="_">
+					MayaData
+				</a>{" "}
+				❤️
 			</Typography>
 		</div>
 	);
