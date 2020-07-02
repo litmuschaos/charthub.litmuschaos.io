@@ -59,7 +59,7 @@ function HomePage() {
 		<div className={classes.rootContainer}>
 			<div className={classes.root}>
 				<div className={classes.title}>
-					<b>Chaos Charts for Kubernetes</b>
+					<b>Hello World for Kubernetes</b>
 				</div>
 				<div className={classes.description}>
 					Charts are pre-defined chaos experiments. Use these charts
