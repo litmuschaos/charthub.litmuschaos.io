@@ -177,7 +177,7 @@ export default function Footer(props: { showStat: boolean }) {
 		<div className={classes.root}>
 			<div>
 				{props.showStat ? <Stat stat={stat} /> : <></>}
-				<div className={classes.footerContainer}>
+				<div className={classes.footerContainer} data-cy="Footer">
 					<Copyright />
 					<Community header="Community" data={community} />
 					<Community header="Resources" data={resources} />
