@@ -9,6 +9,9 @@ services:
 script:
     - docker build -t $REPO:$COMMIT -f Dockerfile.client .
     - docker build -t ${REPO}-server:$COMMIT -f Dockerfile.server .
+    - cd app/client
+    - npm ci
+    - npm run cyrun
 
 after_success:
     - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";

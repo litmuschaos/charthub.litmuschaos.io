@@ -24,6 +24,7 @@ export function SearchBar(props: any) {
 				}}
 				onChange={props.handleSearch}
 				value={props.searchToken}
+				data-cy="SearchBar"
 			/>
 		</Paper>
 	);
