@@ -73,10 +73,17 @@ var routes = Routes{
 		"GET",
 		"/github/contributors",
 		handler.GetGithubContributorData,
-	}, Route{
+	},
+	Route{
 		"IconData",
 		"GET",
 		"/icon/{expGroup}/{iconFile}",
 		handler.GetIconHandler,
+	},
+	Route{
+		"CommunityData",
+		"GET",
+		"/community",
+		handler.GetCommunityData,
 	},
 }
