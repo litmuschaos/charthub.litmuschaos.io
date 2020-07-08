@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/community"
 	"log"
 	"net/http"
 
 	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/analytics"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/community"
 	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/github"
 	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/gitops"
 	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/routes"

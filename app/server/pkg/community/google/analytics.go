@@ -22,20 +22,22 @@ const (
 	base         = 10
 	bitSize      = 64
 )
-type CommGAResponse struct{
-	TotalRuns string `json:"total-runs"`
-	OpInstalls string `json:"operator-installs"`
-	CityData [][]string `json:"geo-city"`
-	CountryData [][]string `json:"geo-country"`
-	DailyData [][]string `json:"daily-data"`
-}
-// GAResponseJSONObject is the array of GAResponse struct
-var GAResponseJSONObject CommGAResponse
 
-// Handler is responsible for the looping the UpdateAnalyticsData()
+type CommunityGAResponse struct {
+	TotalRuns   string     `json:"totalRuns"`
+	OpInstalls  string     `json:"operatorInstalls"`
+	CityData    [][]string `json:"geoCity"`
+	CountryData [][]string `json:"geoCountry"`
+	DailyData   [][]string `json:"dailyData"`
+}
+
+// GAResponseJSONObject is an instance of CommunityGAResponse struct
+var GAResponseJSONObject CommunityGAResponse
+
+// Handler is responsible for syncing the latest analytics data
 func Handler() {
 	for true {
-		log.Infof("Updating Google Analytics Data ...")
+		log.Infof("Updating google analytics data ...")
 		err := getGraphData()
 		if err != nil {
 			log.Error(err)
@@ -44,7 +46,7 @@ func Handler() {
 		if err != nil {
 			log.Error(err)
 		}
-		log.Infof("Updated Google Analytics Data ...")
+		log.Infof("Google analytics data updated ...")
 		time.Sleep(timeInterval)
 	}
 }
@@ -70,8 +72,7 @@ func getterSVC(httpClient *http.Client) (*analytics.Service, error) {
 	return svc, nil
 }
 
-// UpdateAnalyticsData sends the GET request to the GA instance and receives the events' metrics at every t time intervals
-// and updates the global JSON object for containing the response
+// getTotalCounts will get the Total Experiment Run and Chaos Operator Install Count
 func getTotalCounts() error {
 	httpClient, err := getterJWTConfig()
 	if err != nil {
@@ -90,7 +91,7 @@ func getTotalCounts() error {
 	for i := range GAResponse {
 		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" && GAResponse[i][0] != "drain-node" {
 			if GAResponse[i][0] != "Chaos-Operator" {
-				count, err:= strconv.Atoi(GAResponse[i][1])
+				count, err := strconv.Atoi(GAResponse[i][1])
 				if err != nil {
 					return fmt.Errorf("Error while converting count to string, err: %s", err)
 				}
@@ -101,10 +102,11 @@ func getTotalCounts() error {
 			}
 		}
 	}
-	GAResponseJSONObject.TotalRuns= strconv.Itoa(totalCount)
+	GAResponseJSONObject.TotalRuns = strconv.Itoa(totalCount)
 	return nil
 }
 
+// getGraphData will get the analytics data required for Geographic Plot and Time Series Plots.
 func getGraphData() error {
 	httpClient, err := getterJWTConfig()
 	if err != nil {
@@ -118,20 +120,20 @@ func getGraphData() error {
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
-	GAResponseJSONObject.CountryData=response.Rows
+	GAResponseJSONObject.CountryData = response.Rows
 	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:users").Dimensions("ga:city").Filters(filters).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
-	GAResponseJSONObject.CityData=response.Rows
+	GAResponseJSONObject.CityData = response.Rows
 	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
-	dailyData:=response.Rows
-	for i,val:=range dailyData{
-		dailyData[i][0]=val[0][:4]+"-"+val[0][4:6]+"-"+val[0][6:]
+	dailyData := response.Rows
+	for i, val := range dailyData {
+		dailyData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-" + val[0][6:]
 	}
-	GAResponseJSONObject.DailyData=dailyData
+	GAResponseJSONObject.DailyData = dailyData
 	return nil
 }

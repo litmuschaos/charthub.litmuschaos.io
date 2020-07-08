@@ -13,11 +13,13 @@ import (
 const (
 	timeInterval = 1 * time.Hour
 	repoName     = "litmus"
+	githubApi    = "https://api.github.com/repos/"
+	organization = "litmuschaos"
 )
 
-type GithubData struct{
-	Stars string `json:"stars"`
-	ExperimentCount string `json:"experiment-count"`
+type GithubData struct {
+	Stars           string `json:"stars"`
+	ExperimentCount string `json:"experimentsCount"`
 }
 
 var Github GithubData
@@ -25,69 +27,74 @@ var Github GithubData
 // Handler is responsible for the looping the UpdateGithubData()
 func Handler() {
 	for true {
-		log.Infof("Updating Github Litmus Repo Data ...")
-		err := UpdateGithubStars()
+		log.Infof("Updating github litmus repository data...")
+		err := updateGithubStars()
 		if err != nil {
 			log.Error(err)
 		}
-		err = UpdateExpCount()
+		err = updateExpCount()
 		if err != nil {
 			log.Error(err)
 		}
-		log.Infof("Updated Github Litmus Repo Data...")
+		log.Infof("Github litmus repository data updated...")
 		time.Sleep(timeInterval)
 	}
 }
 
-//UpdateGithubStars updates github star count for litmus repo, makes a get request to the public APIs
-//of github to fetch repo stars
-func UpdateGithubStars() error {
-	response, err := http.Get("https://api.github.com/repos/litmuschaos/" + repoName)
+//updateGithubStars will get the github stars count for litmus repository using github APIs
+func updateGithubStars() error {
+	response, err := http.Get(githubApi + organization + "/" + repoName)
 	if err != nil {
 		return fmt.Errorf("error while getting github star data, err :%s", err)
 	}
-	data, _ := ioutil.ReadAll(response.Body)
+	data, error := ioutil.ReadAll(response.Body)
+	if error != nil {
+		return fmt.Errorf("error while getting github star data, err :%s", error)
+	}
 	var githubD map[string]interface{}
-	err = json.Unmarshal(data,&githubD)
-	if err!=nil{
+	err = json.Unmarshal(data, &githubD)
+	if err != nil {
 		return fmt.Errorf("error while getting github star data, err :%s", err)
 	}
 	Github.Stars = fmt.Sprintf("%v", githubD["stargazers_count"])
 	return nil
 }
-//UpdateExpCount updates github experiment count for litmus repo, makes a get request to the public APIs
-//of github to fetch experiments dirs
-func UpdateExpCount() error {
-	response, err := http.Get("https://api.github.com/repos/litmuschaos/chaos-charts/contents/charts")
+
+//updateExpCount updates will get the chaos experiment count from chaos-charts repo
+func updateExpCount() error {
+	response, err := http.Get(githubApi + organization + "/chaos-charts/contents/charts")
 	if err != nil {
 		return fmt.Errorf("error while getting experiment count, err :%s", err)
 	}
 	data, _ := ioutil.ReadAll(response.Body)
 	var dir []map[string]interface{}
-	err = json.Unmarshal(data,&dir)
-	if err!=nil{
+	err = json.Unmarshal(data, &dir)
+	if err != nil {
 		return fmt.Errorf("error while getting experiment count, err :%s", err)
 	}
-	count:=0
-	for _,dirD:=range dir{
-		if dirD["type"].(string)=="dir"{
-			response, err = http.Get("https://api.github.com/repos/litmuschaos/chaos-charts/contents/charts/"+dirD["name"].(string))
+	count := 0
+	for _, dirD := range dir {
+		if dirD["type"].(string) == "dir" {
+			response, err = http.Get(githubApi + organization + "/chaos-charts/contents/charts/" + dirD["name"].(string))
 			if err != nil {
 				return fmt.Errorf("error while getting experiment count, err :%s", err)
 			}
-			data, _ = ioutil.ReadAll(response.Body)
+			data, error := ioutil.ReadAll(response.Body)
+			if error != nil {
+				return fmt.Errorf("error while getting experiment count, err :%s", error)
+			}
 			var exp []map[string]interface{}
-			err = json.Unmarshal(data,&exp)
-			if err!=nil{
+			err = json.Unmarshal(data, &exp)
+			if err != nil {
 				return fmt.Errorf("error while getting experiment count, err :%s", err)
 			}
-			for _,expD:=range exp {
-				if expD["type"].(string)=="dir" && expD["name"].(string)!="icons"{
+			for _, expD := range exp {
+				if expD["type"].(string) == "dir" && expD["name"].(string) != "icons" {
 					count++
 				}
 			}
 		}
 	}
-	Github.ExperimentCount=fmt.Sprintf("%v", count)
+	Github.ExperimentCount = fmt.Sprintf("%v", count)
 	return nil
 }

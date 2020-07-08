@@ -19,7 +19,6 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/community"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -32,6 +31,7 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/analytics"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/community"
 )
 
 // ChaosChartPath refers the location of the freshly updated repository
@@ -238,9 +238,9 @@ func GetGithubContributorData(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(response))
 }
 
-// GetCommunityData returns all the analytics data related to the community
-func GetCommunityData(w http.ResponseWriter, r *http.Request) {
-	data,err :=community.GetAnalytics()
+// GetCommunityAnalyticsData returns all the analytics data related to the community
+func GetCommunityAnalyticsData(w http.ResponseWriter, r *http.Request) {
+	data, err := community.GetAnalytics()
 	responseStatusCode := 200
 	if err != nil {
 		log.Error(err)

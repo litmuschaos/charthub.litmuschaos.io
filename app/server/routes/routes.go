@@ -84,6 +84,6 @@ var routes = Routes{
 		"CommunityData",
 		"GET",
 		"/community",
-		handler.GetCommunityData,
+		handler.GetCommunityAnalyticsData,
 	},
 }
