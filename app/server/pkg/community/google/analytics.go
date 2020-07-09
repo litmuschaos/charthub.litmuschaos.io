@@ -14,21 +14,20 @@ import (
 )
 
 const (
-	timeInterval = 30 * time.Minute
+	timeInterval = 1 * time.Hour
 	viewID       = "ga:208521052"
 	startDate    = "2019-12-01"
 	endDate      = "today"
 	filters      = "ga:eventCategory!=key1"
-	base         = 10
-	bitSize      = 64
 )
 
 type CommunityGAResponse struct {
-	TotalRuns   string     `json:"totalRuns"`
-	OpInstalls  string     `json:"operatorInstalls"`
-	CityData    [][]string `json:"geoCity"`
-	CountryData [][]string `json:"geoCountry"`
-	DailyData   [][]string `json:"dailyData"`
+	TotalRuns           string     `json:"totalRuns"`
+	OpInstalls          string     `json:"operatorInstalls"`
+	CityData            [][]string `json:"geoCity"`
+	CountryData         [][]string `json:"geoCountry"`
+	DailyOperatorData   [][]string `json:"dailyOperatorData"`
+	DailyExperimentData [][]string `json:"dailyExperimentData"`
 }
 
 // GAResponseJSONObject is an instance of CommunityGAResponse struct
@@ -38,11 +37,11 @@ var GAResponseJSONObject CommunityGAResponse
 func Handler() {
 	for true {
 		log.Infof("Updating google analytics data ...")
-		err := getGraphData()
+		err := getTotalCounts()
 		if err != nil {
 			log.Error(err)
 		}
-		err = getTotalCounts()
+		err = getGraphData()
 		if err != nil {
 			log.Error(err)
 		}
@@ -82,7 +81,7 @@ func getTotalCounts() error {
 	if err != nil {
 		return fmt.Errorf("error while getting service account, err :%s", err)
 	}
-	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:eventLabel").Filters(filters).Do()
+	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:eventLabel").Filters(filters).MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
@@ -116,24 +115,33 @@ func getGraphData() error {
 	if err != nil {
 		return fmt.Errorf("error while getting service account, err :%s", err)
 	}
-	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, "ga:users").Dimensions("ga:country").Filters(filters).Do()
+	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, "ga:users").Dimensions("ga:country").Filters(filters).MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
 	GAResponseJSONObject.CountryData = response.Rows
-	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:users").Dimensions("ga:city").Filters(filters).Do()
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:users").Dimensions("ga:city,ga:latitude, ga:longitude").Filters(filters).MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
 	GAResponseJSONObject.CityData = response.Rows
-	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Do()
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
-	dailyData := response.Rows
-	for i, val := range dailyData {
-		dailyData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-" + val[0][6:]
+	dailyOperatorData := response.Rows
+	for i, val := range dailyOperatorData {
+		dailyOperatorData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-" + val[0][6:]
 	}
-	GAResponseJSONObject.DailyData = dailyData
+	GAResponseJSONObject.DailyOperatorData = dailyOperatorData
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(10000).Do()
+	if err != nil {
+		return fmt.Errorf("Error while getting response, err: %s", err)
+	}
+	dailyExperimentData := response.Rows
+	for i, val := range dailyExperimentData {
+		dailyExperimentData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-" + val[0][6:]
+	}
+	GAResponseJSONObject.DailyExperimentData = dailyExperimentData
 	return nil
 }
