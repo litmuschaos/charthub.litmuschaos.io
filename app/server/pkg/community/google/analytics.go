@@ -109,8 +109,8 @@ func getTotalCounts() error {
 }
 
 //timeSeriesHelper is a helper function to add month-end dates to all monthly data
-func timeSeriesHelper(TimeData [][]string) ([][]string , error) {
-	
+func timeSeriesHelper(TimeData [][]string) ([][]string, error) {
+
 	for i, val := range TimeData {
 		if val[0][4:6] == "01" || val[0][4:6] == "03" || val[0][4:6] == "05" || val[0][4:6] == "07" || val[0][4:6] == "08" || val[0][4:6] == "10" || val[0][4:6] == "12" {
 			TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-31"
@@ -119,7 +119,29 @@ func timeSeriesHelper(TimeData [][]string) ([][]string , error) {
 			TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-30"
 		}
 		if val[0][4:6] == "02" {
-			TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-28"
+			year, err := strconv.Atoi(val[0][:4])
+			if err != nil {
+				return nil, fmt.Errorf("Error while converting year to integer, err: %s", err)
+			}
+			leapFlag := false
+			if year%4 == 0 {
+				if year%100 == 0 {
+					if year%400 == 0 {
+						leapFlag = true
+					} else {
+						leapFlag = false
+					}
+				} else {
+					leapFlag = true
+				}
+			} else {
+				leapFlag = false
+			}
+			if leapFlag == false {
+				TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-28"
+			} else {
+				TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-29"
+			}
 		}
 	}
 
@@ -173,11 +195,11 @@ func getGraphData() error {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
 	monthlyOperatorData := response.Rows
-	
+
 	monthlyOperatorDataCorrected, err := timeSeriesHelper(monthlyOperatorData)
-		if err != nil {
-			return fmt.Errorf("Error while adding End date to month, err: %s", err)
-		}
+	if err != nil {
+		return fmt.Errorf("Error while adding End date to month, err: %s", err)
+	}
 	GAResponseJSONObject.MonthlyOperatorData = monthlyOperatorDataCorrected
 
 	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(10000).Do()
@@ -185,7 +207,7 @@ func getGraphData() error {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
 	monthlyExperimentData := response.Rows
-	
+
 	monthlyExperimentDataCorrected, err := timeSeriesHelper(monthlyExperimentData)
 	if err != nil {
 		return fmt.Errorf("Error while adding End date to month, err: %s", err)
