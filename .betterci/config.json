@@ -1,0 +1,4 @@
+{
+  "cmd": ["echo betterci"],
+  "docker-compose": "ci-docker-compose.yml"
+}
