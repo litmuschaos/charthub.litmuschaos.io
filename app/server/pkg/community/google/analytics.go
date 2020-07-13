@@ -129,7 +129,7 @@ func getGraphData() error {
 	}
 	GAResponseJSONObject.CityData = response.Rows
 
-	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(999999999).Do()
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
@@ -139,7 +139,7 @@ func getGraphData() error {
 	}
 	GAResponseJSONObject.DailyOperatorData = dailyOperatorData
 
-	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(999999999).Do()
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
@@ -149,7 +149,7 @@ func getGraphData() error {
 	}
 	GAResponseJSONObject.DailyExperimentData = dailyExperimentData
 
-	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(999999999).Do()
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
@@ -167,7 +167,7 @@ func getGraphData() error {
 	}
 	GAResponseJSONObject.MonthlyOperatorData = monthlyOperatorData
 
-	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(999999999).Do()
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
