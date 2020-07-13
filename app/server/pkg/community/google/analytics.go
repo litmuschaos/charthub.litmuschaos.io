@@ -21,13 +21,16 @@ const (
 	filters      = "ga:eventCategory!=key1"
 )
 
+//CommunityGAResponse A struct for storing Analytics for Litmus Community
 type CommunityGAResponse struct {
-	TotalRuns           string     `json:"totalRuns"`
-	OpInstalls          string     `json:"operatorInstalls"`
-	CityData            [][]string `json:"geoCity"`
-	CountryData         [][]string `json:"geoCountry"`
-	DailyOperatorData   [][]string `json:"dailyOperatorData"`
-	DailyExperimentData [][]string `json:"dailyExperimentData"`
+	TotalRuns             string     `json:"totalRuns"`
+	OpInstalls            string     `json:"operatorInstalls"`
+	CityData              [][]string `json:"geoCity"`
+	CountryData           [][]string `json:"geoCountry"`
+	DailyOperatorData     [][]string `json:"dailyOperatorData"`
+	DailyExperimentData   [][]string `json:"dailyExperimentData"`
+	MonthlyOperatorData   [][]string `json:"monthlyOperatorData"`
+	MonthlyExperimentData [][]string `json:"monthlyExperimentData"`
 }
 
 // GAResponseJSONObject is an instance of CommunityGAResponse struct
@@ -125,7 +128,8 @@ func getGraphData() error {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
 	GAResponseJSONObject.CityData = response.Rows
-	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(10000).Do()
+
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(999999999).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
@@ -134,7 +138,8 @@ func getGraphData() error {
 		dailyOperatorData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-" + val[0][6:]
 	}
 	GAResponseJSONObject.DailyOperatorData = dailyOperatorData
-	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(10000).Do()
+
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(999999999).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
@@ -143,5 +148,42 @@ func getGraphData() error {
 		dailyExperimentData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-" + val[0][6:]
 	}
 	GAResponseJSONObject.DailyExperimentData = dailyExperimentData
+
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(999999999).Do()
+	if err != nil {
+		return fmt.Errorf("Error while getting response, err: %s", err)
+	}
+	monthlyOperatorData := response.Rows
+	for i, val := range monthlyOperatorData {
+		if val[0][4:6] == "01" || val[0][4:6] == "03" || val[0][4:6] == "05" || val[0][4:6] == "07" || val[0][4:6] == "08" || val[0][4:6] == "10" || val[0][4:6] == "12" {
+			monthlyOperatorData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-31"
+		}
+		if val[0][4:6] == "04" || val[0][4:6] == "06" || val[0][4:6] == "09" || val[0][4:6] == "11" {
+			monthlyOperatorData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-30"
+		}
+		if val[0][4:6] == "02" {
+			monthlyOperatorData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-28"
+		}
+	}
+	GAResponseJSONObject.MonthlyOperatorData = monthlyOperatorData
+
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(999999999).Do()
+	if err != nil {
+		return fmt.Errorf("Error while getting response, err: %s", err)
+	}
+	monthlyExperimentData := response.Rows
+	for i, val := range monthlyExperimentData {
+		if val[0][4:6] == "01" || val[0][4:6] == "03" || val[0][4:6] == "05" || val[0][4:6] == "07" || val[0][4:6] == "08" || val[0][4:6] == "10" || val[0][4:6] == "12" {
+			monthlyExperimentData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-31"
+		}
+		if val[0][4:6] == "04" || val[0][4:6] == "06" || val[0][4:6] == "09" || val[0][4:6] == "11" {
+			monthlyExperimentData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-30"
+		}
+		if val[0][4:6] == "02" {
+			monthlyExperimentData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-28"
+		}
+	}
+	GAResponseJSONObject.MonthlyExperimentData = monthlyExperimentData
+
 	return nil
 }
