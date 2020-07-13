@@ -109,7 +109,7 @@ function AboutUs() {
 const community: CommunityItem[] = [
 	{
 		value: "Slack",
-		link: "https://app.slack.com/client/T09NY5SBT/CNXNB0ZTN",
+		link: "https://slack.litmuschaos.io",
 	},
 	{ value: "GitHub", link: "https://github.com/litmuschaos" },
 	{ value: "Twitter", link: "https://twitter.com/LitmusChaos" },
