@@ -109,7 +109,7 @@ func getTotalCounts() error {
 }
 
 //timeSeriesHelper is a helper function to add month-end dates to all monthly data
-func timeSeriesHelper(TimeData [][]string) (DailyOperatorData , error) {
+func timeSeriesHelper(TimeData [][]string) ([][]string , error) {
 	
 	for i, val := range TimeData {
 		if val[0][4:6] == "01" || val[0][4:6] == "03" || val[0][4:6] == "05" || val[0][4:6] == "07" || val[0][4:6] == "08" || val[0][4:6] == "10" || val[0][4:6] == "12" {
