@@ -13,13 +13,14 @@ import {
 import HomeIcon from "@material-ui/icons/HomeTwoTone";
 import Menu from "@material-ui/icons/MenuTwoTone";
 import ContributeIcon from "@material-ui/icons/ReceiptTwoTone";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../redux/actions";
 import * as VersionActions from "../../redux/actions/versions";
 import { history } from "../../redux/configureStore";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
+
 interface ListItemProps {
 	handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 	children: JSX.Element;
@@ -50,7 +51,13 @@ function Drawer() {
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
 		versionActions.toggleVersion(event.target.value as string);
 	};
-
+	useEffect(() => {
+		const script = document.createElement("script");
+		script.async = true;
+		script.src = "https://buttons.github.io/buttons.js";
+		//For head
+		document.head.appendChild(script);
+	}, []);
 	return (
 		<>
 			<FormControl className={classes.formControl}>
@@ -76,6 +83,18 @@ function Drawer() {
 				className={classes.logo}
 				onClick={() => history.push("/")}
 			/>
+			<div className={classes.stars}>
+				<a
+					className="github-button"
+					href="https://github.com/litmuschaos/litmus"
+					data-color-scheme="no-preference: dark; light: dark; dark: dark;"
+					data-icon="octicon-star"
+					aria-label="Star litmuschaos/litmus on GitHub"
+					data-size="large"
+				>
+					Star
+				</a>
+			</div>
 
 			<List className={classes.drawerList}>
 				<CustomisedListItem

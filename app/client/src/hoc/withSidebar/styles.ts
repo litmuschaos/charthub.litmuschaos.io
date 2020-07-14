@@ -92,4 +92,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: "85%",
 		cursor: "pointer",
 	},
+	stars: {
+		display: "block",
+		marginTop: theme.spacing(1),
+		marginLeft: "auto",
+		marginRight: "auto",
+		cursor: "pointer",
+	},
 }));
