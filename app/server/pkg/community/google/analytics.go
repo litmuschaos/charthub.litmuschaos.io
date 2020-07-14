@@ -194,25 +194,23 @@ func getGraphData() error {
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
-	monthlyOperatorData := response.Rows
 
-	monthlyOperatorDataCorrected, err := timeSeriesHelper(monthlyOperatorData)
+	formattedMonthlyOperatorData, err := timeSeriesHelper(response.Rows)
 	if err != nil {
 		return fmt.Errorf("Error while adding End date to month, err: %s", err)
 	}
-	GAResponseJSONObject.MonthlyOperatorData = monthlyOperatorDataCorrected
+	GAResponseJSONObject.MonthlyOperatorData = formattedMonthlyOperatorData
 
 	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
-	monthlyExperimentData := response.Rows
 
-	monthlyExperimentDataCorrected, err := timeSeriesHelper(monthlyExperimentData)
+	formattedMonthlyExperimentData, err := timeSeriesHelper(response.Rows)
 	if err != nil {
 		return fmt.Errorf("Error while adding End date to month, err: %s", err)
 	}
-	GAResponseJSONObject.MonthlyExperimentData = monthlyExperimentDataCorrected
+	GAResponseJSONObject.MonthlyExperimentData = formattedMonthlyExperimentData
 
 	return nil
 }
