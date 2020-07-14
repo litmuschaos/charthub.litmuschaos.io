@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"checkJs": false,
 		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"types": ["node"],
