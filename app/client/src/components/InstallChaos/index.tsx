@@ -70,7 +70,7 @@ export function InstallChaos(props: InstallProps) {
 	}
 
 	function showYamlInPage(text: string) {
-		if (viewing === false) {
+		if (!viewing) {
 			fetchYamlAndShowInPage(yamlLink);
 			setViewing(true);
 		} else {

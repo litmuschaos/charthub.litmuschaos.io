@@ -235,9 +235,9 @@ export default class AceEditori extends Component<
 
 	render() {
 		return (
-			<div className={this.props.classpass.editorbackgroundfull}>
+			<div className={this.props.classpass.editorBackgroundFull}>
 				<div>
-					<Typography className={this.props.classpass.statusheading}>
+					<Typography className={this.props.classpass.statusHeading}>
 						<strong>Status YAML: </strong>
 
 						<Typography
@@ -294,7 +294,7 @@ export default class AceEditori extends Component<
 						</Typography>
 					</Typography>
 					<Typography
-						className={this.props.classpass.statusdescription}
+						className={this.props.classpass.statusDescription}
 					>
 						{this.state.blank
 							? ""
@@ -324,7 +324,7 @@ export default class AceEditori extends Component<
 					<Grid
 						item
 						xs={12}
-						className={this.props.classpass.editorbuttons}
+						className={this.props.classpass.editorButtonGrid}
 					>
 						<Tooltip
 							title="Undo"
@@ -488,27 +488,25 @@ export default class AceEditori extends Component<
 					<Grid item xs={12}>
 						<Grid
 							container
-							className={this.props.classpass.editorcontainer}
+							className={this.props.classpass.editorContainer}
 						>
 							<Grid
 								item
 								xs={11}
-								className={this.props.classpass.editorgrid}
+								className={this.props.classpass.editorGrid}
 							>
 								<div
 									id="editor"
-									className={this.props.classpass.editorpos}
+									className={
+										this.props.classpass.editorPosition
+									}
 								>
 									{this.props.content}
 								</div>
 							</Grid>
 
 							<Grid item xs={1}>
-								<div
-									className={
-										this.props.classpass.fixedcontainer
-									}
-								>
+								<div>
 									<Tooltip
 										title="Full Screen (Press Escape to End)"
 										placement="bottom"

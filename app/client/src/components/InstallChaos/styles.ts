@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	done: {
 		color: theme.palette.success.dark,
 	},
-	statusheading: {
+	statusHeading: {
 		marginTop: -20,
 		fontFamily: "Ubuntu",
 		fontSize: 16,
@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		transform: "translate(-50%, -50%)",
 	},
 
-	statusdescription: {
+	statusDescription: {
 		width: 800,
 		marginTop: 15,
 		fontFamily: "Ubuntu",
@@ -57,7 +57,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginLeft: theme.spacing(2),
 	},
 
-	editorbackgroundfull: {
+	editorBackgroundFull: {
 		backgroundColor: "#282a36",
 		color: "#FFFFFF",
 	},
@@ -66,19 +66,19 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		backgroundColor: "#FFFFFF",
 	},
 
-	editorbuttons: {
+	editorButtonGrid: {
 		marginTop: theme.spacing(3),
 	},
 
-	editorcontainer: {
+	editorContainer: {
 		marginTop: theme.spacing(4),
 	},
-	editorgrid: {
+	editorGrid: {
 		overflow: "auto",
 		maxHeight: theme.spacing(58),
 	},
 
-	editorpos: {
+	editorPosition: {
 		marginBottom: theme.spacing(0),
 		overflow: "auto",
 		whiteSpace: "pre-wrap",
