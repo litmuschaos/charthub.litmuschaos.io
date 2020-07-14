@@ -7,7 +7,7 @@ import { useStyles } from "./styles";
 export function BackButton(props: { path: string }) {
 	const classes = useStyles();
 	return (
-		<div className={classes.ring}>
+		<div className={classes.ring} data-cy="BackButton">
 			<IconButton
 				className={classes.button}
 				onClick={() => history.push(props.path)}

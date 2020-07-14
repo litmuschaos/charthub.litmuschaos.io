@@ -31,6 +31,7 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/analytics"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/community"
 )
 
 // ChaosChartPath refers the location of the freshly updated repository
@@ -235,4 +236,18 @@ func GetGithubContributorData(w http.ResponseWriter, r *http.Request) {
 	}
 	writeHeaders(&w, responseStatusCode)
 	fmt.Fprint(w, string(response))
+}
+
+// GetCommunityAnalyticsData returns all the analytics data related to the community
+func GetCommunityAnalyticsData(w http.ResponseWriter, r *http.Request) {
+	data, err := community.GetAnalytics()
+	responseStatusCode := 200
+	if err != nil {
+		log.Error(err)
+		responseStatusCode = 500
+		fmt.Fprint(w, "unable to get community analytics data, err : "+err.Error())
+	}
+	writeHeaders(&w, responseStatusCode)
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	w.Write(data)
 }
