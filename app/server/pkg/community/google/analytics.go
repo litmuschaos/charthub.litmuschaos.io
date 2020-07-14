@@ -21,13 +21,16 @@ const (
 	filters      = "ga:eventCategory!=key1"
 )
 
+//CommunityGAResponse A struct for storing Analytics for Litmus Community
 type CommunityGAResponse struct {
-	TotalRuns           string     `json:"totalRuns"`
-	OpInstalls          string     `json:"operatorInstalls"`
-	CityData            [][]string `json:"geoCity"`
-	CountryData         [][]string `json:"geoCountry"`
-	DailyOperatorData   [][]string `json:"dailyOperatorData"`
-	DailyExperimentData [][]string `json:"dailyExperimentData"`
+	TotalRuns             string     `json:"totalRuns"`
+	OpInstalls            string     `json:"operatorInstalls"`
+	CityData              [][]string `json:"geoCity"`
+	CountryData           [][]string `json:"geoCountry"`
+	DailyOperatorData     [][]string `json:"dailyOperatorData"`
+	DailyExperimentData   [][]string `json:"dailyExperimentData"`
+	MonthlyOperatorData   [][]string `json:"monthlyOperatorData"`
+	MonthlyExperimentData [][]string `json:"monthlyExperimentData"`
 }
 
 // GAResponseJSONObject is an instance of CommunityGAResponse struct
@@ -105,6 +108,47 @@ func getTotalCounts() error {
 	return nil
 }
 
+//timeSeriesHelper is a helper function to add month-end dates to all monthly data
+func timeSeriesHelper(TimeData [][]string) ([][]string, error) {
+
+	for i, val := range TimeData {
+		if val[0][4:6] == "01" || val[0][4:6] == "03" || val[0][4:6] == "05" || val[0][4:6] == "07" || val[0][4:6] == "08" || val[0][4:6] == "10" || val[0][4:6] == "12" {
+			TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-31"
+		}
+		if val[0][4:6] == "04" || val[0][4:6] == "06" || val[0][4:6] == "09" || val[0][4:6] == "11" {
+			TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-30"
+		}
+		if val[0][4:6] == "02" {
+			year, err := strconv.Atoi(val[0][:4])
+			if err != nil {
+				return nil, fmt.Errorf("Error while converting year to integer, err: %s", err)
+			}
+			leapFlag := false
+			if year%4 == 0 {
+				if year%100 == 0 {
+					if year%400 == 0 {
+						leapFlag = true
+					} else {
+						leapFlag = false
+					}
+				} else {
+					leapFlag = true
+				}
+			} else {
+				leapFlag = false
+			}
+			if leapFlag == false {
+				TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-28"
+			} else {
+				TimeData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-29"
+			}
+		}
+	}
+
+	return TimeData, nil
+
+}
+
 // getGraphData will get the analytics data required for Geographic Plot and Time Series Plots.
 func getGraphData() error {
 	httpClient, err := getterJWTConfig()
@@ -125,6 +169,7 @@ func getGraphData() error {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
 	GAResponseJSONObject.CityData = response.Rows
+
 	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
@@ -134,6 +179,7 @@ func getGraphData() error {
 		dailyOperatorData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-" + val[0][6:]
 	}
 	GAResponseJSONObject.DailyOperatorData = dailyOperatorData
+
 	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:date").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(10000).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
@@ -143,5 +189,28 @@ func getGraphData() error {
 		dailyExperimentData[i][0] = val[0][:4] + "-" + val[0][4:6] + "-" + val[0][6:]
 	}
 	GAResponseJSONObject.DailyExperimentData = dailyExperimentData
+
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel==Chaos-Operator").MaxResults(10000).Do()
+	if err != nil {
+		return fmt.Errorf("Error while getting response, err: %s", err)
+	}
+
+	formattedMonthlyOperatorData, err := timeSeriesHelper(response.Rows)
+	if err != nil {
+		return fmt.Errorf("Error while adding End date to month, err: %s", err)
+	}
+	GAResponseJSONObject.MonthlyOperatorData = formattedMonthlyOperatorData
+
+	response, err = svc.Data.Ga.Get(viewID, startDate, endDate, "ga:totalEvents").Dimensions("ga:yearMonth").Filters(filters).Filters("ga:eventLabel!=Chaos-Operator").MaxResults(10000).Do()
+	if err != nil {
+		return fmt.Errorf("Error while getting response, err: %s", err)
+	}
+
+	formattedMonthlyExperimentData, err := timeSeriesHelper(response.Rows)
+	if err != nil {
+		return fmt.Errorf("Error while adding End date to month, err: %s", err)
+	}
+	GAResponseJSONObject.MonthlyExperimentData = formattedMonthlyExperimentData
+
 	return nil
 }
