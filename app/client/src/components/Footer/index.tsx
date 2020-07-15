@@ -152,7 +152,10 @@ export default function Footer(props: { showStat: boolean }) {
 	// contributors =
 	// 	contributors.length >= 5 ? contributors.slice(0, 5) : contributors;
 
-	const opInstalls = formatCount(analyticsData.chaosOperatorCount);
+	const opInstalls =
+		analyticsData.chaosOperatorCount != undefined
+			? analyticsData.chaosOperatorCount.toString()
+			: "0";
 	const githubStars = formatCount(githubData.star_count);
 	const expRuns = formatCount(analyticsData.totalExpRuns);
 	const expCount = formatCount(chartData.totalExpCount);
