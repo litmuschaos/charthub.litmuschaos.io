@@ -6,19 +6,17 @@ describe("Checking The Rechability Of Website", () => {
 	});
 });
 
-// describe("Testing the functionality of Footer Links", () => {
-//   it("Visiting And Checking Footer Links", () => {
-//     cy.visit("/");
-//     cy.get("[data-cy=Footer]")
-//       .get("a")
-//       .each(($div) => {
-//         let link = $div.attr("href");
-//         let linkName = $div.text();
-//         cy.log("Clicking on "+linkName+" link");
-//         cy.wrap($div).click();
-//       });
-//   });
-// });
+describe("Testing the functionality of Footer Links", () => {
+  it("Visiting And Checking Footer Links", () => {
+    cy.visit("/");
+    cy.get("[data-cy=Footer] a")
+      .each(($div) => {
+        let linkName = $div.text();
+        cy.log("Clicking on "+linkName+" link");
+        cy.wrap($div).click();
+      });
+  });
+});
 
 describe("Testing the SearchBar Functionality", () => {
 	it("Selecting the SearchBar", () => {
