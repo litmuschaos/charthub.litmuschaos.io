@@ -7,14 +7,17 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.text.secondary,
 		margin: "16px 0",
 	},
+
 	title: {
 		fontSize: 20,
 		fontWeight: "bold",
 		margin: "8px 0",
 	},
+
 	description: {
 		margin: "8px 0",
 	},
+
 	linkBox: {
 		backgroundColor: theme.palette.primary.main,
 		padding: 8,
@@ -23,6 +26,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		flexDirection: "row",
 		justifyContent: "space-between",
 	},
+
 	yamlLink: {
 		width: "90%",
 		whiteSpace: "pre-wrap",
@@ -31,7 +35,14 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			fontSize: 14,
 		},
 	},
+
 	done: {
 		color: theme.palette.success.dark,
+	},
+
+	modalEditor: {
+		width: 850,
+		marginLeft: "25%",
+		marginTop: "3%",
 	},
 }));

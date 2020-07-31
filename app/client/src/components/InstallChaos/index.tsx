@@ -1,23 +1,49 @@
-import { IconButton, Typography } from "@material-ui/core";
+import { Grid, IconButton, Modal, Typography } from "@material-ui/core";
 import Done from "@material-ui/icons/DoneAllTwoTone";
 import Copy from "@material-ui/icons/FileCopyTwoTone";
+import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
+import PageviewTwoToneIcon from "@material-ui/icons/PageviewTwoTone";
+import CloseTwoToneIcon from "@material-ui/icons/CloseTwoTone";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./styles";
+import YamlEditor from "../YamlEditor/Editor";
 
 interface InstallProps {
 	title: string;
 	description: string;
 	yamlLink: string;
-	engine: boolean;
 }
 
 export function InstallChaos(props: InstallProps) {
 	const classes = useStyles();
-	const { title, description, yamlLink, engine } = props;
+	const { title, description, yamlLink } = props;
 	const [copying, setCopying] = useState(false);
+	const [editing, setEditing] = useState(false);
+	const [viewing, setViewing] = useState(false);
 	const [yaml, setYaml] = useState(`kubectl apply -f ${yamlLink}`);
+	const [yamlText, setYamlText] = useState(``);
+	const [open, setOpen] = useState(false);
+	const [reload, setReload] = useState(false);
+
+	const handleClose = () => {
+		setOpen(false);
+		setReload(true);
+	};
 
 	function fetchYaml(yamlLink: string) {
+		fetch(yamlLink)
+			.then((data) => {
+				data.text().then((yamlText) => {
+					setYamlText(yamlText);
+					setOpen(true);
+				});
+			})
+			.catch((err) => {
+				console.error("Unable to fetch the yaml text" + err);
+			});
+	}
+
+	function fetchYamlAndShowInPage(yamlLink: string) {
 		fetch(yamlLink)
 			.then((data) => {
 				data.text().then((yamlText) => {
@@ -42,27 +68,93 @@ export function InstallChaos(props: InstallProps) {
 		setTimeout(() => setCopying(false), 3000);
 	}
 
+	function showYamlInPage(text: string) {
+		if (!viewing) {
+			fetchYamlAndShowInPage(yamlLink);
+			setViewing(true);
+		} else {
+			setYaml(`kubectl apply -f ${yamlLink}`);
+			setViewing(false);
+		}
+	}
+
+	function startEditing(text: string) {
+		setEditing(true);
+	}
+
 	useEffect(() => {
-		if (engine) fetchYaml(yamlLink);
-	}, []);
+		if (reload) {
+			setEditing(false);
+			setOpen(false);
+			setReload(false);
+		}
+		if (editing) fetchYaml(yamlLink);
+	}, [editing, reload, yamlLink]);
 
 	return (
 		<div className={classes.root}>
 			<div className={classes.title}>{title}</div>
 			<div className={classes.description}>{description}</div>
 			<div className={classes.linkBox}>
-				<Typography variant="subtitle1" className={classes.yamlLink}>
-					{yaml}
-				</Typography>
-				<div>
-					<IconButton onClick={() => copyTextToClipboard(yaml)}>
-						{!copying ? (
-							<Copy />
-						) : (
-							<Done className={classes.done} />
-						)}
-					</IconButton>
-				</div>
+				<Grid container>
+					<Grid item xs={11}>
+						<Typography
+							variant="subtitle1"
+							className={classes.yamlLink}
+						>
+							{yaml}
+						</Typography>
+					</Grid>
+					<Grid item xs={1}>
+						<Grid container>
+							<Grid item xs={12}>
+								<IconButton
+									onClick={() => copyTextToClipboard(yaml)}
+								>
+									{!copying ? (
+										<Copy />
+									) : (
+										<Done className={classes.done} />
+									)}
+								</IconButton>
+							</Grid>
+
+							<Grid item xs={12}>
+								<IconButton
+									onClick={() => showYamlInPage(yaml)}
+								>
+									{!viewing ? (
+										<PageviewTwoToneIcon />
+									) : (
+										<CloseTwoToneIcon />
+									)}
+								</IconButton>
+							</Grid>
+
+							<Grid item xs={12}>
+								<IconButton onClick={() => startEditing(yaml)}>
+									{!editing ? (
+										<EditTwoToneIcon />
+									) : (
+										<Modal
+											open={open}
+											onClose={handleClose}
+											aria-labelledby="simple-modal-title"
+											aria-describedby="simple-modal-description"
+											disableAutoFocus={true}
+											className={classes.modalEditor}
+										>
+											<YamlEditor
+												content={yamlText}
+												filename={yamlLink}
+											/>
+										</Modal>
+									)}
+								</IconButton>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
 			</div>
 		</div>
 	);
