@@ -157,7 +157,10 @@ export default function Footer(props: { showStat: boolean }) {
 			? analyticsData.chaosOperatorCount.toString()
 			: "0";
 	const githubStars = formatCount(githubData.star_count);
-	const expRuns = formatCount(analyticsData.totalExpRuns);
+	const expRuns =
+		analyticsData.totalExpRuns != undefined
+			? analyticsData.totalExpRuns.toString()
+			: "0";
 	const expCount = formatCount(chartData.totalExpCount);
 	//const opInstalls = formatCount(analyticsData.chaosOperatorCount)
 
