@@ -3,7 +3,6 @@ import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { useStyles } from "./App-styles";
 import { Loader } from "./components";
 import withTheme from "./hoc/themeHoc";
-import withSidebar from "./hoc/withSidebar";
 import { useActions } from "./redux/actions";
 import * as AnalyticsActions from "./redux/actions/analytics";
 import * as GithubActions from "./redux/actions/github";
@@ -39,8 +38,6 @@ function Routes() {
 	);
 }
 
-const AppBody = withSidebar(Routes);
-
 function App() {
 	const githubActions = useActions(GithubActions);
 	const analyticsActions = useActions(AnalyticsActions);
@@ -59,9 +56,8 @@ function App() {
 			<Router history={history}>
 				<div className={classes.root}>
 					<div className={classes.appFrame}>
-						{/* <Routes /> */}
 						<div className={classes.routeBody}>
-							<AppBody />
+							<Routes />
 						</div>
 					</div>
 				</div>

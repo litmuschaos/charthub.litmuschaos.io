@@ -9,17 +9,21 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 
 	title: {
-		fontSize: 20,
+		fontSize: 16,
+		marginBottom: 16,
 		fontWeight: "bold",
 		margin: "8px 0",
 	},
 
 	description: {
 		margin: "8px 0",
+		fontSize: 16,
+		marginBottom: 16,
 	},
 
 	linkBox: {
-		backgroundColor: theme.palette.primary.main,
+		backgroundColor: " rgba(0, 0, 0, 0.02)",
+		border: "1px solid  rgba(0, 0, 0, 0.05)",
 		padding: 8,
 		borderRadius: 8,
 		display: "flex",
@@ -30,7 +34,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	yamlLink: {
 		width: "90%",
 		whiteSpace: "pre-wrap",
-		padding: "16px 8px",
+		paddingTop: "16px",
+		paddingLeft: "20px",
+		fontSize: 16,
 		[theme.breakpoints.down("md")]: {
 			fontSize: 14,
 		},

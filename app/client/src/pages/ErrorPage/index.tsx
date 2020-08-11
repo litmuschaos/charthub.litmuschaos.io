@@ -28,7 +28,7 @@ function ErrorPage() {
 				/>
 			</div>
 			{/* Footer */}
-			<Footer showStat={true} />
+			<Footer />
 		</div>
 	);
 }

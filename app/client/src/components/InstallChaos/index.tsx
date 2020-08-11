@@ -1,12 +1,10 @@
-import { Grid, IconButton, Modal, Typography } from "@material-ui/core";
+import { Grid, IconButton, Typography } from "@material-ui/core";
 import Done from "@material-ui/icons/DoneAllTwoTone";
 import Copy from "@material-ui/icons/FileCopyTwoTone";
-import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import PageviewTwoToneIcon from "@material-ui/icons/PageviewTwoTone";
 import CloseTwoToneIcon from "@material-ui/icons/CloseTwoTone";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./styles";
-import YamlEditor from "../YamlEditor/Editor";
 
 interface InstallProps {
 	title: string;
@@ -24,11 +22,6 @@ export function InstallChaos(props: InstallProps) {
 	const [yamlText, setYamlText] = useState(``);
 	const [open, setOpen] = useState(false);
 	const [reload, setReload] = useState(false);
-
-	const handleClose = () => {
-		setOpen(false);
-		setReload(true);
-	};
 
 	function fetchYaml(yamlLink: string) {
 		fetch(yamlLink)
@@ -78,10 +71,6 @@ export function InstallChaos(props: InstallProps) {
 		}
 	}
 
-	function startEditing(text: string) {
-		setEditing(true);
-	}
-
 	useEffect(() => {
 		if (reload) {
 			setEditing(false);
@@ -127,28 +116,6 @@ export function InstallChaos(props: InstallProps) {
 										<PageviewTwoToneIcon />
 									) : (
 										<CloseTwoToneIcon />
-									)}
-								</IconButton>
-							</Grid>
-
-							<Grid item xs={12}>
-								<IconButton onClick={() => startEditing(yaml)}>
-									{!editing ? (
-										<EditTwoToneIcon />
-									) : (
-										<Modal
-											open={open}
-											onClose={handleClose}
-											aria-labelledby="simple-modal-title"
-											aria-describedby="simple-modal-description"
-											disableAutoFocus={true}
-											className={classes.modalEditor}
-										>
-											<YamlEditor
-												content={yamlText}
-												filename={yamlLink}
-											/>
-										</Modal>
 									)}
 								</IconButton>
 							</Grid>

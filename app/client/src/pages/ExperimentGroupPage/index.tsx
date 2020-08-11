@@ -4,10 +4,8 @@ import {
 	BackButton,
 	Charts,
 	CustomBreadCrumbs,
-	CustomButton,
 	ExperimentInfo,
 	SearchBar,
-	SortButton,
 	UsefulLinks,
 } from "../../components";
 import Footer from "../../components/Footer";
@@ -16,6 +14,7 @@ import { Experiment, ExperimentGroup } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { getExpRunCount } from "../../utils";
 import { useStyles } from "./styles";
+import MainHeader from "../../components/Header";
 
 function ExperimentsGroupPage(props: any) {
 	const classes = useStyles();
@@ -31,25 +30,6 @@ function ExperimentsGroupPage(props: any) {
 	const experiments: Experiment[] = chartGroup ? chartGroup.experiments : [];
 	const [displayExps, setDisplayExps] = React.useState(experiments);
 	const [searchToken, setsearchToken] = React.useState("");
-
-	const handleSort = () => {
-		let payload: Experiment[] = [
-			...displayExps,
-		].sort((c1: Experiment, c2: Experiment) =>
-			c1.name.localeCompare(c2.name)
-		);
-		try {
-			if (JSON.stringify(payload) === JSON.stringify(displayExps))
-				payload = [
-					...displayExps,
-				].sort((c1: Experiment, c2: Experiment) =>
-					c2.name.localeCompare(c1.name)
-				);
-		} catch {
-			console.error("Error Sorting Charts");
-		}
-		setDisplayExps(payload);
-	};
 
 	const handleSearch = (event: React.ChangeEvent<{ value: unknown }>) => {
 		let search: string = event.target.value as string;
@@ -71,6 +51,7 @@ function ExperimentsGroupPage(props: any) {
 	} else
 		return (
 			<div className={classes.rootContainer}>
+				<MainHeader />
 				<div className={classes.root}>
 					{/* BreadCrumbs + SearchBar */}
 					<div className={classes.header}>
@@ -108,8 +89,6 @@ function ExperimentsGroupPage(props: any) {
 							</div>
 							{chartGroup.experiments.length !== 0 ? (
 								<>
-									{/* Sort Button */}
-									<SortButton handleClick={handleSort} />
 									{/* Card component */}
 									<Charts
 										experiments={displayExps}
@@ -124,16 +103,6 @@ function ExperimentsGroupPage(props: any) {
 						</div>
 						{/* Install Experiments CTA + Usefull Links */}
 						<div className={classes.info}>
-							<div className={classes.installCTA}>
-								<CustomButton
-									handleClick={() =>
-										history.push(
-											`${match.url}/install-all-experiments`
-										)
-									}
-									label="Install All Experiments"
-								/>
-							</div>
 							<UsefulLinks
 								links={chartGroup.links}
 								maintainers={chartGroup.maintainers}
@@ -142,7 +111,7 @@ function ExperimentsGroupPage(props: any) {
 					</div>
 				</div>
 				{/* Footer */}
-				<Footer showStat={false} />
+				<Footer />
 			</div>
 		);
 }

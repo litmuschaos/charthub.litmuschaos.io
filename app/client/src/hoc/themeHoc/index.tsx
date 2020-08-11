@@ -52,11 +52,15 @@ function customTheme(options: ThemeOptions) {
 				default: "rgb(255, 255, 255)",
 			},
 			text: {
-				primary: "rgba(20, 47, 72, 0.72)",
-				secondary: "rgba(20, 47, 72, 0.88)",
-				disabled: "rgba(20, 47, 72, 0.54)",
+				primary: "#5B44BA",
+				secondary: "#042A2B",
+				disabled: "rgba(4, 42, 43, 0.6)",
 				hint: "rgba(20, 47, 72, 0.54)",
 			},
+		},
+		typography: {
+			fontSize: 12,
+			fontFamily: "Ubuntu",
 		},
 		...options,
 	});

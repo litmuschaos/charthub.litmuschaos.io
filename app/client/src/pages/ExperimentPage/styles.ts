@@ -5,26 +5,17 @@ export const useStyles = makeStyles((theme) => ({
 		height: "100vh",
 		display: "flex",
 		flexDirection: "column",
-		justifyContent: "space-between",
 	},
 	root: {
-		padding: 16,
 		fontSize: 18,
 	},
-	breadCrumbs: {
-		marginTop: 16,
-		marginLeft: 0,
-		marginBottom: 32,
-		[theme.breakpoints.up("md")]: {
-			marginLeft: 64,
-		},
-	},
-	body: {
+	mainDiv: {
+		backgroundImage:
+			"linear-gradient(82.18deg, #5B44BA -6.24%, #858CDD 142.26%)",
+		height: 500,
+		flexGrow: 1,
 		display: "flex",
-		flexDirection: "row",
-		[theme.breakpoints.down("sm")]: {
-			flexDirection: "column",
-		},
+		flexDirection: "column",
 	},
 	content: {
 		width: "60%",
@@ -39,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	contentHead: {
 		display: "flex",
-		flexDirection: "row",
+		flexDirection: "column",
 	},
 	info: {
 		margin: "0 auto",
@@ -47,7 +38,9 @@ export const useStyles = makeStyles((theme) => ({
 	note: {
 		marginTop: 32,
 		fontWeight: "bold",
-		color: theme.palette.warning.dark,
+		fontSize: 16,
+		marginBottom: 16,
+		color: theme.palette.common.black,
 		margin: 0,
 	},
 	installLinks: {
@@ -55,5 +48,29 @@ export const useStyles = makeStyles((theme) => ({
 		[theme.breakpoints.down("md")]: {
 			width: "100%",
 		},
+	},
+	headerDiv: {
+		marginLeft: 130,
+		marginTop: 30,
+	},
+	expInfoDiv: {
+		paddingLeft: 20,
+		paddingRight: 20,
+	},
+	expMain: {
+		marginLeft: 10,
+	},
+	detailDiv: {
+		marginTop: "-5%",
+		marginLeft: "8.55%",
+		marginRight: "8.55%",
+		backgroundColor: "#FFFFFF",
+		border: "1px solid rgba(0, 0, 0, 0.05)",
+		borderRadius: "3px",
+		padding: "50px 50px 50px 50px",
+	},
+	horizontalLine: {
+		marginTop: 40,
+		borderLeft: "1px solid rgba(0, 0, 0, 0.2)",
 	},
 }));

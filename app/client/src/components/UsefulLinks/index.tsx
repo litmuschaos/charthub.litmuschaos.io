@@ -25,9 +25,6 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginRight: 10 }}>
-						<MaintainerIcon />
-					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						Maintainers
 					</Typography>
@@ -55,9 +52,6 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginRight: 10 }}>
-						<LinkIcon />
-					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						{header}
 					</Typography>
@@ -89,9 +83,6 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginRight: 10 }}>
-						<MaturityIcon />
-					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						{header}
 					</Typography>
@@ -114,9 +105,6 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginRight: 10 }}>
-						<PlatformIcon />
-					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						{header}
 					</Typography>
