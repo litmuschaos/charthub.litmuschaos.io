@@ -1,28 +1,65 @@
 import { Typography, Hidden } from "@material-ui/core";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ChartGroups, SearchBar } from "../../components";
+import { SearchBar, Charts } from "../../components";
 import Footer from "../../components/Footer";
-import { useActions } from "../../redux/actions";
-import * as ChartActions from "../../redux/actions/charts";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
 import MainHeader from "../../components/Header";
 import Stat from "../../components/Stats";
+import { Experiment, ExperimentGroup } from "../../redux/model";
+import { getExpRunCount } from "../../utils";
+
 function HomePage() {
 	const classes = useStyles();
-	const [searchToken, setsearchToken] = useState("");
-	const chartData = useSelector((state: RootState) => state.chartData);
-	const chartActions = useActions(ChartActions);
+	const { analyticsData, chartData } = useSelector(
+		(state: RootState) => state
+	);
+
+	const [experiments, setExperiments] = React.useState<Experiment[]>([]);
+	const [displayExps, setDisplayExps] = React.useState<Experiment[]>([]);
+	const [searchToken, setsearchToken] = React.useState("");
 
 	useEffect(() => {
-		chartActions.searchCharts("");
-	}, []);
+		const exps: Experiment[] = [];
+		chartData.allExperimentGroups.forEach((expg: ExperimentGroup) => {
+			expg.experiments.forEach((exp: Experiment) => {
+				exp.expGroup = expg.metadataName;
+				exp.totalRuns = getExpRunCount(exp, analyticsData.expAnalytics);
+				exps.push(exp);
+			});
+		});
+		exps.sort((c1: Experiment, c2: Experiment) => {
+			if (c1.totalRuns !== undefined && c2.totalRuns !== undefined)
+				return c2.totalRuns - c1.totalRuns;
+			return 0;
+		});
+		setExperiments(exps);
+		setDisplayExps(exps);
+	}, [chartData.allExperimentGroups, analyticsData.expAnalytics]);
 
-	const handleSearch = (event: React.ChangeEvent<{ value: unknown }>) => {
-		setsearchToken(event.target.value as string);
-		chartActions.searchCharts(event.target.value as string);
+	const handleSearch = (
+		event: React.ChangeEvent<{ value: unknown }> | undefined,
+		token: string | undefined
+	) => {
+		let search: string =
+			event !== undefined ? (event.target.value as string) : token || "";
+		setsearchToken(search);
+		const tokens: string[] = search
+			.toLowerCase()
+			.split(" ")
+			.filter((s) => s !== "");
+		const payload: Experiment[] = experiments.filter((exp: Experiment) => {
+			return tokens.every(
+				(s: string) =>
+					exp.name.toLowerCase().includes(s) ||
+					(exp.expGroup !== undefined
+						? exp.expGroup.toLowerCase().includes(s)
+						: false)
+			);
+		});
+		setDisplayExps(payload);
 	};
 
 	return (
@@ -62,8 +99,9 @@ function HomePage() {
 					</div>
 				</div>
 				<div className={classes.chartsDiv}>
-					<ChartGroups
-						experimentGroups={chartData.displayExperimentGroups}
+					<Charts
+						experiments={displayExps}
+						handleSearch={(token) => handleSearch(undefined, token)}
 					/>
 				</div>
 			</div>

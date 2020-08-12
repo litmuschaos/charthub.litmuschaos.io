@@ -1,7 +1,5 @@
 export * from "./BackButton";
-export * from "./ChartGroups";
 export * from "./Charts";
-export * from "./CustomBreadCrumbs";
 export * from "./CustomCard";
 export * from "./ExperimentInfo";
 export * from "./Footer";

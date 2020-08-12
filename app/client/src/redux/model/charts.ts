@@ -14,6 +14,8 @@ export interface Experiment {
 	category?: string;
 	createdAt?: string;
 	supportLink?: string;
+	expGroup?: string;
+	totalRuns?: number;
 	description: string;
 	maturity: string;
 	maintainers: Maintainer[];

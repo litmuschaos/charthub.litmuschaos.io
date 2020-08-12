@@ -10,7 +10,6 @@ import * as VersionActions from "./redux/actions/versions";
 import { history } from "./redux/configureStore";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
-const ExperimentGroupPage = lazy(() => import("./pages/ExperimentGroupPage"));
 const ExperimentPage = lazy(() => import("./pages/ExperimentPage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
@@ -22,11 +21,6 @@ function Routes() {
 			<Switch>
 				<Route exact={true} path="/" component={HomePage} />
 				<Route exact={true} path="/404" component={ErrorPage} />
-				<Route
-					exact={true}
-					path="/:chartGroupId"
-					component={ExperimentGroupPage}
-				/>
 				<Route
 					exact={true}
 					path="/:chartGroupId/:chartId"

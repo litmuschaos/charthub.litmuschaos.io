@@ -1,4 +1,4 @@
-import { IconButton, Tooltip, Zoom } from "@material-ui/core";
+import { IconButton, Tooltip, Zoom, Link } from "@material-ui/core";
 import InfraIcon from "@material-ui/icons/NewReleasesTwoTone";
 import React from "react";
 import { formatCount } from "../../utils";
@@ -8,8 +8,10 @@ import { useStyles } from "./styles";
 function CardContent(props: CardProps) {
 	const {
 		title,
+		expGrp,
 		urlToIcon,
 		handleClick,
+		handleExpGrpClick,
 		experimentCount,
 		provider,
 		description,
@@ -57,7 +59,20 @@ function CardContent(props: CardProps) {
 					<div className={classes.noImage}>Image</div>
 				)}
 				<div className={classes.cardInfo}>
-					<div className={classes.title}>{title}</div>
+					<div className={classes.title}>
+						<Link
+							href="#"
+							onClick={(e: any) => {
+								e.preventDefault();
+								e.stopPropagation();
+								handleExpGrpClick(expGrp);
+							}}
+							color="inherit"
+						>
+							{expGrp}
+						</Link>
+						/{title}
+					</div>
 					<div className={classes.provider}>
 						Contributed by {provider}
 					</div>

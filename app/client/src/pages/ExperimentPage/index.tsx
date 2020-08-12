@@ -83,11 +83,7 @@ function ExperimentPage(props: any) {
 						<div className={classes.contentHead}>
 							<div className={classes.headerDiv}>
 								{/* Back Button */}
-								<BackButton
-									path={path
-										.slice(0, path.length - 1)
-										.join("/")}
-								/>
+								<BackButton path="/" />
 								{/* Exp title + Exp run counts + description*/}
 								<div className={classes.expMain}>
 									<ExperimentHeader
