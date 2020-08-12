@@ -13,15 +13,13 @@ function DeveloperGuide(props: DeveloperGuideProps) {
 	const handleClose = () => {
 		setDisplay(false);
 	};
-	const [docs, setDocs] = React.useState<string | undefined>("");
-	React.useEffect(() => {
-		if (props.links.length > 1) {
-			return props.links[1].url !== undefined
-				? setDocs(props.links[1].url)
-				: setDocs("https://docs.litmuschaos.io/docs/getstarted/");
+	let docs = "https://docs.litmuschaos.io/docs/getstarted/";
+	for (let i = 0; i < props.links.length; ++i)
+		if (props.links[i].name.toLowerCase() === "documentation") {
+			docs = props.links[i].url;
+			break;
 		}
-		return setDocs("https://docs.litmuschaos.io/docs/getstarted/");
-	});
+
 	const classes = useStyles();
 	return (
 		<>
@@ -38,7 +36,11 @@ function DeveloperGuide(props: DeveloperGuideProps) {
 							</Typography>
 							<div style={{ display: "block", paddingTop: 25 }}>
 								<img src="/icons/guide.png" />
-								<a href={docs} className={classes.guideLink}>
+								<a
+									href={docs}
+									className={classes.guideLink}
+									target="_"
+								>
 									Developer's guide
 								</a>
 							</div>

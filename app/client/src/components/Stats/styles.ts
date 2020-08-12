@@ -13,11 +13,13 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		paddingLeft: 20,
 		textAlign: "center",
 		borderRadius: "4.8382px",
+		minWidth: "20%",
+		maxWidth: "fit-content",
 		[theme.breakpoints.down("sm")]: {
-			width: "45%",
+			minWidth: "45%",
 		},
 		[theme.breakpoints.down("xs")]: {
-			width: "44.5%",
+			minWidth: "44.5%",
 		},
 	},
 	stat: {
