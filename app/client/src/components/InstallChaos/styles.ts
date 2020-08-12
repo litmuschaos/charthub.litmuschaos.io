@@ -39,6 +39,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		fontSize: 16,
 		[theme.breakpoints.down("md")]: {
 			fontSize: 14,
+			paddingLeft: "0px",
 		},
 	},
 

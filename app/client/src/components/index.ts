@@ -9,3 +9,4 @@ export * from "./SearchBar";
 export * from "./UsefulLinks";
 export * from "./Stats";
 export * from "./ExperimentHeader";
+export * from "./DeveloperGuide";

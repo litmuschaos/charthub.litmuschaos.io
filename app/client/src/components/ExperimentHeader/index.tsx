@@ -15,18 +15,20 @@ export function ExperimentHeader(props: ExpInfoProps) {
 	const desc = description?.split(".").slice(0, 1);
 	return (
 		<div className={classes.root}>
-			<div style={{ display: "flex", flexDirection: "row" }}>
+			<div className={classes.expDiv}>
 				<img src={urlToIcon} className={classes.expImg} />
-				<div className={classes.titleDiv}>
-					<div className={classes.expHeader}>{title}</div>
-					<div className={classes.expDesc}>
-						<Typography>{desc}.</Typography>
+				<div className={classes.expDiv1}>
+					<div className={classes.titleDiv}>
+						<div className={classes.expHeader}>{title}</div>
+						<div className={classes.expDesc}>
+							<Typography>{desc}.</Typography>
+						</div>
 					</div>
-				</div>
-				<div>
-					<Typography className={classes.expInfo}>
-						{runCount} runs
-					</Typography>
+					<div>
+						<Typography className={classes.expInfo}>
+							{runCount} runs
+						</Typography>
+					</div>
 				</div>
 			</div>
 		</div>

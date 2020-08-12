@@ -1,9 +1,9 @@
 import { IconButton, Tooltip, Zoom, Link } from "@material-ui/core";
-import InfraIcon from "@material-ui/icons/NewReleasesTwoTone";
 import React from "react";
 import { formatCount } from "../../utils";
 import { CardProps } from "./model";
 import { useStyles } from "./styles";
+import InfoIcon from "@material-ui/icons/Info";
 
 function CardContent(props: CardProps) {
 	const {
@@ -13,7 +13,6 @@ function CardContent(props: CardProps) {
 		handleClick,
 		handleExpGrpClick,
 		experimentCount,
-		provider,
 		description,
 		totalRuns,
 		chaosType,
@@ -31,16 +30,16 @@ function CardContent(props: CardProps) {
 					</span>
 				) : chaosType ? (
 					<Tooltip
-						TransitionComponent={Zoom}
 						TransitionProps={{ timeout: 400 }}
 						title={
 							chartType === "generic"
 								? "Infra-Chaos :- Multiple applications might be impacted"
 								: "Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted"
 						}
+						placement="bottom-start"
 					>
 						<IconButton className={classes.button}>
-							<InfraIcon fontSize="small" />
+							<InfoIcon className={classes.infoIcon} />
 						</IconButton>
 					</Tooltip>
 				) : (
@@ -67,14 +66,11 @@ function CardContent(props: CardProps) {
 								e.stopPropagation();
 								handleExpGrpClick(expGrp);
 							}}
-							color="inherit"
+							style={{ color: "#5B44BA", fontWeight: 500 }}
 						>
-							{expGrp}
+							{expGrp}/
 						</Link>
-						/{title}
-					</div>
-					<div className={classes.provider}>
-						Contributed by {provider}
+						{title}
 					</div>
 				</div>
 				{description ? (

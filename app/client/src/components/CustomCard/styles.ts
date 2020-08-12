@@ -3,20 +3,24 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
 	card: {
 		width: "95%",
-		background: theme.palette.background.paper,
-		boxShadow: theme.shadows[4],
-		borderRadius: 8,
+		background: theme.palette.common.white,
+		borderRadius: 3,
 		overflow: "hidden",
-		fontSize: 14,
+		fontSize: 16,
 		marginTop: theme.spacing(2),
 		marginBottom: theme.spacing(2),
 		display: "flex",
 		flexDirection: "column",
 		flexWrap: "wrap",
 		textAlign: "center",
+		border: "2px solid #ECECEC",
+		"&:hover": {
+			border: "2px solid #5B44BA",
+		},
 		cursor: "pointer",
+
 		// Above tablet size
-		[theme.breakpoints.up("md")]: {
+		[theme.breakpoints.up("sm")]: {
 			width: 250,
 			margin: theme.spacing(2),
 		},
@@ -25,7 +29,6 @@ export const useStyles = makeStyles((theme) => ({
 	cardMedia: {
 		width: "100%",
 		height: 100,
-		backgroundColor: theme.palette.primary.dark,
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "center",
@@ -40,12 +43,12 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	cardBody: {
 		// Below mobile size
-		[theme.breakpoints.down("sm")]: {
-			display: "flex",
-			flexDirection: "row",
-			justifyContent: "start",
-			padding: 8,
-		},
+		// [theme.breakpoints.down("sm")]: {
+		// 	display: "flex",
+		// 	flexDirection: "row",
+		// 	justifyContent: "start",
+		// 	padding: 8,
+		// },
 	},
 	cardInfo: {
 		[theme.breakpoints.down("sm")]: {
@@ -53,10 +56,11 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	title: {
-		fontWeight: 600,
 		fontSize: 18,
-		color: theme.palette.primary.contrastText,
+		color: theme.palette.common.black,
 		margin: "12px 0",
+		display: "flex",
+		flexDirection: "column",
 		[theme.breakpoints.down("sm")]: {
 			margin: 0,
 		},
@@ -98,11 +102,14 @@ export const useStyles = makeStyles((theme) => ({
 		color: theme.palette.warning.dark,
 	},
 	totalRuns: {
-		backgroundColor: theme.palette.secondary.main,
-		color: theme.palette.secondary.contrastText,
-		borderRadius: 9,
+		backgroundColor: theme.palette.secondary.light,
+		color: theme.palette.common.white,
+		borderRadius: 4,
 		padding: "3px 6px",
 		fontWeight: 500,
 		fontSize: 14,
+	},
+	infoIcon: {
+		color: theme.palette.error.dark,
 	},
 }));

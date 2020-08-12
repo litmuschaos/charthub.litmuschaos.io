@@ -16,6 +16,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		[theme.breakpoints.down("sm")]: {
 			width: "45%",
 		},
+		[theme.breakpoints.down("xs")]: {
+			width: "44.5%",
+		},
 	},
 	stat: {
 		color: theme.palette.common.white,

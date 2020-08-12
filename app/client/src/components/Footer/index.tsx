@@ -144,7 +144,7 @@ const adoptors: CommunityItem[] = [
 			"https://github.com/litmuschaos/litmus/blob/master/adopters/AppAnywhere.md",
 	},
 	{
-		value: "Open EBS",
+		value: "OpenEBS",
 		link:
 			"https://github.com/litmuschaos/litmus/blob/master/adopters/openebs.md",
 	},

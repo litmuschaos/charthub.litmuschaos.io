@@ -14,6 +14,7 @@ import { RootState } from "../../redux/reducers";
 import { getExpRunCount } from "../../utils";
 import { useStyles } from "./styles";
 import MainHeader from "../../components/Header";
+import DeveloperGuide from "../../components/DeveloperGuide";
 
 const getIconUrl = (path: any) => {
 	let baseURL: string = "";
@@ -96,57 +97,62 @@ function ExperimentPage(props: any) {
 							</div>
 						</div>
 					</div>
-					<div className={classes.detailDiv}>
-						<div style={{ display: "flex", flexDirection: "row" }}>
-							<div className={classes.expInfoDiv}>
-								<ExperimentInfo
-									description={chart.description}
-									videoURL={videoURL}
-								/>
+					<div className={classes.detailDiv1}>
+						<DeveloperGuide links={chart.links} />
+						<div className={classes.detailDiv}>
+							<div className={classes.expInfo}>
+								<div className={classes.expInfoDiv}>
+									<ExperimentInfo
+										description={chart.description}
+										videoURL={videoURL}
+									/>
+								</div>
+								<div className={classes.info}>
+									<UsefulLinks
+										links={chart.links}
+										maintainers={chart.maintainers}
+										platforms={chart.platforms}
+										maturity={chart.maturity}
+									/>
+								</div>
 							</div>
-							<div className={classes.info}>
-								<UsefulLinks
-									links={chart.links}
-									maintainers={chart.maintainers}
-									platforms={chart.platforms}
-									maturity={chart.maturity}
-								/>
-							</div>
-						</div>
-						<hr className={classes.horizontalLine} />
-						<div>
-							<div className={classes.note}>PRE-REQUISITE:</div>
+							<hr className={classes.horizontalLine} />
 							<div>
-								<a
-									href="https://docs.litmuschaos.io/docs/getstarted/"
-									target="_"
-								>
-									Install Litmus Operator
-								</a>
-								: a tool for injecting Chaos Experiments
+								<div className={classes.note}>
+									PRE-REQUISITE:
+								</div>
+								<div>
+									<a
+										href="https://docs.litmuschaos.io/docs/getstarted/"
+										target="_"
+									>
+										Install Litmus Operator
+									</a>
+									: a tool for injecting Chaos Experiments
+								</div>
 							</div>
-						</div>
-						<hr className={classes.horizontalLine} />
-						<div className={classes.installLinks}>
-							<InstallChaos
-								title="Install this Chaos Expermiment"
-								description="You can install the Chaos Experiment using the following command"
-								yamlLink={hubUrl}
-							/>
-							{rbacUrl && (
+							<hr className={classes.horizontalLine} />
+							<div className={classes.installLinks}>
 								<InstallChaos
-									title="Setup Service Account (RBAC)"
-									description="Create a service account using the following command"
-									yamlLink={rbacUrl}
+									title="Install this Chaos Expermiment"
+									description="You can install the Chaos Experiment using the following command"
+									yamlLink={hubUrl}
 								/>
-							)}
-							{engineUrl && (
-								<InstallChaos
-									title="Sample Chaos Engine"
-									description="Copy and edit this sample Chaos Engine yaml according to your application needs"
-									yamlLink={engineUrl}
-								/>
-							)}
+								{rbacUrl && (
+									<InstallChaos
+										title="Setup Service Account (RBAC)"
+										description="Create a service account using the following command"
+										yamlLink={rbacUrl}
+									/>
+								)}
+								{engineUrl && (
+									<InstallChaos
+										title="Sample Chaos Engine"
+										description="Copy and edit this sample Chaos Engine yaml according to your application needs"
+										yamlLink={engineUrl}
+									/>
+								)}
+							</div>
 						</div>
 					</div>
 				</div>

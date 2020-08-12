@@ -13,12 +13,12 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		fontSize: 18,
 		marginBottom: 9,
 		fontWeight: "bold",
-		color: theme.palette.primary.contrastText,
+		color: theme.palette.common.black,
 	},
 	linkType: {
 		fontSize: 14,
 		marginBottom: 10,
-		color: theme.palette.secondary.light,
+		color: theme.palette.text.primary,
 	},
 	linkListBox: {
 		display: "flex",
@@ -36,6 +36,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		borderRadius: 10,
 		borderLeft: "1px solid rgba(0, 0, 0, 0.2)",
 		paddingBottom: 20,
+		[theme.breakpoints.down("xs")]: {
+			padding: 10,
+			borderLeft: "none",
+			borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+		},
 	},
 	maintainerField: {
 		borderRadius: 10,
@@ -43,7 +48,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	maintainerlinkName: {
 		fontSize: 14,
 		marginBottom: 7,
-		color: theme.palette.text.secondary,
+		color: theme.palette.text.primary,
 	},
 	maintainerlinkEmail: {
 		fontSize: 14,

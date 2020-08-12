@@ -42,10 +42,15 @@ function customTheme(options: ThemeOptions) {
 				contrastText: "rgba(20, 47, 72, 0.95)",
 			},
 			secondary: {
-				light: "rgb(10, 55, 171)",
+				light: "#858CDD",
 				main: "rgb(54, 220, 200)",
 				dark: "rgba(20, 47, 72, 0.88)",
 				contrastText: "rgb(10, 55, 171)",
+			},
+			error: {
+				light: "rgba(255, 0, 0, 0.1)",
+				main: "#BA3B34",
+				dark: "#CA2C2C",
 			},
 			background: {
 				paper: "rgba(225, 226, 238)",
@@ -66,7 +71,19 @@ function customTheme(options: ThemeOptions) {
 	});
 }
 
-const theme = customTheme({});
+const theme = customTheme({
+	overrides: {
+		MuiTooltip: {
+			tooltip: {
+				backgroundColor: "#000000",
+				color: "#FFFFFF",
+				width: 200,
+				fontSize: 12,
+				borderRadius: 2,
+			},
+		},
+	},
+});
 
 export default function withTheme(Component: any) {
 	function WithTheme(props: object) {

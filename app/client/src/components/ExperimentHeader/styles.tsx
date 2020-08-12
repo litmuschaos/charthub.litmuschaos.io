@@ -8,6 +8,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.text.secondary,
 		fontSize: 18,
 		marginTop: 40,
+		[theme.breakpoints.down("sm")]: {
+			marginTop: 12,
+		},
 	},
 	expHeader: {
 		fontWeight: "bold",
@@ -33,11 +36,27 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		height: 100,
 		borderRadius: 10,
 	},
+	expDiv: {
+		display: "flex",
+		flexDirection: "row",
+		[theme.breakpoints.down("sm")]: {
+			display: "flex",
+			flexDirection: "column",
+		},
+	},
+	expDiv1: {
+		display: "flex",
+		flexDirection: "row",
+	},
 	titleDiv: {
 		display: "flex",
 		flexDirection: "column",
 		marginLeft: 20,
 		marginTop: 10,
 		width: 350,
+		[theme.breakpoints.down("sm")]: {
+			marginTop: 0,
+			marginLeft: 0,
+		},
 	},
 }));

@@ -34,9 +34,6 @@ export function UsefulLinks(props: UsefulLinks) {
 						<Typography className={classes.maintainerlinkName}>
 							{m.name}
 						</Typography>
-						<Typography className={classes.maintainerlinkEmail}>
-							{m.email}
-						</Typography>
 					</div>
 				))}
 			</div>
