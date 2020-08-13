@@ -131,7 +131,6 @@ export default function MainHeader() {
 								<img src="/icons/menu.svg" alt="menu" />
 							</IconButton>
 							<Menu
-								id="fade-menu"
 								anchorEl={anchorEl}
 								keepMounted
 								open={open}

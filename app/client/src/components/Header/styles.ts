@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: 40,
 		backgroundColor: "rgba(0, 0, 0, 0.1)",
 		borderRadius: 3,
+		"&:hover": {
+			background: "rgba(0, 0, 0, 0.1)",
+		},
 	},
 	starsText: {
 		color: "#FFFFFF",
@@ -101,6 +104,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		color: "#FFFFFF",
 		margin: "auto",
 		textTransform: "none",
+		"&:hover": {
+			backgroundColor: "#5B44BA",
+		},
 	},
 	handleStar: {
 		borderRadius: 4,
