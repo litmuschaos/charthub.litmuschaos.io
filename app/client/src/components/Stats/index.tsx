@@ -20,12 +20,18 @@ function Stat() {
 		analyticsData.chaosOperatorCount != undefined
 			? analyticsData.chaosOperatorCount.toString()
 			: "0";
-	const githubStars = formatCount(githubData.star_count);
+	const githubStars =
+		githubData.star_count != undefined
+			? githubData.star_count.toString()
+			: "0";
 	const expRuns =
 		analyticsData.totalExpRuns != undefined
 			? analyticsData.totalExpRuns.toString()
 			: "0";
-	const expCount = formatCount(chartData.totalExpCount);
+	const expCount =
+		chartData.totalExpCount != undefined
+			? chartData.totalExpCount.toString()
+			: "0";
 	// const opInstalls = formatCount(analyticsData.chaosOperatorCount);
 
 	const stat: StatItem[] = [

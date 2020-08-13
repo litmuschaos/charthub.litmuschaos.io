@@ -125,6 +125,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 		paddingLeft: 10,
 		paddingBottom: 5,
 	},
+	menuItem: {
+		outline: "none",
+		"&:hover": {
+			outline: "none",
+		},
+		"&:focus": {
+			outline: "none",
+		},
+	},
 }));
 
 export default useStyles;
