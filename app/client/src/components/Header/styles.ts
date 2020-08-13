@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 		borderBottom: "1px solid rgba(255,255,255,0.2)",
 	},
 	mainLogo: {
+		width: 102,
+		height: 40,
 		marginLeft: 110,
 		marginRight: 30,
 		[theme.breakpoints.down("sm")]: {
@@ -49,10 +51,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 	select: {
 		"& ul": {
-			backgroundColor: "#FFFFFF",
+			backgroundColor: theme.palette.common.white,
 		},
 		"& li": {
-			color: "#000000",
+			color: theme.palette.common.black,
 			fontSize: 14,
 		},
 	},
@@ -74,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		},
 	},
 	starsText: {
-		color: "#FFFFFF",
+		color: theme.palette.common.white,
 		paddingLeft: 10,
 	},
 	contributeBtn: {
@@ -85,23 +87,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 		cursor: "pointer",
 	},
 	headerFont: {
-		color: "#FFFFFF",
+		color: theme.palette.common.white,
 		marginLeft: 20,
 		marginTop: 12.5,
 	},
 	getStartedBtn: {
 		width: 116,
 		height: 46,
-		color: "#FFFFFF",
+		color: theme.palette.common.white,
 		marginLeft: 20,
-		borderColor: "#FFFFFF",
+		borderColor: theme.palette.common.white,
 	},
 	getStarted: {
 		backgroundColor: "#5B44BA",
 		borderRadius: 4,
 		width: 230,
 		height: 51,
-		color: "#FFFFFF",
+		color: theme.palette.common.white,
 		margin: "auto",
 		textTransform: "none",
 		"&:hover": {
@@ -114,7 +116,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: 51,
 		margin: "auto",
 		textTransform: "none",
-		color: "#000000",
+		color: theme.palette.common.black,
 		border: "2px solid #000000",
 	},
 	backdrop: {
@@ -133,6 +135,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 		"&:focus": {
 			outline: "none",
 		},
+	},
+	menuItemClose: {
+		outline: "none",
+		"&:hover": {
+			outline: "none",
+		},
+		"&:focus": {
+			outline: "none",
+		},
+		color: theme.palette.common.white,
+		top: 0,
+		right: 0,
+		position: "fixed",
+	},
+	closeBtn: {
+		color: theme.palette.common.white,
 	},
 }));
 

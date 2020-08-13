@@ -10,6 +10,7 @@ import {
 	IconButton,
 	Menu,
 	Fade,
+	Popover,
 } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -18,6 +19,7 @@ import * as VersionActions from "../../redux/actions/versions";
 import { history } from "../../redux/configureStore";
 import { RootState } from "../../redux/reducers";
 import useStyles from "./styles";
+import CloseIcon from "@material-ui/icons/Close";
 
 export default function MainHeader() {
 	const classes = useStyles();
@@ -48,6 +50,7 @@ export default function MainHeader() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+	const id = open ? "simple-popover" : undefined;
 	return (
 		<div>
 			<AppBar
@@ -57,7 +60,7 @@ export default function MainHeader() {
 			>
 				<Toolbar>
 					<img
-						src="/icons/litmus-header.png"
+						src="/icons/litmus-header.svg"
 						alt="Litmus Logo"
 						className={classes.mainLogo}
 						onClick={() => history.push("/")}
@@ -146,6 +149,17 @@ export default function MainHeader() {
 									},
 								}}
 							>
+								<MenuItem
+									className={classes.menuItemClose}
+									button={false}
+								>
+									<IconButton onClick={handleClose}>
+										<CloseIcon
+											fontSize="large"
+											className={classes.closeBtn}
+										/>
+									</IconButton>
+								</MenuItem>
 								<MenuItem
 									className={classes.menuItem}
 									button={false}

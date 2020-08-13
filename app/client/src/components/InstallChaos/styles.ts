@@ -34,7 +34,19 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			flexDirection: "column",
 		},
 	},
-
+	copyBtn: {
+		width: 95,
+		height: 50,
+		borderColor: theme.palette.text.primary,
+		textTransform: "none",
+	},
+	displayYamlBtn: {
+		width: 95,
+		height: 50,
+		borderColor: theme.palette.text.primary,
+		marginLeft: 20,
+		textTransform: "none",
+	},
 	yamlLink: {
 		width: "90%",
 		whiteSpace: "pre-wrap",

@@ -97,8 +97,11 @@ function ExperimentPage(props: any) {
 							</div>
 						</div>
 					</div>
+					{/* Overlapping Div */}
 					<div className={classes.overlapDiv}>
+						{/* Developer Guide Component */}
 						<DeveloperGuide links={chart.links} />
+						{/* Experiment Info */}
 						<div className={classes.detailDiv}>
 							<div className={classes.expInfo}>
 								<div className={classes.expInfoDiv}>
@@ -135,6 +138,7 @@ function ExperimentPage(props: any) {
 										/>
 									</div>
 								</div>
+								{/* Useful Links Section */}
 								<div className={classes.info}>
 									<UsefulLinks
 										links={chart.links}
@@ -144,6 +148,7 @@ function ExperimentPage(props: any) {
 									/>
 								</div>
 							</div>
+							{/* Install Chaos Section */}
 							<div className={classes.installLinks}>
 								<InstallChaos
 									title="Install this Chaos Expermiment"

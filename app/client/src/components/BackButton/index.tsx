@@ -12,6 +12,7 @@ export function BackButton(props: { path: string }) {
 					style={{
 						display: "flex",
 						flexDirection: "row",
+						textTransform: "none",
 					}}
 				>
 					<img src="/icons/back.svg" />
