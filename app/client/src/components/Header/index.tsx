@@ -147,7 +147,10 @@ export default function MainHeader() {
 									},
 								}}
 							>
-								<MenuItem button={false}>
+								<MenuItem
+									className={classes.menuItem}
+									button={false}
+								>
 									<Typography
 										className={classes.contributeBtn}
 										onClick={handleContribute}
@@ -155,7 +158,10 @@ export default function MainHeader() {
 										Contribute
 									</Typography>
 								</MenuItem>
-								<MenuItem button={false}>
+								<MenuItem
+									className={classes.menuItem}
+									button={false}
+								>
 									<Button
 										className={classes.getStarted}
 										onClick={handleGetStarted}
@@ -163,7 +169,10 @@ export default function MainHeader() {
 										<Typography>Get Started</Typography>
 									</Button>
 								</MenuItem>
-								<MenuItem button={false}>
+								<MenuItem
+									className={classes.menuItem}
+									button={false}
+								>
 									<Button
 										variant="outlined"
 										className={classes.handleStar}
