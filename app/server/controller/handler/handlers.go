@@ -226,18 +226,6 @@ func GetGithubRepoData(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(response))
 }
 
-// GetGithubContributorData will return the github contributors data for litmus
-func GetGithubContributorData(w http.ResponseWriter, r *http.Request) {
-	response, err := ioutil.ReadFile(githubData + "githubContributorData.json")
-	responseStatusCode := 200
-	if err != nil {
-		fmt.Errorf("unable to read file, error: %v", err)
-		responseStatusCode = 500
-	}
-	writeHeaders(&w, responseStatusCode)
-	fmt.Fprint(w, string(response))
-}
-
 // GetCommunityAnalyticsData returns all the analytics data related to the community
 func GetCommunityAnalyticsData(w http.ResponseWriter, r *http.Request) {
 	data, err := community.GetAnalytics()

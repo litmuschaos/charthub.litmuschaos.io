@@ -34,5 +34,6 @@ export const loadAnalytics = () => (dispatch: Function, getState: Function) => {
 				type: AnalyticsActions.LOAD_ANALYTICS,
 				payload: new Map<string, number>(),
 			});
+			dispatch(VersionActions.loadVersions());
 		});
 };

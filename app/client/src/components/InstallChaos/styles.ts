@@ -28,6 +28,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		borderRadius: 8,
 		display: "flex",
 		flexDirection: "row",
+		wordWrap: "break-word",
 		justifyContent: "space-between",
 		[theme.breakpoints.down("sm")]: {
 			display: "flex",
