@@ -45,34 +45,21 @@ export interface ExperimentGroup {
 
 export interface ChartData {
 	allExperimentGroups: ExperimentGroup[];
-	displayExperimentGroups: ExperimentGroup[];
+	allExperiments: Experiment[];
 	totalExpCount: number;
-	chaosFilter: string[];
-	contributorFilter: string[];
 }
 
 export enum ChartActions {
 	LOAD_ALL_CHARTS = "LOAD_ALL_CHARTS",
-	// LOAD_CHART = "LOAD_CHART",
-	FILTER_CHARTS_ON_SEARCH = "FILTER_CHARTS_ON_SEARCH",
-	FILTER_CHARTS_BY_FILTERS = "FILTER_CHARTS_BY_FILTERS",
-	SORT_CHARTS = "SORT_CHARTS",
 }
 
 interface ChartActionType<T, P> {
 	type: T;
 	payload: P;
+	chartAnalytics: Map<string, number>;
 }
 
-export type ChartAction =
-	| ChartActionType<typeof ChartActions.LOAD_ALL_CHARTS, ExperimentGroup[]>
-	// | ChartActionType<typeof ChartActions.LOAD_CHART, Experiment>
-	| ChartActionType<
-			typeof ChartActions.FILTER_CHARTS_ON_SEARCH,
-			ExperimentGroup[]
-	  >
-	| ChartActionType<
-			typeof ChartActions.FILTER_CHARTS_BY_FILTERS,
-			ExperimentGroup[]
-	  >
-	| ChartActionType<typeof ChartActions.SORT_CHARTS, ExperimentGroup[]>;
+export type ChartAction = ChartActionType<
+	typeof ChartActions.LOAD_ALL_CHARTS,
+	ExperimentGroup[]
+>;

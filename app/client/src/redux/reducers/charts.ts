@@ -6,28 +6,25 @@ import {
 	ExperimentGroup,
 } from "../model";
 import createReducer from "./createReducer";
+import { getExpRunCount } from "../../utils";
 
 const initialState: ChartData = {
 	allExperimentGroups: [],
-	displayExperimentGroups: [],
+	allExperiments: [],
 	totalExpCount: 0,
-	chaosFilter: [],
-	contributorFilter: [],
 };
 
 export const chartData = createReducer<ChartData>(initialState, {
 	[ChartActions.LOAD_ALL_CHARTS](state: ChartData, action: ChartAction) {
 		let totalExpCount: number = 0;
 		let experimentGroups: ExperimentGroup[] = [];
-		let chaosFilter: Set<string> = new Set<string>();
-		let contributorFilter: Set<string> = new Set<string>();
+		let allExperiments: Experiment[] = [];
 		action.payload.forEach((g: any) => {
 			let exp: Experiment[] = [];
 			if (g.Experiments)
 				g.Experiments.forEach((e: any) => {
 					let spec = e.Spec;
 					totalExpCount++;
-					chaosFilter.add(e.Metadata.Annotations.Categories);
 					exp.push({
 						name: spec.DisplayName,
 						metadataName: e.Metadata.Name,
@@ -56,9 +53,14 @@ export const chartData = createReducer<ChartData>(initialState, {
 						platforms: spec.Platforms,
 						chaosType: spec.ChaosType,
 					});
+					exp[exp.length - 1].totalRuns = getExpRunCount(
+						exp[exp.length - 1],
+						action.chartAnalytics
+					);
+					exp[exp.length - 1].expGroup = g.Metadata.Name;
+					allExperiments.push(exp[exp.length - 1]);
 				});
 			let spec = g.Spec;
-			contributorFilter.add(spec.Provider.Name);
 			experimentGroups.push({
 				name: spec.DisplayName,
 				metadataName: g.Metadata.Name,
@@ -86,37 +88,16 @@ export const chartData = createReducer<ChartData>(initialState, {
 				experiments: exp,
 			});
 		});
+		allExperiments.sort((c1: Experiment, c2: Experiment) => {
+			if (c1.totalRuns !== undefined && c2.totalRuns !== undefined)
+				return c2.totalRuns - c1.totalRuns;
+			return 0;
+		});
 		return {
 			...state,
 			allExperimentGroups: experimentGroups,
-			displayExperimentGroups: experimentGroups,
+			allExperiments,
 			totalExpCount: totalExpCount,
-			chaosFilter: Array.from(chaosFilter),
-			contributorFilter: Array.from(contributorFilter),
-		};
-	},
-	[ChartActions.FILTER_CHARTS_BY_FILTERS](
-		state: ChartData,
-		action: ChartAction
-	) {
-		return {
-			...state,
-			displayExperimentGroups: action.payload,
-		};
-	},
-	[ChartActions.SORT_CHARTS](state: ChartData, action: ChartAction) {
-		return {
-			...state,
-			displayExperimentGroups: action.payload,
-		};
-	},
-	[ChartActions.FILTER_CHARTS_ON_SEARCH](
-		state: ChartData,
-		action: ChartAction
-	) {
-		return {
-			...state,
-			displayExperimentGroups: action.payload,
 		};
 	},
 });

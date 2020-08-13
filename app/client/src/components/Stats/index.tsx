@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { formatCount } from "../../utils";
 import { Typography } from "@material-ui/core";
 import { useStyles } from "./styles";
 interface StatItem {
@@ -17,19 +16,19 @@ function Stat() {
 	);
 
 	const opInstalls =
-		analyticsData.chaosOperatorCount != undefined
+		analyticsData.chaosOperatorCount !== undefined
 			? analyticsData.chaosOperatorCount.toString()
 			: "0";
 	const githubStars =
-		githubData.star_count != undefined
+		githubData.star_count !== undefined
 			? githubData.star_count.toString()
 			: "0";
 	const expRuns =
-		analyticsData.totalExpRuns != undefined
+		analyticsData.totalExpRuns !== undefined
 			? analyticsData.totalExpRuns.toString()
 			: "0";
 	const expCount =
-		chartData.totalExpCount != undefined
+		chartData.totalExpCount !== undefined
 			? chartData.totalExpCount.toString()
 			: "0";
 	// const opInstalls = formatCount(analyticsData.chaosOperatorCount);

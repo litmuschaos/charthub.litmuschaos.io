@@ -35,14 +35,11 @@ function Routes() {
 function App() {
 	const githubActions = useActions(GithubActions);
 	const analyticsActions = useActions(AnalyticsActions);
-	const versionActions = useActions(VersionActions);
 	const classes = useStyles();
 
 	useEffect(() => {
 		analyticsActions.loadAnalytics();
-		versionActions.loadVersions();
 		githubActions.loadStarCount();
-		githubActions.loadContributors();
 	}, []);
 
 	return (

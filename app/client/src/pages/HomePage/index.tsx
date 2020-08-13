@@ -1,6 +1,5 @@
 import { Typography, Hidden } from "@material-ui/core";
 import * as React from "react";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { SearchBar, Charts } from "../../components";
 import Footer from "../../components/Footer";
@@ -8,36 +7,20 @@ import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
 import MainHeader from "../../components/Header";
 import Stat from "../../components/Stats";
-import { Experiment, ExperimentGroup } from "../../redux/model";
-import { getExpRunCount } from "../../utils";
+import { Experiment } from "../../redux/model";
 
 function HomePage() {
 	const classes = useStyles();
-	const { analyticsData, chartData } = useSelector(
-		(state: RootState) => state
+	const { chartData } = useSelector((state: RootState) => state);
+
+	const [displayExps, setDisplayExps] = React.useState<Experiment[]>(
+		chartData.allExperiments
 	);
+	React.useEffect(() => {
+		setDisplayExps(chartData.allExperiments);
+	}, [chartData.allExperiments]);
 
-	const [experiments, setExperiments] = React.useState<Experiment[]>([]);
-	const [displayExps, setDisplayExps] = React.useState<Experiment[]>([]);
 	const [searchToken, setsearchToken] = React.useState("");
-
-	useEffect(() => {
-		const exps: Experiment[] = [];
-		chartData.allExperimentGroups.forEach((expg: ExperimentGroup) => {
-			expg.experiments.forEach((exp: Experiment) => {
-				exp.expGroup = expg.metadataName;
-				exp.totalRuns = getExpRunCount(exp, analyticsData.expAnalytics);
-				exps.push(exp);
-			});
-		});
-		exps.sort((c1: Experiment, c2: Experiment) => {
-			if (c1.totalRuns !== undefined && c2.totalRuns !== undefined)
-				return c2.totalRuns - c1.totalRuns;
-			return 0;
-		});
-		setExperiments(exps);
-		setDisplayExps(exps);
-	}, [chartData.allExperimentGroups, analyticsData.expAnalytics]);
 
 	const handleSearch = (
 		event: React.ChangeEvent<{ value: unknown }> | undefined,
@@ -50,15 +33,17 @@ function HomePage() {
 			.toLowerCase()
 			.split(" ")
 			.filter((s) => s !== "");
-		const payload: Experiment[] = experiments.filter((exp: Experiment) => {
-			return tokens.every(
-				(s: string) =>
-					exp.name.toLowerCase().includes(s) ||
-					(exp.expGroup !== undefined
-						? exp.expGroup.toLowerCase().includes(s)
-						: false)
-			);
-		});
+		const payload: Experiment[] = chartData.allExperiments.filter(
+			(exp: Experiment) => {
+				return tokens.every(
+					(s: string) =>
+						exp.name.toLowerCase().includes(s) ||
+						(exp.expGroup !== undefined
+							? exp.expGroup.toLowerCase().includes(s)
+							: false)
+				);
+			}
+		);
 		setDisplayExps(payload);
 	};
 

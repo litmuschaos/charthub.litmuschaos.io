@@ -1,4 +1,5 @@
 import { AnalyticsActions } from "../model";
+import * as VersionActions from "./versions";
 
 let baseURL: string = "";
 if (
@@ -25,6 +26,7 @@ export const loadAnalytics = () => (dispatch: Function, getState: Function) => {
 				type: AnalyticsActions.LOAD_ANALYTICS,
 				payload: mapped_data,
 			});
+			dispatch(VersionActions.loadVersions());
 		})
 		.catch((err) => {
 			console.error("Can't load data", err);
