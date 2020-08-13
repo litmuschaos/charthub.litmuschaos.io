@@ -89,12 +89,7 @@ export function InstallChaos(props: InstallProps) {
 				<Button
 					variant="outlined"
 					onClick={() => copyTextToClipboard(yaml)}
-					style={{
-						width: 95,
-						height: 50,
-						borderColor: "#5B44BA",
-						textTransform: "none",
-					}}
+					className={classes.copyBtn}
 				>
 					{!copying ? (
 						<div
@@ -120,13 +115,7 @@ export function InstallChaos(props: InstallProps) {
 					<Button
 						variant="outlined"
 						onClick={() => showYamlInPage(yaml)}
-						style={{
-							width: 95,
-							height: 50,
-							borderColor: "#5B44BA",
-							marginLeft: 20,
-							textTransform: "none",
-						}}
+						className={classes.displayYamlBtn}
 					>
 						{!viewing ? (
 							<div

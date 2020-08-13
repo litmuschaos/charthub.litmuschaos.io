@@ -76,11 +76,15 @@ export const useStyles = makeStyles((theme) => ({
 	headerImg: {
 		marginTop: -80,
 	},
+	searchBar: {
+		flexGrow: 1,
+	},
 	searchDiv: {
 		display: "flex",
 		flexDirection: "row",
 		marginLeft: 130,
 		marginRight: 130,
+		marginTop: 30,
 		[theme.breakpoints.up("xl")]: {
 			display: "flex",
 			flexDirection: "row",
@@ -91,38 +95,22 @@ export const useStyles = makeStyles((theme) => ({
 			display: "flex",
 			flexDirection: "column",
 			width: "95%",
-			marginLeft: 40,
-			marginRight: 40,
+			marginLeft: 30,
 		},
 		[theme.breakpoints.down("xs")]: {
-			display: "flex",
-			flexDirection: "column",
-			width: "95%",
 			marginTop: "5%",
 			marginLeft: 10,
-			marginRight: 10,
 		},
-		[theme.breakpoints.down(376)]: {
-			display: "flex",
-			flexDirection: "column",
-			width: "95%",
-			marginTop: "20%",
-			marginLeft: 10,
-			marginRight: 10,
-		},
-		[theme.breakpoints.down(325)]: {
-			display: "flex",
-			flexDirection: "column",
-			width: "95%",
-			marginTop: "30%",
+		[theme.breakpoints.down(378)]: {
+			marginTop: 90,
 			marginLeft: 10,
 			marginRight: 10,
 		},
 	},
 	statsDiv: {
 		marginTop: -10,
-		marginLeft: "auto",
 		flexGrow: 1,
+		marginLeft: 10,
 		[theme.breakpoints.down("sm")]: {
 			width: "100%",
 			marginLeft: -10,
@@ -134,29 +122,14 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	chartsDiv: {
-		marginTop: "-4%",
+		marginTop: -80,
 		marginLeft: "8.55%",
 		marginRight: "8.55%",
 		backgroundColor: theme.palette.common.white,
 		border: "1px solid rgba(0, 0, 0, 0.05)",
 		borderRadius: "3px",
-		[theme.breakpoints.down("sm")]: {
-			marginTop: "-15%",
-			marginLeft: "6%",
-			marginRight: "6%",
-		},
-		[theme.breakpoints.down("xs")]: {
-			marginTop: "-22%",
-			marginLeft: "6%",
-			marginRight: "6%",
-		},
 		[theme.breakpoints.down(376)]: {
-			marginTop: "-14%",
-			marginLeft: "6%",
-			marginRight: "6%",
-		},
-		[theme.breakpoints.down(325)]: {
-			marginTop: "-7%",
+			marginTop: -40,
 			marginLeft: "6%",
 			marginRight: "6%",
 		},

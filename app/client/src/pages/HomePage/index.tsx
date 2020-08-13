@@ -52,6 +52,7 @@ function HomePage() {
 			<MainHeader />
 			<div className={classes.root}>
 				<div className={classes.mainDiv}>
+					{/* Header component */}
 					<div className={classes.headerDiv}>
 						<div className={classes.headerText}>
 							<Typography className={classes.mainHeader}>
@@ -73,16 +74,20 @@ function HomePage() {
 							</div>
 						</Hidden>
 					</div>
+					{/* SearchBar and Stats */}
 					<div className={classes.searchDiv}>
-						<SearchBar
-							searchToken={searchToken}
-							handleSearch={handleSearch}
-						/>
+						<div className={classes.searchBar}>
+							<SearchBar
+								searchToken={searchToken}
+								handleSearch={handleSearch}
+							/>
+						</div>
 						<div className={classes.statsDiv}>
 							<Stat />
 						</div>
 					</div>
 				</div>
+				{/* Charts Div */}
 				<div className={classes.chartsDiv}>
 					<Charts
 						experiments={displayExps}

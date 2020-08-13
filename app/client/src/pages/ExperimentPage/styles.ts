@@ -91,49 +91,22 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	overlapDiv: {
-		marginTop: "-20.5%",
+		marginTop: -300,
 		marginLeft: "5.75%",
 		marginRight: "5.75%",
 		borderRadius: "3px",
 		padding: "50px 50px 50px 50px",
-		[theme.breakpoints.up("xl")]: {
-			marginTop: "-11%",
-		},
-		[theme.breakpoints.between(1600, 1950)]: {
-			marginTop: "-17%",
-			marginLeft: 0,
-			marginRight: 0,
-			padding: "50px 100px 50px 100px",
-		},
-		[theme.breakpoints.down("md")]: {
-			marginTop: "-27%",
-		},
 		[theme.breakpoints.down("sm")]: {
-			marginTop: "-30%",
-			marginLeft: 0,
-			marginRight: 0,
-			padding: "10px 10px 10px 10px",
-		},
-		[theme.breakpoints.between(610, 740)]: {
-			marginTop: "-38%",
+			marginTop: -250,
 			marginLeft: 0,
 			marginRight: 0,
 			padding: "10px 10px 10px 10px",
 		},
 		[theme.breakpoints.down("xs")]: {
-			marginTop: "-55%",
+			marginTop: -300,
 			marginLeft: 0,
 			marginRight: 0,
-		},
-		[theme.breakpoints.down(450)]: {
-			marginTop: "-70%",
-			marginLeft: 0,
-			marginRight: 0,
-		},
-		[theme.breakpoints.down(370)]: {
-			marginTop: "-80%",
-			marginLeft: 0,
-			marginRight: 0,
+			padding: "10px 10px 10px 10px",
 		},
 	},
 	expInfo: {
