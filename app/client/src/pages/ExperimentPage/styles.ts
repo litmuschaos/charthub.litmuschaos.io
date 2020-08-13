@@ -35,8 +35,20 @@ export const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "column",
 	},
+	expInfoDiv: {
+		flexGrow: 1,
+		display: "flex",
+		flexDirection: "column",
+		paddingLeft: 20,
+		paddingRight: 20,
+	},
 	info: {
 		margin: "0 auto",
+		width: "25%",
+		[theme.breakpoints.down("xs")]: {
+			marginRight: "auto",
+			width: "100%",
+		},
 	},
 	note: {
 		marginTop: 32,
@@ -65,10 +77,7 @@ export const useStyles = makeStyles((theme) => ({
 			marginTop: 0,
 		},
 	},
-	expInfoDiv: {
-		paddingLeft: 20,
-		paddingRight: 20,
-	},
+
 	expMain: {
 		marginLeft: 10,
 	},
@@ -81,14 +90,20 @@ export const useStyles = makeStyles((theme) => ({
 			padding: "10px 10px 10px 10px",
 		},
 	},
-	detailDiv1: {
-		marginTop: "-18.5%",
+	overlapDiv: {
+		marginTop: "-20.5%",
 		marginLeft: "5.75%",
 		marginRight: "5.75%",
 		borderRadius: "3px",
 		padding: "50px 50px 50px 50px",
 		[theme.breakpoints.up("xl")]: {
-			marginTop: "-10%",
+			marginTop: "-11%",
+		},
+		[theme.breakpoints.between(1600, 1950)]: {
+			marginTop: "-17%",
+			marginLeft: 0,
+			marginRight: 0,
+			padding: "50px 100px 50px 100px",
 		},
 		[theme.breakpoints.down("md")]: {
 			marginTop: "-27%",
@@ -99,8 +114,24 @@ export const useStyles = makeStyles((theme) => ({
 			marginRight: 0,
 			padding: "10px 10px 10px 10px",
 		},
+		[theme.breakpoints.between(610, 740)]: {
+			marginTop: "-38%",
+			marginLeft: 0,
+			marginRight: 0,
+			padding: "10px 10px 10px 10px",
+		},
 		[theme.breakpoints.down("xs")]: {
-			marginTop: "-65%",
+			marginTop: "-55%",
+			marginLeft: 0,
+			marginRight: 0,
+		},
+		[theme.breakpoints.down(450)]: {
+			marginTop: "-70%",
+			marginLeft: 0,
+			marginRight: 0,
+		},
+		[theme.breakpoints.down(370)]: {
+			marginTop: "-80%",
 			marginLeft: 0,
 			marginRight: 0,
 		},
@@ -115,6 +146,9 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	horizontalLine: {
 		marginTop: 40,
-		borderLeft: "1px solid rgba(0, 0, 0, 0.2)",
+		height: 0.3,
+		marginRight: "5%",
+		border: "0.5px solid #C4C4C4",
+		boxSizing: "border-box",
 	},
 }));

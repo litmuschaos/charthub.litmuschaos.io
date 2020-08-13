@@ -97,7 +97,7 @@ function ExperimentPage(props: any) {
 							</div>
 						</div>
 					</div>
-					<div className={classes.detailDiv1}>
+					<div className={classes.overlapDiv}>
 						<DeveloperGuide links={chart.links} />
 						<div className={classes.detailDiv}>
 							<div className={classes.expInfo}>
@@ -106,6 +106,34 @@ function ExperimentPage(props: any) {
 										description={chart.description}
 										videoURL={videoURL}
 									/>
+									<div
+										style={{
+											marginTop: "auto",
+											marginBottom: 40,
+										}}
+									>
+										<hr
+											className={classes.horizontalLine}
+										/>
+										<div>
+											<div className={classes.note}>
+												PRE-REQUISITE:
+											</div>
+											<div>
+												<a
+													href="https://docs.litmuschaos.io/docs/getstarted/"
+													target="_"
+												>
+													Install Litmus Operator
+												</a>
+												: a tool for injecting Chaos
+												Experiments
+											</div>
+										</div>
+										<hr
+											className={classes.horizontalLine}
+										/>
+									</div>
 								</div>
 								<div className={classes.info}>
 									<UsefulLinks
@@ -116,22 +144,6 @@ function ExperimentPage(props: any) {
 									/>
 								</div>
 							</div>
-							<hr className={classes.horizontalLine} />
-							<div>
-								<div className={classes.note}>
-									PRE-REQUISITE:
-								</div>
-								<div>
-									<a
-										href="https://docs.litmuschaos.io/docs/getstarted/"
-										target="_"
-									>
-										Install Litmus Operator
-									</a>
-									: a tool for injecting Chaos Experiments
-								</div>
-							</div>
-							<hr className={classes.horizontalLine} />
 							<div className={classes.installLinks}>
 								<InstallChaos
 									title="Install this Chaos Expermiment"

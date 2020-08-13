@@ -39,6 +39,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		[theme.breakpoints.down("xs")]: {
 			padding: 10,
 			borderLeft: "none",
+			borderRadius: 0,
 			borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
 		},
 	},

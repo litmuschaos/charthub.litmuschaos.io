@@ -53,6 +53,7 @@ export const useStyles = makeStyles((theme) => ({
 	cardInfo: {
 		[theme.breakpoints.down("sm")]: {
 			padding: "0 12px",
+			paddingBottom: 20,
 		},
 	},
 	title: {

@@ -7,6 +7,9 @@ import {
 	AppBar,
 	Toolbar,
 	Typography,
+	IconButton,
+	Menu,
+	Fade,
 } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -22,6 +25,28 @@ export default function MainHeader() {
 	const versionActions = useActions(VersionActions);
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
 		versionActions.toggleVersion(event.target.value as string);
+	};
+	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+	const open = Boolean(anchorEl);
+
+	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleContribute = () => {
+		window.open("https://github.com/litmuschaos/litmus");
+	};
+
+	const handleGetStarted = () => {
+		window.open("https://docs.litmuschaos.io/docs/getstarted/");
+	};
+
+	const handleStars = () => {
+		window.open("https://github.com/litmuschaos/litmus");
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
 	};
 	return (
 		<div>
@@ -42,19 +67,45 @@ export default function MainHeader() {
 						<Select
 							classes={{
 								root: classes.whiteColor,
-								icon: classes.whiteColor,
+								icon: classes.whiteColor1,
 							}}
 							labelId="change-cocs-version"
 							value={versionData.currentVersion}
 							onChange={handleChange}
 							disableUnderline
-							style={{ width: 95, height: 40 }}
+							MenuProps={{ classes: { paper: classes.select } }}
+							className={classes.versionSelect}
 						>
 							{versionData.versions.map((d: string) => (
-								<MenuItem value={d}>{d}</MenuItem>
+								<MenuItem value={d}>
+									{d !== "master" ? "v " + d : d}
+								</MenuItem>
 							))}
 						</Select>
 					</FormControl>
+					<Hidden smDown>
+						<Button
+							className={classes.starsBtn}
+							onClick={handleStars}
+						>
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "row",
+								}}
+							>
+								<img
+									src="/icons/github-white.svg"
+									alt="github light"
+									className={classes.starImg}
+								/>
+								<Typography className={classes.starsText}>
+									Stars
+								</Typography>
+							</div>
+						</Button>
+					</Hidden>
+
 					<Hidden smDown>
 						<div className={classes.headerDiv}>
 							<a
@@ -66,21 +117,78 @@ export default function MainHeader() {
 									Contribute
 								</Typography>
 							</a>
-							<a
-								href="https://docs.litmuschaos.io/docs/getstarted/"
-								target="#"
-								style={{ textDecoration: "none" }}
-							>
-								<Typography className={classes.headerFont}>
-									Litmus docs
-								</Typography>
-							</a>
 							<Button
 								variant="outlined"
 								className={classes.getStartedBtn}
 							>
 								Get Started
 							</Button>
+						</div>
+					</Hidden>
+					<Hidden mdUp>
+						<div className={classes.headerDiv}>
+							<IconButton onClick={handleClick}>
+								<img src="/icons/menu.svg" alt="menu" />
+							</IconButton>
+							<Menu
+								id="fade-menu"
+								anchorEl={anchorEl}
+								keepMounted
+								open={open}
+								onClose={handleClose}
+								TransitionComponent={Fade}
+								className={classes.backdrop}
+								PaperProps={{
+									style: {
+										marginTop: 50,
+										width: "100%",
+										backgroundColor: "#FFFFFF",
+										borderRadius: 4,
+									},
+								}}
+							>
+								<MenuItem button={false}>
+									<Typography
+										className={classes.contributeBtn}
+										onClick={handleContribute}
+									>
+										Contribute
+									</Typography>
+								</MenuItem>
+								<MenuItem button={false}>
+									<Button
+										className={classes.getStarted}
+										onClick={handleGetStarted}
+									>
+										<Typography>Get Started</Typography>
+									</Button>
+								</MenuItem>
+								<MenuItem button={false}>
+									<Button
+										variant="outlined"
+										className={classes.handleStar}
+										onClick={handleStars}
+									>
+										<div
+											style={{
+												display: "flex",
+												flexDirection: "row",
+											}}
+										>
+											<img
+												src="/icons/github-dark.svg"
+												className={classes.starImg}
+												alt="github dark"
+											/>
+											<Typography
+												className={classes.menuStarBtn}
+											>
+												Star
+											</Typography>
+										</div>
+									</Button>
+								</MenuItem>
+							</Menu>
 						</div>
 					</Hidden>
 				</Toolbar>

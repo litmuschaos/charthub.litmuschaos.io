@@ -17,22 +17,38 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		paddingLeft: 20,
 		color: theme.palette.common.white,
 		[theme.breakpoints.down("sm")]: {
-			paddingBottom: 20,
+			paddingBottom: 10,
 		},
 	},
 	mainText: {
 		fontWeight: "bold",
 		fontSize: 24,
+		[theme.breakpoints.down("sm")]: {
+			fontSize: 16,
+		},
 	},
 	textDesc: {
 		fontSize: 16,
+		[theme.breakpoints.down("sm")]: {
+			fontSize: 14,
+		},
 	},
 	guideLink: {
 		color: theme.palette.common.white,
 		paddingLeft: 12,
 		paddingTop: -10,
+		[theme.breakpoints.down("sm")]: {
+			fontSize: 14,
+		},
 	},
 	closeIcon: {
 		color: theme.palette.common.white,
+	},
+	imgDiv: {
+		display: "block",
+		paddingTop: 25,
+		[theme.breakpoints.down("sm")]: {
+			paddingTop: 10,
+		},
 	},
 }));

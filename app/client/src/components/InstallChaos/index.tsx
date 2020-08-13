@@ -1,7 +1,5 @@
-import { Grid, IconButton, Typography } from "@material-ui/core";
+import { Typography, Button, Hidden } from "@material-ui/core";
 import Done from "@material-ui/icons/DoneAllTwoTone";
-import Copy from "@material-ui/icons/FileCopyTwoTone";
-import PageviewTwoToneIcon from "@material-ui/icons/PageviewTwoTone";
 import CloseTwoToneIcon from "@material-ui/icons/CloseTwoTone";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./styles";
@@ -85,43 +83,69 @@ export function InstallChaos(props: InstallProps) {
 			<div className={classes.title}>{title}</div>
 			<div className={classes.description}>{description}</div>
 			<div className={classes.linkBox}>
-				<Grid container>
-					<Grid item xs={11}>
-						<Typography
-							variant="subtitle1"
-							className={classes.yamlLink}
+				<Typography variant="subtitle1" className={classes.yamlLink}>
+					{yaml}
+				</Typography>
+				<Button
+					variant="outlined"
+					onClick={() => copyTextToClipboard(yaml)}
+					style={{
+						width: 95,
+						height: 50,
+						borderColor: "#5B44BA",
+						textTransform: "none",
+					}}
+				>
+					{!copying ? (
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "row",
+							}}
 						>
-							{yaml}
-						</Typography>
-					</Grid>
-					<Grid item xs={1}>
-						<Grid container>
-							<Grid item xs={12}>
-								<IconButton
-									onClick={() => copyTextToClipboard(yaml)}
-								>
-									{!copying ? (
-										<Copy />
-									) : (
-										<Done className={classes.done} />
-									)}
-								</IconButton>
-							</Grid>
-
-							<Grid item xs={12}>
-								<IconButton
-									onClick={() => showYamlInPage(yaml)}
-								>
-									{!viewing ? (
-										<PageviewTwoToneIcon />
-									) : (
-										<CloseTwoToneIcon />
-									)}
-								</IconButton>
-							</Grid>
-						</Grid>
-					</Grid>
-				</Grid>
+							<img
+								src="/icons/copy.svg"
+								style={{ paddingRight: 10 }}
+							/>
+							<Typography>Copy</Typography>
+						</div>
+					) : (
+						<>
+							<Done className={classes.done} />
+							<Typography>Copied</Typography>
+						</>
+					)}
+				</Button>
+				<Hidden mdDown>
+					<Button
+						variant="outlined"
+						onClick={() => showYamlInPage(yaml)}
+						style={{
+							width: 95,
+							height: 50,
+							borderColor: "#5B44BA",
+							marginLeft: 20,
+							textTransform: "none",
+						}}
+					>
+						{!viewing ? (
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "row",
+								}}
+							>
+								<img
+									src="/icons/edit.svg"
+									style={{ paddingRight: 10 }}
+								/>
+								<Typography>Edit</Typography>
+							</div>
+						) : (
+							<CloseTwoToneIcon />
+						)}
+					</Button>
+				</Hidden>
 			</div>
 		</div>
 	);

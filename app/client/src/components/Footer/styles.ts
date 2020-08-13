@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		backgroundColor: "#FAFBFD",
 		color: theme.palette.primary.main,
 		width: "100%",
-		padding: 8,
+		padding: 20,
 		marginTop: 40,
 	},
 
@@ -21,13 +21,28 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			margin: theme.spacing(2),
 		},
 	},
+	footerContainer1: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-around",
+		marginTop: theme.spacing(4),
+		marginLeft: theme.spacing(4),
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			marginLeft: theme.spacing(1.5),
+			marginRight: theme.spacing(1.5),
+		},
+	},
 
 	footHeading: {
 		fontWeight: 500,
 		color: theme.palette.text.primary,
 		marginBottom: 32,
+		[theme.breakpoints.down("sm")]: {
+			maxWidth: 100,
+			marginBottom: 16,
+		},
 	},
-	community: {},
 	footerText: {
 		textAlign: "center",
 		marginTop: 30,
@@ -36,7 +51,18 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 
 	copyright: {
-		width: "20rem",
+		maxWidth: "20rem",
+
+		[theme.breakpoints.down("sm")]: {
+			maxWidth: "100%",
+			marginLeft: "20%",
+			marginRight: "20%",
+		},
+		[theme.breakpoints.down("xs")]: {
+			maxWidth: "100%",
+			marginLeft: 0,
+			marginRight: 0,
+		},
 	},
 	copyrightText: {
 		lineHeight: "1.5",
@@ -56,10 +82,12 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	// Community
 	commData: {
 		display: "inline-block",
-		marginLeft: 8,
 		fontSize: "16px",
 		marginBottom: 15,
 		color: theme.palette.text.secondary,
+		[theme.breakpoints.down("sm")]: {
+			marginLeft: 0,
+		},
 	},
 	commList: {
 		display: "flex",
@@ -75,14 +103,32 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		border: "0.5px solid #C4C4C4",
 		boxSizing: "border-box",
 	},
-	footerItem: {
+	footerDiv: {
 		display: "flex",
 		flexDirection: "row",
-		justifyContent: "space-around",
+		justifyContent: "space-between",
+		marginBottom: 50,
 		[theme.breakpoints.down("sm")]: {
-			display: "flex",
-			flexDirection: "row",
-			justifyContent: "space-around",
+			marginLeft: "20%",
+			marginRight: "20%",
+		},
+		[theme.breakpoints.down("xs")]: {
+			marginLeft: 0,
+			marginRight: "5%",
+		},
+	},
+	footerDiv1: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginBottom: 50,
+		[theme.breakpoints.down("sm")]: {
+			marginLeft: "20%",
+			marginRight: "16%",
+		},
+		[theme.breakpoints.down("xs")]: {
+			marginLeft: 0,
+			marginRight: "1%",
 		},
 	},
 }));

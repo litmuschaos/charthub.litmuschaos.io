@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography, Hidden } from "@material-ui/core";
 import * as React from "react";
 import { useStyles } from "./styles";
 
@@ -19,11 +19,15 @@ function Community(props: { header: string; data: CommunityItem[] }) {
 
 			{props.data.map((d, i) => (
 				<div key={i} className={classes.commList}>
-					<img
-						src={d.img}
-						alt={d.alt}
-						style={{ paddingBottom: 15 }}
-					/>
+					{d.img ? (
+						<img
+							src={d.img}
+							alt={d.alt}
+							style={{ paddingBottom: 15, paddingRight: 10 }}
+						/>
+					) : (
+						<></>
+					)}
 					<a href={d.link} target="#">
 						<Typography className={classes.commData}>
 							{d.value}
@@ -39,11 +43,6 @@ function Copyright() {
 	const classes = useStyles();
 	return (
 		<div className={classes.copyright}>
-			<img
-				className={classes.logo}
-				src="/icons/litmus-light.png"
-				alt="litmus logo"
-			/>
 			<Typography className={classes.copyrightText}>
 				Copyright © 2020 LitmusChaos Authors. All rights reserved.
 			</Typography>
@@ -59,6 +58,19 @@ function Copyright() {
 				</a>{" "}
 				page.
 			</Typography>
+		</div>
+	);
+}
+
+function FooterLogo() {
+	const classes = useStyles();
+	return (
+		<div className={classes.copyright}>
+			<img
+				className={classes.logo}
+				src="/icons/litmus-light.svg"
+				alt="litmus logo"
+			/>
 		</div>
 	);
 }
@@ -99,12 +111,6 @@ const community: CommunityItem[] = [
 
 const resources: CommunityItem[] = [
 	{
-		value: "Docs",
-		img: "/icons/docs.png",
-		alt: "Docs",
-		link: "https://docs.litmuschaos.io/docs/getstarted/",
-	},
-	{
 		value: "FAQ",
 		img: "/icons/faq.png",
 		alt: "FAQ",
@@ -120,16 +126,20 @@ const resources: CommunityItem[] = [
 
 const links: CommunityItem[] = [
 	{
-		value: "Get started",
-		link: "https://docs.litmuschaos.io/docs/getstarted/",
+		value: "Litmus homepage",
+		link: "#",
 	},
 	{
-		value: "Contribute",
-		link: "https://github.com/litmuschaos/litmus",
+		value: "Why Litmus?",
+		link: "#",
 	},
 	{
-		value: "Litmus Docs",
-		link: "https://docs.litmuschaos.io/docs/getstarted/",
+		value: "Community",
+		link: "#",
+	},
+	{
+		value: "Blog",
+		link: "#",
 	},
 ];
 
@@ -160,13 +170,40 @@ export default function Footer() {
 	return (
 		<div className={classes.root}>
 			<div>
-				<div className={classes.footerContainer} data-cy="Footer">
-					<Copyright />
-					<Community header="Links" data={links} />
-					<Community header="Resources" data={resources} />
-					<Community header="Top Adoptors" data={adoptors} />
-					<Community header="Join the community" data={community} />
-				</div>
+				<Hidden smDown>
+					<div className={classes.footerContainer} data-cy="Footer">
+						<div
+							style={{ display: "flex", flexDirection: "column" }}
+						>
+							<FooterLogo />
+							<Copyright />
+						</div>
+						<Community header="Litmus Website" data={links} />
+						<Community header="Resources" data={resources} />
+						<Community header="Top Adoptors" data={adoptors} />
+						<Community
+							header="Join the community"
+							data={community}
+						/>
+					</div>
+				</Hidden>
+				<Hidden mdUp>
+					<div className={classes.footerContainer1} data-cy="Footer">
+						<FooterLogo />
+						<div className={classes.footerDiv}>
+							<Community header="Litmus Website" data={links} />
+							<Community header="Resources" data={resources} />
+						</div>
+						<div className={classes.footerDiv1}>
+							<Community header="Top Adoptors" data={adoptors} />
+							<Community
+								header="Join the community"
+								data={community}
+							/>
+						</div>
+						<Copyright />
+					</div>
+				</Hidden>
 			</div>
 			<hr className={classes.horizontalLine} />
 			<div>

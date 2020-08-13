@@ -8,6 +8,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.text.secondary,
 		fontSize: 18,
 		marginTop: 40,
+		[theme.breakpoints.up("xl")]: {
+			marginLeft: "3%",
+		},
 		[theme.breakpoints.down("sm")]: {
 			marginTop: 12,
 		},
@@ -17,6 +20,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		fontSize: 24,
 		marginBottom: 8,
 		color: theme.palette.common.white,
+		[theme.breakpoints.down("xs")]: {
+			paddingTop: 10,
+			fontSize: 18,
+		},
 	},
 	expInfo: {
 		marginTop: 10,
@@ -55,6 +62,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginTop: 10,
 		width: 350,
 		[theme.breakpoints.down("sm")]: {
+			marginTop: 0,
+			marginLeft: 0,
+		},
+		[theme.breakpoints.down("xs")]: {
+			width: "70%",
 			marginTop: 0,
 			marginLeft: 0,
 		},

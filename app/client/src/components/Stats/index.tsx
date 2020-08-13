@@ -29,12 +29,12 @@ function Stat() {
 	// const opInstalls = formatCount(analyticsData.chaosOperatorCount);
 
 	const stat: StatItem[] = [
+		{ key: "expCount", value: expCount, desc: "Experiments" },
 		{
 			key: "opInstalls",
 			value: opInstalls,
 			desc: "Installed",
 		},
-		{ key: "expCount", value: expCount, desc: "Experiments" },
 		{
 			key: "expRuns",
 			value: expRuns,

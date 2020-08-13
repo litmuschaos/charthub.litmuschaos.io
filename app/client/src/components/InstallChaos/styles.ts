@@ -24,27 +24,36 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	linkBox: {
 		backgroundColor: " rgba(0, 0, 0, 0.02)",
 		border: "1px solid  rgba(0, 0, 0, 0.05)",
-		padding: 8,
+		padding: 30,
 		borderRadius: 8,
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-between",
+		[theme.breakpoints.down("sm")]: {
+			display: "flex",
+			flexDirection: "column",
+		},
 	},
 
 	yamlLink: {
 		width: "90%",
 		whiteSpace: "pre-wrap",
-		paddingTop: "16px",
-		paddingLeft: "20px",
+		paddingTop: "10px",
 		fontSize: 16,
 		[theme.breakpoints.down("md")]: {
 			fontSize: 14,
 			paddingLeft: "0px",
 		},
+		[theme.breakpoints.down("sm")]: {
+			width: "100%",
+			height: "fit-content",
+			paddingLeft: "0px",
+		},
 	},
 
 	done: {
-		color: theme.palette.success.dark,
+		color: theme.palette.text.primary,
+		paddingRight: 5,
 	},
 
 	modalEditor: {

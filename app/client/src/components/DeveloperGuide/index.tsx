@@ -34,7 +34,7 @@ function DeveloperGuide(props: DeveloperGuideProps) {
 								Complete the steps listed in the developer`s
 								guide to make it work on your chaos hubs
 							</Typography>
-							<div style={{ display: "block", paddingTop: 25 }}>
+							<div className={classes.imgDiv}>
 								<img src="/icons/guide.png" />
 								<a
 									href={docs}

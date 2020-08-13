@@ -1,8 +1,4 @@
-import { Icon, Typography } from "@material-ui/core";
-import PlatformIcon from "@material-ui/icons/CodeTwoTone";
-import LinkIcon from "@material-ui/icons/LinkTwoTone";
-import MaturityIcon from "@material-ui/icons/SpaTwoTone";
-import MaintainerIcon from "@material-ui/icons/SupervisorAccountTwoTone";
+import { Typography } from "@material-ui/core";
 import React from "react";
 import { Link, Maintainer } from "../../redux/model";
 import { useStyles } from "./styles";
