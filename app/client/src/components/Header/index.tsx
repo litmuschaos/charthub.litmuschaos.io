@@ -10,7 +10,6 @@ import {
 	IconButton,
 	Menu,
 	Fade,
-	Popover,
 } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -50,7 +49,6 @@ export default function MainHeader() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-	const id = open ? "simple-popover" : undefined;
 	return (
 		<div>
 			<AppBar

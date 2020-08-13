@@ -1,4 +1,4 @@
-import { IconButton, Tooltip, Zoom, Link } from "@material-ui/core";
+import { IconButton, Tooltip, Link } from "@material-ui/core";
 import React from "react";
 import { formatCount } from "../../utils";
 import { CardProps } from "./model";

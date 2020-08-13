@@ -6,7 +6,6 @@ import withTheme from "./hoc/themeHoc";
 import { useActions } from "./redux/actions";
 import * as AnalyticsActions from "./redux/actions/analytics";
 import * as GithubActions from "./redux/actions/github";
-import * as VersionActions from "./redux/actions/versions";
 import { history } from "./redux/configureStore";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -40,7 +39,7 @@ function App() {
 	useEffect(() => {
 		analyticsActions.loadAnalytics();
 		githubActions.loadStarCount();
-	}, []);
+	});
 
 	return (
 		<Suspense fallback={<Loader />}>

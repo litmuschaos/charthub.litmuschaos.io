@@ -1,4 +1,4 @@
-import { ChartActions, ExperimentGroup, Experiment } from "../model";
+import { ChartActions } from "../model";
 
 let baseURL: string = "";
 if (
