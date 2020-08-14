@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: 40,
 		marginLeft: 110,
 		marginRight: 30,
+		cursor: "pointer",
 		[theme.breakpoints.down("sm")]: {
 			marginLeft: 10,
 			marginRight: 30,
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		borderRadius: 3,
 	},
 	starsBtn: {
-		marginTop: 4.5,
+		marginTop: 4,
 		textTransform: "none",
 		width: 95,
 		height: 40,

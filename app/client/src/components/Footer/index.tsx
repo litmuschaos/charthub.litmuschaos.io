@@ -1,6 +1,7 @@
 import { Typography, Hidden } from "@material-ui/core";
 import * as React from "react";
 import { useStyles } from "./styles";
+import { history } from "../../redux/configureStore";
 
 interface CommunityItem {
 	value: string;
@@ -70,6 +71,7 @@ function FooterLogo() {
 				className={classes.logo}
 				src="/icons/litmus-light.svg"
 				alt="litmus logo"
+				onClick={() => history.push("/")}
 			/>
 		</div>
 	);

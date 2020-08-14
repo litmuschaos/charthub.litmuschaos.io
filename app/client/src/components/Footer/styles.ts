@@ -77,6 +77,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	logo: {
 		width: "10rem",
 		marginBottom: 50,
+		cursor: "pointer",
 	},
 
 	// Community
@@ -114,7 +115,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		},
 		[theme.breakpoints.down("xs")]: {
 			marginLeft: 0,
-			marginRight: "5%",
 		},
 	},
 	footerDiv1: {
@@ -124,11 +124,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginBottom: 50,
 		[theme.breakpoints.down("sm")]: {
 			marginLeft: "20%",
-			marginRight: "16%",
+			marginRight: "15%",
 		},
 		[theme.breakpoints.down("xs")]: {
 			marginLeft: 0,
-			marginRight: "1%",
 		},
 	},
 }));

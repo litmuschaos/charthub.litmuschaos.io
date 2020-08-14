@@ -15,7 +15,7 @@ export function BackButton(props: { path: string }) {
 						textTransform: "none",
 					}}
 				>
-					<img src="/icons/back.svg" />
+					<img src="/icons/back.svg" alt="back" />
 					<Typography className={classes.backText}>Back</Typography>
 				</div>
 			</Button>

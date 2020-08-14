@@ -120,6 +120,7 @@ export default function MainHeader() {
 							</a>
 							<Button
 								variant="outlined"
+								onClick={handleGetStarted}
 								className={classes.getStartedBtn}
 							>
 								Get Started

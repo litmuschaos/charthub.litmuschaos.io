@@ -27,7 +27,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		display: "flex",
 		margin: "0 auto",
 		justifyContent: "center",
-		flexWrap: "wrap",
+		[theme.breakpoints.down("sm")]: {
+			flexWrap: "wrap",
+		},
 	},
 	statValue: {
 		color: theme.palette.common.white,

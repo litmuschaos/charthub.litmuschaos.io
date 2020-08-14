@@ -40,6 +40,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		height: 50,
 		borderColor: theme.palette.text.primary,
 		textTransform: "none",
+		[theme.breakpoints.down("sm")]: {
+			marginTop: 15,
+		},
 	},
 	displayYamlBtn: {
 		width: 95,
@@ -47,6 +50,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		borderColor: theme.palette.text.primary,
 		marginLeft: 20,
 		textTransform: "none",
+		[theme.breakpoints.down("sm")]: {
+			marginTop: 15,
+		},
 	},
 	yamlLink: {
 		width: "90%",
@@ -73,5 +79,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: 850,
 		marginLeft: "25%",
 		marginTop: "3%",
+	},
+	btnImg: {
+		paddingRight: 10,
 	},
 }));

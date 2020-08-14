@@ -1,5 +1,6 @@
 import React from "react";
 import { useStyles } from "./styles";
+import VideoFrame from "../VideoBox";
 
 const ReactMarkdown = require("react-markdown");
 
@@ -18,14 +19,7 @@ export function ExperimentInfo(props: ExpInfoProps) {
 			<div className={classes.expDesc}>
 				<ReactMarkdown source={description} />
 			</div>
-			{videoURL && (
-				<iframe
-					className={classes.video}
-					allowFullScreen
-					frameBorder="0"
-					src={videoEmbed}
-				/>
-			)}
+			{videoURL && <VideoFrame width={"775px"} src={videoEmbed || ""} />}
 		</div>
 	);
 }

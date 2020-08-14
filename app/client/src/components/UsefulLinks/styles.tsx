@@ -54,6 +54,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	maintainerlinkEmail: {
 		fontSize: 14,
 		marginBottom: 7,
-		color: theme.palette.secondary.light,
+		color: theme.palette.text.primary,
 	},
 }));
