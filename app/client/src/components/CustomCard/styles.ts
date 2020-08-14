@@ -2,68 +2,50 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
 	card: {
-		width: "95%",
 		background: theme.palette.common.white,
-		borderRadius: 3,
-		overflow: "hidden",
-		fontSize: 16,
-		marginTop: theme.spacing(2),
-		marginBottom: theme.spacing(2),
-		display: "flex",
-		flexDirection: "column",
-		flexWrap: "wrap",
-		textAlign: "center",
 		border: "2px solid #ECECEC",
 		"&:hover": {
 			border: "2px solid #5B44BA",
 		},
-		cursor: "pointer",
-
-		// Above tablet size
-		[theme.breakpoints.up("sm")]: {
-			width: 250,
-			margin: theme.spacing(2),
+	},
+	allExpCard: {
+		backgroundColor: "#5B44BA",
+		border: "2px solid #858CDD",
+		"&:hover": {
+			border: "2px solid #FFFFFF",
 		},
 	},
 	// CARD MEDIA
 	cardMedia: {
 		width: "100%",
-		height: 100,
-		display: "flex",
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "center",
 		"& img": {
 			height: 80,
 		},
 	},
+	allExpCardMedia: {
+		width: 100,
+		padding: 10,
+		borderRadius: 10,
+		margin: "0 auto",
+		backgroundColor: "#FFFFFF",
+
+		"& img": {
+			height: 80,
+		},
+	},
+
 	// CARD CONTENT
 	cardContent: {
 		color: theme.palette.text.primary,
 	},
-	cardBody: {
-		// Below mobile size
-		// [theme.breakpoints.down("sm")]: {
-		// 	display: "flex",
-		// 	flexDirection: "row",
-		// 	justifyContent: "start",
-		// 	padding: 8,
-		// },
+	link: {
+		color: "#5B44BA",
+		fontWeight: 500,
 	},
 	cardInfo: {
 		[theme.breakpoints.down("sm")]: {
 			padding: "0 12px",
 			paddingBottom: 20,
-		},
-	},
-	title: {
-		fontSize: 18,
-		color: theme.palette.common.black,
-		margin: "12px 0",
-		display: "flex",
-		flexDirection: "column",
-		[theme.breakpoints.down("sm")]: {
-			margin: 0,
 		},
 	},
 	description: {
@@ -105,12 +87,79 @@ export const useStyles = makeStyles((theme) => ({
 	totalRuns: {
 		backgroundColor: theme.palette.secondary.light,
 		color: theme.palette.common.white,
+	},
+	allExptotalRuns: {
+		backgroundColor: theme.palette.common.white,
+		color: theme.palette.text.primary,
+	},
+	allExpLink: {
+		color: theme.palette.common.white,
+		fontWeight: 500,
+	},
+	title: {
+		color: theme.palette.common.black,
+	},
+	allExpTitle: {
+		color: theme.palette.common.white,
+	},
+
+	infoIcon: {
+		color: theme.palette.error.dark,
+	},
+
+	allExpimgMedia: {
+		width: "100%",
+		objectFit: "scale-down",
+	},
+	imgMedia: {
+		width: 100,
+		objectFit: "scale-down",
+	},
+
+	//Default properties
+
+	mainCard: {
+		width: "95%",
+		borderRadius: 3,
+		overflow: "hidden",
+		fontSize: 16,
+		marginTop: theme.spacing(2),
+		marginBottom: theme.spacing(2),
+		display: "flex",
+		flexDirection: "column",
+		flexWrap: "wrap",
+		textAlign: "center",
+		cursor: "pointer",
+		// Above tablet size
+		[theme.breakpoints.up("sm")]: {
+			width: 250,
+			margin: theme.spacing(2),
+		},
+		[theme.breakpoints.down(682)]: {
+			width: "80%",
+			margin: theme.spacing(2),
+		},
+	},
+	mainCardMedia: {
+		height: 100,
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	maintotalRuns: {
 		borderRadius: 4,
 		padding: "3px 6px",
 		fontWeight: 500,
 		fontSize: 14,
 	},
-	infoIcon: {
-		color: theme.palette.error.dark,
+	mainTitle: {
+		fontSize: 18,
+		margin: "12px 0",
+		display: "flex",
+		flexDirection: "column",
+		[theme.breakpoints.down("sm")]: {
+			margin: 0,
+		},
 	},
 }));

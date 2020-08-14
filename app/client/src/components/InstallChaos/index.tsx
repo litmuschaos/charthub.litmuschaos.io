@@ -90,6 +90,7 @@ export function InstallChaos(props: InstallProps) {
 								<img
 									src="/icons/copy.svg"
 									style={{ paddingRight: 10 }}
+									alt="copy"
 								/>
 								<Typography>Copy</Typography>
 							</div>
@@ -117,6 +118,7 @@ export function InstallChaos(props: InstallProps) {
 									<img
 										src="/icons/edit.svg"
 										style={{ paddingRight: 10 }}
+										alt="edit"
 									/>
 									<Typography>Edit</Typography>
 								</div>

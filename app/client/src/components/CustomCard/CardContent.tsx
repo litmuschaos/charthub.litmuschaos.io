@@ -4,6 +4,7 @@ import { formatCount } from "../../utils";
 import { CardProps } from "./model";
 import { useStyles } from "./styles";
 import InfoIcon from "@material-ui/icons/Info";
+import clsx from "clsx";
 
 function CardContent(props: CardProps) {
 	const {
@@ -45,20 +46,49 @@ function CardContent(props: CardProps) {
 				) : (
 					<span />
 				)}
-				<span className={classes.totalRuns}>
+				<span
+					className={clsx(
+						props.title !== "all-experiments"
+							? classes.totalRuns
+							: classes.allExptotalRuns,
+						classes.maintotalRuns
+					)}
+				>
 					{formatCount(totalRuns)} runs
 				</span>
 			</div>
-			<div className={classes.cardBody}>
+			<div>
 				{urlToIcon ? (
-					<div className={classes.cardMedia}>
-						<img src={urlToIcon} alt="chart provider logo" />
+					<div
+						className={clsx(
+							props.title !== "all-experiments"
+								? classes.cardMedia
+								: classes.allExpCardMedia,
+							classes.mainCardMedia
+						)}
+					>
+						<img
+							src={urlToIcon}
+							className={
+								props.title !== "all-experiments"
+									? classes.imgMedia
+									: classes.allExpimgMedia
+							}
+							alt="chart provider logo"
+						/>
 					</div>
 				) : (
 					<div className={classes.noImage}>Image</div>
 				)}
 				<div className={classes.cardInfo}>
-					<div className={classes.title}>
+					<div
+						className={clsx(
+							props.title !== "all-experiments"
+								? classes.title
+								: classes.allExpTitle,
+							classes.mainTitle
+						)}
+					>
 						<Link
 							href="#"
 							onClick={(e: any) => {
@@ -66,7 +96,11 @@ function CardContent(props: CardProps) {
 								e.stopPropagation();
 								handleExpGrpClick(expGrp);
 							}}
-							style={{ color: "#5B44BA", fontWeight: 500 }}
+							className={clsx(
+								props.title !== "all-experiments"
+									? classes.link
+									: classes.allExpLink
+							)}
 						>
 							{expGrp}/
 						</Link>
