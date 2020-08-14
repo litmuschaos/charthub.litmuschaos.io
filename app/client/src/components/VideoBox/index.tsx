@@ -12,10 +12,10 @@ const VideoFrame: React.FC<IVideoFrame> = ({ width, src }) => {
 	return (
 		<div className={classes.videoDiv}>
 			<iframe
+				title="chaos-video"
 				src={src}
 				frameBorder="0"
 				allow="accelerometer"
-				picture-in-picture
 				allowFullScreen
 				className={classes.videoBox}
 				style={{ width: width, height: `calc(${width} / (16 / 9))` }}

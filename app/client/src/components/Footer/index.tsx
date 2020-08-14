@@ -1,7 +1,6 @@
 import { Typography, Hidden } from "@material-ui/core";
 import * as React from "react";
 import { useStyles } from "./styles";
-import { history } from "../../redux/configureStore";
 
 interface CommunityItem {
 	value: string;
@@ -67,12 +66,13 @@ function FooterLogo() {
 	const classes = useStyles();
 	return (
 		<div className={classes.copyright}>
-			<img
-				className={classes.logo}
-				src="/icons/litmus-light.svg"
-				alt="litmus logo"
-				onClick={() => history.push("/")}
-			/>
+			<a href="https://litmuschaos.io/" target="_">
+				<img
+					className={classes.logo}
+					src="/icons/litmus-light.svg"
+					alt="litmus logo"
+				/>
+			</a>
 		</div>
 	);
 }
@@ -133,7 +133,7 @@ const links: CommunityItem[] = [
 	},
 	{
 		value: "Why Litmus?",
-		link: "#",
+		link: "https://litmuschaos.io/",
 	},
 	{
 		value: "Community",

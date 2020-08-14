@@ -26,7 +26,7 @@ export function UsefulLinks(props: UsefulLinks) {
 					</Typography>
 				</div>
 				{maintainers.map((m: Maintainer) => (
-					<div className={classes.maintainerField}>
+					<div className={classes.maintainerField} key={m.name}>
 						<Typography className={classes.maintainerlinkName}>
 							{m.name}
 						</Typography>
@@ -55,7 +55,7 @@ export function UsefulLinks(props: UsefulLinks) {
 				{data.map(
 					(d) =>
 						d.url && (
-							<div>
+							<div key={d.name}>
 								<a
 									href={d.url}
 									style={{ textDecoration: "none" }}
@@ -85,7 +85,9 @@ export function UsefulLinks(props: UsefulLinks) {
 				</div>
 				<div className={classes.linkListBox}>
 					{data.map((d) => (
-						<span className={classes.staticType}>{d},</span>
+						<span className={classes.staticType} key={d}>
+							{d},
+						</span>
 					))}
 				</div>
 			</div>
@@ -107,7 +109,9 @@ export function UsefulLinks(props: UsefulLinks) {
 				</div>
 				<div className={classes.linkListBox}>
 					{data.map((d) => (
-						<div className={classes.staticType}>{d}</div>
+						<div className={classes.staticType} key={d}>
+							{d}
+						</div>
 					))}
 				</div>
 			</div>

@@ -28,7 +28,7 @@ export function Charts(props: ChartProps) {
 			{experiments &&
 				experiments.map((e: Experiment) => (
 					<CustomCard
-						key={e.metadataName}
+						key={e.expGroup + "-" + e.metadataName}
 						id={e.metadataName}
 						title={e.name}
 						expGrp={e.expGroup || ""}
