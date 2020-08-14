@@ -9,7 +9,7 @@ interface DeveloperGuideProps {
 
 function DeveloperGuide(props: DeveloperGuideProps) {
 	const [display, setDisplay] = React.useState(true);
-	console.log(props.links);
+
 	const handleClose = () => {
 		setDisplay(false);
 	};
