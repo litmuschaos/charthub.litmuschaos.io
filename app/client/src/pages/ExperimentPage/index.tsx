@@ -24,6 +24,8 @@ const getIconUrl = (path: any) => {
 	) {
 		baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
 	} else baseURL = "/api";
+	if (path[2] === "all-experiments")
+		return baseURL + "/icon/" + path[1] + "/" + path[1] + ".png";
 	return baseURL + "/icon/" + path[1] + "/" + path[2] + ".png";
 };
 
@@ -40,7 +42,7 @@ function ExperimentPage(props: any) {
 		(g) => g.metadataName === chartGroupId
 	)[0];
 	const chart: any =
-		chartId === "install-all-experiments"
+		chartId === "all-experiments"
 			? chartGroup
 			: chartGroup &&
 			  chartGroup.experiments.filter(

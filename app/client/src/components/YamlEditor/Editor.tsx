@@ -116,7 +116,7 @@ const YamlEditor: React.FC<YamlEditorProps> = ({ content, filename }) => {
 
 	const downloadYamlFile = () => {
 		const element = document.createElement("a");
-		const file = new Blob([editorState.content as any], {
+		const file = new Blob([modifiedYaml as any], {
 			type: "text/yaml",
 		});
 		element.href = URL.createObjectURL(file);

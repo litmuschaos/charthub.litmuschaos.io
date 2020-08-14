@@ -19,6 +19,7 @@ export const chartData = createReducer<ChartData>(initialState, {
 		let totalExpCount: number = 0;
 		let experimentGroups: ExperimentGroup[] = [];
 		let allExperiments: Experiment[] = [];
+		let allExpGp: Experiment[] = [];
 		action.payload.forEach((g: any) => {
 			let exp: Experiment[] = [];
 			if (g.Experiments)
@@ -87,12 +88,52 @@ export const chartData = createReducer<ChartData>(initialState, {
 				chaosExpCRDLink: spec.ChaosExpCRDLink,
 				experiments: exp,
 			});
+			if (exp.length !== 0) {
+				allExpGp.push({
+					name: "all-experiments",
+					metadataName: "all-experiments",
+					version: g.Metadata.Version,
+					vendor: g.Metadata.Annotations.Vendor,
+					createdAt: g.Metadata.Annotations.CreatedAt,
+					supportLink: g.Metadata.Annotations.Support,
+					description: g.Metadata.Annotations.ChartDescription,
+					maintainers: spec.Maintainers
+						? spec.Maintainers.map((m: any) => ({
+								name: m.Name,
+								email: m.Email,
+						  }))
+						: [],
+					miniKubeVersion: spec.MiniKubeVersion,
+					provider: spec.Provider.Name,
+					links: spec.Links
+						? spec.Links.map((l: any) => ({
+								name: l.Name,
+								url: l.Url,
+						  }))
+						: [],
+					chaosExpCRDLink: spec.ChaosExpCRDLink,
+					maturity: "",
+					chaosType: "",
+					platforms: [],
+				});
+				allExpGp[allExpGp.length - 1].totalRuns = getExpRunCount(
+					exp,
+					action.chartAnalytics
+				);
+				allExpGp[allExpGp.length - 1].expGroup = g.Metadata.Name;
+			}
 		});
 		allExperiments.sort((c1: Experiment, c2: Experiment) => {
 			if (c1.totalRuns !== undefined && c2.totalRuns !== undefined)
 				return c2.totalRuns - c1.totalRuns;
 			return 0;
 		});
+		allExpGp.sort((c1: Experiment, c2: Experiment) => {
+			if (c1.totalRuns !== undefined && c2.totalRuns !== undefined)
+				return c2.totalRuns - c1.totalRuns;
+			return 0;
+		});
+		allExperiments = allExpGp.concat(allExperiments);
 		return {
 			...state,
 			allExperimentGroups: experimentGroups,

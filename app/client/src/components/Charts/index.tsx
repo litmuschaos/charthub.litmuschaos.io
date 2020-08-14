@@ -16,6 +16,8 @@ const getIconUrl = (chartMetadataName: string, chartGroup: string) => {
 	) {
 		baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
 	} else baseURL = "/api";
+	if (chartMetadataName === "all-experiments")
+		return baseURL + "/icon/" + chartGroup + "/" + chartGroup + ".png";
 	return baseURL + "/icon/" + chartGroup + "/" + chartMetadataName + ".png";
 };
 
