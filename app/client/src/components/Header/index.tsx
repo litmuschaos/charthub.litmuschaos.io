@@ -35,7 +35,9 @@ export default function MainHeader() {
 	};
 
 	const handleContribute = () => {
-		window.open("https://github.com/litmuschaos/litmus");
+		window.open(
+			"https://github.com/litmuschaos/chaos-charts/blob/master/CONTRIBUTING.md"
+		);
 	};
 
 	const handleGetStarted = () => {
