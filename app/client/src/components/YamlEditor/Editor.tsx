@@ -475,7 +475,7 @@ const YamlEditor: React.FC<YamlEditorProps> = ({ content, filename }) => {
 								editor.setShowFoldWidgets(true);
 								editor.setAnimatedScroll(true);
 								editor.setShowInvisibles(false);
-								editor.setFontSize("0.75rem");
+								editor.setFontSize("1rem");
 								editor.container.style.background = "#1C1C1C";
 								editor.container.style.lineHeight = "160%";
 								let nodeStyle = (document.getElementsByClassName(

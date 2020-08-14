@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 			outline: "1px solid slategrey",
 		},
 		[theme.breakpoints.down("xl")]: {
-			height: "450px",
+			height: "480px",
 		},
 		[theme.breakpoints.down("lg")]: {
 			height: "390px",
@@ -185,7 +185,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 			marginLeft: theme.spacing(1.3),
 		},
 		[theme.breakpoints.down("md")]: {
-			marginLeft: theme.spacing(1),
+			display: "none",
 		},
 	},
 
@@ -211,6 +211,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		[theme.breakpoints.down("xs")]: {
 			marginRight: theme.spacing(0.1),
 			marginTop: theme.spacing(1.5),
+		},
+		[theme.breakpoints.down("xl")]: {
+			marginRight: theme.spacing(2),
 		},
 	},
 

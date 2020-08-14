@@ -1,4 +1,4 @@
-import { Typography, Button, Modal } from "@material-ui/core";
+import { Typography, Button, Modal, Hidden } from "@material-ui/core";
 import Done from "@material-ui/icons/DoneAllTwoTone";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./styles";
@@ -99,45 +99,57 @@ export function InstallChaos(props: InstallProps) {
 							</>
 						)}
 					</Button>
-					{!editing ? (
-						<Button
-							variant="outlined"
-							onClick={() => startEditing(yaml)}
-							className={classes.displayYamlBtn}
-						>
-							<div
+
+					<Hidden smDown>
+						{!editing ? (
+							<Button
+								variant="outlined"
+								onClick={() => startEditing(yaml)}
+								className={classes.displayYamlBtn}
+							>
+								<div
+									style={{
+										display: "flex",
+										flexDirection: "row",
+									}}
+								>
+									<img
+										src="/icons/edit.svg"
+										style={{ paddingRight: 10 }}
+									/>
+									<Typography>Edit</Typography>
+								</div>
+							</Button>
+						) : (
+							<Modal
+								open={open}
+								onClose={handleClose}
 								style={{
-									display: "flex",
-									flexDirection: "row",
+									background: "rgba(33, 21, 86, 0.65)",
+									backdropFilter: "blur(10px)",
 								}}
 							>
-								<img
-									src="/icons/edit.svg"
-									style={{ paddingRight: 10 }}
-								/>
-								<Typography>Edit</Typography>
-							</div>
-						</Button>
-					) : (
-						<Modal open={open} onClose={handleClose}>
-							<div className={classes.modalContainer}>
-								<div className={classes.modalContainerClose}>
-									<Button
-										variant="outlined"
-										color="secondary"
-										className={classes.closeButtonStyle}
-										onClick={handleClose}
+								<div className={classes.modalContainer}>
+									<div
+										className={classes.modalContainerClose}
 									>
-										&#x2715;
-									</Button>
+										<Button
+											variant="outlined"
+											color="secondary"
+											className={classes.closeButtonStyle}
+											onClick={handleClose}
+										>
+											&#x2715;
+										</Button>
+									</div>
+									<YamlEditor
+										content={yamlText}
+										filename={yamlLink}
+									/>
 								</div>
-								<YamlEditor
-									content={yamlText}
-									filename={yamlLink}
-								/>
-							</div>
-						</Modal>
-					)}
+							</Modal>
+						)}
+					</Hidden>
 				</div>
 			</div>
 		</div>

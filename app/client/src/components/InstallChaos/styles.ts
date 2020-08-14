@@ -88,21 +88,28 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 
 	modalContainer: {
-		width: "80%",
+		width: "75%",
 		height: "60%",
-		marginLeft: "10%",
-		marginTop: "7.5%",
+		margin: "0 auto",
+		marginTop: "5%",
 		marginBottom: "5.5%",
 		background: "#1C1C1C",
 		outline: "none",
 		[theme.breakpoints.down("xs")]: {
-			height: "35%",
+			height: "40%",
 		},
 		[theme.breakpoints.down("sm")]: {
-			height: "55%",
+			height: "50%",
 		},
 		[theme.breakpoints.down("md")]: {
-			height: "50%",
+			height: "60%",
+		},
+		[theme.breakpoints.down("lg")]: {
+			width: "70%",
+			height: "60%",
+		},
+		[theme.breakpoints.down("xl")]: {
+			height: "60%",
 		},
 	},
 
