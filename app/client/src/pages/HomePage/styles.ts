@@ -83,7 +83,7 @@ export const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "row",
 		marginLeft: 130,
-		marginRight: 130,
+		marginRight: 80,
 		marginTop: 30,
 		[theme.breakpoints.up("xl")]: {
 			display: "flex",

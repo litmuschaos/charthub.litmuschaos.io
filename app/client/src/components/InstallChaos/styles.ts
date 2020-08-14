@@ -34,6 +34,18 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			flexDirection: "column",
 		},
 	},
+
+	buttonBox: {
+		padding: 10,
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-around",
+		[theme.breakpoints.down("sm")]: {
+			display: "flex",
+			flexDirection: "row",
+		},
+	},
+
 	copyBtn: {
 		width: 95,
 		height: 50,
@@ -68,9 +80,57 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		paddingRight: 5,
 	},
 
-	modalEditor: {
-		width: 850,
-		marginLeft: "25%",
-		marginTop: "3%",
+	modalContainer: {
+		width: "80%",
+		height: "60%",
+		marginLeft: "10%",
+		marginTop: "7.5%",
+		marginBottom: "5.5%",
+		background: "#1C1C1C",
+		outline: "none",
+		[theme.breakpoints.down("xs")]: {
+			height: "35%",
+		},
+		[theme.breakpoints.down("sm")]: {
+			height: "55%",
+		},
+		[theme.breakpoints.down("md")]: {
+			height: "50%",
+		},
+	},
+
+	modalContainerClose: {
+		paddingLeft: "95%",
+		[theme.breakpoints.down("xs")]: {
+			paddingLeft: "85%",
+		},
+		[theme.breakpoints.down("sm")]: {
+			paddingLeft: "87%",
+		},
+		[theme.breakpoints.down("md")]: {
+			paddingLeft: "88%",
+		},
+	},
+
+	errorText: {
+		marginTop: theme.spacing(7.5),
+		fontSize: "1rem",
+		color: "red",
+	},
+
+	closeButtonStyle: {
+		fontSize: "1rem",
+		fontWeight: 1000,
+		display: "inline-block",
+		paddingTop: theme.spacing(0.375),
+		paddingBottom: theme.spacing(0.375),
+		paddingLeft: theme.spacing(1.5),
+		paddingRight: theme.spacing(1.5),
+		minHeight: 0,
+		minWidth: 0,
+		borderRadius: 3,
+		color: "#FFFFFF",
+		border: "1px solid rgba(255, 255, 255, 0.2)",
+		marginTop: theme.spacing(2.5),
 	},
 }));

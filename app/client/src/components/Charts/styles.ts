@@ -7,5 +7,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		flexWrap: "wrap",
 		justifyContent: "center",
 		alignItems: "center",
+		marginTop: theme.spacing(3),
+		marginBottom: theme.spacing(3),
 	},
 }));

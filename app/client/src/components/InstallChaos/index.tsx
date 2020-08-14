@@ -1,8 +1,8 @@
-import { Typography, Button, Hidden } from "@material-ui/core";
+import { Typography, Button, Modal } from "@material-ui/core";
 import Done from "@material-ui/icons/DoneAllTwoTone";
-import CloseTwoToneIcon from "@material-ui/icons/CloseTwoTone";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./styles";
+import YamlEditor from "../YamlEditor/Editor";
 
 interface InstallProps {
 	title: string;
@@ -15,11 +15,15 @@ export function InstallChaos(props: InstallProps) {
 	const { title, description, yamlLink } = props;
 	const [copying, setCopying] = useState(false);
 	const [editing, setEditing] = useState(false);
-	const [viewing, setViewing] = useState(false);
 	const [yaml, setYaml] = useState(`kubectl apply -f ${yamlLink}`);
 	const [yamlText, setYamlText] = useState(``);
 	const [open, setOpen] = useState(false);
 	const [reload, setReload] = useState(false);
+
+	const handleClose = () => {
+		setOpen(false);
+		setReload(true);
+	};
 
 	function fetchYaml(yamlLink: string) {
 		fetch(yamlLink)
@@ -27,18 +31,6 @@ export function InstallChaos(props: InstallProps) {
 				data.text().then((yamlText) => {
 					setYamlText(yamlText);
 					setOpen(true);
-				});
-			})
-			.catch((err) => {
-				console.error("Unable to fetch the yaml text" + err);
-			});
-	}
-
-	function fetchYamlAndShowInPage(yamlLink: string) {
-		fetch(yamlLink)
-			.then((data) => {
-				data.text().then((yamlText) => {
-					setYaml(yamlText);
 				});
 			})
 			.catch((err) => {
@@ -59,14 +51,8 @@ export function InstallChaos(props: InstallProps) {
 		setTimeout(() => setCopying(false), 3000);
 	}
 
-	function showYamlInPage(text: string) {
-		if (!viewing) {
-			fetchYamlAndShowInPage(yamlLink);
-			setViewing(true);
-		} else {
-			setYaml(`kubectl apply -f ${yamlLink}`);
-			setViewing(false);
-		}
+	function startEditing(text: string) {
+		setEditing(true);
 	}
 
 	useEffect(() => {
@@ -86,38 +72,39 @@ export function InstallChaos(props: InstallProps) {
 				<Typography variant="subtitle1" className={classes.yamlLink}>
 					{yaml}
 				</Typography>
-				<Button
-					variant="outlined"
-					onClick={() => copyTextToClipboard(yaml)}
-					className={classes.copyBtn}
-				>
-					{!copying ? (
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "row",
-							}}
-						>
-							<img
-								src="/icons/copy.svg"
-								style={{ paddingRight: 10 }}
-							/>
-							<Typography>Copy</Typography>
-						</div>
-					) : (
-						<>
-							<Done className={classes.done} />
-							<Typography>Copied</Typography>
-						</>
-					)}
-				</Button>
-				<Hidden mdDown>
+
+				<div className={classes.buttonBox}>
 					<Button
 						variant="outlined"
-						onClick={() => showYamlInPage(yaml)}
-						className={classes.displayYamlBtn}
+						onClick={() => copyTextToClipboard(yaml)}
+						className={classes.copyBtn}
 					>
-						{!viewing ? (
+						{!copying ? (
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "row",
+								}}
+							>
+								<img
+									src="/icons/copy.svg"
+									style={{ paddingRight: 10 }}
+								/>
+								<Typography>Copy</Typography>
+							</div>
+						) : (
+							<>
+								<Done className={classes.done} />
+								<Typography>Copied</Typography>
+							</>
+						)}
+					</Button>
+					{!editing ? (
+						<Button
+							variant="outlined"
+							onClick={() => startEditing(yaml)}
+							className={classes.displayYamlBtn}
+						>
 							<div
 								style={{
 									display: "flex",
@@ -130,11 +117,28 @@ export function InstallChaos(props: InstallProps) {
 								/>
 								<Typography>Edit</Typography>
 							</div>
-						) : (
-							<CloseTwoToneIcon />
-						)}
-					</Button>
-				</Hidden>
+						</Button>
+					) : (
+						<Modal open={open} onClose={handleClose}>
+							<div className={classes.modalContainer}>
+								<div className={classes.modalContainerClose}>
+									<Button
+										variant="outlined"
+										color="secondary"
+										className={classes.closeButtonStyle}
+										onClick={handleClose}
+									>
+										&#x2715;
+									</Button>
+								</div>
+								<YamlEditor
+									content={yamlText}
+									filename={yamlLink}
+								/>
+							</div>
+						</Modal>
+					)}
+				</div>
 			</div>
 		</div>
 	);
