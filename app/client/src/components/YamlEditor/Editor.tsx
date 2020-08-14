@@ -484,11 +484,6 @@ const YamlEditor: React.FC<YamlEditorProps> = ({ content, filename }) => {
 								nodeStyle.color = "rgba(255, 255, 255, 0.4)";
 								nodeStyle.borderRight = 0;
 								nodeStyle.background = "#1C1C1C";
-								let nodeStyleActive = (document.getElementsByClassName(
-									"ace_gutter-active-line"
-								)[0] as any).style;
-								nodeStyleActive.backgroundColor = "#5B44BA";
-								nodeStyleActive.color = "#FFFFFF";
 							}}
 							onCursorChange={(selection) => {
 								(YamlAce.current!.editor as any).setOptions({
