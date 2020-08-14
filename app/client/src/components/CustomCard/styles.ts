@@ -136,7 +136,7 @@ export const useStyles = makeStyles((theme) => ({
 			margin: theme.spacing(2),
 		},
 		[theme.breakpoints.down(682)]: {
-			width: "80%",
+			width: "90%",
 			margin: theme.spacing(2),
 		},
 	},
