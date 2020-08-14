@@ -10,7 +10,6 @@ import { history } from "./redux/configureStore";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ExperimentPage = lazy(() => import("./pages/ExperimentPage"));
-const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
 function Routes() {
 	const classes = useStyles();
@@ -19,13 +18,12 @@ function Routes() {
 		<div className={classes.content}>
 			<Switch>
 				<Route exact={true} path="/" component={HomePage} />
-				<Route exact={true} path="/404" component={ErrorPage} />
 				<Route
 					exact={true}
 					path="/:chartGroupId/:chartId"
 					component={ExperimentPage}
 				/>
-				<Redirect to="/404" />
+				<Redirect to="/" />
 			</Switch>
 		</div>
 	);
