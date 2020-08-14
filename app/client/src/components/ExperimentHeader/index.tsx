@@ -16,7 +16,11 @@ export function ExperimentHeader(props: ExpInfoProps) {
 	return (
 		<div className={classes.root}>
 			<div className={classes.expDiv}>
-				<img src={urlToIcon} className={classes.expImg} />
+				<img
+					src={urlToIcon}
+					alt="exp icon"
+					className={classes.expImg}
+				/>
 				<div className={classes.expDiv1}>
 					<div className={classes.titleDiv}>
 						<div className={classes.expHeader}>{title}</div>

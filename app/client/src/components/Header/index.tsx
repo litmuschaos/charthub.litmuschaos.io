@@ -78,7 +78,7 @@ export default function MainHeader() {
 							className={classes.versionSelect}
 						>
 							{versionData.versions.map((d: string) => (
-								<MenuItem value={d}>
+								<MenuItem value={d} key={d}>
 									{d !== "master" ? "v " + d : d}
 								</MenuItem>
 							))}
@@ -120,6 +120,7 @@ export default function MainHeader() {
 							</a>
 							<Button
 								variant="outlined"
+								onClick={handleGetStarted}
 								className={classes.getStartedBtn}
 							>
 								Get Started
@@ -150,6 +151,7 @@ export default function MainHeader() {
 								<MenuItem
 									className={classes.menuItemClose}
 									button={false}
+									key="close"
 								>
 									<IconButton onClick={handleClose}>
 										<CloseIcon
@@ -161,6 +163,7 @@ export default function MainHeader() {
 								<MenuItem
 									className={classes.menuItem}
 									button={false}
+									key="contribute"
 								>
 									<Typography
 										className={classes.contributeBtn}
@@ -172,6 +175,7 @@ export default function MainHeader() {
 								<MenuItem
 									className={classes.menuItem}
 									button={false}
+									key="getstarted"
 								>
 									<Button
 										className={classes.getStarted}
@@ -183,6 +187,7 @@ export default function MainHeader() {
 								<MenuItem
 									className={classes.menuItem}
 									button={false}
+									key="star"
 								>
 									<Button
 										variant="outlined"

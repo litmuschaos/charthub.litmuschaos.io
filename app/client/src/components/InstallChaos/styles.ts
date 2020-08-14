@@ -28,6 +28,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		borderRadius: 8,
 		display: "flex",
 		flexDirection: "row",
+		wordWrap: "break-word",
 		justifyContent: "space-between",
 		[theme.breakpoints.down("sm")]: {
 			display: "flex",
@@ -51,6 +52,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		height: 50,
 		borderColor: theme.palette.text.primary,
 		textTransform: "none",
+		[theme.breakpoints.down("sm")]: {
+			marginTop: 15,
+		},
 	},
 	displayYamlBtn: {
 		width: 95,
@@ -58,6 +62,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		borderColor: theme.palette.text.primary,
 		marginLeft: 20,
 		textTransform: "none",
+		[theme.breakpoints.down("sm")]: {
+			marginTop: 15,
+		},
 	},
 	yamlLink: {
 		width: "90%",
@@ -132,5 +139,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		color: "#FFFFFF",
 		border: "1px solid rgba(255, 255, 255, 0.2)",
 		marginTop: theme.spacing(2.5),
+	},
+	btnImg: {
+		paddingRight: 10,
 	},
 }));

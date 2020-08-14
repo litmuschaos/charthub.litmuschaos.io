@@ -75,9 +75,21 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	headerImg: {
 		marginTop: -80,
+		marginRight: 50,
+		[theme.breakpoints.down("md")]: {
+			marginTop: -50,
+			marginLeft: 30,
+			marginRight: 0,
+		},
 	},
 	searchBar: {
 		flexGrow: 1,
+		[theme.breakpoints.down("sm")]: {
+			marginRight: 20,
+		},
+		[theme.breakpoints.down("xs")]: {
+			marginRight: 0,
+		},
 	},
 	searchDiv: {
 		display: "flex",
@@ -96,6 +108,7 @@ export const useStyles = makeStyles((theme) => ({
 			flexDirection: "column",
 			width: "95%",
 			marginLeft: 30,
+			marginRight: 30,
 		},
 		[theme.breakpoints.down("xs")]: {
 			marginTop: "5%",
@@ -128,6 +141,12 @@ export const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.common.white,
 		border: "1px solid rgba(0, 0, 0, 0.05)",
 		borderRadius: "3px",
+		[theme.breakpoints.down("md")]: {
+			marginTop: -60,
+		},
+		[theme.breakpoints.down("sm")]: {
+			marginTop: -80,
+		},
 		[theme.breakpoints.down(376)]: {
 			marginTop: -40,
 			marginLeft: "6%",

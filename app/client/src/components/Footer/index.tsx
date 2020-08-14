@@ -66,11 +66,13 @@ function FooterLogo() {
 	const classes = useStyles();
 	return (
 		<div className={classes.copyright}>
-			<img
-				className={classes.logo}
-				src="/icons/litmus-light.svg"
-				alt="litmus logo"
-			/>
+			<a href="https://litmuschaos.io/" target="_">
+				<img
+					className={classes.logo}
+					src="/icons/litmus-light.svg"
+					alt="litmus logo"
+				/>
+			</a>
 		</div>
 	);
 }
@@ -131,7 +133,7 @@ const links: CommunityItem[] = [
 	},
 	{
 		value: "Why Litmus?",
-		link: "#",
+		link: "https://litmuschaos.io/",
 	},
 	{
 		value: "Community",

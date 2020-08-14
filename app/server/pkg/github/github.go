@@ -30,7 +30,7 @@ func Handler() {
 }
 
 //UpdateGithubData updates github data related to litmus repo, makes a get request to the public APIs
-//of github to fetch repo and contributor data
+//of github to fetch repo
 func UpdateGithubData() error {
 	if _, err := os.Stat(basePath); os.IsNotExist(err) {
 		os.Mkdir(basePath, 0700)
@@ -43,18 +43,6 @@ func UpdateGithubData() error {
 	file, err := os.Create(basePath + "githubRepoData.json")
 	if err != nil {
 		return fmt.Errorf("Error saving github data, err :%s", err)
-	}
-	file.WriteString(string(data))
-	defer file.Close()
-
-	response, err = http.Get("https://api.github.com/repos/litmuschaos/" + repoName + "/contributors")
-	if err != nil {
-		return fmt.Errorf("Error while getting github contributor data, err :%s", err)
-	}
-	data, _ = ioutil.ReadAll(response.Body)
-	file, err = os.Create(basePath + "githubContributorData.json")
-	if err != nil {
-		return fmt.Errorf("Error saving github contributor data, err :%s", err)
 	}
 	file.WriteString(string(data))
 	defer file.Close()
