@@ -44,6 +44,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		},
 	},
 	footerText: {
+		fontSize: "16px",
 		textAlign: "center",
 		marginTop: 30,
 		marginBottom: 30,
