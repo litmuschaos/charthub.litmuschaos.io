@@ -1,8 +1,8 @@
-import { IconButton, Link } from "@material-ui/core";
+import { Tooltip, Link, Typography, Button } from "@material-ui/core";
 import React from "react";
 import { formatCount } from "../../utils";
 import { CardProps } from "./model";
-import { InfoTooltip, useStyles } from "./styles";
+import { useStyles } from "./styles";
 import InfoIcon from "@material-ui/icons/Info";
 import clsx from "clsx";
 
@@ -25,7 +25,7 @@ function CardContent(props: CardProps) {
 		<div className={classes.cardContent} onClick={handleClick}>
 			<div className={classes.cardAnalytics}>
 				{chaosType ? (
-					<InfoTooltip
+					<Tooltip
 						TransitionProps={{ timeout: 400 }}
 						title={
 							chartType === "generic"
@@ -34,18 +34,22 @@ function CardContent(props: CardProps) {
 						}
 						placement="bottom-start"
 					>
-						<span
-							className={clsx(
-								classes.chaosInfo,
-								classes.chaosInfoBase
-							)}
-						>
-							<IconButton className={classes.button}>
-								<InfoIcon className={classes.infoIcon} />
-							</IconButton>
-							&nbsp;Infra-chaos
+						<span className={classes.chaosInfoBase}>
+							<Button className={classes.button}>
+								<InfoIcon
+									className={classes.infoIcon}
+									style={{
+										paddingRight: 5,
+										height: 20,
+										width: 20,
+									}}
+								/>
+								<Typography style={{ fontSize: 14 }}>
+									Infra-Chaos
+								</Typography>
+							</Button>
 						</span>
-					</InfoTooltip>
+					</Tooltip>
 				) : (
 					<span />
 				)}

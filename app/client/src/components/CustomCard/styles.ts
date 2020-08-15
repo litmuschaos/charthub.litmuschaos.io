@@ -1,5 +1,4 @@
-import { Tooltip } from "@material-ui/core";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
 	card: {
@@ -78,9 +77,16 @@ export const useStyles = makeStyles((theme) => ({
 		margin: "8px 8px 12px 8px",
 	},
 	button: {
+		width: 100,
+		height: 24,
 		padding: 0,
 		margin: 0,
-		color: theme.palette.warning.dark,
+		backgroundColor: "#F6B92B",
+		color: theme.palette.common.white,
+		textTransform: "none",
+		"&:hover": {
+			backgroundColor: "#F6B92B",
+		},
 	},
 	totalRuns: {
 		backgroundColor: theme.palette.secondary.light,
@@ -154,22 +160,16 @@ export const useStyles = makeStyles((theme) => ({
 		justifyContent: "center",
 	},
 	maintotalRuns: {
+		marginTop: 3,
 		borderRadius: 4,
-		padding: "3px 6px",
-		fontWeight: 500,
-		fontSize: 14,
-	},
-	maintotalCount: {
-		borderRadius: 4,
-		padding: "3px 6px",
+		padding: "2px 6px",
+		height: 24,
 		fontWeight: 500,
 		fontSize: 14,
 	},
 	chaosInfoBase: {
 		borderRadius: 4,
-		padding: "3px 6px",
-		fontWeight: 500,
-		fontSize: 14,
+		padding: "2px 6px",
 	},
 	mainTitle: {
 		fontSize: 18,
@@ -185,9 +185,3 @@ export const useStyles = makeStyles((theme) => ({
 
 	allExpName: { color: theme.palette.common.white },
 }));
-
-export const InfoTooltip = withStyles({
-	tooltip: {
-		backgroundColor: "rgba(0, 0, 0, 0.8)",
-	},
-})(Tooltip);

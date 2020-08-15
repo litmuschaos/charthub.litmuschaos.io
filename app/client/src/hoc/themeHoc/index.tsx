@@ -75,7 +75,7 @@ const theme = customTheme({
 	overrides: {
 		MuiTooltip: {
 			tooltip: {
-				backgroundColor: "#000000",
+				backgroundColor: "rgba(0,0,0,0.8)",
 				color: "#FFFFFF",
 				width: 200,
 				fontSize: 12,
