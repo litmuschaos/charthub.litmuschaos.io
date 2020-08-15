@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		flexDirection: "column",
 		color: theme.palette.text.secondary,
 		fontSize: 18,
-		margin: "0 32px",
 	},
 	expHeader: {
 		fontWeight: "bold",

@@ -1,18 +1,16 @@
 import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
 	searchField: {
-		maxWidth: 400,
-		height: 50,
+		height: 60,
 		display: "flex",
-		margin: "auto",
 		justifyContent: "left",
-		color: theme.palette.text.primary,
+		backgroundColor: theme.palette.common.white,
+		border: "1px solid rgba(0, 0, 0, 0.05)",
 		marginBottom: 20,
 	},
 	searchIcon: {
 		margin: "auto",
 		marginLeft: 20,
-		marginRight: 20,
 		color: theme.palette.primary.contrastText,
 	},
 	textField: {

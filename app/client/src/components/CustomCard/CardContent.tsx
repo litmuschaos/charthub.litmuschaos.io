@@ -1,17 +1,18 @@
-import { IconButton, Tooltip, Zoom } from "@material-ui/core";
-import InfraIcon from "@material-ui/icons/NewReleasesTwoTone";
+import { Tooltip, Link, Typography, Button } from "@material-ui/core";
 import React from "react";
 import { formatCount } from "../../utils";
 import { CardProps } from "./model";
 import { useStyles } from "./styles";
+import InfoIcon from "@material-ui/icons/Info";
+import clsx from "clsx";
 
 function CardContent(props: CardProps) {
 	const {
 		title,
+		expGrp,
 		urlToIcon,
 		handleClick,
-		experimentCount,
-		provider,
+		handleExpGrpClick,
 		description,
 		totalRuns,
 		chaosType,
@@ -23,43 +24,102 @@ function CardContent(props: CardProps) {
 	return (
 		<div className={classes.cardContent} onClick={handleClick}>
 			<div className={classes.cardAnalytics}>
-				{experimentCount ? (
-					<span className={classes.expCount}>
-						{experimentCount} Experiments
-					</span>
-				) : chaosType ? (
+				{chaosType ? (
 					<Tooltip
-						TransitionComponent={Zoom}
 						TransitionProps={{ timeout: 400 }}
 						title={
 							chartType === "generic"
 								? "Infra-Chaos :- Multiple applications might be impacted"
 								: "Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted"
 						}
+						placement="bottom-start"
 					>
-						<IconButton className={classes.button}>
-							<InfraIcon fontSize="small" />
-						</IconButton>
+						<span className={classes.chaosInfoBase}>
+							<Button className={classes.button}>
+								<InfoIcon
+									className={classes.infoIcon}
+									style={{
+										paddingRight: 5,
+										height: 20,
+										width: 20,
+									}}
+								/>
+								<Typography style={{ fontSize: 14 }}>
+									Infra-Chaos
+								</Typography>
+							</Button>
+						</span>
 					</Tooltip>
 				) : (
 					<span />
 				)}
-				<span className={classes.totalRuns}>
+				<span
+					className={clsx(
+						props.title !== "all-experiments"
+							? classes.totalRuns
+							: classes.allExptotalRuns,
+						classes.maintotalRuns
+					)}
+				>
 					{formatCount(totalRuns)} runs
 				</span>
 			</div>
-			<div className={classes.cardBody}>
+			<div>
 				{urlToIcon ? (
-					<div className={classes.cardMedia}>
-						<img src={urlToIcon} alt="chart provider logo" />
+					<div
+						className={clsx(
+							props.title !== "all-experiments"
+								? classes.cardMedia
+								: classes.allExpCardMedia,
+							classes.mainCardMedia
+						)}
+					>
+						<img
+							src={urlToIcon}
+							className={
+								props.title !== "all-experiments"
+									? classes.imgMedia
+									: classes.allExpimgMedia
+							}
+							alt="chart provider logo"
+						/>
 					</div>
 				) : (
 					<div className={classes.noImage}>Image</div>
 				)}
 				<div className={classes.cardInfo}>
-					<div className={classes.title}>{title}</div>
-					<div className={classes.provider}>
-						Contributed by {provider}
+					<div
+						className={clsx(
+							props.title !== "all-experiments"
+								? classes.title
+								: classes.allExpTitle,
+							classes.mainTitle
+						)}
+					>
+						<Link
+							href="#"
+							onClick={(e: any) => {
+								e.preventDefault();
+								e.stopPropagation();
+								handleExpGrpClick(expGrp);
+							}}
+							className={clsx(
+								props.title !== "all-experiments"
+									? classes.link
+									: classes.allExpLink
+							)}
+						>
+							{expGrp}/
+						</Link>
+						<div
+							className={clsx(
+								props.title !== "all-experiments"
+									? classes.expName
+									: classes.allExpName
+							)}
+						>
+							{title}
+						</div>
 					</div>
 				</div>
 				{description ? (

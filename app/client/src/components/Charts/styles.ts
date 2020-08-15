@@ -7,9 +7,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		flexWrap: "wrap",
 		justifyContent: "center",
 		alignItems: "center",
-		[theme.breakpoints.down("md")]: {
-			flexDirection: "column",
-			width: "100%",
-		},
+		marginTop: theme.spacing(3),
+		marginBottom: theme.spacing(3),
 	},
 }));

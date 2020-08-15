@@ -42,27 +42,48 @@ function customTheme(options: ThemeOptions) {
 				contrastText: "rgba(20, 47, 72, 0.95)",
 			},
 			secondary: {
-				light: "rgb(10, 55, 171)",
+				light: "#858CDD",
 				main: "rgb(54, 220, 200)",
 				dark: "rgba(20, 47, 72, 0.88)",
 				contrastText: "rgb(10, 55, 171)",
+			},
+			error: {
+				light: "rgba(255, 0, 0, 0.1)",
+				main: "#BA3B34",
+				dark: "#CA2C2C",
 			},
 			background: {
 				paper: "rgba(225, 226, 238)",
 				default: "rgb(255, 255, 255)",
 			},
 			text: {
-				primary: "rgba(20, 47, 72, 0.72)",
-				secondary: "rgba(20, 47, 72, 0.88)",
-				disabled: "rgba(20, 47, 72, 0.54)",
+				primary: "#5B44BA",
+				secondary: "#042A2B",
+				disabled: "rgba(4, 42, 43, 0.6)",
 				hint: "rgba(20, 47, 72, 0.54)",
 			},
+		},
+		typography: {
+			fontSize: 12,
+			fontFamily: "Ubuntu",
 		},
 		...options,
 	});
 }
 
-const theme = customTheme({});
+const theme = customTheme({
+	overrides: {
+		MuiTooltip: {
+			tooltip: {
+				backgroundColor: "rgba(0,0,0,0.8)",
+				color: "#FFFFFF",
+				width: 200,
+				fontSize: 12,
+				borderRadius: 2,
+			},
+		},
+	},
+});
 
 export default function withTheme(Component: any) {
 	function WithTheme(props: object) {
