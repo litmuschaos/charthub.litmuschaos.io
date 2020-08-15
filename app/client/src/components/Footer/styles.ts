@@ -38,6 +38,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		fontWeight: 500,
 		color: theme.palette.text.primary,
 		marginBottom: 32,
+		fontSize: 16,
 		[theme.breakpoints.down("sm")]: {
 			maxWidth: 100,
 			marginBottom: 16,
@@ -84,7 +85,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	// Community
 	commData: {
 		display: "inline-block",
-		fontSize: "16px",
+		fontSize: 16,
 		marginBottom: 15,
 		color: theme.palette.text.secondary,
 		[theme.breakpoints.down("sm")]: {
@@ -115,7 +116,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			marginRight: "20%",
 		},
 		[theme.breakpoints.down("xs")]: {
-			marginLeft: 0,
+			marginLeft: 5,
 		},
 	},
 	footerDiv1: {
@@ -128,7 +129,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			marginRight: "15%",
 		},
 		[theme.breakpoints.down("xs")]: {
-			marginLeft: 0,
+			marginLeft: 5,
 		},
 	},
 }));
