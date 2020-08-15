@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 	starsText: {
 		color: theme.palette.common.white,
-		paddingLeft: 10,
+		paddingLeft: 7,
 	},
 	contributeBtn: {
 		margin: "auto",
@@ -91,6 +91,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.common.white,
 		marginLeft: 20,
 		marginTop: 12.5,
+		fontSize: 14,
 	},
 	getStartedBtn: {
 		width: 116,
@@ -98,6 +99,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.common.white,
 		marginLeft: 20,
 		borderColor: theme.palette.common.white,
+		textTransform: "none",
+		fontSize: 14,
 	},
 	getStarted: {
 		backgroundColor: "#5B44BA",

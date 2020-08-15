@@ -49,6 +49,10 @@ function ExperimentPage(props: any) {
 					(e) => e.metadataName === chartId
 			  )[0];
 
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	});
+
 	if (!chartGroup || !chart) {
 		history.push("/");
 		return <></>;

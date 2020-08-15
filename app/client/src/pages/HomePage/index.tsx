@@ -20,6 +20,10 @@ function HomePage() {
 		setDisplayExps(chartData.allExperiments);
 	}, [chartData.allExperiments]);
 
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	});
+
 	const [searchToken, setsearchToken] = React.useState("");
 
 	const handleSearch = (
@@ -45,6 +49,7 @@ function HomePage() {
 			}
 		);
 		setDisplayExps(payload);
+		window.scrollTo(0, 0);
 	};
 
 	return (

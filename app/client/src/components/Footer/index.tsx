@@ -80,32 +80,32 @@ function FooterLogo() {
 const community: CommunityItem[] = [
 	{
 		value: "GitHub",
-		img: "/icons/github.png",
+		img: "/icons/github.svg",
 		alt: "Github",
 		link: "https://github.com/litmuschaos",
 	},
 	{
 		value: "Slack",
-		img: "/icons/slack.png",
+		img: "/icons/slack.svg",
 		alt: "Slack",
 		link: "https://slack.litmuschaos.io",
 	},
 
 	{
 		value: "Twitter",
-		img: "/icons/twitter.png",
+		img: "/icons/twitter.svg",
 		alt: "Twitter",
 		link: "https://twitter.com/LitmusChaos",
 	},
 	{
 		value: "Dev",
-		img: "/icons/dev.png",
+		img: "/icons/dev.svg",
 		alt: "Dev",
 		link: "https://dev.to/t/litmuschaos/latest",
 	},
 	{
-		value: "YouTube",
-		img: "/icons/youtube.png",
+		value: "Youtube",
+		img: "/icons/youtube.svg",
 		alt: "YouTube",
 		link: "https://www.youtube.com/channel/UCa57PMqmz_j0wnteRa9nCaw",
 	},
@@ -114,13 +114,13 @@ const community: CommunityItem[] = [
 const resources: CommunityItem[] = [
 	{
 		value: "FAQ",
-		img: "/icons/faq.png",
+		img: "/icons/faq.svg",
 		alt: "FAQ",
 		link: "https://docs.litmuschaos.io/docs/faq-general/",
 	},
 	{
 		value: "Issues",
-		img: "/icons/issues.png",
+		img: "/icons/issues.svg",
 		alt: "Issues",
 		link: "https://github.com/litmuschaos/litmus/issues",
 	},
@@ -133,11 +133,11 @@ const links: CommunityItem[] = [
 	},
 	{
 		value: "Why Litmus?",
-		link: "https://litmuschaos.io/",
+		link: "https://litmuschaos.io/whylitmus",
 	},
 	{
 		value: "Community",
-		link: "https://slack.litmuschaos.io",
+		link: "https://litmuschaos.io/community",
 	},
 	{
 		value: "Blog",
@@ -161,7 +161,7 @@ const adoptors: CommunityItem[] = [
 			"https://github.com/litmuschaos/litmus/blob/master/adopters/openebs.md",
 	},
 	{
-		value: "Zerebrium",
+		value: "Zebrium",
 		link:
 			"https://github.com/litmuschaos/litmus/blob/master/adopters/zebrium.md",
 	},
@@ -182,7 +182,7 @@ export default function Footer() {
 						</div>
 						<Community header="Litmus Website" data={links} />
 						<Community header="Resources" data={resources} />
-						<Community header="Top Adoptors" data={adoptors} />
+						<Community header="Top Adopters" data={adoptors} />
 						<Community
 							header="Join the community"
 							data={community}
@@ -197,7 +197,7 @@ export default function Footer() {
 							<Community header="Resources" data={resources} />
 						</div>
 						<div className={classes.footerDiv1}>
-							<Community header="Top Adoptors" data={adoptors} />
+							<Community header="Top Adopters" data={adoptors} />
 							<Community
 								header="Join the community"
 								data={community}
@@ -210,7 +210,7 @@ export default function Footer() {
 			<hr className={classes.horizontalLine} />
 			<div>
 				<Typography className={classes.footerText}>
-					Originally created by <strong>Mayadata</strong>
+					Originally created by <strong>MayaData</strong>
 				</Typography>
 			</div>
 		</div>
