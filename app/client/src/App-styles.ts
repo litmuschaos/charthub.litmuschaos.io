@@ -5,6 +5,19 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: "100%",
 		height: "100%",
 		zIndex: 1,
+		overflow: "auto",
+		"&::-webkit-scrollbar": {
+			width: "0.5em",
+		},
+		"&::-webkit-scrollbar-track": {
+			webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+			borderRadius: "0.5em",
+		},
+		"&::-webkit-scrollbar-thumb": {
+			backgroundColor: theme.palette.text.primary,
+			outline: "1px solid slategrey",
+			borderRadius: "0.5em",
+		},
 	},
 	appFrame: {
 		position: "relative",
