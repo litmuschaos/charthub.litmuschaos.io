@@ -1,123 +1,128 @@
-import React, { useState } from 'react';
-import { Typography, Button, Grid } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
-import GetAppTwoToneIcon from '@material-ui/icons/GetAppTwoTone';
-import FileCopyTwoToneIcon from '@material-ui/icons/FileCopyTwoTone';
-import FindInPageTwoToneIcon from '@material-ui/icons/FindInPageTwoTone';
-import FindReplaceTwoToneIcon from '@material-ui/icons/FindReplaceTwoTone';
-import UndoTwoToneIcon from '@material-ui/icons/UndoTwoTone';
-import RedoTwoToneIcon from '@material-ui/icons/RedoTwoTone';
-import UnfoldLessTwoToneIcon from '@material-ui/icons/UnfoldLessTwoTone';
-import UnfoldMoreTwoToneIcon from '@material-ui/icons/UnfoldMoreTwoTone';
-import SelectAllTwoToneIcon from '@material-ui/icons/SelectAllTwoTone';
-import ErrorTwoToneIcon from '@material-ui/icons/ErrorTwoTone';
-import Tooltip from '@material-ui/core/Tooltip';
-import Fade from '@material-ui/core/Fade';
-import AceEditor from 'react-ace';
-import 'brace/mode/yaml';
-import 'brace/theme/dracula';
-import 'ace-builds/src-min-noconflict/ext-searchbox';
-import 'ace-builds/src-min-noconflict/ext-beautify';
-import 'ace-builds/src-min-noconflict/ext-code_lens';
-import 'ace-builds/src-min-noconflict/ext-elastic_tabstops_lite';
-import 'ace-builds/src-min-noconflict/ext-emmet';
-import 'ace-builds/src-min-noconflict/ext-error_marker';
-import 'ace-builds/src-min-noconflict/ext-keybinding_menu';
-import 'ace-builds/src-min-noconflict/ext-language_tools';
-import 'ace-builds/src-min-noconflict/ext-linking';
-import 'ace-builds/src-min-noconflict/ext-modelist';
-import 'ace-builds/src-min-noconflict/ext-options';
-import 'ace-builds/src-min-noconflict/ext-prompt';
-import 'ace-builds/src-min-noconflict/ext-rtl';
-import 'ace-builds/src-min-noconflict/ext-searchbox';
-import 'ace-builds/src-min-noconflict/ext-spellcheck';
-import 'ace-builds/src-min-noconflict/ext-split';
-import 'ace-builds/src-min-noconflict/ext-static_highlight';
-import 'ace-builds/src-min-noconflict/ext-statusbar';
-import 'ace-builds/src-min-noconflict/ext-textarea';
-import 'ace-builds/src-min-noconflict/ext-themelist';
-import 'ace-builds/src-min-noconflict/ext-whitespace';
-import { AceValidations, parseYamlValidations } from './Validations';
-import { useStyles } from './styles';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import { Typography, Button, Box } from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
+import GetAppTwoToneIcon from "@material-ui/icons/GetAppTwoTone";
+import FileCopyTwoToneIcon from "@material-ui/icons/FileCopyTwoTone";
+import FindInPageTwoToneIcon from "@material-ui/icons/FindInPageTwoTone";
+import FindReplaceTwoToneIcon from "@material-ui/icons/FindReplaceTwoTone";
+import UndoTwoToneIcon from "@material-ui/icons/UndoTwoTone";
+import RedoTwoToneIcon from "@material-ui/icons/RedoTwoTone";
+import UnfoldLessTwoToneIcon from "@material-ui/icons/UnfoldLessTwoTone";
+import UnfoldMoreTwoToneIcon from "@material-ui/icons/UnfoldMoreTwoTone";
+import SelectAllTwoToneIcon from "@material-ui/icons/SelectAllTwoTone";
+import ErrorTwoToneIcon from "@material-ui/icons/ErrorTwoTone";
+import Tooltip from "@material-ui/core/Tooltip";
+import Fade from "@material-ui/core/Fade";
+import AceEditor from "react-ace";
+import "brace/mode/yaml";
+import "brace/theme/cobalt";
+import "ace-builds/src-min-noconflict/ext-searchbox";
+import "ace-builds/src-min-noconflict/ext-beautify";
+import "ace-builds/src-min-noconflict/ext-code_lens";
+import "ace-builds/src-min-noconflict/ext-elastic_tabstops_lite";
+import "ace-builds/src-min-noconflict/ext-emmet";
+import "ace-builds/src-min-noconflict/ext-error_marker";
+import "ace-builds/src-min-noconflict/ext-keybinding_menu";
+import "ace-builds/src-min-noconflict/ext-language_tools";
+import "ace-builds/src-min-noconflict/ext-linking";
+import "ace-builds/src-min-noconflict/ext-modelist";
+import "ace-builds/src-min-noconflict/ext-options";
+import "ace-builds/src-min-noconflict/ext-prompt";
+import "ace-builds/src-min-noconflict/ext-rtl";
+import "ace-builds/src-min-noconflict/ext-spellcheck";
+import "ace-builds/src-min-noconflict/ext-split";
+import "ace-builds/src-min-noconflict/ext-static_highlight";
+import "ace-builds/src-min-noconflict/ext-statusbar";
+import "ace-builds/src-min-noconflict/ext-textarea";
+import "ace-builds/src-min-noconflict/ext-themelist";
+import "ace-builds/src-min-noconflict/ext-whitespace";
+import { AceValidations, parseYamlValidations } from "./Validations";
+import useStyles from "./styles";
 
 interface YamlEditorProps {
-	id?: string;
 	content: string;
 	filename: string;
 }
 
-const YamlEditor: React.FC<YamlEditorProps> = (props) => {
+const YamlEditor: React.FC<YamlEditorProps> = ({ content, filename }) => {
 	const classes = useStyles();
 
-	const { content, filename } = props;
+	const [isValid, setIsValid] = useState(true);
 
-	const [ isValid, setIsValid ] = useState(true);
-
-	const [ errors, setErrors ] = useState({
-		errorLine: ' ',
-		errorPosition: ' ',
-		errorType: ' ',
-		errorInfo: ' '
+	const [errors, setErrors] = useState({
+		errorLine: " ",
+		errorPosition: " ",
+		errorType: " ",
+		errorInfo: " ",
 	});
 
-	const [ editorState, setEditorState ] = React.useState({
+	const [editorState, setEditorState] = React.useState({
 		markers: [],
 		annotations: [],
-		content: content
+		content,
 	});
+
+	const [modifiedYaml, setModifiedYaml] = useState(content);
 
 	const YamlAce = React.createRef() as React.RefObject<AceEditor>;
 
 	const onEditorChange = (value: string) => {
 		let editorValidations: AceValidations = {
 			markers: [],
-			annotations: []
+			annotations: [],
 		};
 		editorValidations = parseYamlValidations(value, classes);
 		const stateObject = {
 			markers: editorValidations.markers,
 			annotations: editorValidations.annotations,
-			content: value
 		};
 		if (stateObject.annotations.length > 0) {
 			setIsValid(false);
-			console.log(stateObject.markers);
-			console.log(stateObject.annotations);
 			setErrors({
-				errorLine: (stateObject.annotations[0].row as unknown) as string,
-				errorPosition: (stateObject.annotations[0].column as unknown) as string,
+				errorLine: (stateObject.annotations[0]
+					.row as unknown) as string,
+				errorPosition: (stateObject.annotations[0]
+					.column as unknown) as string,
 				errorType: stateObject.annotations[0].type as string,
-				errorInfo: stateObject.annotations[0].text as string
+				errorInfo: stateObject.annotations[0].text as string,
 			});
+			let nodeStyleError = (document.getElementsByClassName(
+				"ace_gutter-cell"
+			)[stateObject.annotations[0].row] as any).style;
+			nodeStyleError.background = "red";
+			nodeStyleError.color = "#FFFFFF";
 		} else {
 			setIsValid(true);
 			setErrors({
-				errorLine: ' ',
-				errorPosition: ' ',
-				errorType: ' ',
-				errorInfo: ' '
+				errorLine: " ",
+				errorPosition: " ",
+				errorType: " ",
+				errorInfo: " ",
 			});
+			let nodeStyleErrorList = document.getElementsByClassName(
+				"ace_gutter-cell"
+			);
+			for (let i = 0; i < nodeStyleErrorList.length; i++) {
+				(nodeStyleErrorList[i] as any).style.backgroundColor =
+					"#1C1C1C";
+				(nodeStyleErrorList[i] as any).style.color =
+					"rgba(255, 255, 255, 0.4)";
+			}
 		}
 		setEditorState(stateObject as any);
+		setModifiedYaml(value);
 	};
 
 	const downloadYamlFile = () => {
-		const element = document.createElement('a');
-		const file = new Blob([ editorState.content as any ], {
-			type: 'text/yaml'
+		const element = document.createElement("a");
+		const file = new Blob([modifiedYaml as any], {
+			type: "text/yaml",
 		});
 		element.href = URL.createObjectURL(file);
-		let filenameArray = filename.split('/');
+		let filenameArray = filename.split("/");
 		let downloadFilename =
-			filenameArray[2] +
-			'-' +
-			filenameArray[5].split('?')[0] +
-			'-' +
-			filenameArray[6] +
-			'-' +
-			filenameArray[7] +
-			'-' +
-			filenameArray[8];
+			filenameArray[6] + "-" + filenameArray[7] + "-" + filenameArray[8];
 		element.download = downloadFilename;
 		document.body.appendChild(element);
 		element.click();
@@ -125,49 +130,52 @@ const YamlEditor: React.FC<YamlEditorProps> = (props) => {
 
 	const copycontent = () => {
 		if (!navigator.clipboard) {
-			console.error('Oops Could not copy text: ');
+			console.error("Oops Could not copy text: ");
 			return;
 		}
 		navigator.clipboard
-			.writeText(editorState.content as any)
-			.catch((err) => console.error('Async: Could not copy text: ', err));
+			.writeText(modifiedYaml as any)
+			.catch((err) => console.error("Async: Could not copy text: ", err));
 	};
 
 	const startfinder = () => {
-		(YamlAce.current!['editor'] as any).execCommand('find');
+		(YamlAce.current!.editor as any).execCommand("find");
 	};
 
 	const startreplace = () => {
-		(YamlAce.current!['editor'] as any).execCommand('replace');
+		(YamlAce.current!.editor as any).execCommand("replace");
 	};
 
 	const startundo = () => {
-		(YamlAce.current!['editor'] as any).execCommand('undo');
+		(YamlAce.current!.editor as any).execCommand("undo");
 	};
 
 	const startredo = () => {
-		(YamlAce.current!['editor'] as any).execCommand('redo');
+		(YamlAce.current!.editor as any).execCommand("redo");
 	};
 
 	const startfoldall = () => {
-		(YamlAce.current!['editor'] as any).execCommand('foldall');
+		(YamlAce.current!.editor as any).execCommand("foldall");
 	};
 
 	const startunfoldall = () => {
-		(YamlAce.current!['editor'] as any).execCommand('unfoldall');
+		(YamlAce.current!.editor as any).execCommand("unfoldall");
 	};
 
 	const startselectall = () => {
-		(YamlAce.current!['editor'] as any).execCommand('selectall');
+		(YamlAce.current!.editor as any).execCommand("selectall");
 	};
 
 	const startgotonexterror = () => {
-		(YamlAce.current!['editor'] as any).execCommand('goToNextError');
+		(YamlAce.current!.editor as any).execCommand("goToNextError");
 	};
 
 	const fullscreentrigger = () => {
-		let i: any = document.getElementById('resize-editor');
-		(YamlAce.current!['editor'] as any).setOption('maxLines', document.body.clientHeight);
+		const i: any = document.getElementById("resize-editor");
+		(YamlAce.current!.editor as any).setOption(
+			"maxLines",
+			document.body.clientHeight
+		);
 		if (i.requestFullscreen) {
 			i.requestFullscreen();
 		} else if (i.webkitRequestFullscreen) {
@@ -179,74 +187,96 @@ const YamlEditor: React.FC<YamlEditorProps> = (props) => {
 		}
 	};
 
+	useEffect(() => {
+		let editorValidations: AceValidations = {
+			markers: [],
+			annotations: [],
+		};
+		editorValidations = parseYamlValidations(content, classes);
+		const stateObject = {
+			markers: editorValidations.markers,
+			annotations: editorValidations.annotations,
+		};
+		if (stateObject.annotations.length > 0) {
+			setIsValid(false);
+			setErrors({
+				errorLine: (stateObject.annotations[0]
+					.row as unknown) as string,
+				errorPosition: (stateObject.annotations[0]
+					.column as unknown) as string,
+				errorType: stateObject.annotations[0].type as string,
+				errorInfo: stateObject.annotations[0].text as string,
+			});
+		} else {
+			setIsValid(true);
+			setErrors({
+				errorLine: " ",
+				errorPosition: " ",
+				errorType: " ",
+				errorInfo: " ",
+			});
+		}
+		setEditorState(stateObject as any);
+	}, []);
+
 	return (
 		<div className={classes.editorBackgroundFull} id="editor">
-			<div>
-				<Typography className={classes.statusHeading}>
-					<strong>Status YAML: </strong>
-
-					<Typography
-						className={classes.saved}
-						style={{
-							display: 'inline-block',
-							fontFamily: 'Ubuntu',
-							fontSize: 16
-						}}
-					>
-						&nbsp; &nbsp;
-						<strong>
-							<span>
-								<Typography
-									style={{
-										display: 'inline-block',
-										fontFamily: 'Ubuntu',
-										fontSize: 16
-									}}
-									color={isValid ? 'secondary' : 'error'}
-								>
-									{isValid ? '\u2713' : '\u274C'}
-								</Typography>
-							</span>
+			<Typography className={classes.statusHeading}>
+				Status YAML:
+				<Typography className={classes.saved} display="inline">
+					&nbsp; &nbsp;
+					<strong>
+						<span>
 							<Typography
-								id="YamlStatus"
-								style={{
-									display: 'inline-block',
-									fontFamily: 'Ubuntu',
-									fontSize: 16
-								}}
-								color={isValid ? 'secondary' : 'error'}
+								className={
+									isValid
+										? classes.markStyleCorrect
+										: classes.markStyleWrong
+								}
+								display="inline"
 							>
-								&nbsp;
-								<strong>{isValid ? 'Correct' : 'Incorrect'}</strong>
+								{isValid ? "\u2713" : "\u274C"}
 							</Typography>
-						</strong>
-					</Typography>
+						</span>
+						<Typography
+							id="YamlStatus"
+							className={
+								isValid
+									? classes.markStyleCorrect
+									: classes.markStyleWrong
+							}
+							display="inline"
+						>
+							&nbsp;
+							<strong>{isValid ? "Correct" : "Incorrect"}</strong>
+						</Typography>
+					</strong>
 				</Typography>
-				<Typography className={classes.statusDescription}>
-					{isValid ? (
-						' '
-					) : (
-						'Pay attention to Line ' +
-						errors.errorLine +
-						"'s " +
-						' character ' +
-						errors.errorPosition +
-						'. Type: ' +
-						errors.errorType +
-						' -> ' +
-						errors.errorInfo +
-						'.'
-					)}
-					&nbsp;
-					{isValid ? 'Your code is fine. You can move on!' : 'Correct this error and keep moving forward!'}
-				</Typography>
-			</div>
+			</Typography>
+			<Typography className={classes.statusDescription}>
+				{isValid
+					? " "
+					: `Pay attention to Line ${errors.errorLine}'s ` +
+					  ` character ${errors.errorPosition}. Type: ${errors.errorType} -> ${errors.errorInfo}.`}
+				&nbsp;
+				{isValid
+					? "Your code is fine. You can move on!"
+					: "Correct this error and keep moving forward!"}
+			</Typography>
+			<div className={classes.widthManager}>
+				<Divider
+					variant="middle"
+					classes={{ root: classes.horizontalLineWhite }}
+				/>
 
-			<Divider variant="middle" classes={{ root: classes.horizontalLineWhite }} />
-
-			<Grid container>
-				<Grid item xs={12} className={classes.editorButtonGrid}>
-					<Tooltip title="Undo" placement="bottom" TransitionComponent={Fade} TransitionProps={{ timeout: 500 }} arrow>
+				<div className={classes.editorButtonGrid}>
+					<Tooltip
+						title="Undo"
+						placement="bottom"
+						TransitionComponent={Fade}
+						TransitionProps={{ timeout: 500 }}
+						arrow
+					>
 						<Button
 							variant="outlined"
 							className={classes.editorButtonUndo}
@@ -255,7 +285,13 @@ const YamlEditor: React.FC<YamlEditorProps> = (props) => {
 						/>
 					</Tooltip>
 
-					<Tooltip title="Redo" placement="bottom" TransitionComponent={Fade} TransitionProps={{ timeout: 500 }} arrow>
+					<Tooltip
+						title="Redo"
+						placement="bottom"
+						TransitionComponent={Fade}
+						TransitionProps={{ timeout: 500 }}
+						arrow
+					>
 						<Button
 							variant="outlined"
 							className={classes.editorButtons}
@@ -279,7 +315,13 @@ const YamlEditor: React.FC<YamlEditorProps> = (props) => {
 						/>
 					</Tooltip>
 
-					<Tooltip title="Copy" placement="bottom" TransitionComponent={Fade} TransitionProps={{ timeout: 500 }} arrow>
+					<Tooltip
+						title="Copy"
+						placement="bottom"
+						TransitionComponent={Fade}
+						TransitionProps={{ timeout: 500 }}
+						arrow
+					>
 						<Button
 							variant="outlined"
 							className={classes.editorButtons}
@@ -303,10 +345,16 @@ const YamlEditor: React.FC<YamlEditorProps> = (props) => {
 						/>
 					</Tooltip>
 
-					<Tooltip title="Find" placement="bottom" TransitionComponent={Fade} TransitionProps={{ timeout: 500 }} arrow>
+					<Tooltip
+						title="Find"
+						placement="bottom"
+						TransitionComponent={Fade}
+						TransitionProps={{ timeout: 500 }}
+						arrow
+					>
 						<Button
 							variant="outlined"
-							className={classes.editorButtons}
+							className={classes.editorButtonFind}
 							onClick={startfinder}
 							startIcon={<FindInPageTwoToneIcon />}
 						/>
@@ -336,7 +384,7 @@ const YamlEditor: React.FC<YamlEditorProps> = (props) => {
 					>
 						<Button
 							variant="outlined"
-							className={classes.editorButtons}
+							className={classes.editorButtonFoldAndUnfold}
 							onClick={startunfoldall}
 							startIcon={<UnfoldMoreTwoToneIcon />}
 						/>
@@ -351,7 +399,7 @@ const YamlEditor: React.FC<YamlEditorProps> = (props) => {
 					>
 						<Button
 							variant="outlined"
-							className={classes.editorButtons}
+							className={classes.editorButtonFoldAndUnfold}
 							onClick={startfoldall}
 							startIcon={<UnfoldLessTwoToneIcon />}
 						/>
@@ -371,77 +419,132 @@ const YamlEditor: React.FC<YamlEditorProps> = (props) => {
 							startIcon={<SelectAllTwoToneIcon />}
 						/>
 					</Tooltip>
-				</Grid>
+				</div>
+			</div>
+			<div className={classes.fullWidth}>
+				<Box display="flex" p={1} className={classes.editorContainer}>
+					<Box
+						p={1}
+						flexGrow={1}
+						className={classes.editorGrid}
+						id="resize-editor"
+					>
+						<AceEditor
+							mode="yaml"
+							theme="cobalt"
+							name="code"
+							width="100%"
+							height="100%"
+							maxLines={12000}
+							minLines={1}
+							highlightActiveLine={false}
+							readOnly={false}
+							tabSize={2}
+							wrapEnabled
+							ref={YamlAce}
+							showGutter
+							onChange={onEditorChange}
+							showPrintMargin={false}
+							enableBasicAutocompletion
+							enableSnippets
+							enableLiveAutocompletion
+							value={editorState.content}
+							editorProps={{
+								$blockScrolling: Infinity,
+								$useWorker: true,
+							}}
+							onLoad={(editor) => {
+								editor.setOptions({
+									fontFamily: "Ubuntu Mono",
+									highlightGutterLine: false,
+									autoScrollEditorIntoView: true,
+									tooltipFollowsMouse: true,
+									displayIndentGuides: false,
+								});
+								editor.focus();
+								editor.setHighlightSelectedWord(true);
+								editor.session.setFoldStyle("markbeginend");
+								editor.setShowFoldWidgets(true);
+								editor.setAnimatedScroll(true);
+								editor.setShowInvisibles(false);
+								editor.setFontSize("1rem");
+								editor.container.style.background = "#1C1C1C";
+								editor.container.style.lineHeight = "160%";
+								let nodeStyle = (document.getElementsByClassName(
+									"ace_gutter"
+								)[0] as any).style;
+								nodeStyle.color = "rgba(255, 255, 255, 0.4)";
+								nodeStyle.borderRight = 0;
+								nodeStyle.background = "#1C1C1C";
+							}}
+							onCursorChange={(selection) => {
+								(YamlAce.current!.editor as any).setOptions({
+									autoScrollEditorIntoView: true,
+									tooltipFollowsMouse: true,
+								});
+								(YamlAce.current!.editor as any).focus();
 
-				<Grid item xs={12}>
-					<Grid container className={classes.editorContainer}>
-						<Grid item xs={11} className={classes.editorGrid} id="resize-editor">
-							<AceEditor
-								mode="yaml"
-								theme="dracula"
-								name="code"
-								width="100%"
-								height="100%"
-								maxLines={12000}
-								minLines={29}
-								highlightActiveLine={false}
-								readOnly={false}
-								tabSize={2}
-								wrapEnabled={true}
-								ref={YamlAce}
-								fontSize={14}
-								showGutter={true}
-								onChange={onEditorChange}
-								showPrintMargin={false}
-								enableBasicAutocompletion={true}
-								enableSnippets={true}
-								enableLiveAutocompletion={true}
-								value={editorState.content}
-								editorProps={{
-									$blockScrolling: Infinity,
-									$useWorker: true
-								}}
-								onLoad={(editor) => {
-									editor.focus();
-									editor.setHighlightSelectedWord(true);
-								}}
-								annotations={editorState.annotations}
-								markers={editorState.markers}
-							/>
-						</Grid>
+								let nodeStyleActiveList = document.getElementsByClassName(
+									"ace_gutter-cell"
+								);
+								for (
+									let i = 0;
+									i < nodeStyleActiveList.length;
+									i++
+								) {
+									(nodeStyleActiveList[
+										i
+									] as any).style.backgroundColor = "#1C1C1C";
+									(nodeStyleActiveList[
+										i
+									] as any).style.color =
+										"rgba(255, 255, 255, 0.4)";
+								}
 
-						<Grid item xs={1}>
-							<div>
-								<Tooltip
-									title="Full Screen (Press Escape to End)"
-									placement="bottom"
-									TransitionComponent={Fade}
-									TransitionProps={{ timeout: 500 }}
-									arrow
-								>
-									<Button
-										variant="outlined"
-										className={classes.editorButtonFullScreen}
-										onClick={fullscreentrigger}
-										startIcon={
-											<img
-												src="/icons/fullscreen.svg"
-												alt="Full Screen"
-												color="#FFFFFF"
-												width="25px"
-												height="25px"
-												margin-right="25px"
-											/>
-										}
+								if (
+									document.getElementsByClassName(
+										"ace_gutter-cell"
+									)[selection.cursor.row] as any
+								) {
+									let nodeStyleActive = (document.getElementsByClassName(
+										"ace_gutter-cell"
+									)[selection.cursor.row] as any).style;
+									nodeStyleActive.backgroundColor = "#5B44BA";
+									nodeStyleActive.color = "#FFFFFF";
+								}
+							}}
+							annotations={editorState.annotations}
+							markers={editorState.markers}
+						/>
+					</Box>
+					<Box p={1} flexGrow={0} className={classes.fullScreenGrid}>
+						<Tooltip
+							title="Full Screen (Press Escape to End)"
+							placement="bottom"
+							TransitionComponent={Fade}
+							TransitionProps={{ timeout: 500 }}
+							arrow
+						>
+							<Button
+								variant="outlined"
+								className={classes.editorButtonFullScreen}
+								onClick={fullscreentrigger}
+								startIcon={
+									<img
+										src="/icons/fullscreen.svg"
+										alt="Full Screen"
+										color="#FFFFFF"
+										width="25px"
+										height="25px"
+										margin-right="25px"
 									/>
-								</Tooltip>
-							</div>
-						</Grid>
-					</Grid>
-				</Grid>
-
-				<Grid item xs={12} className={classes.extraSpace} />
-			</Grid>
+								}
+							/>
+						</Tooltip>
+					</Box>
+				</Box>
+			</div>
+			<div className={classes.extraSpace} />
 		</div>
 	);
 };

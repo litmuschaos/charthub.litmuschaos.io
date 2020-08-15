@@ -1,24 +1,21 @@
 filter_secrets: false
 env:
-    global:
-        - COMMIT=${TRAVIS_COMMIT::6}
-        - REPO=mayadata/charthub-litmuschaos-io
-        - STAG_REPO=mayadata/charthub-litmuschaos-io-stag
+  global:
+    - COMMIT=${TRAVIS_COMMIT::6}
+    - REPO=mayadata/charthub-litmuschaos-io
+    - STAG_REPO=mayadata/charthub-litmuschaos-io-stag
 services:
-    - docker
+  - docker
 script:
-    - docker build -t $REPO:$COMMIT -f Dockerfile.client .
-    - docker build -t ${REPO}-server:$COMMIT -f Dockerfile.server .
-    - cd app/client
-    - npm ci
-    - npm run cyrun
+  - docker build -t $REPO:$COMMIT -f Dockerfile.client .
+  - docker build -t ${REPO}-server:$COMMIT -f Dockerfile.server .
 
 after_success:
-    - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
-      docker push $REPO:$COMMIT && docker push ${REPO}-server:$COMMIT;
-      fi
-    - if [ "$TRAVIS_BRANCH" = "staging" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
-      docker tag $REPO:$COMMIT $STAG_REPO:$COMMIT;
-      docker tag ${REPO}-server:$COMMIT ${STAG_REPO}-server:$COMMIT;
-      docker push $STAG_REPO:$COMMIT && docker push ${STAG_REPO}-server:$COMMIT;
-      fi
+  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
+    docker push $REPO:$COMMIT && docker push ${REPO}-server:$COMMIT;
+    fi
+  - if [ "$TRAVIS_BRANCH" = "staging" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
+    docker tag $REPO:$COMMIT $STAG_REPO:$COMMIT;
+    docker tag ${REPO}-server:$COMMIT ${STAG_REPO}-server:$COMMIT;
+    docker push $STAG_REPO:$COMMIT && docker push ${STAG_REPO}-server:$COMMIT;
+    fi

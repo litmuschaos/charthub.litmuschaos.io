@@ -2,10 +2,10 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import {
 	BackButton,
-	CustomBreadCrumbs,
 	ExperimentInfo,
 	InstallChaos,
 	UsefulLinks,
+	ExperimentHeader,
 } from "../../components";
 import Footer from "../../components/Footer";
 import { history } from "../../redux/configureStore";
@@ -13,6 +13,21 @@ import { ExperimentGroup, Link } from "../../redux/model";
 import { RootState } from "../../redux/reducers";
 import { getExpRunCount } from "../../utils";
 import { useStyles } from "./styles";
+import MainHeader from "../../components/Header";
+import DeveloperGuide from "../../components/DeveloperGuide";
+
+const getIconUrl = (path: any) => {
+	let baseURL: string = "";
+	if (
+		process.env.NODE_ENV.trim() === "development" ||
+		process.env.NODE_ENV.trim() === "test"
+	) {
+		baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
+	} else baseURL = "/api";
+	if (path[2] === "all-experiments")
+		return baseURL + "/icon/" + path[1] + "/" + path[1] + ".png";
+	return baseURL + "/icon/" + path[1] + "/" + path[2] + ".png";
+};
 
 function ExperimentPage(props: any) {
 	const classes = useStyles();
@@ -27,7 +42,7 @@ function ExperimentPage(props: any) {
 		(g) => g.metadataName === chartGroupId
 	)[0];
 	const chart: any =
-		chartId === "install-all-experiments"
+		chartId === "all-experiments"
 			? chartGroup
 			: chartGroup &&
 			  chartGroup.experiments.filter(
@@ -62,47 +77,80 @@ function ExperimentPage(props: any) {
 				analyticsData.expAnalytics
 			);
 		}
+
 		return (
 			<div className={classes.rootContainer}>
+				<MainHeader />
 				<div className={classes.root}>
-					{/* BreadCrumbs */}
-					<div className={classes.breadCrumbs}>
-						<CustomBreadCrumbs location={props.location.pathname} />
-					</div>
-
-					<div className={classes.body}>
-						<div className={classes.content}>
-							{/* Back Butoon + Experiment info */}
-							<div className={classes.contentHead}>
+					<div className={classes.mainDiv}>
+						<div className={classes.contentHead}>
+							<div className={classes.headerDiv}>
 								{/* Back Button */}
-								<BackButton
-									path={path
-										.slice(0, path.length - 1)
-										.join("/")}
-								/>
+								<BackButton path="/" />
 								{/* Exp title + Exp run counts + description*/}
-								<ExperimentInfo
-									title={chart.name}
-									description={chart.description}
-									runCount={expCount}
-									videoURL={videoURL}
-								/>
-							</div>
-							{/* page body */}
-							<div>
-								<div className={classes.note}>
-									Pre-requisite:
+								<div className={classes.expMain}>
+									<ExperimentHeader
+										title={chart.name}
+										description={chart.description}
+										runCount={expCount}
+										urlToIcon={getIconUrl(path)}
+									/>
 								</div>
-								<div>
-									<a
-										href="https://docs.litmuschaos.io/docs/getstarted/"
-										target="_"
+							</div>
+						</div>
+					</div>
+					{/* Overlapping Div */}
+					<div className={classes.overlapDiv}>
+						{/* Developer Guide Component */}
+						<DeveloperGuide links={chart.links} />
+						{/* Experiment Info */}
+						<div className={classes.detailDiv}>
+							<div className={classes.expInfo}>
+								<div className={classes.expInfoDiv}>
+									<ExperimentInfo
+										description={chart.description}
+										videoURL={videoURL}
+									/>
+									<div
+										style={{
+											marginTop: "auto",
+											marginBottom: 40,
+										}}
 									>
-										Install Litmus Operator
-									</a>
-									: a tool for injecting Chaos Experiments
+										<hr
+											className={classes.horizontalLine}
+										/>
+										<div>
+											<div className={classes.note}>
+												PRE-REQUISITE:
+											</div>
+											<div>
+												<a
+													href="https://docs.litmuschaos.io/docs/getstarted/"
+													target="_"
+												>
+													Install Litmus Operator
+												</a>
+												: a tool for injecting Chaos
+												Experiments
+											</div>
+										</div>
+										<hr
+											className={classes.horizontalLine}
+										/>
+									</div>
+								</div>
+								{/* Useful Links Section */}
+								<div className={classes.info}>
+									<UsefulLinks
+										links={chart.links}
+										maintainers={chart.maintainers}
+										platforms={chart.platforms}
+										maturity={chart.maturity}
+									/>
 								</div>
 							</div>
+							{/* Install Chaos Section */}
 							<div className={classes.installLinks}>
 								<InstallChaos
 									title="Install this Chaos Expermiment"
@@ -125,19 +173,10 @@ function ExperimentPage(props: any) {
 								)}
 							</div>
 						</div>
-						{/* Install Experiments CTA + Usefull Links */}
-						<div className={classes.info}>
-							<UsefulLinks
-								links={chart.links}
-								maintainers={chart.maintainers}
-								platforms={chart.platforms}
-								maturity={chart.maturity}
-							/>
-						</div>
 					</div>
 				</div>
 				{/* Footer */}
-				<Footer showStat={false} />
+				<Footer />
 			</div>
 		);
 	}

@@ -1,4 +1,4 @@
-import { GithubActions, GithubContributor } from "../model";
+import { GithubActions } from "../model";
 let baseURL: string = "";
 if (
 	process.env.NODE_ENV.trim() === "development" ||
@@ -21,36 +21,6 @@ export const loadStarCount = () => (dispatch: Function, getState: Function) => {
 			dispatch({
 				type: GithubActions.LOAD_STAR_COUNT,
 				payload: 0,
-			});
-		});
-};
-
-export const loadContributors = () => (
-	dispatch: Function,
-	getState: Function
-) => {
-	fetch(`${baseURL}/github/contributors`)
-		.then((response) => response.json())
-		.then((data) => {
-			data = data.map((d: any) => ({
-				githubName: d["login"],
-				githubProfileUrl: "https://github.com/" + d["login"],
-				contributions: d["contributions"],
-			}));
-			// data.sort(
-			// 	(a: GithubContributor, b: GithubContributor) =>
-			// 		a.contributions > b.contributions
-			// );
-			dispatch({
-				type: GithubActions.LOAD_CONTRIBUTORS,
-				payload: data,
-			});
-		})
-		.catch((err) => {
-			console.error("Can't load data", err);
-			dispatch({
-				type: GithubActions.LOAD_CONTRIBUTORS,
-				payload: [],
 			});
 		});
 };
