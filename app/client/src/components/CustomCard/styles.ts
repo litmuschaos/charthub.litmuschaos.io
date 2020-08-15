@@ -189,6 +189,5 @@ export const useStyles = makeStyles((theme) => ({
 export const InfoTooltip = withStyles({
 	tooltip: {
 		backgroundColor: "rgba(0, 0, 0, 0.8)",
-		lineHeight: "140%",
 	},
 })(Tooltip);

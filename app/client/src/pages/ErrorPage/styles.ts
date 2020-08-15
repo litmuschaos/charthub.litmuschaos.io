@@ -25,6 +25,9 @@ export const useStyles = makeStyles((theme) => ({
 			flexDirection: "column",
 			alignItems: "center",
 		},
+		[theme.breakpoints.up("lg")]: {
+			marginTop: "5%",
+		},
 	},
 	headerDiv: {
 		display: "flex",
