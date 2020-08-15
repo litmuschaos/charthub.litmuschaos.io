@@ -77,7 +77,7 @@ export const useStyles = makeStyles((theme) => ({
 		margin: "8px 8px 12px 8px",
 	},
 	button: {
-		width: 92,
+		width: 100,
 		height: 24,
 		padding: 0,
 		margin: 0,
@@ -160,22 +160,16 @@ export const useStyles = makeStyles((theme) => ({
 		justifyContent: "center",
 	},
 	maintotalRuns: {
+		marginTop: 3,
 		borderRadius: 4,
-		padding: "3px 6px",
-		fontWeight: 500,
-		fontSize: 14,
-	},
-	maintotalCount: {
-		borderRadius: 4,
-		padding: "3px 6px",
+		padding: "2px 6px",
+		height: 24,
 		fontWeight: 500,
 		fontSize: 14,
 	},
 	chaosInfoBase: {
 		borderRadius: 4,
-		padding: "3px 6px",
-		fontWeight: 500,
-		fontSize: 14,
+		padding: "2px 6px",
 	},
 	mainTitle: {
 		fontSize: 18,

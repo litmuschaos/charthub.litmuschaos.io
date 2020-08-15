@@ -34,22 +34,17 @@ function CardContent(props: CardProps) {
 						}
 						placement="bottom-start"
 					>
-						<span
-							className={clsx(
-								classes.chaosInfo,
-								classes.chaosInfoBase
-							)}
-						>
+						<span className={classes.chaosInfoBase}>
 							<Button className={classes.button}>
 								<InfoIcon
 									className={classes.infoIcon}
 									style={{
-										paddingRight: 10,
-										height: 25,
-										width: 25,
+										paddingRight: 5,
+										height: 20,
+										width: 20,
 									}}
 								/>
-								<Typography style={{ fontSize: 11 }}>
+								<Typography style={{ fontSize: 14 }}>
 									Infra-Chaos
 								</Typography>
 							</Button>
