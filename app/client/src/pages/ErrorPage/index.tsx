@@ -6,7 +6,9 @@ import MainHeader from "../../components/Header/index";
 
 function ErrorPage() {
 	const classes = useStyles();
-
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	});
 	return (
 		<div className={classes.mainHeader}>
 			<MainHeader />
