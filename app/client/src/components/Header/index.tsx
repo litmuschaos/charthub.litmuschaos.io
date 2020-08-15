@@ -103,7 +103,7 @@ export default function MainHeader() {
 									className={classes.starImg}
 								/>
 								<Typography className={classes.starsText}>
-									Stars
+									Star
 								</Typography>
 							</div>
 						</Button>

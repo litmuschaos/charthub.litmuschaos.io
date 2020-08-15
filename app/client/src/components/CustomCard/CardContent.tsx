@@ -29,8 +29,8 @@ function CardContent(props: CardProps) {
 						TransitionProps={{ timeout: 400 }}
 						title={
 							chartType === "generic"
-								? "Infra-Chaos :- Multiple applications might be impacted"
-								: "Infra-Chaos :-  Multiple volumes sharing the same pool might be impacted"
+								? "Multiple applications might be impacted"
+								: "Multiple volumes sharing the same pool might be impacted"
 						}
 						placement="bottom-start"
 					>
