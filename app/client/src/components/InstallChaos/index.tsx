@@ -3,6 +3,8 @@ import Done from "@material-ui/icons/DoneAllTwoTone";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./styles";
 import YamlEditor from "../YamlEditor/Editor";
+import CloseTwoToneIcon from "@material-ui/icons/CloseTwoTone";
+import PageviewOutlinedIcon from "@material-ui/icons/PageviewOutlined";
 
 interface InstallProps {
 	title: string;
@@ -14,17 +16,39 @@ export function InstallChaos(props: InstallProps) {
 	const classes = useStyles();
 	const { title, description, yamlLink } = props;
 	const [copying, setCopying] = useState(false);
+	const [viewing, setViewing] = useState(false);
 	const [editing, setEditing] = useState(false);
 	const [yamlText, setYamlText] = useState(``);
 	const [open, setOpen] = useState(false);
 	const [reload, setReload] = useState(false);
-
-	const yaml = `kubectl apply -f ${yamlLink}`;
+	const [yaml, setYaml] = useState(`kubectl apply -f ${yamlLink}`);
 
 	const handleClose = () => {
 		setOpen(false);
 		setReload(true);
 	};
+
+	function fetchYamlAndShowInPage(yamlLink: string) {
+		fetch(yamlLink)
+			.then((data) => {
+				data.text().then((yamlText) => {
+					setYaml(yamlText);
+				});
+			})
+			.catch((err) => {
+				console.error("Unable to fetch the yaml text" + err);
+			});
+	}
+
+	function showYamlInPage() {
+		if (!viewing) {
+			fetchYamlAndShowInPage(yamlLink);
+			setViewing(true);
+		} else {
+			setYaml(`kubectl apply -f ${yamlLink}`);
+			setViewing(false);
+		}
+	}
 
 	function fetchYaml(yamlLink: string) {
 		fetch(yamlLink)
@@ -52,7 +76,9 @@ export function InstallChaos(props: InstallProps) {
 		setTimeout(() => setCopying(false), 3000);
 	}
 
-	function startEditing(text: string) {
+	function startEditing() {
+		setYaml(`kubectl apply -f ${yamlLink}`);
+		setViewing(false);
 		setEditing(true);
 	}
 
@@ -70,9 +96,21 @@ export function InstallChaos(props: InstallProps) {
 			<div className={classes.title}>{title}</div>
 			<div className={classes.description}>{description}</div>
 			<div className={classes.linkBox}>
-				<Typography variant="subtitle1" className={classes.yamlLink}>
-					{yaml}
-				</Typography>
+				{!viewing ? (
+					<Typography
+						variant="subtitle1"
+						className={classes.yamlLink}
+					>
+						{yaml}
+					</Typography>
+				) : (
+					<Typography
+						variant="subtitle1"
+						className={classes.yamlLink}
+					>
+						kubectl apply -f {yamlLink}
+					</Typography>
+				)}
 
 				<div className={classes.buttonBox}>
 					<Button
@@ -101,28 +139,58 @@ export function InstallChaos(props: InstallProps) {
 							</>
 						)}
 					</Button>
-
-					<Hidden smDown>
-						{!editing ? (
-							<Button
-								variant="outlined"
-								onClick={() => startEditing(yaml)}
-								className={classes.displayYamlBtn}
-							>
+					<Hidden mdUp>
+						<Button
+							variant="outlined"
+							onClick={() => showYamlInPage()}
+							className={classes.displayYamlBtn}
+						>
+							{!viewing ? (
 								<div
 									style={{
 										display: "flex",
 										flexDirection: "row",
 									}}
 								>
-									<img
-										src="/icons/edit.svg"
-										style={{ paddingRight: 10 }}
-										alt="edit"
+									<PageviewOutlinedIcon
+										style={{
+											marginLeft: -10,
+											height: 25,
+											width: 25,
+										}}
 									/>
-									<Typography>Edit</Typography>
+									<Typography style={{ marginTop: 2 }}>
+										&nbsp;&nbsp;&nbsp;View
+									</Typography>
 								</div>
-							</Button>
+							) : (
+								<CloseTwoToneIcon />
+							)}
+						</Button>
+					</Hidden>
+
+					<Hidden smDown>
+						<Button
+							variant="outlined"
+							onClick={() => startEditing()}
+							className={classes.displayYamlBtn}
+						>
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "row",
+								}}
+							>
+								<img
+									src="/icons/edit.svg"
+									style={{ paddingRight: 10 }}
+									alt="Edit"
+								/>
+								<Typography>Edit</Typography>
+							</div>
+						</Button>
+						{!editing ? (
+							<div />
 						) : (
 							<Modal
 								open={open}
@@ -130,6 +198,8 @@ export function InstallChaos(props: InstallProps) {
 								style={{
 									background: "rgba(33, 21, 86, 0.65)",
 									backdropFilter: "blur(10px)",
+									alignItems: "center",
+									justifyContent: "center",
 								}}
 							>
 								<div className={classes.modalContainer}>
@@ -154,6 +224,19 @@ export function InstallChaos(props: InstallProps) {
 						)}
 					</Hidden>
 				</div>
+
+				<Hidden mdUp>
+					{viewing ? (
+						<Typography
+							variant="subtitle1"
+							className={classes.yamlLink}
+						>
+							{yaml}
+						</Typography>
+					) : (
+						<div />
+					)}
+				</Hidden>
 			</div>
 		</div>
 	);

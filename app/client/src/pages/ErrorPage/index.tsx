@@ -34,6 +34,7 @@ function ErrorPage() {
 						<img
 							src="/icons/litmus-404.png"
 							className={classes.errImg}
+							alt="404"
 						/>
 					</div>
 				</div>

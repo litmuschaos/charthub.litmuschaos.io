@@ -34,9 +34,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 		backgroundColor: "rgba(255, 255, 255, 0.2)",
 	},
 
+	widthManager: {
+		width: "98.5%",
+	},
+
 	editorButtonGrid: {
 		marginTop: theme.spacing(3),
-		width: "100%",
 		display: "flex",
 		flexWrap: "wrap",
 		justifyContent: "space-between",
@@ -48,8 +51,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 	editorGrid: {
 		overflow: "auto",
-		height: "450px",
-		width: "92%",
+		height: "50vh",
+		width: "100%",
 		"&::-webkit-scrollbar": {
 			width: "0.2em",
 		},
@@ -61,14 +64,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 			outline: "1px solid slategrey",
 		},
 		[theme.breakpoints.down("xl")]: {
-			height: "480px",
+			height: "55vh",
 		},
 		[theme.breakpoints.down("lg")]: {
-			height: "390px",
+			height: "50vh",
 		},
 		[theme.breakpoints.down("md")]: {
-			height: "290px",
+			height: "45vh",
 		},
+
 		[theme.breakpoints.down("sm")]: {
 			height: "201px",
 		},
@@ -187,6 +191,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		[theme.breakpoints.down("md")]: {
 			display: "none",
 		},
+		[theme.breakpoints.down("lg")]: {
+			marginLeft: theme.spacing(5),
+		},
 	},
 
 	editorButtonSelectAll: {
@@ -228,7 +235,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		marginTop: theme.spacing(-2),
 		width: "1.875rem",
 		height: "1.875rem",
-		marginLeft: theme.spacing(1.25),
+		marginLeft: theme.spacing(-10),
 		[theme.breakpoints.down("sm")]: {
 			marginLeft: theme.spacing(-2),
 			width: "0rem",
@@ -236,11 +243,26 @@ const useStyles = makeStyles((theme: Theme) => ({
 			padding: theme.spacing(0),
 			border: "0px",
 		},
+		[theme.breakpoints.down("xl")]: {
+			width: "0rem",
+			height: "0rem",
+			padding: theme.spacing(0),
+			border: "0px",
+			marginLeft: theme.spacing(-10),
+		},
+		[theme.breakpoints.down("lg")]: {
+			width: "0rem",
+			height: "0rem",
+			padding: theme.spacing(0),
+			border: "0px",
+			marginLeft: theme.spacing(-10),
+		},
 		[theme.breakpoints.down("md")]: {
 			width: "0rem",
 			height: "0rem",
 			padding: theme.spacing(0),
 			border: "0px",
+			marginLeft: theme.spacing(-10),
 		},
 	},
 
@@ -268,7 +290,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 
 	fullScreenGrid: {
-		width: "8%",
+		width: "0%",
 	},
 
 	fullWidth: {

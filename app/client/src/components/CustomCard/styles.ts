@@ -1,4 +1,5 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { Tooltip } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
 	card: {
@@ -6,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
 		border: "2px solid #ECECEC",
 		"&:hover": {
 			border: "2px solid #5B44BA",
+			boxShadow: "0px 4px 4px rgba(91, 68, 186, 0.25)",
 		},
 	},
 	allExpCard: {
@@ -13,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
 		border: "2px solid #858CDD",
 		"&:hover": {
 			border: "2px solid #FFFFFF",
+			boxShadow: "0px 4px 4px #5B44BA",
 		},
 	},
 	// CARD MEDIA
@@ -74,11 +77,6 @@ export const useStyles = makeStyles((theme) => ({
 		justifyContent: "space-between",
 		margin: "8px 8px 12px 8px",
 	},
-	expCount: {
-		color: theme.palette.secondary.contrastText,
-		fontWeight: 600,
-		marginTop: 3,
-	},
 	button: {
 		padding: 0,
 		margin: 0,
@@ -92,6 +90,14 @@ export const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.common.white,
 		color: theme.palette.text.primary,
 	},
+	allExptotalCount: {
+		backgroundColor: theme.palette.common.white,
+		color: theme.palette.text.primary,
+	},
+	chaosInfo: {
+		backgroundColor: "#F6B92B",
+		color: theme.palette.common.white,
+	},
 	allExpLink: {
 		color: theme.palette.common.white,
 		fontWeight: 500,
@@ -104,7 +110,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 
 	infoIcon: {
-		color: theme.palette.error.dark,
+		color: theme.palette.common.white,
 	},
 
 	allExpimgMedia: {
@@ -153,6 +159,18 @@ export const useStyles = makeStyles((theme) => ({
 		fontWeight: 500,
 		fontSize: 14,
 	},
+	maintotalCount: {
+		borderRadius: 4,
+		padding: "3px 6px",
+		fontWeight: 500,
+		fontSize: 14,
+	},
+	chaosInfoBase: {
+		borderRadius: 4,
+		padding: "3px 6px",
+		fontWeight: 500,
+		fontSize: 14,
+	},
 	mainTitle: {
 		fontSize: 18,
 		margin: "12px 0",
@@ -162,4 +180,15 @@ export const useStyles = makeStyles((theme) => ({
 			margin: 0,
 		},
 	},
+
+	expName: {},
+
+	allExpName: { color: theme.palette.common.white },
 }));
+
+export const InfoTooltip = withStyles({
+	tooltip: {
+		backgroundColor: "rgba(0, 0, 0, 0.8)",
+		lineHeight: "140%",
+	},
+})(Tooltip);

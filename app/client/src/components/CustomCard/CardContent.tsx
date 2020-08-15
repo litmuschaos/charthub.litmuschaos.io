@@ -1,8 +1,8 @@
-import { IconButton, Tooltip, Link } from "@material-ui/core";
+import { IconButton, Link } from "@material-ui/core";
 import React from "react";
 import { formatCount } from "../../utils";
 import { CardProps } from "./model";
-import { useStyles } from "./styles";
+import { InfoTooltip, useStyles } from "./styles";
 import InfoIcon from "@material-ui/icons/Info";
 import clsx from "clsx";
 
@@ -13,7 +13,6 @@ function CardContent(props: CardProps) {
 		urlToIcon,
 		handleClick,
 		handleExpGrpClick,
-		experimentCount,
 		description,
 		totalRuns,
 		chaosType,
@@ -25,12 +24,8 @@ function CardContent(props: CardProps) {
 	return (
 		<div className={classes.cardContent} onClick={handleClick}>
 			<div className={classes.cardAnalytics}>
-				{experimentCount ? (
-					<span className={classes.expCount}>
-						{experimentCount} Experiments
-					</span>
-				) : chaosType ? (
-					<Tooltip
+				{chaosType ? (
+					<InfoTooltip
 						TransitionProps={{ timeout: 400 }}
 						title={
 							chartType === "generic"
@@ -39,10 +34,18 @@ function CardContent(props: CardProps) {
 						}
 						placement="bottom-start"
 					>
-						<IconButton className={classes.button}>
-							<InfoIcon className={classes.infoIcon} />
-						</IconButton>
-					</Tooltip>
+						<span
+							className={clsx(
+								classes.chaosInfo,
+								classes.chaosInfoBase
+							)}
+						>
+							<IconButton className={classes.button}>
+								<InfoIcon className={classes.infoIcon} />
+							</IconButton>
+							&nbsp;Infra-chaos
+						</span>
+					</InfoTooltip>
 				) : (
 					<span />
 				)}
@@ -104,7 +107,15 @@ function CardContent(props: CardProps) {
 						>
 							{expGrp}/
 						</Link>
-						{title}
+						<div
+							className={clsx(
+								props.title !== "all-experiments"
+									? classes.expName
+									: classes.allExpName
+							)}
+						>
+							{title}
+						</div>
 					</div>
 				</div>
 				{description ? (
