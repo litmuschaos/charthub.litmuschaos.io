@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
 	headerDiv: {
 		display: "flex",
 		flexDirection: "row",
-		paddingTop: 80,
+		paddingTop: 60,
 		marginLeft: 130,
 		marginRight: 130,
 		[theme.breakpoints.up("xl")]: {
@@ -45,7 +45,7 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	headerText: {
-		width: 540,
+		width: 650,
 		height: 120,
 		[theme.breakpoints.down("sm")]: {
 			width: "100%",
@@ -75,9 +75,15 @@ export const useStyles = makeStyles((theme) => ({
 		marginBottom: 20,
 		color: theme.palette.common.white,
 		textAlign: "left",
+		maxWidth: 500,
+		paddingTop: 20,
+		[theme.breakpoints.down("md")]: {
+			paddingTop: 0,
+			maxWidth: "100%",
+		},
 	},
 	headerImg: {
-		marginTop: -80,
+		marginTop: -50,
 		marginRight: 50,
 		[theme.breakpoints.down("md")]: {
 			marginTop: -50,
@@ -99,7 +105,7 @@ export const useStyles = makeStyles((theme) => ({
 		flexDirection: "row",
 		marginLeft: 130,
 		marginRight: 80,
-		marginTop: 30,
+		marginTop: 10,
 		[theme.breakpoints.up("xl")]: {
 			width: 1550,
 			margin: "0 auto",
@@ -110,6 +116,7 @@ export const useStyles = makeStyles((theme) => ({
 			width: "95%",
 			marginLeft: 30,
 			marginRight: 30,
+			marginTop: 35,
 		},
 		[theme.breakpoints.down("xs")]: {
 			marginTop: "10%",
