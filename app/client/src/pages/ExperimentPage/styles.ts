@@ -26,6 +26,7 @@ export const useStyles = makeStyles((theme) => ({
 		flexDirection: "column",
 		alignItems: "start",
 		marginLeft: 64,
+
 		[theme.breakpoints.down("md")]: {
 			width: "100%",
 			marginLeft: 0,
@@ -67,6 +68,11 @@ export const useStyles = makeStyles((theme) => ({
 	headerDiv: {
 		marginLeft: 130,
 		marginTop: 30,
+		[theme.breakpoints.up("xl")]: {
+			width: 1550,
+			margin: "0 auto",
+			marginTop: 40,
+		},
 		[theme.breakpoints.down("md")]: {
 			marginLeft: 80,
 			marginTop: 10,
@@ -96,6 +102,11 @@ export const useStyles = makeStyles((theme) => ({
 		marginRight: "5.75%",
 		borderRadius: "3px",
 		padding: "50px 50px 50px 50px",
+		[theme.breakpoints.up("xl")]: {
+			marginTop: -300,
+			width: 1660,
+			margin: "0 auto",
+		},
 		[theme.breakpoints.down("sm")]: {
 			marginTop: -250,
 			marginLeft: 0,
