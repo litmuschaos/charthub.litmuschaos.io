@@ -50,6 +50,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginTop: 30,
 		marginBottom: 30,
 		color: theme.palette.text.secondary,
+		"& a": {
+			textDecoration: "none",
+			color: theme.palette.text.secondary,
+		},
 	},
 
 	copyright: {
@@ -80,6 +84,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: "10rem",
 		marginBottom: 50,
 		cursor: "pointer",
+		[theme.breakpoints.down("xs")]: {
+			width: "7rem",
+		},
 	},
 
 	// Community
