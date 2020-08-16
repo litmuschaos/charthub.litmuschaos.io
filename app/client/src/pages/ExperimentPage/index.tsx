@@ -16,7 +16,7 @@ import { useStyles } from "./styles";
 import MainHeader from "../../components/Header";
 import DeveloperGuide from "../../components/DeveloperGuide";
 
-const getIconUrl = (path: any) => {
+const getIconUrl = (path: any, version: string) => {
 	let baseURL: string = "";
 	if (
 		process.env.NODE_ENV.trim() === "development" ||
@@ -25,8 +25,19 @@ const getIconUrl = (path: any) => {
 		baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
 	} else baseURL = "/api";
 	if (path[2] === "all-experiments")
-		return baseURL + "/icon/" + path[1] + "/" + path[1] + ".png";
-	return baseURL + "/icon/" + path[1] + "/" + path[2] + ".png";
+		return (
+			baseURL +
+			"/icon/" +
+			version +
+			"/" +
+			path[1] +
+			"/" +
+			path[1] +
+			".png"
+		);
+	return (
+		baseURL + "/icon/" + version + "/" + path[1] + "/" + path[2] + ".png"
+	);
 };
 
 function ExperimentPage(props: any) {
@@ -97,7 +108,10 @@ function ExperimentPage(props: any) {
 										title={chart.name}
 										description={chart.description}
 										runCount={expCount}
-										urlToIcon={getIconUrl(path)}
+										urlToIcon={getIconUrl(
+											path,
+											versionData.currentVersion
+										)}
 									/>
 								</div>
 							</div>
