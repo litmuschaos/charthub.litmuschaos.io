@@ -8,12 +8,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 			"linear-gradient(82.18deg, #5B44BA -6.24%, #858CDD 142.26%)",
 		borderBottom: "1px solid rgba(255,255,255,0.2)",
 	},
+	toolbarDiv: {
+		[theme.breakpoints.up("xl")]: {
+			width: 1590,
+			margin: "0 auto",
+		},
+	},
 	mainLogo: {
 		width: 102,
 		height: 40,
 		marginLeft: 110,
 		marginRight: 30,
 		cursor: "pointer",
+		[theme.breakpoints.up("xl")]: {
+			marginLeft: 0,
+			marginRight: 30,
+		},
 		[theme.breakpoints.down("sm")]: {
 			marginLeft: 10,
 			marginRight: 30,
@@ -34,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		flexDirection: "row",
 		marginLeft: "auto",
 		marginRight: 120,
+		[theme.breakpoints.up("xl")]: {
+			marginRight: 0,
+		},
 		[theme.breakpoints.down("sm")]: {
 			marginLeft: "auto",
 			marginRight: 0,

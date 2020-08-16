@@ -58,7 +58,7 @@ export default function MainHeader() {
 				className={classes.appBar}
 				elevation={0}
 			>
-				<Toolbar>
+				<Toolbar className={classes.toolbarDiv}>
 					<img
 						src="/icons/litmus-header.svg"
 						alt="Litmus Logo"

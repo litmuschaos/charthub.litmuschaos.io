@@ -7,6 +7,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		borderRadius: "3px",
 		borderLeft: "6px solid  #858CDD",
 		marginBottom: 30,
+		[theme.breakpoints.up("xl")]: {
+			width: 1550,
+			margin: "0 auto",
+			marginBottom: 30,
+		},
 		[theme.breakpoints.down("sm")]: {
 			marginBottom: 10,
 		},
