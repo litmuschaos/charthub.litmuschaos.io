@@ -1,10 +1,10 @@
-import { Tooltip, Link, Typography, Button } from "@material-ui/core";
-import React from "react";
-import { formatCount } from "../../utils";
-import { CardProps } from "./model";
-import { useStyles } from "./styles";
-import InfoIcon from "@material-ui/icons/Info";
-import clsx from "clsx";
+import { Tooltip, Link, Typography, Button } from '@material-ui/core';
+import React from 'react';
+import { formatCount } from '../../utils';
+import { CardProps } from './model';
+import { useStyles } from './styles';
+import InfoIcon from '@material-ui/icons/Info';
+import clsx from 'clsx';
 
 function CardContent(props: CardProps) {
 	const {
@@ -16,7 +16,7 @@ function CardContent(props: CardProps) {
 		description,
 		totalRuns,
 		chaosType,
-		chartType,
+		chartType
 	} = props;
 
 	const classes = useStyles();
@@ -28,9 +28,11 @@ function CardContent(props: CardProps) {
 					<Tooltip
 						TransitionProps={{ timeout: 400 }}
 						title={
-							chartType === "generic"
-								? "Multiple applications might be impacted"
-								: "Multiple volumes sharing the same pool might be impacted"
+							chartType === 'generic' ? (
+								'Multiple applications might be impacted'
+							) : (
+								'Multiple volumes sharing the same pool might be impacted'
+							)
 						}
 						placement="bottom-start"
 					>
@@ -42,17 +44,17 @@ function CardContent(props: CardProps) {
 										paddingRight: 3,
 										paddingLeft: 3,
 										height: 20,
-										width: 20,
+										width: 20
 									}}
 								/>
 								<Typography
 									style={{
 										fontSize: 14,
 										fontWeight: 500,
-										paddingRight: 5,
+										paddingRight: 5
 									}}
 								>
-									{" Infra-Chaos"}
+									{' Infra-Chaos'}
 								</Typography>
 							</Button>
 						</span>
@@ -62,9 +64,7 @@ function CardContent(props: CardProps) {
 				)}
 				<span
 					className={clsx(
-						props.title !== "all-experiments"
-							? classes.totalRuns
-							: classes.allExptotalRuns,
+						props.title !== 'all-experiments' ? classes.totalRuns : classes.allExptotalRuns,
 						classes.maintotalRuns
 					)}
 				>
@@ -75,19 +75,13 @@ function CardContent(props: CardProps) {
 				{urlToIcon ? (
 					<div
 						className={clsx(
-							props.title !== "all-experiments"
-								? classes.cardMedia
-								: classes.allExpCardMedia,
+							props.title !== 'all-experiments' ? classes.cardMedia : classes.allExpCardMedia,
 							classes.mainCardMedia
 						)}
 					>
 						<img
 							src={urlToIcon}
-							className={
-								props.title !== "all-experiments"
-									? classes.imgMedia
-									: classes.allExpimgMedia
-							}
+							className={props.title !== 'all-experiments' ? classes.imgMedia : classes.allExpimgMedia}
 							alt="chart provider logo"
 						/>
 					</div>
@@ -96,12 +90,7 @@ function CardContent(props: CardProps) {
 				)}
 				<div className={classes.cardInfo}>
 					<div
-						className={clsx(
-							props.title !== "all-experiments"
-								? classes.title
-								: classes.allExpTitle,
-							classes.mainTitle
-						)}
+						className={clsx(props.title !== 'all-experiments' ? classes.title : classes.allExpTitle, classes.mainTitle)}
 					>
 						<Link
 							href="#"
@@ -110,30 +99,16 @@ function CardContent(props: CardProps) {
 								e.stopPropagation();
 								handleExpGrpClick(expGrp);
 							}}
-							className={clsx(
-								props.title !== "all-experiments"
-									? classes.link
-									: classes.allExpLink
-							)}
+							className={clsx(props.title !== 'all-experiments' ? classes.link : classes.allExpLink)}
 						>
 							{expGrp}/
 						</Link>
-						<div
-							className={clsx(
-								props.title !== "all-experiments"
-									? classes.expName
-									: classes.allExpName
-							)}
-						>
+						<div className={clsx(props.title !== 'all-experiments' ? classes.expName : classes.allExpName)}>
 							{title}
 						</div>
 					</div>
 				</div>
-				{description ? (
-					<div className={classes.description}>{description}</div>
-				) : (
-					<span></span>
-				)}
+				{description ? <div className={classes.description}>{description}</div> : <span />}
 			</div>
 		</div>
 	);
