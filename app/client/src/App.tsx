@@ -1,16 +1,16 @@
-import React, { lazy, Suspense, useEffect } from "react";
-import { Redirect, Route, Router, Switch } from "react-router-dom";
-import { useStyles } from "./App-styles";
-import { Loader } from "./components";
-import withTheme from "./hoc/themeHoc";
-import { useActions } from "./redux/actions";
-import * as AnalyticsActions from "./redux/actions/analytics";
-import * as GithubActions from "./redux/actions/github";
-import { history } from "./redux/configureStore";
+import React, { lazy, Suspense, useEffect } from 'react';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
+import { useStyles } from './App-styles';
+import { Loader } from './components';
+import withTheme from './hoc/themeHoc';
+import { useActions } from './redux/actions';
+import * as AnalyticsActions from './redux/actions/analytics';
+import * as GithubActions from './redux/actions/github';
+import { history } from './redux/configureStore';
 
-const HomePage = lazy(() => import("./pages/HomePage"));
-const ExperimentPage = lazy(() => import("./pages/ExperimentPage"));
-const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ExperimentPage = lazy(() => import('./pages/ExperimentPage'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 
 function Routes() {
 	const classes = useStyles();
@@ -20,11 +20,7 @@ function Routes() {
 			<Switch>
 				<Route exact={true} path="/" component={HomePage} />
 				<Route exact={true} path="/404" component={ErrorPage} />
-				<Route
-					exact={true}
-					path="/:chartGroupId/:chartId"
-					component={ExperimentPage}
-				/>
+				<Route exact={true} path="/:chartGroupId/:chartId" component={ExperimentPage} />
 				<Redirect to="/404" />
 			</Switch>
 		</div>
