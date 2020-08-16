@@ -87,7 +87,7 @@ export function UsefulLinks(props: UsefulLinks) {
 					{data.map((d, i) => (
 						<span className={classes.staticType} key={d}>
 							{d}
-							{i != data.length - 1 ? ", " : ""}
+							{i !== data.length - 1 ? ", " : ""}
 						</span>
 					))}
 				</div>
