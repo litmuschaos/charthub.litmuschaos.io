@@ -63,7 +63,7 @@ function HomePage() {
 						<div className={classes.headerDiv}>
 							<div className={classes.headerText}>
 								<Typography className={classes.mainHeader}>
-									Chaos Charts for Kubernetes
+									Chaos Experiments for Kubernetes
 								</Typography>
 								<Typography className={classes.headerDesc}>
 									Litmus ChaosHub hosts chaos experiments for

@@ -15,6 +15,9 @@ export const useStyles = makeStyles((theme) => ({
 		height: 500,
 		display: "flex",
 		flexDirection: "column",
+		[theme.breakpoints.down("xs")]: {
+			height: 550,
+		},
 	},
 	headerDiv: {
 		display: "flex",
@@ -53,6 +56,9 @@ export const useStyles = makeStyles((theme) => ({
 		fontWeight: 500,
 		color: theme.palette.common.white,
 		textAlign: "left",
+		[theme.breakpoints.down(981)]: {
+			fontSize: "35px",
+		},
 		[theme.breakpoints.down("sm")]: {
 			fontSize: "25px",
 			fontWeight: 500,
@@ -106,11 +112,14 @@ export const useStyles = makeStyles((theme) => ({
 			marginRight: 30,
 		},
 		[theme.breakpoints.down("xs")]: {
-			marginTop: "5%",
+			marginTop: "10%",
 			marginLeft: 10,
 		},
-		[theme.breakpoints.down(378)]: {
+		[theme.breakpoints.down(465)]: {
 			marginTop: 90,
+		},
+		[theme.breakpoints.down(378)]: {
+			marginTop: 135,
 			marginLeft: 10,
 			marginRight: 10,
 		},
@@ -147,8 +156,11 @@ export const useStyles = makeStyles((theme) => ({
 		[theme.breakpoints.down("sm")]: {
 			marginTop: -80,
 		},
+		[theme.breakpoints.down(600)]: {
+			marginTop: -90,
+		},
 		[theme.breakpoints.down(378)]: {
-			marginTop: -40,
+			marginTop: -30,
 			marginLeft: "6%",
 			marginRight: "6%",
 		},
