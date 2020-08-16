@@ -1,39 +1,12 @@
-import { Typography } from "@material-ui/core";
+import { Typography, Hidden } from "@material-ui/core";
 import * as React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers";
-import { formatCount } from "../../utils";
 import { useStyles } from "./styles";
 
-interface StatItem {
-	key: string;
-	value: string;
-	desc: string;
-}
 interface CommunityItem {
 	value: string;
+	img?: string;
+	alt?: string;
 	link: string;
-}
-
-function Stat(props: { stat: StatItem[] }) {
-	const classes = useStyles();
-	const createStatItem = (s: StatItem) => {
-		return (
-			<div key={s.key} className={classes.statItem}>
-				<Typography variant="h5" className={classes.statValue}>
-					{s.value}
-				</Typography>
-				<Typography variant="caption" style={{ fontWeight: 700 }}>
-					{s.desc}
-				</Typography>
-			</div>
-		);
-	};
-	return (
-		<div className={classes.stat}>
-			{props.stat.map((s: StatItem) => createStatItem(s))}
-		</div>
-	);
 }
 
 function Community(props: { header: string; data: CommunityItem[] }) {
@@ -46,6 +19,15 @@ function Community(props: { header: string; data: CommunityItem[] }) {
 
 			{props.data.map((d, i) => (
 				<div key={i} className={classes.commList}>
+					{d.img ? (
+						<img
+							src={d.img}
+							alt={d.alt}
+							style={{ paddingBottom: 15, paddingRight: 10 }}
+						/>
+					) : (
+						<></>
+					)}
 					<a href={d.link} target="#">
 						<Typography className={classes.commData}>
 							{d.value}
@@ -61,18 +43,13 @@ function Copyright() {
 	const classes = useStyles();
 	return (
 		<div className={classes.copyright}>
-			<img
-				className={classes.logo}
-				src="/icons/litmus-white.png"
-				alt="litmus logo"
-			/>
 			<Typography className={classes.copyrightText}>
 				Copyright © 2020 LitmusChaos Authors. All rights reserved.
 			</Typography>
 			<Typography className={classes.copyrightText}>
-				Copyright © 2020 The Linux Foundation. All rights reserved. The
-				Linux Foundation has registered trademarks and uses trademarks.
-				For a list of trademarks of The Linux Foundation, please see our{" "}
+				The Linux Foundation has registered trademarks and uses
+				trademarks. For a list of trademarks of The Linux Foundation,
+				please see our{" "}
 				<a
 					href="https://www.linuxfoundation.org/trademark-usage/"
 					target="_"
@@ -85,37 +62,51 @@ function Copyright() {
 	);
 }
 
-function AboutUs() {
+function FooterLogo() {
 	const classes = useStyles();
 	return (
 		<div className={classes.copyright}>
-			<Typography variant="h6" className={classes.footHeading}>
-				About Us
-			</Typography>
-			<Typography className={classes.copyrightText}>
-				Litmus is an OSS licensed project as Apache License 2.0
-			</Typography>
-			<Typography className={classes.copyrightText}>
-				Founded by{" "}
-				<a href="https://mayadata.io/" target="_">
-					MayaData
-				</a>{" "}
-				❤️
-			</Typography>
+			<a href="https://litmuschaos.io/" target="_">
+				<img
+					className={classes.logo}
+					src="/icons/litmus-light.svg"
+					alt="litmus logo"
+				/>
+			</a>
 		</div>
 	);
 }
 
 const community: CommunityItem[] = [
 	{
+		value: "GitHub",
+		img: "/icons/github.svg",
+		alt: "Github",
+		link: "https://github.com/litmuschaos",
+	},
+	{
 		value: "Slack",
+		img: "/icons/slack.svg",
+		alt: "Slack",
 		link: "https://slack.litmuschaos.io",
 	},
-	{ value: "GitHub", link: "https://github.com/litmuschaos" },
-	{ value: "Twitter", link: "https://twitter.com/LitmusChaos" },
-	{ value: "Blog", link: "https://dev.to/t/litmuschaos/latest" },
+
 	{
-		value: "YouTube",
+		value: "Twitter",
+		img: "/icons/twitter.svg",
+		alt: "Twitter",
+		link: "https://twitter.com/LitmusChaos",
+	},
+	{
+		value: "Dev",
+		img: "/icons/dev.svg",
+		alt: "Dev",
+		link: "https://dev.to/t/litmuschaos/latest",
+	},
+	{
+		value: "Youtube",
+		img: "/icons/youtube.svg",
+		alt: "YouTube",
 		link: "https://www.youtube.com/channel/UCa57PMqmz_j0wnteRa9nCaw",
 	},
 ];
@@ -123,72 +114,110 @@ const community: CommunityItem[] = [
 const resources: CommunityItem[] = [
 	{
 		value: "FAQ",
+		img: "/icons/faq.svg",
+		alt: "FAQ",
 		link: "https://docs.litmuschaos.io/docs/faq-general/",
 	},
 	{
-		value: "Documentation",
-		link: "https://docs.litmuschaos.io/docs/getstarted/",
-	},
-	{
 		value: "Issues",
+		img: "/icons/issues.svg",
+		alt: "Issues",
 		link: "https://github.com/litmuschaos/litmus/issues",
 	},
 ];
 
-export default function Footer(props: { showStat: boolean }) {
+const links: CommunityItem[] = [
+	{
+		value: "Litmus homepage",
+		link: "https://litmuschaos.io/",
+	},
+	{
+		value: "Why Litmus?",
+		link: "https://litmuschaos.io/whylitmus",
+	},
+	{
+		value: "Community",
+		link: "https://litmuschaos.io/community",
+	},
+	{
+		value: "Blog",
+		link: "https://dev.to/t/litmuschaos/latest",
+	},
+];
+
+const adoptors: CommunityItem[] = [
+	{
+		value: "Intuit",
+		link: "https://github.com/litmuschaos/litmus/blob/master/ADOPTERS.md",
+	},
+	{
+		value: "Wipro",
+		link:
+			"https://github.com/litmuschaos/litmus/blob/master/adopters/AppAnywhere.md",
+	},
+	{
+		value: "OpenEBS",
+		link:
+			"https://github.com/litmuschaos/litmus/blob/master/adopters/openebs.md",
+	},
+	{
+		value: "Zebrium",
+		link:
+			"https://github.com/litmuschaos/litmus/blob/master/adopters/zebrium.md",
+	},
+];
+
+export default function Footer() {
 	const classes = useStyles();
-	const { githubData, analyticsData, chartData } = useSelector(
-		(state: RootState) => state
-	);
-
-	//Logic for Contributors
-
-	// let contributors = githubData.contributorList.map(
-	// 	(d: GithubContributor) => ({
-	// 		value: d.githubName,
-	// 		link: d.githubProfileUrl,
-	// 	})
-	// );
-	// contributors =
-	// 	contributors.length >= 5 ? contributors.slice(0, 5) : contributors;
-
-	const opInstalls =
-		analyticsData.chaosOperatorCount != undefined
-			? analyticsData.chaosOperatorCount.toString()
-			: "0";
-	const githubStars = formatCount(githubData.star_count);
-	const expRuns =
-		analyticsData.totalExpRuns != undefined
-			? analyticsData.totalExpRuns.toString()
-			: "0";
-	const expCount = formatCount(chartData.totalExpCount);
-	//const opInstalls = formatCount(analyticsData.chaosOperatorCount)
-
-	const stat: StatItem[] = [
-		{
-			key: "opInstalls",
-			value: opInstalls,
-			desc: "Chaos Operators Installed",
-		},
-		{ key: "expCount", value: expCount, desc: "Total Experiments" },
-		{
-			key: "expRuns",
-			value: expRuns,
-			desc: "Total Experiment Runs",
-		},
-		{ key: "githubStars", value: githubStars, desc: "Github Stars" },
-	];
-
 	return (
 		<div className={classes.root}>
 			<div>
-				{props.showStat ? <Stat stat={stat} /> : <></>}
-				<div className={classes.footerContainer} data-cy="Footer">
-					<Copyright />
-					<Community header="Community" data={community} />
-					<Community header="Resources" data={resources} />
-					<AboutUs />
-				</div>
+				<Hidden smDown>
+					<div className={classes.footerContainer} data-cy="Footer">
+						<div
+							style={{ display: "flex", flexDirection: "column" }}
+						>
+							<FooterLogo />
+							<Copyright />
+						</div>
+						<Community header="Litmus Website" data={links} />
+						<Community header="Resources" data={resources} />
+						<Community header="Top Adopters" data={adoptors} />
+						<Community
+							header="Join the community"
+							data={community}
+						/>
+					</div>
+				</Hidden>
+				<Hidden mdUp>
+					<div className={classes.footerContainer1} data-cy="Footer">
+						<FooterLogo />
+						<div className={classes.footerDiv}>
+							<Community header="Litmus Website" data={links} />
+							<Community header="Resources" data={resources} />
+						</div>
+						<div className={classes.footerDiv1}>
+							<Community header="Top Adopters" data={adoptors} />
+							<Community
+								header="Join the community"
+								data={community}
+							/>
+						</div>
+						<Copyright />
+					</div>
+				</Hidden>
+			</div>
+			<hr className={classes.horizontalLine} />
+			<div>
+				<Typography className={classes.footerText}>
+					Founded by{" "}
+					<strong>
+						<a href="https://mayadata.io/" target="_">
+							MayaData
+						</a>
+						&nbsp;❤️
+					</strong>
+				</Typography>
 			</div>
 		</div>
 	);

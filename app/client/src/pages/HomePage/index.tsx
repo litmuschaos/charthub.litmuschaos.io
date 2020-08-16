@@ -1,136 +1,116 @@
-import { FormControl, Select } from "@material-ui/core";
-import MenuItem from "@material-ui/core/MenuItem";
-import DocsIcon from "@material-ui/icons/ChromeReaderModeTwoTone";
+import { Typography, Hidden } from "@material-ui/core";
 import * as React from "react";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-	ChartGroups,
-	CustomButton,
-	SearchBar,
-	SortButton,
-} from "../../components";
+import { SearchBar, Charts } from "../../components";
 import Footer from "../../components/Footer";
-import { useActions } from "../../redux/actions";
-import * as ChartActions from "../../redux/actions/charts";
 import { RootState } from "../../redux/reducers";
 import { useStyles } from "./styles";
+import MainHeader from "../../components/Header";
+import Stat from "../../components/Stats";
+import { Experiment } from "../../redux/model";
+import "../../scrollbar.css";
 
 function HomePage() {
 	const classes = useStyles();
-	const [selectChaos, setSelectChaos] = useState("All");
-	const [selectContributors, setSelectContributors] = useState("All");
-	const [searchToken, setsearchToken] = useState("");
-	const chartData = useSelector((state: RootState) => state.chartData);
-	const chartActions = useActions(ChartActions);
+	const { chartData } = useSelector((state: RootState) => state);
 
-	useEffect(() => {
-		chartActions.searchCharts("");
-	}, []);
+	const [displayExps, setDisplayExps] = React.useState<Experiment[]>(
+		chartData.allExperiments
+	);
+	React.useEffect(() => {
+		setDisplayExps(chartData.allExperiments);
+	}, [chartData.allExperiments]);
 
-	const handleChaosChange = (
-		event: React.ChangeEvent<{ value: unknown }>
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	});
+
+	const [searchToken, setsearchToken] = React.useState("");
+
+	const handleSearch = (
+		event: React.ChangeEvent<{ value: unknown }> | undefined,
+		token: string | undefined
 	) => {
-		setsearchToken("");
-		setSelectChaos(event.target.value as string);
-		chartActions.filterCharts(
-			event.target.value as string,
-			selectContributors
+		let search: string =
+			event !== undefined ? (event.target.value as string) : token || "";
+		setsearchToken(search);
+		const tokens: string[] = search
+			.toLowerCase()
+			.split(" ")
+			.filter((s) => s !== "");
+		const payload: Experiment[] = chartData.allExperiments.filter(
+			(exp: Experiment) => {
+				return tokens.every(
+					(s: string) =>
+						exp.name.toLowerCase().includes(s) ||
+						(exp.expGroup !== undefined
+							? exp.expGroup.toLowerCase().includes(s)
+							: false)
+				);
+			}
 		);
-	};
-	const handleContributorChange = (
-		event: React.ChangeEvent<{ value: unknown }>
-	) => {
-		setsearchToken("");
-		setSelectContributors(event.target.value as string);
-		chartActions.filterCharts(selectChaos, event.target.value as string);
-	};
-	const handleSort = () => {
-		chartActions.sortCharts();
-	};
-	const handleSearch = (event: React.ChangeEvent<{ value: unknown }>) => {
-		setsearchToken(event.target.value as string);
-		setSelectChaos("All");
-		setSelectContributors("All");
-		chartActions.searchCharts(event.target.value as string);
+		setDisplayExps(payload);
+		window.scrollTo(0, 0);
 	};
 
 	return (
-		<div className={classes.rootContainer}>
-			<div className={classes.root}>
-				<div className={classes.title}>
-					<b>Chaos Charts for Kubernetes</b>
-				</div>
-				<div className={classes.description}>
-					Charts are pre-defined chaos experiments. Use these charts
-					to inject chaos into cloud native applications and
-					Kubernetes infrastructure.
-				</div>
-				<div className={classes.description1}>
-					Browse . Run . Contribute
-				</div>
-
-				<SearchBar
-					searchToken={searchToken}
-					handleSearch={handleSearch}
-				/>
-
-				<div className={classes.headerButton}>
-					<CustomButton
-						handleClick={() =>
-							window.open(
-								"https://docs.litmuschaos.io/docs/getstarted/"
-							)
-						}
-						label="Visit Docs"
-						handleIcon={<DocsIcon />}
-					/>
-				</div>
-
-				<div className={classes.filter}>
-					<FormControl className={classes.formControl}>
-						<span>Chaos for :</span>
-						<Select
-							className={classes.selectOption}
-							disableUnderline={true}
-							labelId="change-chaos"
-							value={selectChaos}
-							onChange={handleChaosChange}
-						>
-							<MenuItem value={"All"}>All</MenuItem>
-							{chartData.chaosFilter.map((f) => (
-								<MenuItem value={f}>{f}</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-
-					<FormControl className={classes.formControl}>
-						<span>Contributors :</span>
-						<Select
-							className={classes.selectOption}
-							disableUnderline={true}
-							labelId="change-contributors"
-							value={selectContributors}
-							onChange={handleContributorChange}
-						>
-							<MenuItem value={"All"}>All</MenuItem>
-							{chartData.contributorFilter.map((f) => (
-								<MenuItem value={f}>{f}</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-					<div className={classes.sort}>
-						<SortButton handleClick={handleSort} />
+		<div className="scrollbar scrollbar-primary">
+			<div className={classes.rootContainer}>
+				<MainHeader />
+				<div className={classes.root}>
+					<div className={classes.mainDiv}>
+						{/* Header component */}
+						<div className={classes.headerDiv}>
+							<div className={classes.headerText}>
+								<Typography className={classes.mainHeader}>
+									Chaos Experiments for Kubernetes
+								</Typography>
+								<Typography className={classes.headerDesc}>
+									Litmus ChaosHub hosts chaos experiments for
+									Kubernetes. The experiments are declarative
+									and tunable. Use the hub interface to tune
+									them to your needs, deploy them and take
+									that step towards resilience.
+								</Typography>
+							</div>
+							<Hidden smDown>
+								<div style={{ marginLeft: "auto" }}>
+									<img
+										src="icons/chaos-bird.png"
+										alt="Chaos Bird Experiment"
+										className={classes.headerImg}
+									/>
+								</div>
+							</Hidden>
+						</div>
+						{/* SearchBar and Stats */}
+						<div className={classes.searchDiv}>
+							<div className={classes.searchBar}>
+								<SearchBar
+									searchToken={searchToken}
+									handleSearch={handleSearch}
+								/>
+							</div>
+							<div className={classes.statsDiv}>
+								<Stat />
+							</div>
+						</div>
+					</div>
+					{/* Charts Div */}
+					<div className={classes.chartsDiv}>
+						<Charts
+							experiments={displayExps}
+							handleSearch={(token) =>
+								handleSearch(undefined, token)
+							}
+						/>
 					</div>
 				</div>
-
-				{/* Card component */}
-				<ChartGroups
-					experimentGroups={chartData.displayExperimentGroups}
-				/>
+				{/* Footer */}
+				<div style={{ marginTop: "auto" }}>
+					<Footer />
+				</div>
 			</div>
-			{/* Footer */}
-			<Footer showStat={true} />
 		</div>
 	);
 }

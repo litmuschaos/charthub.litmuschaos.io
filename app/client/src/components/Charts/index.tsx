@@ -1,17 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { Experiment } from "../../redux/model";
-import { RootState } from "../../redux/reducers";
-import { getExpRunCount } from "../../utils";
 import CustomCard from "../CustomCard";
 import { useStyles } from "./styles";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/reducers";
 interface ChartProps {
 	experiments: Experiment[];
-	match: any;
+	handleSearch: (token: string) => void;
 }
 
-const getIconUrl = (chartMetadataName: string, chartGroup: string) => {
+const getIconUrl = (
+	chartMetadataName: string,
+	chartGroup: string,
+	version: string
+) => {
 	let baseURL: string = "";
 	if (
 		process.env.NODE_ENV.trim() === "development" ||
@@ -19,38 +22,56 @@ const getIconUrl = (chartMetadataName: string, chartGroup: string) => {
 	) {
 		baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
 	} else baseURL = "/api";
-	return baseURL + "/icon/" + chartGroup + "/" + chartMetadataName + ".png";
+	if (chartMetadataName === "all-experiments")
+		return (
+			baseURL +
+			"/icon/" +
+			version +
+			"/" +
+			chartGroup +
+			"/" +
+			chartGroup +
+			".png"
+		);
+	return (
+		baseURL +
+		"/icon/" +
+		version +
+		"/" +
+		chartGroup +
+		"/" +
+		chartMetadataName +
+		".png"
+	);
 };
 
 export function Charts(props: ChartProps) {
-	const { experiments, match } = props;
+	const { experiments, handleSearch } = props;
 	const classes = useStyles();
-	const analyticsData = useSelector(
-		(state: RootState) => state.analyticsData
-	);
+	const { versionData } = useSelector((state: RootState) => state);
 
 	return (
 		<div className={classes.root}>
 			{experiments &&
 				experiments.map((e: Experiment) => (
 					<CustomCard
-						key={e.metadataName}
+						key={e.expGroup + "-" + e.metadataName}
 						id={e.metadataName}
 						title={e.name}
+						expGrp={e.expGroup || ""}
 						urlToIcon={getIconUrl(
 							e.metadataName,
-							match.params.chartGroupId
+							e.expGroup || "",
+							versionData.currentVersion
 						)}
 						handleClick={() =>
-							history.push(`${match.url}/${e.metadataName}`)
+							history.push(`/${e.expGroup}/${e.metadataName}`)
 						}
+						handleExpGrpClick={handleSearch}
 						provider={e.provider}
-						totalRuns={getExpRunCount(
-							e,
-							analyticsData.expAnalytics
-						)}
+						totalRuns={e.totalRuns || 0}
 						chaosType={e.chaosType}
-						chartType={match.params.chartGroupId}
+						chartType={e.expGroup || ""}
 					/>
 				))}
 		</div>

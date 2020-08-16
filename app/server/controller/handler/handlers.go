@@ -53,7 +53,7 @@ func pathParser(path string) ([]byte, error) {
 //GetIconHandler takes the experiment group and icon file required and returns the specific icon file
 func GetIconHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	img, err := os.Open(ChaosChartPath + "/master/charts/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
+	img, err := os.Open(ChaosChartPath + vars["version"]+"/charts/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
 	responseStatusCode := 200
 	if err != nil {
 		responseStatusCode = 500
@@ -219,20 +219,8 @@ func GetGithubRepoData(w http.ResponseWriter, r *http.Request) {
 	response, err := ioutil.ReadFile(githubData + "githubRepoData.json")
 	responseStatusCode := 200
 	if err != nil {
-		fmt.Errorf("unable to read file, error: %v", err)
 		responseStatusCode = 500
-	}
-	writeHeaders(&w, responseStatusCode)
-	fmt.Fprint(w, string(response))
-}
-
-// GetGithubContributorData will return the github contributors data for litmus
-func GetGithubContributorData(w http.ResponseWriter, r *http.Request) {
-	response, err := ioutil.ReadFile(githubData + "githubContributorData.json")
-	responseStatusCode := 200
-	if err != nil {
 		fmt.Errorf("unable to read file, error: %v", err)
-		responseStatusCode = 500
 	}
 	writeHeaders(&w, responseStatusCode)
 	fmt.Fprint(w, string(response))

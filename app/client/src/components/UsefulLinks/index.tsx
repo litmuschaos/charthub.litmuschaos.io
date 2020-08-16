@@ -1,8 +1,4 @@
-import { Icon, Typography } from "@material-ui/core";
-import PlatformIcon from "@material-ui/icons/CodeTwoTone";
-import LinkIcon from "@material-ui/icons/LinkTwoTone";
-import MaturityIcon from "@material-ui/icons/SpaTwoTone";
-import MaintainerIcon from "@material-ui/icons/SupervisorAccountTwoTone";
+import { Typography } from "@material-ui/core";
 import React from "react";
 import { Link, Maintainer } from "../../redux/model";
 import { useStyles } from "./styles";
@@ -25,15 +21,12 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginRight: 10 }}>
-						<MaintainerIcon />
-					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						Maintainers
 					</Typography>
 				</div>
 				{maintainers.map((m: Maintainer) => (
-					<div className={classes.maintainerField}>
+					<div className={classes.maintainerField} key={m.name}>
 						<Typography className={classes.maintainerlinkName}>
 							{m.name}
 						</Typography>
@@ -55,9 +48,6 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginRight: 10 }}>
-						<LinkIcon />
-					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						{header}
 					</Typography>
@@ -65,7 +55,7 @@ export function UsefulLinks(props: UsefulLinks) {
 				{data.map(
 					(d) =>
 						d.url && (
-							<div>
+							<div key={d.name}>
 								<a
 									href={d.url}
 									style={{ textDecoration: "none" }}
@@ -89,16 +79,16 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginRight: 10 }}>
-						<MaturityIcon />
-					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						{header}
 					</Typography>
 				</div>
 				<div className={classes.linkListBox}>
-					{data.map((d) => (
-						<span className={classes.staticType}>{d},</span>
+					{data.map((d, i) => (
+						<span className={classes.staticType} key={d}>
+							{d}
+							{i !== data.length - 1 ? ", " : ""}
+						</span>
 					))}
 				</div>
 			</div>
@@ -114,16 +104,15 @@ export function UsefulLinks(props: UsefulLinks) {
 						flexDirection: "row",
 					}}
 				>
-					<Icon style={{ marginRight: 10 }}>
-						<PlatformIcon />
-					</Icon>
 					<Typography variant="body1" className={classes.heading}>
 						{header}
 					</Typography>
 				</div>
 				<div className={classes.linkListBox}>
 					{data.map((d) => (
-						<div className={classes.staticType}>{d}</div>
+						<div className={classes.staticType} key={d}>
+							{d}
+						</div>
 					))}
 				</div>
 			</div>
