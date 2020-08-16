@@ -66,10 +66,11 @@ function HomePage() {
 									Chaos Charts for Kubernetes
 								</Typography>
 								<Typography className={classes.headerDesc}>
-									Charts are pre-defined chaos experiments.
-									Use these charts to inject chaos into cloud
-									native applications and Kubernetes
-									infrastructure.
+									Litmus ChaosHub hosts chaos experiments for
+									Kubernetes. The experiments are declarative
+									and tunable. Use the hub interface to tune
+									them to your needs, deploy them and take
+									that step towards resilience.
 								</Typography>
 							</div>
 							<Hidden smDown>
