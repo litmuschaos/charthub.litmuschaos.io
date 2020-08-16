@@ -11,13 +11,13 @@ import MainHeader from '../../components/Header';
 import DeveloperGuide from '../../components/DeveloperGuide';
 import '../../scrollbar.css';
 
-const getIconUrl = (path: any) => {
+const getIconUrl = (path: any, version: string) => {
 	let baseURL: string = '';
 	if (process.env.NODE_ENV.trim() === 'development' || process.env.NODE_ENV.trim() === 'test') {
 		baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
 	} else baseURL = '/api';
-	if (path[2] === 'all-experiments') return baseURL + '/icon/' + path[1] + '/' + path[1] + '.png';
-	return baseURL + '/icon/' + path[1] + '/' + path[2] + '.png';
+	if (path[2] === 'all-experiments') return baseURL + '/icon/' + version + '/' + path[1] + '/' + path[1] + '.png';
+	return baseURL + '/icon/' + version + '/' + path[1] + '/' + path[2] + '.png';
 };
 
 function ExperimentPage(props: any) {
@@ -77,7 +77,7 @@ function ExperimentPage(props: any) {
 											title={chart.name}
 											description={chart.description}
 											runCount={expCount}
-											urlToIcon={getIconUrl(path)}
+											urlToIcon={getIconUrl(path, versionData.currentVersion)}
 										/>
 									</div>
 								</div>

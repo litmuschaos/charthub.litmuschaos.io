@@ -71,7 +71,7 @@ var routes = Routes{
 	Route{
 		"IconData",
 		"GET",
-		"/icon/{expGroup}/{iconFile}",
+		"/icon/{version}/{expGroup}/{iconFile}",
 		handler.GetIconHandler,
 	},
 	Route{
