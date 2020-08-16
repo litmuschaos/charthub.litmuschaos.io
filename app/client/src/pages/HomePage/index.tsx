@@ -8,6 +8,7 @@ import { useStyles } from "./styles";
 import MainHeader from "../../components/Header";
 import Stat from "../../components/Stats";
 import { Experiment } from "../../redux/model";
+import "../../scrollbar.css";
 
 function HomePage() {
 	const classes = useStyles();
@@ -53,56 +54,61 @@ function HomePage() {
 	};
 
 	return (
-		<div className={classes.rootContainer}>
-			<MainHeader />
-			<div className={classes.root}>
-				<div className={classes.mainDiv}>
-					{/* Header component */}
-					<div className={classes.headerDiv}>
-						<div className={classes.headerText}>
-							<Typography className={classes.mainHeader}>
-								Chaos Charts for Kubernetes
-							</Typography>
-							<Typography className={classes.headerDesc}>
-								Charts are pre-defined chaos experiments. Use
-								these charts to inject chaos into cloud native
-								applications and Kubernetes infrastructure.
-							</Typography>
+		<div className="scrollbar scrollbar-primary">
+			<div className={classes.rootContainer}>
+				<MainHeader />
+				<div className={classes.root}>
+					<div className={classes.mainDiv}>
+						{/* Header component */}
+						<div className={classes.headerDiv}>
+							<div className={classes.headerText}>
+								<Typography className={classes.mainHeader}>
+									Chaos Charts for Kubernetes
+								</Typography>
+								<Typography className={classes.headerDesc}>
+									Charts are pre-defined chaos experiments.
+									Use these charts to inject chaos into cloud
+									native applications and Kubernetes
+									infrastructure.
+								</Typography>
+							</div>
+							<Hidden smDown>
+								<div style={{ marginLeft: "auto" }}>
+									<img
+										src="icons/chaos-bird.png"
+										alt="Chaos Bird Experiment"
+										className={classes.headerImg}
+									/>
+								</div>
+							</Hidden>
 						</div>
-						<Hidden smDown>
-							<div style={{ marginLeft: "auto" }}>
-								<img
-									src="icons/chaos-bird.png"
-									alt="Chaos Bird Experiment"
-									className={classes.headerImg}
+						{/* SearchBar and Stats */}
+						<div className={classes.searchDiv}>
+							<div className={classes.searchBar}>
+								<SearchBar
+									searchToken={searchToken}
+									handleSearch={handleSearch}
 								/>
 							</div>
-						</Hidden>
-					</div>
-					{/* SearchBar and Stats */}
-					<div className={classes.searchDiv}>
-						<div className={classes.searchBar}>
-							<SearchBar
-								searchToken={searchToken}
-								handleSearch={handleSearch}
-							/>
-						</div>
-						<div className={classes.statsDiv}>
-							<Stat />
+							<div className={classes.statsDiv}>
+								<Stat />
+							</div>
 						</div>
 					</div>
+					{/* Charts Div */}
+					<div className={classes.chartsDiv}>
+						<Charts
+							experiments={displayExps}
+							handleSearch={(token) =>
+								handleSearch(undefined, token)
+							}
+						/>
+					</div>
 				</div>
-				{/* Charts Div */}
-				<div className={classes.chartsDiv}>
-					<Charts
-						experiments={displayExps}
-						handleSearch={(token) => handleSearch(undefined, token)}
-					/>
+				{/* Footer */}
+				<div style={{ marginTop: "auto" }}>
+					<Footer />
 				</div>
-			</div>
-			{/* Footer */}
-			<div style={{ marginTop: "auto" }}>
-				<Footer />
 			</div>
 		</div>
 	);

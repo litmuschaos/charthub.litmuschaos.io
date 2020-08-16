@@ -15,6 +15,7 @@ import { getExpRunCount } from "../../utils";
 import { useStyles } from "./styles";
 import MainHeader from "../../components/Header";
 import DeveloperGuide from "../../components/DeveloperGuide";
+import "../../scrollbar.css";
 
 const getIconUrl = (path: any, version: string) => {
 	let baseURL: string = "";
@@ -62,11 +63,11 @@ function ExperimentPage(props: any) {
 
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
-	});
+	}, []);
 
 	if (!chartGroup || !chart) {
 		history.push("/");
-		return <></>;
+		return <div />;
 	} else {
 		const hubUrl: string = `https://hub.litmuschaos.io/api/chaos/${
 			versionData.currentVersion
@@ -94,107 +95,113 @@ function ExperimentPage(props: any) {
 		}
 
 		return (
-			<div className={classes.rootContainer}>
-				<MainHeader />
-				<div className={classes.root}>
-					<div className={classes.mainDiv}>
-						<div className={classes.contentHead}>
-							<div className={classes.headerDiv}>
-								{/* Back Button */}
-								<BackButton path="/" />
-								{/* Exp title + Exp run counts + description*/}
-								<div className={classes.expMain}>
-									<ExperimentHeader
-										title={chart.name}
-										description={chart.description}
-										runCount={expCount}
-										urlToIcon={getIconUrl(
-											path,
-											versionData.currentVersion
-										)}
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-					{/* Overlapping Div */}
-					<div className={classes.overlapDiv}>
-						{/* Developer Guide Component */}
-						<DeveloperGuide links={chart.links} />
-						{/* Experiment Info */}
-						<div className={classes.detailDiv}>
-							<div className={classes.expInfo}>
-								<div className={classes.expInfoDiv}>
-									<ExperimentInfo
-										description={chart.description}
-										videoURL={videoURL}
-									/>
-									<div
-										style={{
-											marginTop: "auto",
-											marginBottom: 40,
-										}}
-									>
-										<hr
-											className={classes.horizontalLine}
-										/>
-										<div>
-											<div className={classes.note}>
-												PRE-REQUISITE:
-											</div>
-											<div>
-												<a
-													href="https://docs.litmuschaos.io/docs/getstarted/"
-													target="_"
-												>
-													Install Litmus Operator
-												</a>
-												: a tool for injecting Chaos
-												Experiments
-											</div>
-										</div>
-										<hr
-											className={classes.horizontalLine}
+			<div className="scrollbar scrollbar-primary">
+				<div className={classes.rootContainer}>
+					<MainHeader />
+					<div className={classes.root}>
+						<div className={classes.mainDiv}>
+							<div className={classes.contentHead}>
+								<div className={classes.headerDiv}>
+									{/* Back Button */}
+									<BackButton path="/" />
+									{/* Exp title + Exp run counts + description*/}
+									<div className={classes.expMain}>
+										<ExperimentHeader
+											title={chart.name}
+											description={chart.description}
+											runCount={expCount}
+											urlToIcon={getIconUrl(
+												path,
+												versionData.currentVersion
+											)}
 										/>
 									</div>
 								</div>
-								{/* Useful Links Section */}
-								<div className={classes.info}>
-									<UsefulLinks
-										links={chart.links}
-										maintainers={chart.maintainers}
-										platforms={chart.platforms}
-										maturity={chart.maturity}
-									/>
-								</div>
 							</div>
-							{/* Install Chaos Section */}
-							<div className={classes.installLinks}>
-								<InstallChaos
-									title="Install this Chaos Expermiment"
-									description="You can install the Chaos Experiment using the following command"
-									yamlLink={hubUrl}
-								/>
-								{rbacUrl && (
+						</div>
+						{/* Overlapping Div */}
+						<div className={classes.overlapDiv}>
+							{/* Developer Guide Component */}
+							<DeveloperGuide links={chart.links} />
+							{/* Experiment Info */}
+							<div className={classes.detailDiv}>
+								<div className={classes.expInfo}>
+									<div className={classes.expInfoDiv}>
+										<ExperimentInfo
+											description={chart.description}
+											videoURL={videoURL}
+										/>
+										<div
+											style={{
+												marginTop: "auto",
+												marginBottom: 40,
+											}}
+										>
+											<hr
+												className={
+													classes.horizontalLine
+												}
+											/>
+											<div>
+												<div className={classes.note}>
+													PRE-REQUISITE:
+												</div>
+												<div>
+													<a
+														href="https://docs.litmuschaos.io/docs/getstarted/"
+														target="_"
+													>
+														Install Litmus Operator
+													</a>
+													: a tool for injecting Chaos
+													Experiments
+												</div>
+											</div>
+											<hr
+												className={
+													classes.horizontalLine
+												}
+											/>
+										</div>
+									</div>
+									{/* Useful Links Section */}
+									<div className={classes.info}>
+										<UsefulLinks
+											links={chart.links}
+											maintainers={chart.maintainers}
+											platforms={chart.platforms}
+											maturity={chart.maturity}
+										/>
+									</div>
+								</div>
+								{/* Install Chaos Section */}
+								<div className={classes.installLinks}>
 									<InstallChaos
-										title="Setup Service Account (RBAC)"
-										description="Create a service account using the following command"
-										yamlLink={rbacUrl}
+										title="Install this Chaos Expermiment"
+										description="You can install the Chaos Experiment using the following command"
+										yamlLink={hubUrl}
 									/>
-								)}
-								{engineUrl && (
-									<InstallChaos
-										title="Sample Chaos Engine"
-										description="Copy and edit this sample Chaos Engine yaml according to your application needs"
-										yamlLink={engineUrl}
-									/>
-								)}
+									{rbacUrl && (
+										<InstallChaos
+											title="Setup Service Account (RBAC)"
+											description="Create a service account using the following command"
+											yamlLink={rbacUrl}
+										/>
+									)}
+									{engineUrl && (
+										<InstallChaos
+											title="Sample Chaos Engine"
+											description="Copy and edit this sample Chaos Engine yaml according to your application needs"
+											yamlLink={engineUrl}
+										/>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
+					{/* Footer */}
+					<Footer />
 				</div>
-				{/* Footer */}
-				<Footer />
 			</div>
 		);
 	}
