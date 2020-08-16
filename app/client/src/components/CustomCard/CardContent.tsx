@@ -39,13 +39,20 @@ function CardContent(props: CardProps) {
 								<InfoIcon
 									className={classes.infoIcon}
 									style={{
-										paddingRight: 5,
+										paddingRight: 3,
+										paddingLeft: 3,
 										height: 20,
 										width: 20,
 									}}
 								/>
-								<Typography style={{ fontSize: 14 }}>
-									Infra-Chaos
+								<Typography
+									style={{
+										fontSize: 14,
+										fontWeight: 500,
+										paddingRight: 5,
+									}}
+								>
+									{" Infra-Chaos"}
 								</Typography>
 							</Button>
 						</span>
@@ -125,7 +132,7 @@ function CardContent(props: CardProps) {
 				{description ? (
 					<div className={classes.description}>{description}</div>
 				) : (
-					<span></span>
+					<span />
 				)}
 			</div>
 		</div>
