@@ -210,11 +210,12 @@ export default function Footer() {
 			<hr className={classes.horizontalLine} />
 			<div>
 				<Typography className={classes.footerText}>
-					Originally created by{" "}
+					Founded by{" "}
 					<strong>
 						<a href="https://mayadata.io/" target="_">
 							MayaData
 						</a>
+						&nbsp;❤️
 					</strong>
 				</Typography>
 			</div>
