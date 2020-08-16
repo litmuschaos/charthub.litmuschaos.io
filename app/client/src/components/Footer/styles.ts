@@ -7,6 +7,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		width: "100%",
 		padding: 20,
 		marginTop: 40,
+		[theme.breakpoints.up("xl")]: {
+			width: 1550,
+			margin: "0 auto",
+		},
 	},
 
 	footerContainer: {
@@ -112,6 +116,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		height: 0.3,
 		border: "0.5px solid #C4C4C4",
 		boxSizing: "border-box",
+		[theme.breakpoints.up("xl")]: {
+			marginLeft: 140,
+			marginRight: 140,
+		},
 	},
 	footerDiv: {
 		display: "flex",

@@ -23,11 +23,8 @@ export const useStyles = makeStyles((theme) => ({
 		marginLeft: 130,
 		marginRight: 130,
 		[theme.breakpoints.up("xl")]: {
-			display: "flex",
-			flexDirection: "row",
-			paddingTop: 60,
-			marginLeft: 250,
-			marginRight: 250,
+			width: 1550,
+			margin: "0 auto",
 		},
 		[theme.breakpoints.down("sm")]: {
 			display: "flex",
@@ -98,10 +95,8 @@ export const useStyles = makeStyles((theme) => ({
 		marginRight: 80,
 		marginTop: 30,
 		[theme.breakpoints.up("xl")]: {
-			display: "flex",
-			flexDirection: "row",
-			marginLeft: 250,
-			marginRight: 250,
+			width: 1550,
+			margin: "0 auto",
 		},
 		[theme.breakpoints.down("sm")]: {
 			display: "flex",
@@ -141,6 +136,11 @@ export const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.common.white,
 		border: "1px solid rgba(0, 0, 0, 0.05)",
 		borderRadius: "3px",
+		[theme.breakpoints.up("xl")]: {
+			width: 1550,
+			margin: "0 auto",
+			marginTop: -80,
+		},
 		[theme.breakpoints.down("md")]: {
 			marginTop: -60,
 		},
