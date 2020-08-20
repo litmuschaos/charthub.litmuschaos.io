@@ -47,9 +47,9 @@ function Copyright() {
 				Copyright © 2020 LitmusChaos Authors. All rights reserved.
 			</Typography>
 			<Typography className={classes.copyrightText}>
-				The Linux Foundation has registered trademarks and uses
-				trademarks. For a list of trademarks of The Linux Foundation,
-				please see our{" "}
+				Copyright © 2020 The Linux Foundation has registered trademarks
+				and uses trademarks. For a list of trademarks of The Linux
+				Foundation, please see our{" "}
 				<a
 					href="https://www.linuxfoundation.org/trademark-usage/"
 					target="_"
