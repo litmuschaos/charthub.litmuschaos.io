@@ -4,10 +4,6 @@ WORKDIR $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/app/server
 
 ADD app/server $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/app/server
 
-RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh     
-
-RUN dep ensure -v
-
 RUN CGO_ENABLED=0 go build -o /charthub-server -v
 
 
