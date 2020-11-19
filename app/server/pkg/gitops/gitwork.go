@@ -19,8 +19,10 @@ package gitops
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/hashicorp/go-version"
 	"io/ioutil"
 	"os"
+	"sort"
 	"strings"
 	"time"
 
@@ -83,21 +85,33 @@ func (c GitConfig) getChaosChartVersion() ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("unable to get tag reference, err: %+v", err)
 	}
-	var versions []string
-	versions = append(versions, defaultBranch)
+	versions := []*version.Version{}
+	versionStrings := []string{}
+
 	err = tagrefs.ForEach(func(t *plumbing.Reference) error {
-		versions = append([]string{t.Name().Short()}, versions...)
+		v, err := version.NewVersion(t.Name().Short())
+		if err!=nil{
+			return fmt.Errorf("unable to get version object, err: %+v", err)
+		}
+		versions = append(versions,v)
 		return nil
 	})
 	if err != nil {
 		return nil, fmt.Errorf("unable to get each tag reference, err: %+v", err)
 	}
-	json, err := json.Marshal(versions)
+
+	sort.Sort(sort.Reverse(version.Collection(versions)))
+	for _,v := range versions{
+		versionStrings = append(versionStrings,v.String())
+	}
+	versionStrings = append(versionStrings, defaultBranch)
+
+	jsonData, err := json.Marshal(versionStrings)
 	if err != nil {
 		return nil, fmt.Errorf("unable to marshal version data, err: %+v", err)
 	}
-	ioutil.WriteFile("/tmp/version.json", json, os.ModePerm)
-	return versions, nil
+	ioutil.WriteFile("/tmp/version.json", jsonData, os.ModePerm)
+	return versionStrings, nil
 }
 
 // chaosChartSyncHandler is responsible for all the handler functions
