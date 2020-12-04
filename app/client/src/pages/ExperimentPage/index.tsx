@@ -177,7 +177,7 @@ function ExperimentPage(props: any) {
 								{/* Install Chaos Section */}
 								<div className={classes.installLinks}>
 									<InstallChaos
-										title="Install this Chaos Expermiment"
+										title="Install this Chaos Experiment"
 										description="You can install the Chaos Experiment using the following command"
 										yamlLink={hubUrl}
 									/>
