@@ -89,7 +89,7 @@ const YamlEditor: React.FC<YamlEditorProps> = ({ content, filename }) => {
 			});
 			let nodeStyleError = (document.getElementsByClassName(
 				"ace_gutter-cell"
-			)[stateObject.annotations[0].row] as any).style;
+			)[stateObject.annotations[0].row - 1] as any).style;
 			nodeStyleError.background = "red";
 			nodeStyleError.color = "#FFFFFF";
 		} else {
@@ -482,7 +482,6 @@ const YamlEditor: React.FC<YamlEditorProps> = ({ content, filename }) => {
 									autoScrollEditorIntoView: true,
 									tooltipFollowsMouse: true,
 								});
-								(YamlAce.current!.editor as any).focus();
 
 								let nodeStyleActiveList = document.getElementsByClassName(
 									"ace_gutter-cell"

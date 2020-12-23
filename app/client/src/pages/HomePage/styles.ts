@@ -16,7 +16,8 @@ export const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		[theme.breakpoints.down("xs")]: {
-			height: 550,
+			height: "fit-content",
+			paddingBottom: 40,
 		},
 	},
 	headerDiv: {
@@ -25,6 +26,7 @@ export const useStyles = makeStyles((theme) => ({
 		paddingTop: 60,
 		marginLeft: 130,
 		marginRight: 130,
+		height: "fit-content",
 		[theme.breakpoints.up("xl")]: {
 			width: 1550,
 			margin: "0 auto",
@@ -49,6 +51,7 @@ export const useStyles = makeStyles((theme) => ({
 		height: 120,
 		[theme.breakpoints.down("sm")]: {
 			width: "100%",
+			height: "fit-content",
 		},
 	},
 	mainHeader: {
@@ -116,19 +119,9 @@ export const useStyles = makeStyles((theme) => ({
 			width: "95%",
 			marginLeft: 30,
 			marginRight: 30,
-			marginTop: 35,
 		},
 		[theme.breakpoints.down("xs")]: {
-			marginTop: "10%",
 			marginLeft: 10,
-		},
-		[theme.breakpoints.down(465)]: {
-			marginTop: 90,
-		},
-		[theme.breakpoints.down(378)]: {
-			marginTop: 135,
-			marginLeft: 10,
-			marginRight: 10,
 		},
 	},
 	statsDiv: {
@@ -161,15 +154,10 @@ export const useStyles = makeStyles((theme) => ({
 			marginTop: -60,
 		},
 		[theme.breakpoints.down("sm")]: {
-			marginTop: -80,
+			marginTop: -70,
 		},
-		[theme.breakpoints.down(600)]: {
-			marginTop: -90,
-		},
-		[theme.breakpoints.down(378)]: {
-			marginTop: -30,
-			marginLeft: "6%",
-			marginRight: "6%",
+		[theme.breakpoints.down("xs")]: {
+			marginTop: -20,
 		},
 	},
 }));

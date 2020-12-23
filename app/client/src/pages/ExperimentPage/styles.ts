@@ -17,7 +17,8 @@ export const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		[theme.breakpoints.down("xs")]: {
-			height: 550,
+			height: "fit-content",
+			paddingBottom: 250,
 		},
 	},
 	content: {
@@ -108,13 +109,7 @@ export const useStyles = makeStyles((theme) => ({
 			margin: "0 auto",
 		},
 		[theme.breakpoints.down("sm")]: {
-			marginTop: -250,
-			marginLeft: 0,
-			marginRight: 0,
-			padding: "10px 10px 10px 10px",
-		},
-		[theme.breakpoints.down("xs")]: {
-			marginTop: -300,
+			marginTop: -235,
 			marginLeft: 0,
 			marginRight: 0,
 			padding: "10px 10px 10px 10px",
