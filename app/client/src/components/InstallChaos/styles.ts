@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	linkBox: {
 		backgroundColor: " rgba(0, 0, 0, 0.02)",
 		border: "1px solid  rgba(0, 0, 0, 0.05)",
-		padding: 30,
+		padding: 10,
 		borderRadius: 8,
 		display: "flex",
 		flexDirection: "row",
@@ -48,7 +48,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 
 	copyBtn: {
-		width: 95,
+		width: 55,
 		height: 50,
 		borderColor: theme.palette.text.primary,
 		textTransform: "none",
@@ -57,7 +57,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		},
 	},
 	displayYamlBtn: {
-		width: 95,
+		width: 55,
 		height: 50,
 		borderColor: theme.palette.text.primary,
 		marginLeft: 20,
@@ -69,7 +69,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	yamlLink: {
 		width: "90%",
 		whiteSpace: "pre-wrap",
-		paddingTop: "10px",
+		paddingTop: "20px",
 		fontSize: 16,
 		[theme.breakpoints.down("md")]: {
 			fontSize: 14,
