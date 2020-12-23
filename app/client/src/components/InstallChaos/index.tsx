@@ -7,21 +7,22 @@ import CloseTwoToneIcon from "@material-ui/icons/CloseTwoTone";
 import PageviewOutlinedIcon from "@material-ui/icons/PageviewOutlined";
 
 interface InstallProps {
-	title: string;
+	title?: string;
 	description: string;
 	yamlLink: string;
+	editBtn?: boolean;
 }
 
 export function InstallChaos(props: InstallProps) {
 	const classes = useStyles();
-	const { title, description, yamlLink } = props;
+	const { title, description, yamlLink, editBtn } = props;
 	const [copying, setCopying] = useState(false);
 	const [viewing, setViewing] = useState(false);
 	const [editing, setEditing] = useState(false);
 	const [yamlText, setYamlText] = useState(``);
 	const [open, setOpen] = useState(false);
 	const [reload, setReload] = useState(false);
-	const [yaml, setYaml] = useState(`kubectl apply -f ${yamlLink}`);
+	const [yaml, setYaml] = useState(`${yamlLink}`);
 
 	const handleClose = () => {
 		setOpen(false);
@@ -45,7 +46,7 @@ export function InstallChaos(props: InstallProps) {
 			fetchYamlAndShowInPage(yamlLink);
 			setViewing(true);
 		} else {
-			setYaml(`kubectl apply -f ${yamlLink}`);
+			setYaml(`${yamlLink}`);
 			setViewing(false);
 		}
 	}
@@ -77,7 +78,7 @@ export function InstallChaos(props: InstallProps) {
 	}
 
 	function startEditing() {
-		setYaml(`kubectl apply -f ${yamlLink}`);
+		setYaml(`${yamlLink}`);
 		setViewing(false);
 		setEditing(true);
 	}
@@ -108,7 +109,7 @@ export function InstallChaos(props: InstallProps) {
 						variant="subtitle1"
 						className={classes.yamlLink}
 					>
-						kubectl apply -f {yamlLink}
+						{yamlLink}
 					</Typography>
 				)}
 
@@ -119,39 +120,19 @@ export function InstallChaos(props: InstallProps) {
 						className={classes.copyBtn}
 					>
 						{!copying ? (
-							<div
-								style={{
-									display: "flex",
-									flexDirection: "row",
-								}}
-							>
-								<img
-									src="/icons/copy.svg"
-									style={{ paddingRight: 10 }}
-									alt="copy"
-								/>
-								<Typography>Copy</Typography>
-							</div>
+							<img src="/icons/copy.svg" alt="copy" />
 						) : (
-							<>
-								<Done className={classes.done} />
-								<Typography>Copied</Typography>
-							</>
+							<Done className={classes.done} />
 						)}
 					</Button>
-					<Hidden mdUp>
-						<Button
-							variant="outlined"
-							onClick={() => showYamlInPage()}
-							className={classes.displayYamlBtn}
-						>
-							{!viewing ? (
-								<div
-									style={{
-										display: "flex",
-										flexDirection: "row",
-									}}
-								>
+					{editBtn ? (
+						<Hidden mdUp>
+							<Button
+								variant="outlined"
+								onClick={() => showYamlInPage()}
+								className={classes.displayYamlBtn}
+							>
+								{!viewing ? (
 									<PageviewOutlinedIcon
 										style={{
 											marginLeft: -10,
@@ -159,70 +140,61 @@ export function InstallChaos(props: InstallProps) {
 											width: 25,
 										}}
 									/>
-									<Typography style={{ marginTop: 2 }}>
-										&nbsp;&nbsp;&nbsp;View
-									</Typography>
-								</div>
-							) : (
-								<CloseTwoToneIcon />
-							)}
-						</Button>
-					</Hidden>
+								) : (
+									<CloseTwoToneIcon />
+								)}
+							</Button>
+						</Hidden>
+					) : null}
 
-					<Hidden smDown>
-						<Button
-							variant="outlined"
-							onClick={() => startEditing()}
-							className={classes.displayYamlBtn}
-						>
-							<div
-								style={{
-									display: "flex",
-									flexDirection: "row",
-								}}
+					{editBtn ? (
+						<Hidden smDown>
+							<Button
+								variant="outlined"
+								onClick={() => startEditing()}
+								className={classes.displayYamlBtn}
 							>
-								<img
-									src="/icons/edit.svg"
-									style={{ paddingRight: 10 }}
-									alt="Edit"
-								/>
-								<Typography>Edit</Typography>
-							</div>
-						</Button>
-						{!editing ? (
-							<div />
-						) : (
-							<Modal
-								open={open}
-								onClose={handleClose}
-								style={{
-									background: "rgba(33, 21, 86, 0.65)",
-									backdropFilter: "blur(10px)",
-									alignItems: "center",
-									justifyContent: "center",
-								}}
-							>
-								<div className={classes.modalContainer}>
-									<div
-										className={classes.modalContainerClose}
-									>
-										<Button
-											variant="outlined"
-											color="secondary"
-											className={classes.closeButtonStyle}
-											onClick={handleClose}
+								<img src="/icons/edit.svg" alt="Edit" />
+							</Button>
+							{!editing ? (
+								<div />
+							) : (
+								<Modal
+									open={open}
+									onClose={handleClose}
+									style={{
+										background: "rgba(33, 21, 86, 0.65)",
+										backdropFilter: "blur(10px)",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									<div className={classes.modalContainer}>
+										<div
+											className={
+												classes.modalContainerClose
+											}
 										>
-											&#x2715;
-										</Button>
+											<Button
+												variant="outlined"
+												color="secondary"
+												className={
+													classes.closeButtonStyle
+												}
+												onClick={handleClose}
+											>
+												&#x2715;
+											</Button>
+										</div>
+										<YamlEditor
+											content={yamlText}
+											filename={yamlLink}
+										/>
 									</div>
-									<YamlEditor
-										content={yamlText}
-										filename={yamlLink}
-									/>
-								</div>
-							</Modal>
-						)}
-					</Hidden>
+								</Modal>
+							)}
+						</Hidden>
+					) : null}
 				</div>
 
 				<Hidden mdUp>
