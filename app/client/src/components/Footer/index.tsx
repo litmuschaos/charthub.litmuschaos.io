@@ -212,8 +212,8 @@ export default function Footer() {
 				<Typography className={classes.footerText}>
 					Founded by{" "}
 					<strong>
-						<a href="https://mayadata.io/" target="_">
-							MayaData
+						<a href="https://chaosnative.com/" target="_">
+							ChaosNative
 						</a>
 						&nbsp;❤️
 					</strong>
