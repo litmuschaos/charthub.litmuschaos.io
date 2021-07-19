@@ -79,11 +79,16 @@ export default function MainHeader() {
 							MenuProps={{ classes: { paper: classes.select } }}
 							className={classes.versionSelect}
 						>
-							{versionData.versions.map((d: string) => (
-								<MenuItem value={d} key={d}>
-									{d !== "master" ? "v " + d : d}
-								</MenuItem>
-							))}
+							{versionData.versions
+								.slice(0, 5)
+								.map((d: string) => (
+									<MenuItem value={d} key={d}>
+										{ "v " + d}
+									</MenuItem>
+								))}
+							<MenuItem value={'master'}>
+								master
+							</MenuItem>
 						</Select>
 					</FormControl>
 					<Hidden smDown>
