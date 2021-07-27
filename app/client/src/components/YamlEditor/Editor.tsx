@@ -222,7 +222,7 @@ const YamlEditor: React.FC<YamlEditorProps> = ({ content, filename }) => {
 	return (
 		<div className={classes.editorBackgroundFull} id="editor">
 			<Typography className={classes.statusHeading}>
-				Status YAML:
+				YAML Status:
 				<Typography className={classes.saved} display="inline">
 					&nbsp; &nbsp;
 					<strong>
