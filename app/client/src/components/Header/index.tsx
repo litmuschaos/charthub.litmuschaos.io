@@ -25,7 +25,9 @@ export default function MainHeader() {
 	const { versionData } = useSelector((state: RootState) => state);
 	const versionActions = useActions(VersionActions);
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-		versionActions.toggleVersion(event.target.value as string);
+		if (event.target.value) {
+			versionActions.toggleVersion(event.target.value as string);
+		}
 	};
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -79,11 +81,26 @@ export default function MainHeader() {
 							MenuProps={{ classes: { paper: classes.select } }}
 							className={classes.versionSelect}
 						>
-							{versionData.versions.map((d: string) => (
-								<MenuItem value={d} key={d}>
-									{d !== "master" ? "v " + d : d}
-								</MenuItem>
-							))}
+							{versionData.versions
+								.slice(0, 5)
+								.map((d: string) => (
+									<MenuItem value={d} key={d}>
+										{"v " + d}
+									</MenuItem>
+								))}
+							<MenuItem value={"master"}>master</MenuItem>
+							<MenuItem
+								component="a"
+								href="https://github.com/litmuschaos/chaos-charts/branches/all"
+								target="_blank"
+								style={{
+									textDecoration: "none",
+									color: "#000000",
+									
+								}}
+							>
+								<Typography style={{fontSize: "14px"}}>older releases</Typography>
+							</MenuItem>
 						</Select>
 					</FormControl>
 					<Hidden smDown>
