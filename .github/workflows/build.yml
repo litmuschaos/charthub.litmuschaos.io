@@ -1,0 +1,30 @@
+name: build-pipeline
+
+on:
+  pull_request:
+    branches:
+      - master
+      - staging
+
+jobs:
+  frontend-docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build docker image
+        shell: bash
+        run: |
+          docker build . -f Dockerfile.client
+
+  server-docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build docker image
+        shell: bash
+        run: |
+          docker build . -f Dockerfile.server
+
+  
