@@ -1,0 +1,105 @@
+name: push-pipeline
+on:
+  push:
+    branches:
+      - master
+      - staging
+    tags:
+      - "*"
+jobs:
+  get-envs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - shell: bash
+        run: |
+          echo export IMG_TAG=${GITHUB_SHA::6} >> env-vars
+          echo export BRANCH=${GITHUB_REF#refs/*/} >> env-vars
+      - name: Uploading envs
+        uses: actions/upload-artifact@v2
+        with:
+          name: env_artifact
+          path: env-vars
+
+  frontend-docker-build:
+    runs-on: ubuntu-latest
+    needs:
+      - get-envs
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Downloading image artficate
+        uses: actions/download-artifact@v2
+        with:
+          name: env_artifact
+      - name: Build docker image
+        shell: bash
+        run: |
+          source env-vars
+          if [ ${BRANCH} == "master" ]
+          then
+            docker build . -f Dockerfile.client -t ${{ secrets.REPONAME }}/${{ secrets.IMAGE_NAME }}:${IMG_TAG}
+          elif [ ${BRANCH} == "staging" ]
+          then
+            docker build . -f Dockerfile.client -t ${{ secrets.REPONAME }}/${{ secrets.STAGING_IMAGE_NAME }}:${BRANCH}-${IMG_TAG}
+          fi
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push docker image
+        shell: bash
+        run: |
+          source env-vars
+          if [ ${BRANCH} == "master" ]
+          then
+            docker push ${{ secrets.REPONAME }}/${{ secrets.IMAGE_NAME }}:${IMG_TAG}
+          elif [ ${BRANCH} == "staging" ]
+          then
+            docker push ${{ secrets.REPONAME }}/${{ secrets.STAGING_IMAGE_NAME }}:${BRANCH}-${IMG_TAG}
+          fi
+  
+  server-docker-build:
+    runs-on: ubuntu-latest
+    needs:
+      - get-envs
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Downloading image artficate
+        uses: actions/download-artifact@v2
+        with:
+          name: env_artifact
+      - name: Build docker image
+        shell: bash
+        run: |
+          source env-vars
+          if [ ${BRANCH} == "master" ]
+          then
+            docker build . -f Dockerfile.server -t ${{ secrets.REPONAME }}/${{ secrets.IMAGE_NAME }}-server:${IMG_TAG}
+          elif [ ${BRANCH} == "staging" ]
+          then
+            docker build . -f Dockerfile.server -t ${{ secrets.REPONAME }}/${{ secrets.STAGING_IMAGE_NAME }}-server:${BRANCH}-${IMG_TAG}
+          fi
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push docker image
+        shell: bash
+        run: |
+          source env-vars
+          if [ ${BRANCH} == "master" ]
+          then
+            docker push ${{ secrets.REPONAME }}/${{ secrets.IMAGE_NAME }}-server:${IMG_TAG}
+          elif [ ${BRANCH} == "staging" ]
+          then
+            docker push ${{ secrets.REPONAME }}/${{ secrets.STAGING_IMAGE_NAME }}-server:${BRANCH}-${IMG_TAG}
+          fi
