@@ -116,7 +116,7 @@ const resources: CommunityItem[] = [
 		value: "FAQ",
 		img: "/icons/faq.svg",
 		alt: "FAQ",
-		link: "https://docs.litmuschaos.io/docs/faq-general/",
+		link: "https://docs.litmuschaos.io/docs/faq/",
 	},
 	{
 		value: "Issues",
