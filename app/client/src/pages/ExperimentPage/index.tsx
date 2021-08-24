@@ -148,7 +148,7 @@ function ExperimentPage(props: any) {
 												</div>
 												<div>
 													<a
-														href="https://docs.litmuschaos.io/docs/getstarted/"
+														href="https://docs.litmuschaos.io/docs/getting-started/installation/"
 														target="_"
 													>
 														Install Litmus Operator
