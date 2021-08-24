@@ -43,7 +43,7 @@ export default function MainHeader() {
 	};
 
 	const handleGetStarted = () => {
-		window.open("https://docs.litmuschaos.io/docs/getting-started/installation");
+		window.open("https://docs.litmuschaos.io/docs/getting-started/installation/");
 	};
 
 	const handleStars = () => {
