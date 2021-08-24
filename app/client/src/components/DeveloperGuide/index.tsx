@@ -13,7 +13,7 @@ function DeveloperGuide(props: DeveloperGuideProps) {
 	const handleClose = () => {
 		setDisplay(false);
 	};
-	let docs = "https://docs.litmuschaos.io/docs/getstarted/";
+	let docs = "https://docs.litmuschaos.io/docs/getting-started/installation/";
 	for (let i = 0; i < props.links.length; ++i)
 		if (props.links[i].name.toLowerCase() === "documentation") {
 			docs = props.links[i].url;
