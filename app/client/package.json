@@ -31,7 +31,7 @@
 		"cy:run": "cypress run",
 		"cyrun": "start-server-and-test start http://localhost:3000 cy:run",
 		"format": "prettier --write \"**/*.+(ts|tsx|js|jsx|json|yml|yaml|css|md|vue)\"",
-		"sitemap": "babel-node ./src/sitemap-generator.js",
+		"sitemap": "babel-node ./src/sitemap-generator.js && generate-robotstxt --config ./src/robots-txt.config.js ./public/robots.txt",
 		"predeploy": "npm run sitemap"
 	},
 	"lint-staged": {
@@ -67,6 +67,7 @@
 		"babel-register": "^6.26.0",
 		"cypress": "^4.11.0",
 		"eslint-plugin-react": "7.17.0",
+		"generate-robotstxt": "^8.0.3",
 		"husky": "^4.2.5",
 		"lint-staged": "^10.2.6",
 		"prettier": "^2.0.5",
