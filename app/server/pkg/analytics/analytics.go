@@ -18,7 +18,7 @@ const (
 	viewID       = "ga:208521052"
 	startDate    = "2019-12-01"
 	endDate      = "today"
-	metrics      = "ga:totalEvents"
+	metrics      = "ga:uniqueEvents"
 	dimensions   = "ga:eventLabel"
 	filters      = "ga:eventCategory!=key1"
 	base         = 10
