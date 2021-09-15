@@ -14,15 +14,16 @@ import (
 )
 
 const (
-	timeInterval = 10 * time.Minute
-	viewID       = "ga:208521052"
-	startDate    = "2019-12-01"
-	endDate      = "today"
-	metrics      = "ga:totalEvents"
-	dimensions   = "ga:eventLabel"
-	filters      = "ga:eventCategory!=key1"
-	base         = 10
-	bitSize      = 64
+	timeInterval            = 10 * time.Minute
+	viewID                  = "ga:208521052"
+	startDate               = "2019-12-01"
+	endDate                 = "today"
+	metricsForExperiments   = "ga:totalEvents"
+	metricsForInstallations = "ga:uniqueEvents"
+	dimensions              = "ga:eventLabel"
+	filters                 = "ga:eventCategory!=key1"
+	base                    = 10
+	bitSize                 = 64
 )
 
 // GAResponseJSON is the global entity which defines the structure for holding the GA data
@@ -78,12 +79,28 @@ func UpdateAnalyticsData() error {
 	if err != nil {
 		return fmt.Errorf("error while getting service account, err :%s", err)
 	}
-	response, err := svc.Data.Ga.Get(viewID, startDate, endDate, metrics).Dimensions(dimensions).Filters(filters).Do()
+
+	responseForInstallations, err := svc.Data.Ga.Get(viewID, startDate, endDate, metricsForInstallations).Dimensions(dimensions).Filters(filters).Do()
+	if err != nil {
+		return fmt.Errorf("Error while getting response, err: %s", err)
+	}
+	GAResponse := responseForInstallations.Rows
+	for i := range GAResponse {
+		if GAResponse[i][0] == "Chaos-Operator" {
+			object := GAResponseJSON{
+				Label: GAResponse[i][0],
+				Count: GAResponse[i][1],
+			}
+			GAResponseJSONObject = append(GAResponseJSONObject, object)
+		}
+	}
+
+	responseForExperiments, err := svc.Data.Ga.Get(viewID, startDate, endDate, metricsForExperiments).Dimensions(dimensions).Filters(filters).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
 	var totalCount int64
-	GAResponse := response.Rows
+	GAResponse = responseForExperiments.Rows
 	/* TODO --- this for-block needs to be refactored later
 	 */
 	for i := range GAResponse {
@@ -100,14 +117,16 @@ func UpdateAnalyticsData() error {
 					return fmt.Errorf("Error while converting count to string, err: %s", err)
 				}
 				totalCount = totalCount + count
+				GAResponseJSONObject = append(GAResponseJSONObject, object)
 			}
-			GAResponseJSONObject = append(GAResponseJSONObject, object)
 		}
 	}
+
 	object := GAResponseJSON{
 		Label: "Total-Count",
 		Count: strconv.FormatInt(totalCount, base),
 	}
 	GAResponseJSONObject = append(GAResponseJSONObject, object)
+
 	return nil
 }
