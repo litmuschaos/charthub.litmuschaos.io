@@ -1,10 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
 import { Experiment } from "../../redux/model";
+import { RootState } from "../../redux/reducers";
 import CustomCard from "../CustomCard";
 import { useStyles } from "./styles";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers";
 interface ChartProps {
 	experiments: Experiment[];
 	handleSearch: (token: string) => void;
@@ -52,7 +52,7 @@ export function Charts(props: ChartProps) {
 
 	return (
 		<div className={classes.root}>
-			{experiments &&
+			{experiments?.length > 0 ? (
 				experiments.map((e: Experiment) => (
 					<CustomCard
 						key={e.expGroup + "-" + e.metadataName}
@@ -73,7 +73,17 @@ export function Charts(props: ChartProps) {
 						chaosType={e.chaosType}
 						chartType={e.expGroup || ""}
 					/>
-				))}
+				))
+			) : (
+				<div className={classes.noExp}>
+					<img
+						src="./icons/no-experiment-found.svg"
+						alt="no experiment"
+						className={classes.noExpImage}
+					/>
+					No Experiments Found
+				</div>
+			)}
 		</div>
 	);
 }

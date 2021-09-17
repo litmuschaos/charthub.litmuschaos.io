@@ -1,4 +1,4 @@
-import { Typography, Hidden } from "@material-ui/core";
+import { Hidden, Typography } from "@material-ui/core";
 import * as React from "react";
 import { useStyles } from "./styles";
 
@@ -104,6 +104,12 @@ const community: CommunityItem[] = [
 		link: "https://dev.to/t/litmuschaos/latest",
 	},
 	{
+		value: "Medium",
+		img: "/icons/medium.svg",
+		alt: "Medium",
+		link: "https://medium.com/litmus-chaos	",
+	},
+	{
 		value: "Youtube",
 		img: "/icons/youtube.svg",
 		alt: "YouTube",
@@ -132,38 +138,43 @@ const links: CommunityItem[] = [
 		link: "https://litmuschaos.io/",
 	},
 	{
-		value: "Why Litmus?",
-		link: "https://litmuschaos.io/whylitmus",
+		value: "Litmus Docs",
+		link: "https://docs.litmuschaos.io/",
 	},
 	{
 		value: "Community",
 		link: "https://litmuschaos.io/community",
 	},
 	{
-		value: "Blog",
-		link: "https://dev.to/t/litmuschaos/latest",
+		value: "Adopters",
+		link: "https://litmuschaos.io/#adopters",
 	},
 ];
 
 const adoptors: CommunityItem[] = [
 	{
 		value: "Intuit",
-		link: "https://github.com/litmuschaos/litmus/blob/master/ADOPTERS.md",
+		link: "https://litmuschaos.io/adopters/intuit",
 	},
 	{
-		value: "Wipro",
-		link:
-			"https://github.com/litmuschaos/litmus/blob/master/adopters/AppAnywhere.md",
+		value: "Orange",
+		link: "https://litmuschaos.io/adopters/orange",
 	},
 	{
-		value: "OpenEBS",
-		link:
-			"https://github.com/litmuschaos/litmus/blob/master/adopters/openebs.md",
+		value: "Lenskart",
+		link: "https://litmuschaos.io/adopters/lenskart",
 	},
 	{
-		value: "Zebrium",
-		link:
-			"https://github.com/litmuschaos/litmus/blob/master/adopters/zebrium.md",
+		value: "Halodoc",
+		link: "https://litmuschaos.io/adopters/halodocd",
+	},
+	{
+		value: "Anuta Networks",
+		link: "https://litmuschaos.io/adopters/anutanetworks",
+	},
+	{
+		value: "Kitopi",
+		link: "https://litmuschaos.io/adopters/kitopi",
 	},
 ];
 

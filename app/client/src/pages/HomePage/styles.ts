@@ -108,7 +108,7 @@ export const useStyles = makeStyles((theme) => ({
 		flexDirection: "row",
 		marginLeft: 130,
 		marginRight: 80,
-		marginTop: 10,
+		marginTop: 30,
 		[theme.breakpoints.up("xl")]: {
 			width: 1550,
 			margin: "0 auto",

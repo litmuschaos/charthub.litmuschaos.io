@@ -1,7 +1,7 @@
+import { Typography } from "@material-ui/core";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { Typography } from "@material-ui/core";
 import { useStyles } from "./styles";
 interface StatItem {
 	key: string;
@@ -38,7 +38,7 @@ function Stat() {
 		{
 			key: "opInstalls",
 			value: opInstalls,
-			desc: "Installed",
+			desc: "Installations",
 		},
 		{
 			key: "expRuns",
