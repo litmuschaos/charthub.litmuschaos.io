@@ -17,7 +17,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		alignItems: "center",
 		marginTop: theme.spacing(3),
 		marginBottom: theme.spacing(3),
-		color: theme.palette.error.main,
 		fontSize: "22px",
 	},
 	noExpImage: {

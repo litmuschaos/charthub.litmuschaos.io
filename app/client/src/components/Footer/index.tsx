@@ -134,11 +134,11 @@ const resources: CommunityItem[] = [
 
 const links: CommunityItem[] = [
 	{
-		value: "Litmus homepage",
+		value: "Home",
 		link: "https://litmuschaos.io/",
 	},
 	{
-		value: "Litmus Docs",
+		value: "Docs",
 		link: "https://docs.litmuschaos.io/",
 	},
 	{
