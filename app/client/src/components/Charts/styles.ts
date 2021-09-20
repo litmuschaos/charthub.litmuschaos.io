@@ -10,4 +10,17 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		marginTop: theme.spacing(3),
 		marginBottom: theme.spacing(3),
 	},
+	noExp: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+		marginTop: theme.spacing(3),
+		marginBottom: theme.spacing(3),
+		fontSize: "22px",
+	},
+	noExpImage: {
+		width: "5rem",
+		height: "5rem",
+	},
 }));
