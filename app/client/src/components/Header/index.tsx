@@ -1,16 +1,17 @@
 import {
+	AppBar,
 	Button,
+	Fade,
 	FormControl,
 	Hidden,
-	MenuItem,
-	Select,
-	AppBar,
-	Toolbar,
-	Typography,
 	IconButton,
 	Menu,
-	Fade,
+	MenuItem,
+	Select,
+	Toolbar,
+	Typography,
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../redux/actions";
@@ -18,7 +19,6 @@ import * as VersionActions from "../../redux/actions/versions";
 import { history } from "../../redux/configureStore";
 import { RootState } from "../../redux/reducers";
 import useStyles from "./styles";
-import CloseIcon from "@material-ui/icons/Close";
 
 export default function MainHeader() {
 	const classes = useStyles();
@@ -43,7 +43,9 @@ export default function MainHeader() {
 	};
 
 	const handleGetStarted = () => {
-		window.open("https://docs.litmuschaos.io/docs/getting-started/installation/");
+		window.open(
+			"https://docs.litmuschaos.io/docs/getting-started/installation/"
+		);
 	};
 
 	const handleStars = () => {
@@ -82,6 +84,10 @@ export default function MainHeader() {
 							className={classes.versionSelect}
 						>
 							{versionData.versions
+								.filter(
+									(version) =>
+										!version.match(new RegExp("RC"))
+								)
 								.slice(0, 5)
 								.map((d: string) => (
 									<MenuItem value={d} key={d}>
@@ -96,10 +102,11 @@ export default function MainHeader() {
 								style={{
 									textDecoration: "none",
 									color: "#000000",
-									
 								}}
 							>
-								<Typography style={{fontSize: "14px"}}>older releases</Typography>
+								<Typography style={{ fontSize: "14px" }}>
+									older releases
+								</Typography>
 							</MenuItem>
 						</Select>
 					</FormControl>

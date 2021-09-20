@@ -1,7 +1,8 @@
+import { Typography } from "@material-ui/core";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import { Typography } from "@material-ui/core";
+import { numberFormatter } from "../../utils";
 import { useStyles } from "./styles";
 interface StatItem {
 	key: string;
@@ -17,19 +18,19 @@ function Stat() {
 
 	const opInstalls =
 		analyticsData.chaosOperatorCount !== undefined
-			? analyticsData.chaosOperatorCount.toString()
+			? numberFormatter(analyticsData.chaosOperatorCount)
 			: "0";
 	const githubStars =
 		githubData.star_count !== undefined
-			? githubData.star_count.toString()
+			? numberFormatter(githubData.star_count)
 			: "0";
 	const expRuns =
 		analyticsData.totalExpRuns !== undefined
-			? analyticsData.totalExpRuns.toString()
+			? numberFormatter(analyticsData.totalExpRuns)
 			: "0";
 	const expCount =
 		chartData.totalExpCount !== undefined
-			? chartData.totalExpCount.toString()
+			? numberFormatter(chartData.totalExpCount)
 			: "0";
 	// const opInstalls = formatCount(analyticsData.chaosOperatorCount);
 
@@ -38,7 +39,7 @@ function Stat() {
 		{
 			key: "opInstalls",
 			value: opInstalls,
-			desc: "Installed",
+			desc: "Installations",
 		},
 		{
 			key: "expRuns",

@@ -1,14 +1,14 @@
-import { Typography, Hidden } from "@material-ui/core";
+import { Hidden, Typography } from "@material-ui/core";
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { SearchBar, Charts } from "../../components";
+import { Charts, SearchBar } from "../../components";
 import Footer from "../../components/Footer";
-import { RootState } from "../../redux/reducers";
-import { useStyles } from "./styles";
 import MainHeader from "../../components/Header";
 import Stat from "../../components/Stats";
 import { Experiment } from "../../redux/model";
+import { RootState } from "../../redux/reducers";
 import "../../scrollbar.css";
+import { useStyles } from "./styles";
 
 function HomePage() {
 	const classes = useStyles();
@@ -63,14 +63,17 @@ function HomePage() {
 						<div className={classes.headerDiv}>
 							<div className={classes.headerText}>
 								<Typography className={classes.mainHeader}>
-									Chaos Experiments for Kubernetes
+									One Stop for your Chaos Engineering
+									Experiments
 								</Typography>
 								<Typography className={classes.headerDesc}>
-									Litmus ChaosHub hosts chaos experiments for
-									Kubernetes. The experiments are declarative
-									and tunable. Use the hub interface to tune
-									them to your needs, deploy them and take
-									that step towards resilience.
+									Litmus ChaosHub is an open-source
+									marketplace hosting all the different chaos
+									experiments offered by Litmus. The
+									experiments are declarative and tunable as
+									per your requirements. Use the hub interface
+									to tune them, deploy them, and take that
+									step towards resilience.
 								</Typography>
 							</div>
 							<Hidden smDown>
