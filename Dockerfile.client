@@ -1,5 +1,5 @@
 # build environment
-FROM node:16-alpine as build
+FROM node:lts-alpine3.15 as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY app/client/package.json /app/package.json
