@@ -1,4 +1,4 @@
-import { createBrowserHistory, History } from "history";
+import { createBrowserHistory } from "history";
 import * as localforage from "localforage";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -15,7 +15,7 @@ const persistConfig: PersistConfig<any> = {
 };
 
 const logger = (createLogger as any)();
-const history: History = createBrowserHistory();
+const history = createBrowserHistory();
 
 const dev = process.env.NODE_ENV === "development";
 
