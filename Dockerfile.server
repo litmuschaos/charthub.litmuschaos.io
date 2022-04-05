@@ -7,7 +7,7 @@ ADD app/server $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/app/se
 RUN CGO_ENABLED=0 go build -o /charthub-server -v
 
 
-FROM alpine:latest
+FROM alpine:3.15.4
 
 RUN apk update && apk add curl bash
 RUN apk add --no-cache libc6-compat
