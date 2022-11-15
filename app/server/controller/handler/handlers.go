@@ -87,7 +87,6 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 // GetAnalyticsData gets the data from GA instance
 func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
 	out, err := json.Marshal(analytics.GAResponseJSONObject)
-	fmt.Println("Data ===>", string(out))
 	responseStatusCode := 200
 	if err != nil {
 		log.Error(err)
