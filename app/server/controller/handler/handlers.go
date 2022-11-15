@@ -38,8 +38,9 @@ import (
 var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/app/client/public/chaos-charts/"
 var githubData = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/app/client/public/githubData/"
 
-/*	pathParser reads the path in the csv file <path> forms the system-path <fileLookedPath>
-	and returns the file
+/*
+pathParser reads the path in the csv file <path> forms the system-path <fileLookedPath>
+and returns the file
 */
 func pathParser(path string) ([]byte, error) {
 	var fileLookedPath = ChaosChartPath + path
@@ -50,10 +51,10 @@ func pathParser(path string) ([]byte, error) {
 	return fileContent, nil
 }
 
-//GetIconHandler takes the experiment group and icon file required and returns the specific icon file
+// GetIconHandler takes the experiment group and icon file required and returns the specific icon file
 func GetIconHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	img, err := os.Open(ChaosChartPath + vars["version"]+"/charts/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
+	img, err := os.Open(ChaosChartPath + vars["version"] + "/charts/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
 	responseStatusCode := 200
 	if err != nil {
 		responseStatusCode = 500
@@ -67,7 +68,7 @@ func GetIconHandler(w http.ResponseWriter, r *http.Request) {
 	io.Copy(w, img)
 }
 
-//FileHandler takes out the file paths from the query params respectives URLs
+// FileHandler takes out the file paths from the query params respectives URLs
 func FileHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	filePath, ok := r.URL.Query()["file"]
@@ -86,6 +87,7 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 // GetAnalyticsData gets the data from GA instance
 func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
 	out, err := json.Marshal(analytics.GAResponseJSONObject)
+	fmt.Println("Data ===>", string(out))
 	responseStatusCode := 200
 	if err != nil {
 		log.Error(err)
