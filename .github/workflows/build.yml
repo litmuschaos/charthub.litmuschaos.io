@@ -7,8 +7,26 @@ on:
       - staging
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    # Set job outputs to values from filter step
+    outputs:
+      client: ${{ steps.filter.outputs.client }}
+      server: ${{ steps.filter.outputs.server }}
+    steps:
+      # For pull requests it's not necessary to checkout the code
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            client:
+              - 'app/client/**'
+            server:
+              - 'app/server/**'
   frontend-docker-build:
     runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.client == 'true' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -19,6 +37,8 @@ jobs:
 
   server-docker-build:
     runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.server == 'true' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,5 +46,3 @@ jobs:
         shell: bash
         run: |
           docker build . -f Dockerfile.server
-
-  
