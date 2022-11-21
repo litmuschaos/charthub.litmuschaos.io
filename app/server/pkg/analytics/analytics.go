@@ -24,6 +24,7 @@ const (
 	filters                 = "ga:eventCategory!=key1"
 	base                    = 10
 	bitSize                 = 64
+	maxResult               = 10000
 )
 
 // GAResponseJSON is the global entity which defines the structure for holding the GA data
@@ -80,7 +81,7 @@ func UpdateAnalyticsData() error {
 		return fmt.Errorf("error while getting service account, err :%s", err)
 	}
 
-	responseForInstallations, err := svc.Data.Ga.Get(viewID, startDate, endDate, metricsForInstallations).Dimensions(dimensions).Filters(filters).Do()
+	responseForInstallations, err := svc.Data.Ga.Get(viewID, startDate, endDate, metricsForInstallations).Dimensions(dimensions).Filters(filters).MaxResults(maxResult).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
@@ -95,7 +96,7 @@ func UpdateAnalyticsData() error {
 		}
 	}
 
-	responseForExperiments, err := svc.Data.Ga.Get(viewID, startDate, endDate, metricsForExperiments).Dimensions(dimensions).Filters(filters).Do()
+	responseForExperiments, err := svc.Data.Ga.Get(viewID, startDate, endDate, metricsForExperiments).Dimensions(dimensions).Filters(filters).MaxResults(maxResult).Do()
 	if err != nil {
 		return fmt.Errorf("Error while getting response, err: %s", err)
 	}
@@ -104,21 +105,17 @@ func UpdateAnalyticsData() error {
 	/* TODO --- this for-block needs to be refactored later
 	 */
 	for i := range GAResponse {
-		/* TODO --- this if-block needs to be refactored later
-		 */
-		if GAResponse[i][0] != "pod-delete-sa1xml" && GAResponse[i][0] != "pod-delete-s3onwz" && GAResponse[i][0] != "pod-delete-g85e2f" && GAResponse[i][0] != "drain-node" {
-			object := GAResponseJSON{
-				Label: GAResponse[i][0],
-				Count: GAResponse[i][1],
+		object := GAResponseJSON{
+			Label: GAResponse[i][0],
+			Count: GAResponse[i][1],
+		}
+		if GAResponse[i][0] != "Chaos-Operator" {
+			count, err := strconv.ParseInt(object.Count, base, bitSize)
+			if err != nil {
+				return fmt.Errorf("Error while converting count to string, err: %s", err)
 			}
-			if GAResponse[i][0] != "Chaos-Operator" {
-				count, err := strconv.ParseInt(object.Count, base, bitSize)
-				if err != nil {
-					return fmt.Errorf("Error while converting count to string, err: %s", err)
-				}
-				totalCount = totalCount + count
-				GAResponseJSONObject = append(GAResponseJSONObject, object)
-			}
+			totalCount = totalCount + count
+			GAResponseJSONObject = append(GAResponseJSONObject, object)
 		}
 	}
 
