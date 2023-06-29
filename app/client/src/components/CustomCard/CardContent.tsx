@@ -1,6 +1,5 @@
 import { Tooltip, Link, Typography, Button } from "@material-ui/core";
 import React from "react";
-import { formatCount } from "../../utils";
 import { CardProps } from "./model";
 import { useStyles } from "./styles";
 import InfoIcon from "@material-ui/icons/Info";
@@ -14,7 +13,6 @@ function CardContent(props: CardProps) {
 		handleClick,
 		handleExpGrpClick,
 		description,
-		totalRuns,
 		chaosType,
 		chartType,
 	} = props;
@@ -60,7 +58,7 @@ function CardContent(props: CardProps) {
 				) : (
 					<span />
 				)}
-				<span
+				{/* <span
 					className={clsx(
 						props.title !== "all-experiments"
 							? classes.totalRuns
@@ -69,7 +67,7 @@ function CardContent(props: CardProps) {
 					)}
 				>
 					{formatCount(totalRuns)} runs
-				</span>
+				</span> */}
 			</div>
 			<div>
 				{urlToIcon ? (

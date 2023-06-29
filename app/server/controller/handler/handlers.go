@@ -32,6 +32,7 @@ import (
 
 	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/analytics"
 	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/community"
+	"github.com/litmuschaos/charthub.litmuschaos.io/app/server/pkg/docker"
 )
 
 // ChaosChartPath refers the location of the freshly updated repository
@@ -53,7 +54,7 @@ func pathParser(path string) ([]byte, error) {
 //GetIconHandler takes the experiment group and icon file required and returns the specific icon file
 func GetIconHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	img, err := os.Open(ChaosChartPath + vars["version"]+"/charts/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
+	img, err := os.Open(ChaosChartPath + vars["version"] + "/charts/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
 	responseStatusCode := 200
 	if err != nil {
 		responseStatusCode = 500
@@ -234,6 +235,20 @@ func GetCommunityAnalyticsData(w http.ResponseWriter, r *http.Request) {
 		log.Error(err)
 		responseStatusCode = 500
 		fmt.Fprint(w, "unable to get community analytics data, err : "+err.Error())
+	}
+	writeHeaders(&w, responseStatusCode)
+	(w).Header().Set("Access-Control-Allow-Origin", "*")
+	w.Write(data)
+}
+
+// GetDockerPullsData returns all the docker pull data for chaos-oprator installations
+func GetDockerPullsData(w http.ResponseWriter, r *http.Request) {
+	data, err := docker.FetchDockerPullsDetails()
+	responseStatusCode := 200
+	if err != nil {
+		log.Error(err)
+		responseStatusCode = 500
+		fmt.Fprint(w, "unable to get docker pulls data, err : "+err.Error())
 	}
 	writeHeaders(&w, responseStatusCode)
 	(w).Header().Set("Access-Control-Allow-Origin", "*")

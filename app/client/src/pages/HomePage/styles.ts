@@ -127,7 +127,7 @@ export const useStyles = makeStyles((theme) => ({
 	statsDiv: {
 		marginTop: -10,
 		flexGrow: 1,
-		marginLeft: 10,
+		marginLeft:"auto",
 		[theme.breakpoints.down("sm")]: {
 			width: "100%",
 			marginLeft: -10,
