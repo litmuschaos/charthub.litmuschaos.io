@@ -1,5 +1,5 @@
 # build environment
-FROM node:lts as build
+FROM node:14.2 as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY app/client/package.json /app/package.json
