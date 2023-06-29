@@ -16,7 +16,7 @@ export const parseYamlValidations = (
 	};
 	try {
 		safeLoadAll(yamlInput);
-	} catch (e) {
+	} catch (e: any) {
 		const row = e.mark && e.mark.line ? e.mark.line : 0;
 		const col = e.mark && e.mark.column ? e.mark.column : 0;
 		const message = e.message ? e.message : "";
