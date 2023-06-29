@@ -12,22 +12,15 @@ interface StatItem {
 
 function Stat() {
 	const classes = useStyles();
-	const { githubData, analyticsData, chartData } = useSelector(
+	const { githubData, chartData, dockerPullData } = useSelector(
 		(state: RootState) => state
 	);
 
-	const opInstalls =
-		analyticsData.chaosOperatorCount !== undefined
-			? numberFormatter(analyticsData.chaosOperatorCount)
-			: "0";
 	const githubStars =
 		githubData.star_count !== undefined
 			? numberFormatter(githubData.star_count)
 			: "0";
-	const expRuns =
-		analyticsData.totalExpRuns !== undefined
-			? numberFormatter(analyticsData.totalExpRuns)
-			: "0";
+
 	const expCount =
 		chartData.totalExpCount !== undefined
 			? numberFormatter(chartData.totalExpCount)
@@ -36,16 +29,7 @@ function Stat() {
 
 	const stat: StatItem[] = [
 		{ key: "expCount", value: expCount, desc: "Experiments" },
-		{
-			key: "opInstalls",
-			value: opInstalls,
-			desc: "Installations",
-		},
-		{
-			key: "expRuns",
-			value: expRuns,
-			desc: "Experiment Runs",
-		},
+		{ key: "dockerPulls", value: numberFormatter(dockerPullData.pull_count), desc: "Docker Pulls" },
 		{ key: "githubStars", value: githubStars, desc: "Github Stars" },
 	];
 	const createStatItem = (s: StatItem) => {

@@ -18,7 +18,7 @@ export const versionData = createReducer<VersionData>(initialState, {
 		const match = state.versions.filter(
 			(i: string) => i === action.payload
 		);
-		if (match !== [])
+		if (match.length)
 			return {
 				...state,
 				currentVersion: action.payload,

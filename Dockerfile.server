@@ -1,4 +1,4 @@
-FROM golang:1.14 AS builder
+FROM golang:1.19 AS builder
 
 WORKDIR $GOPATH/src/github.com/litmuschaos/charthub.litmuschaos.io/app/server
 

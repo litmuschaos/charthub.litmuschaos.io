@@ -80,4 +80,10 @@ var routes = Routes{
 		"/community",
 		handler.GetCommunityAnalyticsData,
 	},
+	Route{
+		"DockerPull",
+		"GET",
+		"/docker-pulls",
+		handler.GetDockerPullsData,
+	},
 }
