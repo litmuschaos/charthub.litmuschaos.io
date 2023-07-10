@@ -6,6 +6,7 @@ import withTheme from "./hoc/themeHoc";
 import { useActions } from "./redux/actions";
 import * as AnalyticsActions from "./redux/actions/analytics";
 import * as GithubActions from "./redux/actions/github";
+import * as DockerPullActions from './redux/actions/dockerpulls';
 import { history } from "./redux/configureStore";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -34,11 +35,13 @@ function Routes() {
 function App() {
 	const githubActions = useActions(GithubActions);
 	const analyticsActions = useActions(AnalyticsActions);
+	const dockerPullsActions = useActions(DockerPullActions);
 	const classes = useStyles();
 
 	useEffect(() => {
 		analyticsActions.loadAnalytics();
 		githubActions.loadStarCount();
+		dockerPullsActions.loadDockerPullCount();
 	});
 
 	return (

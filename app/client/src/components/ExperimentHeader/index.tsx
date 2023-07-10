@@ -28,11 +28,11 @@ export function ExperimentHeader(props: ExpInfoProps) {
 							<Typography>{desc}.</Typography>
 						</div>
 					</div>
-					<div>
+					{/* <div>
 						<Typography className={classes.expInfo}>
 							{runCount} runs
 						</Typography>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

@@ -1,9 +1,9 @@
 # build environment
-FROM node:alpine as build
+FROM node:16.14.2 as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY app/client/package.json /app/package.json
-RUN npm install
+RUN npm install --legacy-peer-deps
 COPY app/client /app
 RUN npm run build
 
