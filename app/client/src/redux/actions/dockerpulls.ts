@@ -7,20 +7,21 @@ if (
 	baseURL = `${window.location.protocol}//${window.location.hostname}:8080`;
 } else baseURL = "/api";
 
-export const loadDockerPullCount = () => (dispatch: Function, getState: Function) => {
-	fetch(`${baseURL}/docker-pulls`)
-		.then((response) => response.json())
-		.then((data) => {
-			dispatch({
-				type: DockerPullDataActions.DOCKER_PULL_COUNT,
-				payload: data["pull_count"],
+export const loadDockerPullCount =
+	() => (dispatch: Function, getState: Function) => {
+		fetch(`${baseURL}/docker-pulls`)
+			.then((response) => response.json())
+			.then((data) => {
+				dispatch({
+					type: DockerPullDataActions.DOCKER_PULL_COUNT,
+					payload: data["pull_count"],
+				});
+			})
+			.catch((err) => {
+				console.error("Can't load data", err);
+				dispatch({
+					type: DockerPullDataActions.DOCKER_PULL_COUNT,
+					payload: 12000000, //setting default value to 12M
+				});
 			});
-		})
-		.catch((err) => {
-			console.error("Can't load data", err);
-			dispatch({
-				type: DockerPullDataActions.DOCKER_PULL_COUNT,
-				payload: 0,
-			});
-		});
-};
+	};
