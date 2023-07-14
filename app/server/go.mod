@@ -27,9 +27,9 @@ require (
 	github.com/xanzy/ssh-agent v0.2.1 // indirect
 	go.opencensus.io v0.22.3 // indirect
 	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
-	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e // indirect
+	golang.org/x/net v0.7.0 // indirect
 	golang.org/x/sys v0.9.0 // indirect
-	golang.org/x/text v0.3.2 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	google.golang.org/genproto v0.0.0-20200403120447-c50568487044 // indirect
 	google.golang.org/grpc v1.28.0 // indirect
