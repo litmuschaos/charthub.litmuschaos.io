@@ -41,7 +41,7 @@ func Handler() {
 	}
 }
 
-//updateGithubStars will get the github stars count for litmus repository using github APIs
+// updateGithubStars will get the github stars count for litmus repository using github APIs
 func updateGithubStars() error {
 	response, err := http.Get(githubApi + organization + "/" + repoName)
 	if err != nil {
@@ -60,9 +60,9 @@ func updateGithubStars() error {
 	return nil
 }
 
-//updateExpCount updates will get the chaos experiment count from chaos-charts repo
+// updateExpCount updates will get the chaos experiment count from chaos-charts repo
 func updateExpCount() error {
-	response, err := http.Get(githubApi + organization + "/chaos-charts/contents/charts")
+	response, err := http.Get(githubApi + organization + "/chaos-charts/contents/faults")
 	if err != nil {
 		return fmt.Errorf("error while getting experiment count, err :%s", err)
 	}
@@ -75,7 +75,7 @@ func updateExpCount() error {
 	count := 0
 	for _, dirD := range dir {
 		if dirD["type"].(string) == "dir" {
-			response, err = http.Get(githubApi + organization + "/chaos-charts/contents/charts/" + dirD["name"].(string))
+			response, err = http.Get(githubApi + organization + "/chaos-charts/contents/faults/" + dirD["name"].(string))
 			if err != nil {
 				return fmt.Errorf("error while getting experiment count, err :%s", err)
 			}

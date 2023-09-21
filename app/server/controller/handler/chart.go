@@ -17,22 +17,29 @@ limitations under the License.
 package handler
 
 type Chart struct {
-	ApiVersion  string             `yaml:"apiVersion"`
+	APIVersion  string             `yaml:"apiVersion"`
 	Kind        string             `yaml:"kind"`
 	Metadata    Metadata           `yaml:"metadata"`
 	Spec        Spec               `yaml:"spec"`
 	PackageInfo PackageInformation `yaml:"packageInfo"`
-	Experiments []Chart            `yaml:"experiments"`
+	Experiments []Chart            `yaml:"experiments" `
 }
 
 type Maintainer struct {
-	Name  string
-	Email string
+	Name  string `yaml:"name"`
+	Email string `yaml:"email"`
 }
 
 type Link struct {
-	Name string
-	Url  string
+	Name string `yaml:"name"`
+	URL  string `yaml:"url"`
+}
+
+type Faults struct {
+	Name        string   `yaml:"name"`
+	DisplayName string   `json:"displayName"`
+	Description string   `yaml:"description"`
+	Plan        []string `json:"plan"`
 }
 
 type Metadata struct {
@@ -51,19 +58,20 @@ type Annotation struct {
 }
 
 type Spec struct {
-	DisplayName         string   `yaml:"displayName"`
-	CategoryDescription string   `yaml:"categoryDescription"`
-	Keywords            []string `yaml:"keywords"`
-
-	Maturity       string       `yaml:"maturity"`
-	Maintainers    []Maintainer `yaml:"maintainers"`
-	MinKubeVersion string       `yaml:"minKubeVersion"`
-	Provider       struct {
+	DisplayName         string       `yaml:"displayName"`
+	CategoryDescription string       `yaml:"categoryDescription"`
+	Plan                []string     `json:"plan"`
+	Keywords            []string     `yaml:"keywords"`
+	Maturity            string       `yaml:"maturity"`
+	Maintainers         []Maintainer `yaml:"maintainers"`
+	MinKubeVersion      string       `yaml:"minKubeVersion"`
+	Scenarios           []string     `yaml:"scenarios"`
+	Provider            struct {
 		Name string `yaml:"name"`
 	} `yaml:"provider"`
-	Links []Link `yaml:"links"`
-
+	Links           []Link   `yaml:"links"`
 	Experiments     []string `yaml:"experiments"`
+	Faults          []Faults `yaml:"faults"`
 	ChaosExpCRDLink string   `yaml:"chaosexpcrdlink"`
 	Platforms       []string `yaml:"platforms"`
 	ChaosType       string   `yaml:"chaosType"`
