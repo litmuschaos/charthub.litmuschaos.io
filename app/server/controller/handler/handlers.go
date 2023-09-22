@@ -39,8 +39,9 @@ import (
 var ChaosChartPath = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/app/client/public/chaos-charts/"
 var githubData = os.Getenv("GOPATH") + "/src/github.com/litmuschaos/charthub.litmuschaos.io/app/client/public/githubData/"
 
-/*	pathParser reads the path in the csv file <path> forms the system-path <fileLookedPath>
-	and returns the file
+/*
+pathParser reads the path in the csv file <path> forms the system-path <fileLookedPath>
+and returns the file
 */
 func pathParser(path string) ([]byte, error) {
 	var fileLookedPath = ChaosChartPath + path
@@ -51,10 +52,10 @@ func pathParser(path string) ([]byte, error) {
 	return fileContent, nil
 }
 
-//GetIconHandler takes the experiment group and icon file required and returns the specific icon file
+// GetIconHandler takes the experiment group and icon file required and returns the specific icon file
 func GetIconHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	img, err := os.Open(ChaosChartPath + vars["version"] + "/charts/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
+	img, err := os.Open(ChaosChartPath + vars["version"] + "/faults/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
 	responseStatusCode := 200
 	if err != nil {
 		responseStatusCode = 500
@@ -68,7 +69,7 @@ func GetIconHandler(w http.ResponseWriter, r *http.Request) {
 	io.Copy(w, img)
 }
 
-//FileHandler takes out the file paths from the query params respectives URLs
+// FileHandler takes out the file paths from the query params respectives URLs
 func FileHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	filePath, ok := r.URL.Query()["file"]
@@ -101,7 +102,7 @@ func GetAnalyticsData(w http.ResponseWriter, r *http.Request) {
 // GetChart is used to create YAML objects from experiments' directories from the respective charts'
 func GetChart(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	filePath := ChaosChartPath + vars["version"] + "/charts/" + vars["chartId"]
+	filePath := ChaosChartPath + vars["version"] + "/faults/" + vars["chartId"]
 	chart, err := getYAMLFileContent(filePath)
 	response, err := json.Marshal(chart)
 	responseStatusCode := 200
@@ -135,37 +136,33 @@ func readPackageFile(path string) (PackageInformation, error) {
 	return packageInfo, err
 }
 
-func readExperimentFile(path string) (Chart, error) {
-	var experiment Chart
+func readExperimentFile(path string) (*Chart, error) {
+	var experiment *Chart
 	experimentFile, err := ioutil.ReadFile(path)
 	if err != nil {
-		return experiment, fmt.Errorf("file path of the, err: %+v", err)
+		return nil, fmt.Errorf("file path of the, err: %+v", err)
 	}
-	if yaml.Unmarshal([]byte(experimentFile), &experiment) != nil {
-		return experiment, err
+	if yaml.Unmarshal(experimentFile, &experiment) != nil {
+		return nil, err
 	}
 	return experiment, nil
 }
 func getYAMLFileContent(fileLocation string) (Chart, error) {
 	chartPathSplitted := strings.Split(fileLocation, "/")
 	CSVFilePath := fileLocation + "/" + chartPathSplitted[len(chartPathSplitted)-1] + ".chartserviceversion.yaml"
-	packageFilePath := fileLocation + "/" + chartPathSplitted[len(chartPathSplitted)-1] + ".package.yaml"
 	chart, err := readCSVFile(CSVFilePath)
 	if err != nil {
 		return chart, err
 	}
-	packageInfo, err := readPackageFile(packageFilePath)
-	if err != nil {
-		return chart, err
-	}
-	chart.PackageInfo = packageInfo
-	for _, exp := range packageInfo.Experiments {
+	for _, exp := range chart.Spec.Faults {
 		experimentFilePath := fileLocation + "/" + exp.Name + "/" + exp.Name + ".chartserviceversion.yaml"
 		experiment, err := readExperimentFile(experimentFilePath)
 		if err != nil {
 			log.Error(err)
 		}
-		chart.Experiments = append(chart.Experiments, experiment)
+		if experiment != nil {
+			chart.Experiments = append(chart.Experiments, *experiment)
+		}
 	}
 	return chart, nil
 }
@@ -173,7 +170,7 @@ func getYAMLFileContent(fileLocation string) (Chart, error) {
 // GetCharts is used to create list of YAML objects from charts' directories
 func GetCharts(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	files, err := filepath.Glob(ChaosChartPath + vars["version"] + "/charts/*")
+	files, err := filepath.Glob(ChaosChartPath + vars["version"] + "/faults/*")
 	if err != nil {
 		log.Error(err)
 	}
