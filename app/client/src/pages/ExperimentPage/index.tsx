@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import {
 	BackButton,
 	ExperimentInfo,
-	InstallChaos,
 	UsefulLinks,
 	ExperimentHeader,
 } from "../../components";
@@ -60,7 +59,7 @@ function ExperimentPage(props: any) {
 			  chartGroup.experiments.filter(
 					(e) => e.metadataName === chartId
 			  )[0];
-
+	console.log("chartsss", chartData);
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
@@ -142,26 +141,6 @@ function ExperimentPage(props: any) {
 													classes.horizontalLine
 												}
 											/>
-											<div>
-												<div className={classes.note}>
-													PRE-REQUISITE:
-												</div>
-												<div>
-													<a
-														href="https://docs.litmuschaos.io/docs/getting-started/installation/"
-														target="_"
-													>
-														Install Litmus Operator
-													</a>
-													: a tool for injecting Chaos
-													Experiments
-												</div>
-											</div>
-											<hr
-												className={
-													classes.horizontalLine
-												}
-											/>
 										</div>
 									</div>
 									{/* Useful Links Section */}
@@ -173,49 +152,6 @@ function ExperimentPage(props: any) {
 											maturity={chart.maturity}
 										/>
 									</div>
-								</div>
-								{/* Install Chaos Section */}
-								<div className={classes.installLinks}>
-									<InstallChaos
-										title="Install this Chaos Experiment"
-										description="You can install the Chaos Experiment using the following command"
-										yamlLink={`kubectl apply -f ${hubUrl}`}
-									/>
-									<InstallChaos
-										description="In case you want to customize or download the yaml you can use from the link below"
-										yamlLink={hubUrl}
-										editBtn={true}
-									/>
-									{rbacUrl && (
-										<>
-											<InstallChaos
-												title="Setup Service Account (RBAC)"
-												description="Create a service account using the following command"
-												yamlLink={`kubectl apply -f ${rbacUrl}`}
-											/>
-											<InstallChaos
-												description="In case you want to customize or download the yaml you can use from the link below"
-												yamlLink={rbacUrl}
-												editBtn={true}
-											/>
-										</>
-									)}
-									{engineUrl && (
-										<>
-											<InstallChaos
-												title="Sample Chaos Engine"
-												description="Edit and copy the sample Chaos Engine yaml according to your application needs"
-												yamlLink={engineUrl}
-												editBtn={true}
-											/>
-											<InstallChaos
-												description="Once you download the yaml you can apply the yaml using the below command"
-												yamlLink={
-													"kubectl apply -f <chaosengine-yaml-manifest>"
-												}
-											/>
-										</>
-									)}
 								</div>
 							</div>
 						</div>

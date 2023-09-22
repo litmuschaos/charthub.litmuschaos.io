@@ -120,9 +120,12 @@ export function UsefulLinks(props: UsefulLinks) {
 	}
 	return (
 		<div className={classes.mainDiv}>
-			{createLinks("Useful Links", props.links)}
-			{createMaintainers(props.maintainers)}
+			{props.links.length > 0 && createLinks("Useful Links", props.links)}
+			{props.maintainers.length > 0 &&
+				createMaintainers(props.maintainers)}
 			{props.platforms &&
+				props.platforms.length > 0 &&
+				props.platforms &&
 				createPlatformData("Platforms", props.platforms)}
 			{props.maturity && createStaticData("Maturity", [props.maturity])}
 		</div>
