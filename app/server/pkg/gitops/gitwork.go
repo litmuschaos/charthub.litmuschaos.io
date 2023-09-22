@@ -87,13 +87,20 @@ func (c GitConfig) getChaosChartVersion() ([]string, error) {
 	}
 	versions := []*version.Version{}
 	versionStrings := []string{}
-
+	versionLimiter, err := version.NewVersion("3.1.0")
+	if err != nil {
+		return nil, fmt.Errorf("unable to get limit version object, err: %+v", err)
+	}
 	err = tagrefs.ForEach(func(t *plumbing.Reference) error {
 		v, err := version.NewVersion(t.Name().Short())
-		if err!=nil{
+		if err != nil {
 			return fmt.Errorf("unable to get version object, err: %+v", err)
 		}
-		versions = append(versions,v)
+
+		if v.GreaterThanOrEqual(versionLimiter) {
+			versions = append(versions, v)
+		}
+
 		return nil
 	})
 	if err != nil {
@@ -101,8 +108,8 @@ func (c GitConfig) getChaosChartVersion() ([]string, error) {
 	}
 
 	sort.Sort(sort.Reverse(version.Collection(versions)))
-	for _,v := range versions{
-		versionStrings = append(versionStrings,v.String())
+	for _, v := range versions {
+		versionStrings = append(versionStrings, v.String())
 	}
 	versionStrings = append(versionStrings, defaultBranch)
 
