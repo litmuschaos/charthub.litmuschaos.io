@@ -59,7 +59,6 @@ function ExperimentPage(props: any) {
 			  chartGroup.experiments.filter(
 					(e) => e.metadataName === chartId
 			  )[0];
-	console.log("chartsss", chartData);
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
