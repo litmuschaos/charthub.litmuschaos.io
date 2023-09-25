@@ -19,7 +19,6 @@ export function ExperimentInfo(props: ExpInfoProps) {
 			<div className={classes.expDesc}>
 				<ReactMarkdown source={description} />
 			</div>
-			{videoURL && <VideoFrame width={"775px"} src={videoEmbed || ""} />}
 		</div>
 	);
 }
