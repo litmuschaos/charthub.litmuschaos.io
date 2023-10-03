@@ -91,10 +91,9 @@ export default function MainHeader() {
 								.slice(0, 5)
 								.map((d: string) => (
 									<MenuItem value={d} key={d}>
-										{"v " + d}
+										{d}
 									</MenuItem>
 								))}
-							<MenuItem value={"master"}>master</MenuItem>
 							<MenuItem
 								component="a"
 								href="https://github.com/litmuschaos/chaos-charts/branches/all"
