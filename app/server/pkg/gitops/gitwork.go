@@ -19,12 +19,13 @@ package gitops
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/hashicorp/go-version"
 	"io/ioutil"
 	"os"
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/hashicorp/go-version"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/src-d/go-git.v4"
@@ -87,7 +88,7 @@ func (c GitConfig) getChaosChartVersion() ([]string, error) {
 	}
 	versions := []*version.Version{}
 	versionStrings := []string{}
-	versionLimiter, err := version.NewVersion("3.1.0")
+	versionLimiter, err := version.NewVersion("3.0.0")
 	if err != nil {
 		return nil, fmt.Errorf("unable to get limit version object, err: %+v", err)
 	}
