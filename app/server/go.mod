@@ -9,7 +9,7 @@ require (
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 	google.golang.org/api v0.21.0
 	gopkg.in/src-d/go-git.v4 v4.13.1
-	gopkg.in/yaml.v3 v3.0.0-20191010095647-fc94e3f71652
+	gopkg.in/yaml.v3 v3.0.0
 )
 
 require (
