@@ -93,7 +93,7 @@ const community: CommunityItem[] = [
 
 	{
 		value: "Twitter",
-		img: "/icons/twitter.svg",
+		img: "/icons/twitter-x.svg",
 		alt: "Twitter",
 		link: "https://twitter.com/LitmusChaos",
 	},
