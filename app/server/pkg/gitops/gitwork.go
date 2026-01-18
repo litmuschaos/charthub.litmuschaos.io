@@ -76,11 +76,24 @@ func Trigger() {
 }
 
 func (c GitConfig) getChaosChartVersion() ([]string, error) {
-	os.RemoveAll("/tmp/version")
-	r, _ := git.PlainClone("/tmp/version", false, &git.CloneOptions{
-		URL: c.RepositoryURL, Progress: os.Stdout,
+	// Clone to temporary path first to preserve existing data on failure
+	tmpClonePath := "/tmp/version-tmp"
+	os.RemoveAll(tmpClonePath)
+
+	r, err := git.PlainClone(tmpClonePath, false, &git.CloneOptions{
+		URL:           c.RepositoryURL,
+		Progress:      os.Stdout,
 		ReferenceName: plumbing.NewBranchReferenceName(defaultBranch),
 	})
+	if err != nil {
+		return nil, fmt.Errorf("unable to clone chaos-charts repository: %w", err)
+	}
+
+	// Clone succeeded - now safe to replace old version data
+	os.RemoveAll("/tmp/version")
+	if err := os.Rename(tmpClonePath, "/tmp/version"); err != nil {
+		return nil, fmt.Errorf("unable to move cloned repository: %w", err)
+	}
 
 	tagrefs, err := r.Tags()
 	if err != nil {
