@@ -56,16 +56,17 @@ func pathParser(path string) ([]byte, error) {
 func GetIconHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	img, err := os.Open(ChaosChartPath + vars["version"] + "/faults/" + vars["expGroup"] + "/icons/" + vars["iconFile"])
-	responseStatusCode := 200
 	if err != nil {
-		responseStatusCode = 500
 		log.Error(err)
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, "icon cannot be fetched, err : "+err.Error())
+		return
 	}
 	defer img.Close()
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.WriteHeader(responseStatusCode)
-	w.Header().Set("Content-Type", "image/png") // <-- set the content-type header
+	w.Header().Set("Content-Type", "image/png")
+	w.WriteHeader(http.StatusOK)
 	io.Copy(w, img)
 }
 
