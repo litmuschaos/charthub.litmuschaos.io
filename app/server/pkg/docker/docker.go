@@ -11,9 +11,13 @@ func FetchDockerPullsDetails() ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Error while getting docker pull data, err :%s", err)
 	}
+	defer response.Body.Close()
+	if response.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("Docker Hub API returned non-OK status: %d", response.StatusCode)
+	}
 	data, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		return nil, fmt.Errorf("Error while getting docker pull data, err :%s", err)
+		return nil, fmt.Errorf("Error while reading docker pull data, err :%s", err)
 	}
-	return data, err
+	return data, nil
 }
